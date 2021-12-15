@@ -14,7 +14,7 @@ import { AngularFirestoreModule} from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { HttpClientModule } from '@angular/common/http';
 
-
+import {FormsModule} from '@angular/forms'
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -25,7 +25,7 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
-    AngularFirestoreModule ],
+    AngularFirestoreModule , FormsModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent]
 })
