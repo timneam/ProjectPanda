@@ -4,6 +4,7 @@ export const environment = {
     projectId: 'projectpanda-da2fc',
     appId: '1:198898575316:web:3bcd971c389b74dc169841',
     storageBucket: 'projectpanda-da2fc.appspot.com',
+    locationId: 'us-central',
     apiKey: 'AIzaSyClDhkuyeSE302EKzs_fzZlEiq5TMfoy1s',
     authDomain: 'projectpanda-da2fc.firebaseapp.com',
     messagingSenderId: '198898575316',
