@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "projectpanda-97530": {
+      "hosting": {
+        "app": [
+          "projectpanda-97530"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "projectpanda-97530"
+  }
+}

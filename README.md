@@ -32,7 +32,12 @@ After the user navigates to Tab 2 (Photos), they can tap/click on the camera but
 2) In a terminal, change directory into the repo: `cd photo-gallery-capacitor-ng`.
 3) Install all packages: 
 `npm install`.
-`npm install firebase angularfire2 --save`.
-`npm install firebase@7.24.0 angularfire2 --save`.
+'ng add @angular/fire',
+press y
+space bar to remove ng hosting
+arrow down to firestore and press space bar
+press enter
+arrow down and select ProjectPanda
+arrow down and select ProjectPanda
 4) Run on the web: `ionic serve`.
 5) Run on iOS or Android: See [here](https://ionicframework.com/docs/building/running).

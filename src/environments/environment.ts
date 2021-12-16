@@ -5,13 +5,13 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: "AIzaSyC7URPxhYLDBzYNazMcq0fIuAMHD9wEFxI",
-    authDomain: "projectpanda-97530.firebaseapp.com",
-    databaseURL: "https://projectpanda-97530.firebaseio.com/",
-    projectId: "projectpanda-97530",
-    storageBucket: "projectpanda-97530.appspot.com",
-    messagingSenderId: "1034733166859",
-    appId: "1:1034733166859:web:aeee87d379ed6c8606020e",
+    projectId: 'projectpanda-da2fc',
+    appId: '1:198898575316:web:3bcd971c389b74dc169841',
+    storageBucket: 'projectpanda-da2fc.appspot.com',
+    apiKey: 'AIzaSyClDhkuyeSE302EKzs_fzZlEiq5TMfoy1s',
+    authDomain: 'projectpanda-da2fc.firebaseapp.com',
+    messagingSenderId: '198898575316',
+    measurementId: 'G-7QPC05M26T',
   }
 };
 
