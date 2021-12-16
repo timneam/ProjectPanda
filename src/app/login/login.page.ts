@@ -28,13 +28,7 @@ export class LoginPage implements OnInit {
   onLogin() {
     console.log(this.formData.value)
     this.UsersService.loginUser(this.formData.value.email, this.formData.value.password)
-
   }
 
-  onRegister() {
-    console.log(this.formData.value)
-    this.UsersService.registerUser(this.formData.value.email, this.formData.value.password)
-
-  }
 
 }
