@@ -26,7 +26,13 @@ export class UsersService {
         // Signed in 
         const user = userCredential.user;
         console.log(user)
-        // Route if successful
+        console.log(user)
+        // if successful, add to local storage, route to home page
+        if (user.uid != null) {
+          localStorage.setItem("token", user.uid)
+        } else {
+          console.log("haha funny")
+        }
 
       })
       .catch((error) => {
