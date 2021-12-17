@@ -12,10 +12,10 @@
     height: fit-content;
     margin-top: 120px;
 }
-.subHeader{
-color: #979797;
-}
 
+.subHeading {
+  color: #979797;
+}
 .containerr {
     align-items: center;
     display: flex;
@@ -30,7 +30,7 @@ color: #979797;
 .textField {
     border-radius: 25px;
     box-shadow: 5px 5px 5px grey;
-   width: 80%;
+  // width: 80%;
    // display: flex !important;
 text-overflow: ellipsis;
 white-space: nowrap;
@@ -42,7 +42,7 @@ margin-top: 20px;
 .textFieldd {
     border-radius: 25px;
     box-shadow: 5px 5px 5px grey;
-   width: 80%;
+  // width: 80%;
    // display: flex !important;
 text-overflow: ellipsis;
 white-space: nowrap;
@@ -69,4 +69,15 @@ margin-top: 20px;
   
   ion-button {
     --border-radius: 25px;
+    }
+
+    .switchh {
+      color: #6F6F6F;
+      font-size: 12px;
+    }
+    .textboxxes {
+      width: 80%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }

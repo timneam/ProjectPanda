@@ -1,5 +1,46 @@
 
-
 <ion-content>
+  <div class="containerr">
+    <div class="content">
+      <h1 class="headingg">Register</h1>
+   
+    </div>
+    <!-- <ion-textarea class="textField" placeholder="Email" id="user_email">
 
+    </ion-textarea>
+    <ion-textarea class="textFieldd" placeholder="Password" id="user_password" type="password">
+
+    </ion-textarea>
+    <ion-button style="border-radius: 25px;color: #F5585C; width: 120px; height: 50px; margin-top: 70px;"
+      color="primary">
+      <ion-label style="color: white;text-transform: none;font-size: 16px;font-family: Arial, Helvetica, sans-serif;">
+        <b>Login</b>
+      </ion-label>
+    </ion-button> -->
+
+      <form [formGroup]="formData" class="textboxes">
+        <div class="namee">
+        <ion-textarea class="textFieldF" placeholder="First Name" id="user_firstName" ></ion-textarea>
+        <ion-textarea class="textFieldL" placeholder="Last Name" id="user_lastName" ></ion-textarea>
+      </div>
+        <ion-textarea class="textField" placeholder="Email" id="user_email" formControlName="email"></ion-textarea>
+
+
+        <ion-textarea class="textFieldd" placeholder="Password" id="user_password" type="password"
+          formControlName="password"></ion-textarea>
+          <ion-textarea class="textFieldd" placeholder="Re-enter Password" id="user_password" type="password"
+          formControlName="password"></ion-textarea>
+          <ion-textarea class="textFieldd" placeholder="Phone Number" id="user_password" type="password"
+          formControlName="password"></ion-textarea>
+        <ion-button type="submit"
+          style="border-radius: 25px;color: #F5585C; width: 280px; height: 50px; margin-top: 70px; box-shadow: 5px 5px 5px lightgray;" color="primary">
+          <ion-label
+            style="color: white;text-transform: none;font-size: 16px;font-family: Arial, Helvetica, sans-serif;">
+            <b>Create Account</b>
+          </ion-label>
+        </ion-button>
+
+      </form>
+
+  </div>
 </ion-content>

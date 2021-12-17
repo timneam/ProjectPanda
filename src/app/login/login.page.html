@@ -2,7 +2,7 @@
   <div class="containerr">
     <div class="content">
       <h1 class="headingg">Welcome Back!</h1>
-      <p class="subHeader">Sign in to continue</p>
+      <p class="subHeading">Sign in to continue</p>
     </div>
     <!-- <ion-textarea class="textField" placeholder="Email" id="user_email">
 
@@ -17,7 +17,7 @@
       </ion-label>
     </ion-button> -->
 
-      <form [formGroup]="formData" (ngSubmit)="onLogin()">
+      <form [formGroup]="formData" (ngSubmit)="onLogin()" class="textboxxes">
 
         <ion-textarea class="textField" placeholder="Email" id="user_email" formControlName="email"></ion-textarea>
 
@@ -27,7 +27,7 @@
 
 
         <ion-button type="submit"
-          style="border-radius: 25px;color: #F5585C; width: 120px; height: 50px; margin-top: 70px;" color="primary">
+          style="border-radius: 25px;color: #F5585C; width: 120px; height: 50px; margin-top: 70px;box-shadow: 5px 5px 5px lightgray;" color="primary">
           <ion-label
             style="color: white;text-transform: none;font-size: 16px;font-family: Arial, Helvetica, sans-serif;">
             <b>Login</b>
@@ -35,6 +35,6 @@
         </ion-button>
 
       </form>
-
+<p class="switchh" [routerLink]="['/register']">New User? <u>Create an Account</u></p>
   </div>
 </ion-content>

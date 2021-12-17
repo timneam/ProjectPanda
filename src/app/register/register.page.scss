@@ -1,0 +1,103 @@
+.headingg {
+    font-weight: bold;
+    font-size: 32px;
+    width: 50%;
+}
+.content {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+    width: 85%;
+    height: fit-content;
+    margin-top: 60px;
+}
+
+
+.containerr {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+   // height: 70px;
+    flex-direction: column;
+   // margin-top: 90px;
+  
+}
+
+.textField {
+    border-radius: 25px;
+    box-shadow: 5px 5px 5px grey;
+   width: 80%;
+   // display: flex !important;
+text-overflow: ellipsis;
+white-space: nowrap;
+overflow: 'hidden';
+margin-top: 20px;
+
+   // height: 65px;
+}
+.textFieldd {
+    border-radius: 25px;
+    box-shadow: 5px 5px 5px grey;
+   width: 80%;
+   // display: flex !important;
+text-overflow: ellipsis;
+white-space: nowrap;
+overflow: 'hidden';
+margin-top: 20px;
+   // height: 65px;
+}
+
+.textField::-webkit-input-placeholder {
+    text-align: center;
+  }
+  
+  .textField:-moz-placeholder {
+    text-align: center;
+  }
+  
+  .textField::-moz-placeholder {
+    text-align: center;
+  }
+  
+  .textField:-ms-input-placeholder {
+    text-align: center;
+  }
+  
+  ion-button {
+    --border-radius: 25px;
+    }
+    .namee {
+        display: flex;
+    }
+    .textboxes {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: -15px;
+    }
+    .textFieldF {
+        border-radius: 25px;
+        box-shadow: 5px 5px 5px grey;
+      
+       // display: flex !important;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: 'hidden';
+    margin-top: 20px;
+    
+       // height: 65px;
+    }
+    .textFieldL {
+        border-radius: 25px;
+        box-shadow: 5px 5px 5px grey;
+       
+       // display: flex !important;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: 'hidden';
+    margin-top: 20px;
+    
+       // height: 65px;
+    }
