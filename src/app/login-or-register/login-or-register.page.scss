@@ -1,0 +1,28 @@
+.centerise {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.espresso {
+margin-top: 9px;
+}
+.imggg {
+    position: absolute;
+    left: 50%;
+    top: 38%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+ion-button {
+    --border-radius: 25px;
+    
+    }
+
+    .flexbtn {
+        position: absolute;
+        left: 50%;
+        top: 68%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+
+    }
