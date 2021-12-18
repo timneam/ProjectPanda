@@ -2,6 +2,7 @@
     font-weight: bold;
     font-size: 32px;
     width: 50%;
+    font-family: 'Roboto', sans-serif;
 }
 .content {
     display: flex;
@@ -10,11 +11,13 @@
     justify-content: center;
     width: 85%;
     height: fit-content;
-    margin-top: 120px;
+    margin-top: 70px;
+    margin-left: 28px;
 }
 
 .subHeading {
   color: #979797;
+  font-family: 'Roboto', sans-serif;
 }
 .containerr {
     align-items: center;
@@ -74,10 +77,22 @@ margin-top: 20px;
     .switchh {
       color: #6F6F6F;
       font-size: 12px;
+      margin-top: 50px;
     }
     .textboxxes {
       width: 80%;
       display: flex;
       flex-direction: column;
       align-items: center;
+    }
+
+    ion-textarea {
+      --padding-top: 22px;
+      --padding-bottom: 1px;
+      --padding-start: 20px;
+    }
+    .iconn {
+      height: 23px;
+      margin-top: 10px;
+      margin-left: 10px;
     }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { UsersService } from '../services/users.service';
-
+import {Router} from '@angular/router'
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
@@ -13,7 +13,8 @@ export class RegisterPage implements OnInit {
 
   constructor(
     private UsersService: UsersService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -39,6 +40,10 @@ export class RegisterPage implements OnInit {
       this.formData.value.lastName, 
       this.formData.value.phoneNumber)
 
+  }
+
+  backk() {
+    this.router.navigateByUrl('[/login-or-register]')
   }
 
 }
