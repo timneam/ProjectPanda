@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../services/users.service';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { addDoc, collection, deleteDoc, doc, getDocs, getFirestore, setDoc, updateDoc } from 'firebase/firestore';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,8 @@ export class LoginPage implements OnInit {
 
   constructor(
     private UsersService: UsersService,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder,
+    private navController: NavController) {
 
   }
   ngOnInit() {
@@ -32,6 +34,7 @@ export class LoginPage implements OnInit {
   onLogin() {
     console.log(this.formData.value)
     this.UsersService.loginUser(this.formData.value.email, this.formData.value.password)
+    this.navController.navigateForward('/tabs/tab1');
   }
   
   async getData() {

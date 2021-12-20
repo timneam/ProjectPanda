@@ -33,7 +33,7 @@ export class UsersService {
         if (user.uid != null) {
           localStorage.setItem("token", user.uid)
         } else {
-          console.log("haha funny")
+          console.log("Error Logging In!")
         }
 
       })
