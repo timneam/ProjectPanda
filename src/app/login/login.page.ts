@@ -9,11 +9,9 @@ import { addDoc, collection, deleteDoc, doc, getDocs, getFirestore, setDoc, upda
   styleUrls: ['./login.page.scss'],
 })
 
-
-
 export class LoginPage implements OnInit {
+  
   db = getFirestore();
-
   formData: FormGroup;
 
   constructor(
@@ -42,8 +40,6 @@ export class LoginPage implements OnInit {
       console.log(`${doc.id} => ${doc.data()}`);
     });
   }
-
-
 
   async addData() {
     const data = {

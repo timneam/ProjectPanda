@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { UsersService } from '../services/users.service';
+import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { addDoc, collection, deleteDoc, doc, getDocs, getFirestore, setDoc, updateDoc } from 'firebase/firestore';
 
 @Component({
   selector: 'app-tab1',
@@ -6,7 +9,77 @@ import { Component } from '@angular/core';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
+  // db = getFirestore();
 
-  constructor() {}
+  // formData: FormGroup;
 
+  // constructor(
+  //   private UsersService: UsersService,
+  //   private formBuilder: FormBuilder) {
+
+  // }
+  // ngOnInit() {
+  //   this.getData()
+
+  //   this.formData = new FormGroup({
+  //     email: new FormControl(),
+  //     password: new FormControl()
+  //   })
+
+  // }
+
+  // onLogin() {
+  //   console.log(this.formData.value)
+  //   this.UsersService.loginUser(this.formData.value.email, this.formData.value.password)
+  // }
+  
+  // async getData() {
+  //   const querySnapshot = await getDocs(collection(this.db, "User"));
+  //   querySnapshot.forEach((doc) => {
+  //     console.log(`${doc.id} => ${doc.data()}`);
+  //   });
+  // }
+
+
+
+  // async addData() {
+  //   const data = {
+  //     firstName: "Alan",
+  //     lastName: "Turing",
+  //     phoneNumber: 696969697
+  //   }
+
+  //   const frankDocRef = doc(this.db, "User", "DeezNutz");
+
+  //   // Manually set Doc ID
+
+  //   await setDoc(frankDocRef, data);
+
+  //   // Auto Generate Doc ID
+
+  //   //   try {
+  //   //     const docRef = await addDoc(collection(this.db, "User"), data);
+
+  //   //     console.log("Document written with ID: ", docRef.id);
+  //   //   } catch (e) {
+  //   //     console.error("Error adding document: ", e);
+  //   //   }
+  // }
+
+  // async updateData() {
+
+  //   const frankDocRef = doc(this.db, "User", "DeezNutz");
+
+  //   // To update age and favorite color:
+  //   await updateDoc(frankDocRef, {
+  //     firstName: "Frank",
+  //     lastName: { food: "Pizza", color: "Blue", subject: "recess" },
+  //     phoneNumber: 12
+  //   });
+  // }
+
+  // async deleteData() {
+  //   const frankDocRef = doc(this.db, "User", "DeezNutz");
+  //   await deleteDoc(frankDocRef);
+  // }
 }

@@ -4,22 +4,16 @@ import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms'
 import { doc, updateDoc, deleteDoc, getFirestore, getDocs, collection } from 'firebase/firestore'; 
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.page.html',
-  styleUrls: ['./profile.page.scss'],
+  selector: 'app-profile-edit',
+  templateUrl: './profile-edit.page.html',
+  styleUrls: ['./profile-edit.page.scss'],
 })
-export class ProfilePage implements OnInit {
+export class ProfileEditPage implements OnInit {
 
   db = getFirestore();
   formData: FormGroup;
 
-  constructor(private UsersService: UsersService) { 
-
-    this.UsersService.getUserInformation().subscribe(res => {
-      console.log(res);
-    })
-
-  }
+  constructor(private UsersService: UsersService) { }
 
   ngOnInit() {
     this.getData()
@@ -39,9 +33,16 @@ export class ProfilePage implements OnInit {
     });
   }
 
-  async deleteData() {
+  async updateData() {
+
     const frankDocRef = doc(this.db, "User", "DeezNutz");
-    await deleteDoc(frankDocRef);
+
+    // To update age and favorite color:
+    await updateDoc(frankDocRef, {
+      firstName: "Frank",
+      lastName: { food: "Pizza", color: "Blue", subject: "recess" },
+      phoneNumber: 12
+    });
   }
 
 }

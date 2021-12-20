@@ -19,10 +19,10 @@
       </ion-label>
     </ion-button> -->
 
-      <form [formGroup]="formData" class="textboxes">
+      <form [formGroup]="formData" class="textboxes" (ngSubmit)="onRegister()">
         <div class="namee">
-        <ion-textarea class="textFieldF" placeholder="First Name" id="user_firstName" ></ion-textarea>
-        <ion-textarea class="textFieldL" placeholder="Last Name" id="user_lastName" ></ion-textarea>
+        <ion-textarea class="textFieldF" placeholder="First Name" id="user_firstName" formControlName="firstName"></ion-textarea>
+        <ion-textarea class="textFieldL" placeholder="Last Name" id="user_lastName" formControlName="lastName"></ion-textarea>
       </div>
         <ion-textarea class="textField" placeholder="Email" id="user_email" formControlName="email"></ion-textarea>
 
@@ -30,9 +30,9 @@
         <ion-textarea class="textFieldd" placeholder="Password" id="user_password" type="password"
           formControlName="password"></ion-textarea>
           <ion-textarea class="textFieldd" placeholder="Re-enter Password" id="user_password" type="password"
-          formControlName="password"></ion-textarea>
+          formControlName="reEnterPassword"></ion-textarea>
           <ion-textarea class="textFieldd" placeholder="Phone Number" id="user_password" type="password"
-          formControlName="password"></ion-textarea>
+          formControlName="phoneNumber"></ion-textarea>
         <ion-button type="submit"
           style="border-radius: 25px;color: #F5585C; width: 100%; height: 50px; margin-top: 42px; box-shadow: 5px 5px 5px lightgray;" color="primary">
           <ion-label

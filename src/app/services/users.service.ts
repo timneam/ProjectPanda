@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
-import { collection } from 'firebase/firestore';
 import { collectionData } from 'rxfire/firestore';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import * as firebase from '@angular/fire'
+import { addDoc, collection, deleteDoc, doc, getDocs, getFirestore, setDoc, updateDoc } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
+
+  db = getFirestore();
 
   constructor(private firestore: Firestore) { }
 
@@ -43,26 +45,27 @@ export class UsersService {
       });
   }
 
-  registerUser(email, password, reEnterPassword, firstName, lastName, phoneNumber) {
+  registerUser(firstName, lastName, email, password, reEnterPassword, phoneNumber) {
     const auth = getAuth();
     createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
+      .then(async (userCredential) => {
         // Signed in 
         const user = userCredential.user;
         console.log(user);
         console.log(userCredential);
-        // Route if successful
-        // if ( user created ) {
-        // add registered user informatin to firestore database
-        // }
-        // else {
-        //       .catch((error) => {
-        //   const errorCode = error.code;
-        //   const errorMessage = error.message;
-        //   console.log(errorCode)
-        //   console.log(errorMessage)
-        // });
-        // }
+        if ( userCredential.user.uid != null) {
+          const data = {
+            firstName: firstName,
+            lastName: lastName,
+            phoneNumber: phoneNumber
+          }
+          const newUser = doc(this.db, "User", userCredential.user.uid);
+          // Manually set Doc ID
+          await setDoc(newUser, data);
+        }
+        else {
+          console.log(" retry ");
+        }
       })
       .catch((error) => {
         const errorCode = error.code;

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { UsersService } from '../services/users.service';
-import {Router} from '@angular/router'
+import { Router } from '@angular/router'
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
@@ -33,11 +34,11 @@ export class RegisterPage implements OnInit {
   onRegister() {
     console.log(this.formData.value)
     this.UsersService.registerUser(
+      this.formData.value.firstName,    
+      this.formData.value.lastName, 
       this.formData.value.email, 
       this.formData.value.password,
       this.formData.value.reEnterPassword, 
-      this.formData.value.firstName,    
-      this.formData.value.lastName, 
       this.formData.value.phoneNumber)
 
   }

@@ -34,9 +34,22 @@ const routes: Routes = [
   }
   ,
   {
-    path: 'profile-edit',
+    path: '',
     loadChildren: () => import('./tab3/tab3.module').then(m => m.Tab3PageModule)
+  },
+  {
+    path: 'profile-edit',
+    loadChildren: () => import('./profile-edit/profile-edit.module').then( m => m.ProfileEditPageModule)
+  },  {
+    path: 'singtel-staff-registration',
+    loadChildren: () => import('./singtel-staff-registration/singtel-staff-registration.module').then( m => m.SingtelStaffRegistrationPageModule)
+  },
+  {
+    path: 'are-you-singtel-staff',
+    loadChildren: () => import('./are-you-singtel-staff/are-you-singtel-staff.module').then( m => m.AreYouSingtelStaffPageModule)
   }
+
+
 
 
 ];
