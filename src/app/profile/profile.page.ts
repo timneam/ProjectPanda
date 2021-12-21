@@ -12,27 +12,17 @@ import { getAuth } from 'firebase/auth';
 export class ProfilePage implements OnInit {
 
   db = getFirestore();
-  formData: FormGroup;
+  updateData: FormGroup;
 
   constructor(private UsersService: UsersService) {
 
-    // this.UsersService.getUserInformation().subscribe(res => {
-    //   console.log(res);
-    // })
-
   }
-  data = "lol"
+
   userData = null
+  userData2 = null
 
   ngOnInit() {
     this.getData()
-
-    this.formData = new FormGroup({
-      name: new FormControl(),
-      email: new FormControl(),
-      phoneNumeber: new FormControl(),
-      password: new FormControl()
-    })
   }
 
   async getData() {
@@ -45,19 +35,19 @@ export class ProfilePage implements OnInit {
     const ableToGetData = await getDoc(doc(this.db, "User", user.uid))
     
     if (user !== null) {
-      user.providerData.forEach((tomisnos) => {
-        console.log("  Sign-in provider: " + tomisnos.providerId);
-        console.log("  Provider-specific UID: " + tomisnos.uid);
-        console.log("  Name: " + tomisnos.displayName);
-        console.log("  Email: " + tomisnos.email);
-        console.log("  Photo URL: " + tomisnos.photoURL);
-        this.userData = tomisnos
+      user.providerData.forEach((profile) => {
+        console.log("  Sign-in provider: " + profile.providerId);
+        console.log("  Provider-specific UID: " + profile.uid);
+        console.log("  Name: " + profile.displayName);
+        console.log("  Email: " + profile.email);
+        console.log("  Photo URL: " + profile.photoURL);
+        this.userData = profile
       });
     }
 
     if (ableToGetData.exists) {
       console.log(ableToGetData.data());
-      return ableToGetData.data
+      this.userData2 = ableToGetData.data();
     }
     else {
       console.log("No Such Document!");

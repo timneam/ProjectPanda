@@ -4,6 +4,7 @@ import { collectionData } from 'rxfire/firestore';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, updateProfile } from "firebase/auth";
 import * as firebase from '@angular/fire'
 import { addDoc, collection, deleteDoc, doc, getDocs, getFirestore, setDoc, updateDoc } from 'firebase/firestore';
+import { async } from '@angular/core/testing';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +26,7 @@ export class UsersService {
       .then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
-        
+
         // if successful, add to local storage, route to home page
         // if (user.uid != null) {
         //   localStorage.setItem("token", user.uid)
@@ -48,7 +49,7 @@ export class UsersService {
       .then(async (userCredential) => {
         // Signed in 
         const user = userCredential.user;
-        if ( userCredential.user.uid != null) {
+        if (userCredential.user.uid != null) {
           const data = {
             firstName: firstName,
             lastName: lastName,
@@ -57,10 +58,11 @@ export class UsersService {
           const newUser = doc(this.db, "User", userCredential.user.uid);
           // Manually set Doc ID
           await setDoc(newUser, data);
-          
+
           const username = `${firstName}${lastName}`
           console.log(username)
-          updateProfile(auth.currentUser, {  displayName: username , photoURL: "https://emoji.gg/assets/emoji/8858-pepekek.png"
+          updateProfile(auth.currentUser, {
+            displayName: username, photoURL: "https://emoji.gg/assets/emoji/8858-pepekek.png"
           }).then(() => {
             // Profile updated!
             // ...
@@ -68,7 +70,7 @@ export class UsersService {
             // An error occurred
             // ...
           });
-          
+
         }
         else {
           console.log(" retry ");
@@ -80,6 +82,29 @@ export class UsersService {
         console.log(errorCode)
         console.log(errorMessage)
       });
+  }
+
+  updateUserProfile(firstName, lastName, email, password, phoneNumber) {
+    const auth = getAuth();
+    const user = auth.currentUser;
+    const username = `${firstName}${lastName}`
+    updateProfile(auth.currentUser, {
+      displayName: username
+    }).then(async (userCredential) => {
+      // Profile updated!
+      // update email, phone number, password
+      // Signed in 
+      const updateThis = doc(this.db, 'User', user.uid)
+      await updateDoc(updateThis , {
+          firstName: firstName,
+          lastName: lastName,
+          phoneNumber: phoneNumber
+      })  
+        console.log(userCredential)
+    }).catch((error) => {
+      // An error occurred
+      // ...
+    });
   }
 
   signoutUser() {
