@@ -21,19 +21,48 @@
 
       <form [formGroup]="formData" class="textboxes" (ngSubmit)="onRegister()">
         <div class="namee">
-        <ion-textarea class="textFieldF" placeholder="First Name" id="user_firstName" formControlName="firstName"></ion-textarea>
-        <ion-textarea class="textFieldL" placeholder="Last Name" id="user_lastName" formControlName="lastName"></ion-textarea>
+     <!--   <ion-textarea class="textFieldF" placeholder="First Name" id="user_firstName" formControlName="firstName"></ion-textarea>
+        <ion-textarea class="textFieldL" placeholder="Last Name" id="user_lastName" formControlName="lastName"></ion-textarea> -->
+        <ion-card class="textFieldF">
+          <ion-item>
+            <ion-icon name="person-outline" style="margin-right: 8px;"></ion-icon>
+            <ion-input name="Fname" type="name" placeholder="First Name" required></ion-input>
+          </ion-item>
+        </ion-card>
+        <ion-card class="textFieldL">
+          <ion-item>
+        
+            <ion-input name="Lname" type="name" placeholder="Last Name" required></ion-input>
+          </ion-item>
+        </ion-card>
       </div>
-        <ion-textarea class="textField" placeholder="Email" id="user_email" formControlName="email"></ion-textarea>
+      <ion-card class="textCard">
+        <ion-item>
+          <ion-icon name="mail-outline" style="margin-right: 8px;" ></ion-icon>
+          <ion-input name="Email" type="email" formControlName="email" required placeholder="Email" ></ion-input>
+        </ion-item>
+      </ion-card>
 
 
-        <ion-textarea class="textFieldd" placeholder="Password" id="user_password" type="password"
-          formControlName="password"></ion-textarea>
-          <ion-textarea class="textFieldd" placeholder="Re-enter Password" id="user_password" type="password"
-          formControlName="reEnterPassword"></ion-textarea>
-          <ion-textarea class="textFieldd" placeholder="Phone Number" id="user_password" type="password"
-          formControlName="phoneNumber"></ion-textarea>
-        <ion-button type="submit"
+      <ion-card class="textCard1">
+        <ion-item lines= 'none'>
+          <ion-icon name="lock-closed-outline" style="margin-right: 8px;"></ion-icon>
+          <ion-input name="Password" type="password" placeholder="Password" id="user_password" required  formControlName="password" ></ion-input>
+        </ion-item>
+      </ion-card>
+      <ion-card class="textCard1">
+        <ion-item lines= 'none'>
+          <ion-icon name="lock-closed-outline" style="margin-right: 8px;"></ion-icon>
+          <ion-input name="Password" type="password" placeholder="Confirm Password" id="user_password" required   formControlName="reEnterPassword" ></ion-input>
+        </ion-item>
+      </ion-card>
+      <ion-card class="textCard1">
+        <ion-item lines= 'none'>
+          <ion-icon name="call-outline" style="margin-right: 8px;"></ion-icon>
+          <ion-input name="Phone Number" type="number"  formControlName="phoneNumber" required placeholder="Phone Number"></ion-input>
+        </ion-item>
+      </ion-card>
+        <ion-button type="submit"  
           style="border-radius: 25px;color: #F5585C; width: 100%; height: 50px; margin-top: 42px; box-shadow: 5px 5px 5px lightgray;" color="primary">
           <ion-label
             style="color: white;text-transform: none;font-size: 16px;font-family: 'Sen', sans-serif;">

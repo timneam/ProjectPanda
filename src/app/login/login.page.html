@@ -1,10 +1,10 @@
-<ion-content>
+<!-- <ion-content>
   <img src="../assets/backk.png" class="iconn" [routerLink]="['/login-or-register']">
   <div class="containerr">
     <div class="content">
       <h1 class="headingg">Welcome Back!</h1>
       <p class="subHeading">Sign in to continue</p>
-    </div>
+    </div> -->
     <!-- <ion-textarea class="textField" placeholder="Email" id="user_email">
 
     </ion-textarea>
@@ -18,7 +18,7 @@
       </ion-label>
     </ion-button> -->
 
-      <form [formGroup]="formData" (ngSubmit)="onLogin()" class="textboxxes">
+  <!--   <form [formGroup]="formData" (ngSubmit)="onLogin()" class="textboxxes">
 
         <ion-textarea class="textField" placeholder="Email" id="user_email" formControlName="email" required></ion-textarea>
 
@@ -38,4 +38,44 @@
       </form>
 <p class="switchh" [routerLink]="['/register']">New User? <u>Create an Account</u></p>
   </div>
-</ion-content>
+</ion-content> -->
+
+
+<ion-content>
+  <img src="../assets/backk.png" class="iconn" [routerLink]="['/login-or-register']">
+  <div class="containerr">
+    <div class="content">
+      <h1 class="headingg">Welcome Back!</h1>
+      <p class="subHeading">Sign in to continue</p>
+    </div>
+
+
+      <form [formGroup]="formData" (ngSubmit)="onLogin()" class="textboxxes">
+
+
+        <ion-card class="textCard">
+          <ion-item>
+            <ion-icon name="mail-outline" style="margin-right: 8px;"></ion-icon>
+            <ion-input name="Email" placeholder="Email" type="email"  id="user_email" formControlName="email" required ></ion-input>
+          </ion-item>
+        </ion-card>
+        <ion-card class="textCard1">
+          <ion-item lines= 'none'>
+            <ion-icon name="lock-closed-outline" style="margin-right: 8px;"></ion-icon>
+            <ion-input name="Password" type="password" placeholder="Password" id="user_password" required  formControlName="password" ></ion-input>
+          </ion-item>
+        </ion-card>
+
+
+        <ion-button type="submit"
+          style="border-radius: 25px;color: #F5585C; width: 120px; height: 50px; margin-top: 70px;box-shadow: 5px 5px 5px lightgray;" color="primary">
+          <ion-label
+            style="color: white;text-transform: none;font-size: 16px;font-family: 'Sen', sans-serif;">
+            <b>Login</b>
+          </ion-label>
+        </ion-button>
+
+      </form>
+<p class="switchh" [routerLink]="['/register']">New User? <u>Create an Account</u></p>
+  </div>
+</ion-content> 

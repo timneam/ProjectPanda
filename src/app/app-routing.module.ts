@@ -47,6 +47,10 @@ const routes: Routes = [
   {
     path: 'are-you-singtel-staff',
     loadChildren: () => import('./are-you-singtel-staff/are-you-singtel-staff.module').then( m => m.AreYouSingtelStaffPageModule)
+  },
+  {
+    path: 'singtel',
+    loadChildren: () => import('./singtel/singtel.module').then( m => m.SingtelPageModule)
   }
 
 

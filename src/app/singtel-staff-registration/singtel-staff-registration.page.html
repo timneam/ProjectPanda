@@ -1,9 +1,38 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>singtelStaffRegistration</ion-title>
-  </ion-toolbar>
-</ion-header>
 
 <ion-content>
+ <div style="display: flex;flex-direction: row;">
+  <img src="../assets/backk.png" class="iconn" [routerLink]="['/are-you-singtel-staff']">
+
+ </div>
+
+  <div class="pagee">
+    <img src="../assets/ESPRESSO.png" style="height: 18px;width: 130px; margin-top: -20px;" >
+  
+  <img src="../assets/staffPass.png" class="imggg"  >
+<div class="textbox">
+  <ion-card class="textCard">
+    <ion-item>
+      <ion-icon name="person-outline" style="margin-right: 8px;"></ion-icon>
+      <ion-input name="Singtel Staff Name" type="name"  placeholder="Singtel Staff Name"></ion-input>
+    </ion-item>
+  </ion-card>
+
+  <ion-card class="textCard1">
+    <ion-item lines= 'none'>
+      <ion-icon name="card-outline" style="margin-right: 8px;"></ion-icon>
+      <ion-input name="Staff Card" type="number"  placeholder="Singtel Staff ID"></ion-input>
+    </ion-item>
+  </ion-card>
+
+  <ion-button 
+  style="border-radius: 25px;color: #F5585C; width: 280px; height: 47px; margin-top: 50px; font-size: 24px;" color="primary">
+  <ion-label
+    style="color: white;text-transform: none;font-size: 18px;font-family: 'Sen', sans-serif;">
+    <b>Confirm</b>
+  </ion-label>
+</ion-button>
+</div>
+  
+</div>
 
 </ion-content>

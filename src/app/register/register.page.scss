@@ -77,31 +77,36 @@ margin-top: 20px;
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin-top: -15px;
+        margin-top: 2px;
+        width: 80%;
     }
     .textFieldF {
         border-radius: 25px;
-        box-shadow: 5px 5px 5px grey;
+        box-shadow: 4px 4px 4px rgb(158, 156, 156);
       
        // display: flex !important;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: 'hidden';
-    margin-top: 20px;
-    width: 161px;
+    //transform: translateX(5px);
+    transform: translateX(-6px);
+    width: 88%;
+    
+    //width: 161px;
     
        // height: 65px;
     }
     .textFieldL {
         border-radius: 25px;
-        box-shadow: 5px 5px 5px grey;
+        box-shadow: 4px 4px 4px rgb(158, 156, 156);
        
        // display: flex !important;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: 'hidden';
-    margin-top: 20px;
-    width: 130px;
+    width: 203px;
+    transform: translateX(-1px)
+    //width: 125px;
     
        // height: 65px;
     }
@@ -120,3 +125,25 @@ margin-top: 20px;
       margin-top: 10px;
       margin-left: 10px;
     }
+
+    .textCard1 {
+      border-radius: 25px;
+      width: 105%;
+      box-shadow: 4px 4px 4px rgb(158, 156, 156);
+      margin-top: 15px;
+      padding: 3px;
+  }
+
+  .textCard {
+    border-radius: 25px;
+    width: 105%;
+    box-shadow: 4px 4px 4px rgb(158, 156, 156);
+    margin-top: 15px;
+    padding: 3px;
+}
+
+ion-item {
+
+    --border-width: 0;
+    --inner-border-width: 0;
+}
