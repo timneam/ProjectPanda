@@ -4,9 +4,9 @@
 <h1 class="headerr">Profile</h1>
 
 <div class="sameLine">
-<img src="../assets/profile.png" width="80" height="80" style="margin-right: 20px;margin-left: 30px;" >
+<img src={{userData.photoURL}} width="80" height="80" style="margin-right: 20px;margin-left: 30px;" >
 <div class="namePhoto">
-<h3 class="namee">Jane Doe</h3>
+<h3 class="namee">{{userData.displayName}}</h3>
 <p class="subb">Change Profile Photo</p>
 
 </div>
@@ -19,7 +19,7 @@
   <ion-card class="textCard">
     <ion-item>
       <ion-icon name="mail-outline" style="margin-right: 8px;"></ion-icon>
-      <ion-input name="Email" type="email" value="JaneDoe@gmail.com" disabled></ion-input>
+      <ion-input name="Email" type="email" value={{userData.email}} disabled></ion-input>
     </ion-item>
   </ion-card>
 

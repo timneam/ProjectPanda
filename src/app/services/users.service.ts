@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
 import { collectionData } from 'rxfire/firestore';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, updateProfile } from "firebase/auth";
 import * as firebase from '@angular/fire'
 import { addDoc, collection, deleteDoc, doc, getDocs, getFirestore, setDoc, updateDoc } from 'firebase/firestore';
 
@@ -20,21 +20,18 @@ export class UsersService {
   }
 
   loginUser(email, password) {
-    console.log(email)
-    console.log(password)
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
-        console.log(user)
-        console.log(user)
+        
         // if successful, add to local storage, route to home page
-        if (user.uid != null) {
-          localStorage.setItem("token", user.uid)
-        } else {
-          console.log("Error Logging In!")
-        }
+        // if (user.uid != null) {
+        //   localStorage.setItem("token", user.uid)
+        // } else {
+        //   console.log("Error Logging In!")
+        // }
 
       })
       .catch((error) => {
@@ -51,8 +48,6 @@ export class UsersService {
       .then(async (userCredential) => {
         // Signed in 
         const user = userCredential.user;
-        console.log(user);
-        console.log(userCredential);
         if ( userCredential.user.uid != null) {
           const data = {
             firstName: firstName,
@@ -62,6 +57,18 @@ export class UsersService {
           const newUser = doc(this.db, "User", userCredential.user.uid);
           // Manually set Doc ID
           await setDoc(newUser, data);
+          
+          const username = `${firstName}${lastName}`
+          console.log(username)
+          updateProfile(auth.currentUser, {  displayName: username , photoURL: "https://emoji.gg/assets/emoji/8858-pepekek.png"
+          }).then(() => {
+            // Profile updated!
+            // ...
+          }).catch((error) => {
+            // An error occurred
+            // ...
+          });
+          
         }
         else {
           console.log(" retry ");

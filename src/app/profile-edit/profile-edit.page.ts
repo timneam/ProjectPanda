@@ -30,8 +30,8 @@ export class ProfileEditPage implements OnInit {
     // get user id from local storage
     // search firebase with the given uid
     // display the data
-    const userID = localStorage.getItem('token')
-    console.log(userID);
+    // const userID = localStorage.getItem('token')
+    // console.log(userID);
     
     // const querySnapshot = await getDocs(collection(this.db, "User"));
     // querySnapshot.forEach((doc) => {
