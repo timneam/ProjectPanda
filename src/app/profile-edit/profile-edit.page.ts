@@ -30,7 +30,8 @@ export class ProfileEditPage implements OnInit {
     this.getData()
 
     this.updateDataForm = new FormGroup({
-      name: new FormControl(),
+      firstName: new FormControl(),
+      lastName: new FormControl(),
       email: new FormControl(),
       phoneNumber: new FormControl(),
       password: new FormControl()
@@ -68,13 +69,13 @@ export class ProfileEditPage implements OnInit {
 
   updateUserProfile(){
     this.UsersService.updateUserProfile(
-      "test",
-      "this",
-      "shit",
-      "plz",
-      "work",
+      this.updateDataForm.value.firstName,
+      this.updateDataForm.value.lastName,
+      this.updateDataForm.value.email,
+      this.updateDataForm.value.password,
+      this.updateDataForm.value.phoneNumber
     )
-    console.log("saved lol")
+    console.log(this.updateDataForm)
   }
 
   async editName() {
