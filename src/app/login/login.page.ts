@@ -34,7 +34,7 @@ export class LoginPage implements OnInit {
   onLogin() {
     console.log(this.formData.value)
     this.UsersService.loginUser(this.formData.value.email, this.formData.value.password)
-    this.navController.navigateForward('/tabs/tab1');
+    this.navController.navigateForward('/tabs/stalls');
   }
   
   async getData() {
