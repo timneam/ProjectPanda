@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
 import { collectionData } from 'rxfire/firestore';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, updateProfile } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, updateProfile, updateEmail, updatePassword } from "firebase/auth";
 import * as firebase from '@angular/fire'
 import { addDoc, collection, deleteDoc, doc, getDocs, getFirestore, setDoc, updateDoc } from 'firebase/firestore';
 import { async } from '@angular/core/testing';
@@ -90,20 +90,36 @@ export class UsersService {
     const username = `${firstName}${lastName}`
     updateProfile(auth.currentUser, {
       displayName: username
-    }).then(async (userCredential) => {
-      // Profile updated!
-      // update email, phone number, password
-      // Signed in 
+    }).then(async () => {
+      // update user Document
       const updateThis = doc(this.db, 'User', user.uid)
-      await updateDoc(updateThis , {
-          firstName: firstName,
-          lastName: lastName,
-          phoneNumber: phoneNumber
-      })  
-        console.log(userCredential)
+      await updateDoc(updateThis, {
+        firstName: firstName,
+        lastName: lastName,
+        phoneNumber: phoneNumber
+      }).then(() => {
+        //update email 
+        if (email.length != 0) {
+          updateEmail(auth.currentUser, email).then((res) => {
+            console.log("Updated Email")
+
+            if (password.length != 0) {
+              updatePassword(user, password).then((res) => {
+                console.log("Updated Password")
+              }).catch((error) => {
+                // An error ocurred
+                console.log(error)
+              });
+            }
+          }).catch((error) => {
+            // An error occurred
+            console.log(error)
+          });
+        }
+      })
     }).catch((error) => {
       // An error occurred
-      // ...
+      console.log(error)
     });
   }
 
