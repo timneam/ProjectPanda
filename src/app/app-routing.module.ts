@@ -51,6 +51,10 @@ const routes: Routes = [
   {
     path: 'singtel',
     loadChildren: () => import('./singtel/singtel.module').then( m => m.SingtelPageModule)
+  },
+  {
+    path: 'name-pop-up',
+    loadChildren: () => import('./name-pop-up/name-pop-up.module').then( m => m.NamePopUpPageModule)
   }
 
 

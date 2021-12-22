@@ -41,6 +41,7 @@ export class RegisterPage implements OnInit {
       this.formData.value.reEnterPassword, 
       this.formData.value.phoneNumber)
 
+      this.router.navigateByUrl('/are-you-singtel-staff');
   }
 
   backk() {

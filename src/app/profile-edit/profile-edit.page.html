@@ -1,12 +1,16 @@
 <ion-content>
 
-  <h1 class="headerr">Profile</h1>
+  <img src="../assets/backk.png" class="iconn" [routerLink]="['/tabs/profile']">
 
-  <form [formGroup]="updateDataForm" (ngSubmit)="updateUserProfile()">
+  <form [formGroup]="updateDataForm" (ngSubmit)="updateUserProfile()" style="margin-top: 30px;">
     <div class="sameLine">
       <img src="../assets/profile.png" width="80" height="80" style="margin-right: 20px;margin-left: 30px;">
       <div class="namePhoto">
-        <h3 class="namee">Lemao</h3>
+        <div style="display: flex;flex-direction: row;">
+          <h3 class="namee">Lemao</h3>
+          <ion-icon name="create-outline" style="font-size: 23px; color: rgb(87, 86, 86);margin-top: 18px;margin-left: 10px;" (click)="editName()"></ion-icon>
+        </div>
+        
         <p class="subb">Change Profile Photo</p>
 
       </div>

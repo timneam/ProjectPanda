@@ -1,3 +1,44 @@
-ion-content ion-toolbar {
-  --background: translucent;
+ion-toolbar {
+  --background: #F1696C;
+}
+.centerise {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.espresso {
+  width: 110px;
+  margin-top: 10px;
+}
+
+.headerr {
+  font-weight: bold;
+  font-size: 23px;
+  margin-left: 25px;
+  margin-top: 20px;
+}
+.carddd {
+ display: flex;
+ justify-content: center;
+ margin-top: -11px;
+}
+
+.stallText {
+  color: black;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 19px;
+  margin-left: 20px;
+}
+
+.stallSub {
+  color: #3F3F3F;
+  font-size: 16px;
+  margin-left: 20px;
+  width: 80%;
+  font-family: inherit;
+  margin-top: 2px;
+}
+.stalll {
+  width: 135px;
 }
