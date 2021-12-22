@@ -5,6 +5,7 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, on
 import * as firebase from '@angular/fire'
 import { addDoc, collection, deleteDoc, doc, getDocs, getFirestore, setDoc, updateDoc } from 'firebase/firestore';
 import { async } from '@angular/core/testing';
+import { NavController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ export class UsersService {
 
   db = getFirestore();
 
-  constructor(private firestore: Firestore) { }
+  constructor(private firestore: Firestore,
+    private navCntrl: NavController) { }
 
   getUserInformation() {
     const usersRef = collection(this.firestore, 'User');
@@ -105,7 +107,7 @@ export class UsersService {
 
             if (password.length != 0) {
               updatePassword(user, password).then((res) => {
-                console.log("Updated Password")
+                this.navCntrl.navigateForward('tabs/profile');
               }).catch((error) => {
                 // An error ocurred
                 console.log(error)
