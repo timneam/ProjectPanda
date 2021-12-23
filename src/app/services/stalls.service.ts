@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { addDoc, collection, deleteDoc, doc, getDocs, getFirestore, setDoc, updateDoc } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, getDocs, getFirestore, setDoc, updateDoc, where, query } from 'firebase/firestore';
 import { NavController } from '@ionic/angular';
-import { Firestore } from '@angular/fire/firestore';
+import { documentId, Firestore } from '@angular/fire/firestore';
 import { collectionData } from 'rxfire/firestore';
 
 @Injectable({
@@ -17,6 +17,16 @@ export class StallsService {
   getStallInformation() {
     const stallRef = collection(this.firestore, 'Stall');
     return collectionData(stallRef);
+  }
+
+  async getMenuInformation() {
+    const q = query(collection(this.firestore, "Stall"));
+
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      console.log(doc.id, " => ", doc.data());
+    });
   }
 
 }
