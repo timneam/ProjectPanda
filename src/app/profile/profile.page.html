@@ -1,8 +1,11 @@
 
 <ion-content>
-
+<div style="display: flex;flex-direction: row;align-items: center;">
 <h1 class="headerr">Profile</h1>
-
+<div class="powerIcon">
+<ion-icon name="power" (click)="presentAlert()" style="font-size: 26px;margin-left: 200px;margin-top: 11px;" ></ion-icon>
+</div>
+</div>
 <div class="sameLine">
 <img src={{userData.photoURL}} width="80" height="80" style="margin-right: 20px;margin-left: 30px;" >
 <div class="namePhoto">

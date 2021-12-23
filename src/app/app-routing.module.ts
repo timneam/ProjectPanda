@@ -55,6 +55,10 @@ const routes: Routes = [
   {
     path: 'name-pop-up',
     loadChildren: () => import('./name-pop-up/name-pop-up.module').then( m => m.NamePopUpPageModule)
+  },
+  {
+    path: 'menu',
+    loadChildren: () => import('./menu/menu.module').then( m => m.MenuPageModule)
   }
 
 

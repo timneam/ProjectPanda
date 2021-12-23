@@ -3,7 +3,8 @@ import { UsersService } from '../services/users.service';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { doc, updateDoc, deleteDoc, getFirestore, getDocs, collection, where, getDoc } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
-
+import { AlertController } from '@ionic/angular';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
@@ -14,7 +15,7 @@ export class ProfilePage implements OnInit {
   db = getFirestore();
   updateData: FormGroup;
 
-  constructor(private UsersService: UsersService) {
+  constructor(private UsersService: UsersService,public router: Router, public alertController: AlertController) {
 
   }
 
@@ -59,4 +60,28 @@ export class ProfilePage implements OnInit {
     await deleteDoc(frankDocRef);
   }
 
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Log out',
+     
+      message: 'Are you sure you want to log out?',
+      buttons: [ {
+        text: 'No',
+        handler: () => {
+          alert.dismiss()
+        }
+      },
+      {
+        text: 'Logout',
+        handler: () => {
+          //remove login credentials too
+          this.router.navigateByUrl('/login-or-register');
+        }
+      },]
+    });
+    await alert.present();
+
+   
+  }
 }
