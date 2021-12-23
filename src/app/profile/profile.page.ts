@@ -5,6 +5,7 @@ import { doc, updateDoc, deleteDoc, getFirestore, getDocs, collection, where, ge
 import { getAuth } from 'firebase/auth';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',

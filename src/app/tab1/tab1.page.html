@@ -13,13 +13,13 @@
 
 <ion-content>
  <h2 class="headerr">Vendors</h2>
-<div class="carddd">
+<div class="carddd" *ngFor="let test of stallData">
  <ion-card style="margin-top: 18px;box-shadow: 3px 5px 3px rgb(184, 180, 180);border-radius: 2px;width:90%" [routerLink]="['/menu']" >
    <div style="display: flex;flex-direction: row;">
     <img src="../assets/malayStall.png" class="stalll">
     <div style="display: flex;flex-direction: column;">
-      <h3 class="stallText">Malay Stall</h3>
-      <p class="stallSub">Malay stall that sells malay food</p>
+      <h3 class="stallText">{{test.stallName}}</h3>
+      <p class="stallSub">{{test.stallDetails}}</p>
     </div>
    </div>
  </ion-card>

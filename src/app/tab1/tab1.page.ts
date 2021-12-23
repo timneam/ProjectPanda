@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { UsersService } from '../services/users.service';
+import { StallsService } from '../services/stalls.service';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
-import { addDoc, collection, deleteDoc, doc, getDocs, getFirestore, setDoc, updateDoc } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, getDocs, getFirestore, setDoc, updateDoc, query, where, } from 'firebase/firestore';
+
 
 @Component({
   selector: 'app-tab1',
@@ -9,77 +10,34 @@ import { addDoc, collection, deleteDoc, doc, getDocs, getFirestore, setDoc, upda
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
-  // db = getFirestore();
 
-  // formData: FormGroup;
+  db = getFirestore();
+  stallData = [];
+  testData = ['1', '2', '3', '4'];
 
-  // constructor(
-  //   private UsersService: UsersService,
-  //   private formBuilder: FormBuilder) {
+  constructor(
+    private StallsService: StallsService,
+    private formBuilder: FormBuilder) {
 
-  // }
-  // ngOnInit() {
-  //   this.getData()
+  }
 
-  //   this.formData = new FormGroup({
-  //     email: new FormControl(),
-  //     password: new FormControl()
-  //   })
+  ngOnInit() {
+    this.getData()
+  }
 
-  // }
+  async getData() {
+    // const querySnapshot = await getDocs(collection(this.db, "Stall"));
+    // querySnapshot.forEach(async (doc) => {
+    // console.log(`${doc.id} => ${doc.data()}`);
+    //  });
 
-  // onLogin() {
-  //   console.log(this.formData.value)
-  //   this.UsersService.loginUser(this.formData.value.email, this.formData.value.password)
-  // }
-  
-  // async getData() {
-  //   const querySnapshot = await getDocs(collection(this.db, "User"));
-  //   querySnapshot.forEach((doc) => {
-  //     console.log(`${doc.id} => ${doc.data()}`);
-  //   });
-  // }
+    const querySnapshot = await getDocs(collection(this.db, "Stall"));
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      console.log(doc.id, " => ", doc.data());
+      this.stallData.push(doc.data());
+    })
+    
+  }
 
-
-
-  // async addData() {
-  //   const data = {
-  //     firstName: "Alan",
-  //     lastName: "Turing",
-  //     phoneNumber: 696969697
-  //   }
-
-  //   const frankDocRef = doc(this.db, "User", "DeezNutz");
-
-  //   // Manually set Doc ID
-
-  //   await setDoc(frankDocRef, data);
-
-  //   // Auto Generate Doc ID
-
-  //   //   try {
-  //   //     const docRef = await addDoc(collection(this.db, "User"), data);
-
-  //   //     console.log("Document written with ID: ", docRef.id);
-  //   //   } catch (e) {
-  //   //     console.error("Error adding document: ", e);
-  //   //   }
-  // }
-
-  // async updateData() {
-
-  //   const frankDocRef = doc(this.db, "User", "DeezNutz");
-
-  //   // To update age and favorite color:
-  //   await updateDoc(frankDocRef, {
-  //     firstName: "Frank",
-  //     lastName: { food: "Pizza", color: "Blue", subject: "recess" },
-  //     phoneNumber: 12
-  //   });
-  // }
-
-  // async deleteData() {
-  //   const frankDocRef = doc(this.db, "User", "DeezNutz");
-  //   await deleteDoc(frankDocRef);
-  // }
 }
