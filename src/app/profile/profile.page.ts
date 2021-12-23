@@ -76,8 +76,8 @@ export class ProfilePage implements OnInit {
       {
         text: 'Logout',
         handler: () => {
-          //remove login credentials too
-          this.router.navigateByUrl('/login-or-register');
+          this.UsersService.signoutUser();
+          // this.router.navigateByUrl('/login-or-register');
         }
       },]
     });

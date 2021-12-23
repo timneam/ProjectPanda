@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
 import { collectionData } from 'rxfire/firestore';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, updateProfile, updateEmail, updatePassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, updateProfile, updateEmail, updatePassword, signOut } from "firebase/auth";
 import * as firebase from '@angular/fire'
 import { addDoc, collection, deleteDoc, doc, getDocs, getFirestore, setDoc, updateDoc } from 'firebase/firestore';
 import { async } from '@angular/core/testing';
@@ -13,6 +13,7 @@ import { NavController } from '@ionic/angular';
 export class UsersService {
 
   db = getFirestore();
+  router: any;
 
   constructor(private firestore: Firestore,
     private navCntrl: NavController) { }
@@ -127,16 +128,11 @@ export class UsersService {
 
   signoutUser() {
     const auth = getAuth();
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/firebase.User
-        const uid = user.uid;
-        // ...
-      } else {
-        // User is signed out
-        // ...
-      }
+    signOut(auth).then(() => {
+      this.navCntrl.navigateForward('/login-or-register');
+      console.log("User has successfully logged out");
+    }).catch((error) => {
+      console.log(error);
     });
   }
 
