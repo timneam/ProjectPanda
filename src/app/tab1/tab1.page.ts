@@ -12,9 +12,10 @@ import { addDoc, collection, deleteDoc, doc, getDocs, getFirestore, setDoc, upda
 export class Tab1Page {
 
   db = getFirestore();
-  stallData = [];
-  stallId = [];
-  stallDetails = [];
+  stallName = []
+  stallDetails = []
+  stallId = []
+  stall = []
 
   constructor(
     private StallsService: StallsService,
@@ -33,22 +34,19 @@ export class Tab1Page {
     //  });
 
     const querySnapshot = await getDocs(collection(this.db, "Stall"));
-    console.log(querySnapshot)
     querySnapshot.forEach((doc) => {
+      let data = doc.data()
       // doc.data() is never undefined for query doc snapshots
       // console.log(doc.id, " => ", doc.data());
-      // this.stallDetails.push(doc.data(), doc.id);
-      // console.log(this.stallData)
-      // this.stallId.push(doc.id);
-      // console.log(this.stallId);
-      this.stallData = [doc.id, doc.data()]
-      console.log(this.stallData)
+      this.stallName.push(data.stallName);
+      this.stallDetails.push(data.stallDetails);
+      this.stallId.push(doc.id);
     })
+    for (let i = 0; i < this.stallName.length; i++) {
+      let data = { "id": this.stallId[i], "stallName": this.stallName[i], "stallDetails": this.stallDetails[i] }
+      this.stall.push(data)
+    }
+    console.log(this.stall)
   }
-
-
-
-
-
 
 }
