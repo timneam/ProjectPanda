@@ -40,7 +40,8 @@ const routes: Routes = [
   {
     path: 'profile-edit',
     loadChildren: () => import('./profile-edit/profile-edit.module').then( m => m.ProfileEditPageModule)
-  },  {
+  },
+  {
     path: 'singtel-staff-registration',
     loadChildren: () => import('./singtel-staff-registration/singtel-staff-registration.module').then( m => m.SingtelStaffRegistrationPageModule)
   },
@@ -59,7 +60,12 @@ const routes: Routes = [
   {
     path: 'menu',
     loadChildren: () => import('./menu/menu.module').then( m => m.MenuPageModule)
-  }
+  },
+  {
+    path: '',
+    loadChildren: () => import('./vendor-tabs/vendor-tabs.module').then( m => m.VendorTabsPageModule)
+  },
+
 
 
 
