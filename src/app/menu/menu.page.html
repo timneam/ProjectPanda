@@ -1,22 +1,40 @@
-
 <ion-content>
-  <img src="../assets/stallBackground.png" style="position: absolute;z-index: -1;width: 100%;">
-  <img src="../assets/whiteback.png" class="iconn" [routerLink]="['/tabs/stalls']">
-  <h3 style="font-size: 22px;font-weight: bold;color: #ffffff;display: flex;justify-content: center;">Malay Stall</h3>
-  <p class="subb">Estimated wait time 5 ~ 7 mins  </p>
+  <div *ngFor="let data of stallData">
+    <img src="../assets/stallBackground.png" style="position: absolute;z-index: -1;width: 100%;">
+    <img src="../assets/whiteback.png" class="iconn" [routerLink]="['/tabs/stalls']">
+    <h3 style="font-size: 22px;font-weight: bold;color: #ffffff;display: flex;justify-content: center;">
+      {{data.stallName}}
+    </h3>
+    <div *ngFor="let data of stallMenu">
+      <p class="subb">Estimated wait time {{data.foodEstTime}}  mins </p>
+    </div>
 
+  </div>
   <h2 class="headerr">Menu</h2>
 
   <ion-list>
-    <ion-item>
-      <img src='../assets/nasiLemak.png' height="90px" width="90px" style="margin-bottom: 13px;margin-top: 7px;" >
-      <p style="margin-right:196px;margin-top:45px;display:inline-block;background-color:transparent;z-index:-1;margin-left: 35px;">$ 8.00</p>
-      <ion-label style="margin-left: -237px;margin-top:-28px;z-index: 99;background-color: transparent;font-size:18px ;" ><b>Nasi Lemak</b></ion-label>
-     
-    </ion-item>
-    <hr>
-    <!-- <ion-item>
-     <ion-label>Main 2</ion-label>
-   </ion-item> -->
+    <div *ngFor="let data of stallMenu">
+      <ion-item>
+
+        <img src='../assets/nasiLemak.png' height="90px" width="90px" style="margin-bottom: 13px;margin-top: 7px;">
+
+        <p style="margin-right:196px;margin-top:45px;display:inline-block;background-color:transparent;z-index:-1;margin-left: 35px;">
+          {{data.foodPrice}}
+        </p>
+
+        <ion-label style="margin-left: -237px;margin-top:-28px;z-index: 99;background-color: transparent;font-size:18px ;">
+          <b>{{data.foodName}}</b>
+        </ion-label>
+
+      </ion-item>
+
+      <hr>
+
+    </div>
+
+      <ion-item>
+        <ion-label>Main 2</ion-label>
+      </ion-item>
+
   </ion-list>
 </ion-content>

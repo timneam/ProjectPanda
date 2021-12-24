@@ -12,8 +12,10 @@ import { ActivatedRoute } from '@angular/router';
 export class MenuPage implements OnInit {
 
   db = getFirestore();
-  thisStallData = [];
-  docid: string;
+  stallData = []
+  stallMenu = []
+
+  docid = this.activatedRoute.snapshot.paramMap.get("id");
 
   constructor(
     private stallService: StallsService,
@@ -21,26 +23,26 @@ export class MenuPage implements OnInit {
 
   ngOnInit() {
     this.getStallData();
-
-    let docid = this.activatedRoute.snapshot.paramMap.get("id");
-    console.log(docid);
+    this.getStallMenu();
   }
 
   async getStallData() {
-    const stallRef = doc(this.db, "Stall", this.docid);
-    console.log(stallRef)
-    const stallData = await getDoc(stallRef);
-    
+    const stallData = await getDoc(doc(this.db, "Stall", this.docid));
     if (stallData.exists()) {
-      // console.log("Document data:", stallData.data());
-
+      this.stallData = [stallData.data()]
     } else {
-      // doc.data() will be undefined in this case
       console.log("No such document!");
     }
   }
 
-  async getStallMenu(){
+  async getStallMenu() {
+    const querySnapshot = await getDocs(collection(this.db, "Stall", this.docid, "Menu"));
+    querySnapshot.forEach((doc) => {
+      let data = doc.data()
+      let foodData = { "foodId": doc.id, "foodName": data.foodName, "foodDetails": data.foodDetails, "foodPrice": data.foodPrice, "foodEstTime": data.foodEstTime }
+      this.stallMenu.push(foodData)
+    })
+    console.log(this.stallMenu)
   }
 
 }

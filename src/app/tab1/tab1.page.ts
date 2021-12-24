@@ -24,28 +24,16 @@ export class Tab1Page {
   }
 
   ngOnInit() {
-    this.getData()
+    this.getStallData()
   }
 
-  async getData() {
-    // const querySnapshot = await getDocs(collection(this.db, "Stall"));
-    // querySnapshot.forEach(async (doc) => {
-    // console.log(`${doc.id} => ${doc.data()}`);
-    //  });
-
+  async getStallData() {
     const querySnapshot = await getDocs(collection(this.db, "Stall"));
     querySnapshot.forEach((doc) => {
       let data = doc.data()
-      // doc.data() is never undefined for query doc snapshots
-      // console.log(doc.id, " => ", doc.data());
-      this.stallName.push(data.stallName);
-      this.stallDetails.push(data.stallDetails);
-      this.stallId.push(doc.id);
+      let stallData = { "id": doc.id, "stallName": data.stallName, "stallDetails": data.stallDetails }
+      this.stall.push(stallData)
     })
-    for (let i = 0; i < this.stallName.length; i++) {
-      let data = { "id": this.stallId[i], "stallName": this.stallName[i], "stallDetails": this.stallDetails[i] }
-      this.stall.push(data)
-    }
     console.log(this.stall)
   }
 
