@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { StallsService } from '../services/stalls.service';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { addDoc, collection, deleteDoc, doc, getDocs, getFirestore, setDoc, updateDoc, query, where, QuerySnapshot, } from 'firebase/firestore';
-
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab1',
@@ -18,6 +18,7 @@ export class Tab1Page {
   stall = []
 
   constructor(
+    private LoadingController : LoadingController ,
     private StallsService: StallsService,
     private formBuilder: FormBuilder) {
 
@@ -25,7 +26,23 @@ export class Tab1Page {
 
   ngOnInit() {
     this.getStallData()
+    this.presentLoading()
+
   }
+
+
+  async presentLoading() {
+    const loading = await this.LoadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'Please wait...',
+      duration: 2000
+    });
+    await loading.present();
+
+    const { role, data } = await loading.onDidDismiss();
+    console.log('Loading dismissed!');
+  }
+
 
   async getStallData() {
     const querySnapshot = await getDocs(collection(this.db, "Stall"));

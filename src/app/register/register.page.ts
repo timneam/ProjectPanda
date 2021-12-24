@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { UsersService } from '../services/users.service';
 import { Router } from '@angular/router'
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-register',
@@ -13,6 +14,7 @@ export class RegisterPage implements OnInit {
   formData: FormGroup;
 
   constructor(
+    private LoadingController : LoadingController ,
     private UsersService: UsersService,
     private formBuilder: FormBuilder,
     private router: Router
@@ -31,6 +33,21 @@ export class RegisterPage implements OnInit {
 
   }
 
+  
+  async presentLoading() {
+    const loading = await this.LoadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'Please wait...',
+      duration: 2000
+    });
+    await loading.present();
+
+    const { role, data } = await loading.onDidDismiss();
+    console.log('Loading dismissed!');
+  }
+
+
+
   onRegister() {
     console.log(this.formData.value)
     this.UsersService.registerUser(
@@ -40,7 +57,7 @@ export class RegisterPage implements OnInit {
       this.formData.value.password,
       this.formData.value.reEnterPassword, 
       this.formData.value.phoneNumber)
-
+      this.presentLoading()
       this.router.navigateByUrl('/are-you-singtel-staff');
   }
 

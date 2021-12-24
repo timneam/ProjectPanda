@@ -3,6 +3,7 @@ import { StallsService } from '../services/stalls.service';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { addDoc, collection, deleteDoc, doc, getDocs, getFirestore, setDoc, updateDoc, query, where, getDoc, } from 'firebase/firestore';
 import { ActivatedRoute } from '@angular/router';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-menu',
@@ -18,14 +19,29 @@ export class MenuPage implements OnInit {
   docid = this.activatedRoute.snapshot.paramMap.get("id");
 
   constructor(
+    private LoadingController : LoadingController ,
     private stallService: StallsService,
     private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+    this.presentLoading()
     this.getStallData();
     this.getStallMenu();
   }
 
+  async presentLoading() {
+    const loading = await this.LoadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'Please wait...',
+      duration: 2000
+    });
+    await loading.present();
+
+    const { role, data } = await loading.onDidDismiss();
+    console.log('Loading dismissed!');
+  }
+
+  
   async getStallData() {
     const stallData = await getDoc(doc(this.db, "Stall", this.docid));
     if (stallData.exists()) {

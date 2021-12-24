@@ -3,6 +3,7 @@ import { UsersService } from '../services/users.service';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { addDoc, collection, deleteDoc, doc, getDocs, getFirestore, setDoc, updateDoc } from 'firebase/firestore';
 import { NavController } from '@ionic/angular';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,7 @@ export class LoginPage implements OnInit {
   formData: FormGroup;
 
   constructor(
+    private LoadingController : LoadingController ,
     private UsersService: UsersService,
     private formBuilder: FormBuilder,
     private navController: NavController) {
@@ -30,6 +32,19 @@ export class LoginPage implements OnInit {
     })
 
   }
+
+  async presentLoading() {
+    const loading = await this.LoadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'Please wait...',
+      duration: 2000
+    });
+    await loading.present();
+
+    const { role, data } = await loading.onDidDismiss();
+    console.log('Loading dismissed!');
+  }
+
 
   onLogin() {
     console.log(this.formData.value)
