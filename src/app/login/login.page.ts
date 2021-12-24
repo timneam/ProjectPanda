@@ -24,8 +24,6 @@ export class LoginPage implements OnInit {
 
   }
   ngOnInit() {
-    this.getData()
-
     this.formData = new FormGroup({
       email: new FormControl(),
       password: new FormControl()
@@ -50,13 +48,6 @@ export class LoginPage implements OnInit {
     console.log(this.formData.value)
     this.UsersService.loginUser(this.formData.value.email, this.formData.value.password)
     this.navController.navigateForward('/tabs/stalls');
-  }
-  
-  async getData() {
-    const querySnapshot = await getDocs(collection(this.db, "User"));
-    querySnapshot.forEach((doc) => {
-      console.log(`${doc.id} => ${doc.data()}`);
-    });
   }
 
   async addData() {

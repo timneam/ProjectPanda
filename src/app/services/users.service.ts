@@ -87,6 +87,24 @@ export class UsersService {
       });
   }
 
+  async singtelStaffRegister(staffName, staffId) {
+    const auth = getAuth(); //get current user
+    const user = auth.currentUser; // user is this user
+    if (user != null) {
+      const data = {
+        staffName: staffName,
+        staffId: staffId
+      }
+      const putData = doc(this.db, 'User', user.uid)
+      await updateDoc(putData, data).then(() => {
+        console.log("Successfully added staffs details!");
+        this.navCntrl.navigateForward('tabs/stalls');
+      }).catch((error) => {
+        console.log(error);
+      });
+    }
+  }
+
   updateUserProfile(firstName, lastName, email, password, phoneNumber) {
     const auth = getAuth();
     const user = auth.currentUser;

@@ -19,7 +19,7 @@ export class MenuPage implements OnInit {
   docid = this.activatedRoute.snapshot.paramMap.get("id");
 
   constructor(
-    private LoadingController : LoadingController ,
+    private LoadingController : LoadingController,
     private stallService: StallsService,
     private activatedRoute: ActivatedRoute) { }
 

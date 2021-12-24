@@ -47,7 +47,7 @@ export class Tab1Page {
   async getStallData() {
     const querySnapshot = await getDocs(collection(this.db, "Stall"));
     querySnapshot.forEach((doc) => {
-      let data = doc.data()
+      let data = doc.data() //store stallname and stalldetails
       let stallData = { "id": doc.id, "stallName": data.stallName, "stallDetails": data.stallDetails }
       this.stall.push(stallData)
     })
