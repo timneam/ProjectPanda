@@ -29,4 +29,12 @@ export class StallsService {
     });
   }
 
+  async getOneStallInformation(id){
+    const stallInformation = collection(this.firestore, 'Stall', id)
+  }
+
+  async getOneStallMenu(id, docid){
+    const stallInformation = collection(this.firestore, 'Stall', id, 'Menu', docid)
+  }
+
 }
