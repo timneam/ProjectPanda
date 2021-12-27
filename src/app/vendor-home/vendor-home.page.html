@@ -2,6 +2,18 @@
 
 <ion-content>
 
+  <div class="carddd" *ngFor="let data of menu">
+    <ion-card style="margin-top: 18px;box-shadow: 3px 5px 3px rgb(184, 180, 180);border-radius: 2px;width:90%" >
+      <div style="display: flex;flex-direction: row;">
+       <img src="../assets/malayStall.png" class="stalll">
+       <div style="display: flex;flex-direction: column;">
+         <h3 class="stallText">{{data.foodName}}</h3>
+         <p class="stallSub">{{data.foodPrice}}</p>
+       </div>
+      </div>
+    </ion-card>
+   </div>
+
   <ion-fab vertical="bottom" horizontal="end" edge slot="fixed" style="margin-bottom: 62px; margin-right: 18px;">
     <ion-fab-button color="primary"  [routerLink]="['/add']">
       <ion-icon name="add"></ion-icon>

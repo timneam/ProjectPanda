@@ -32,16 +32,16 @@ export class UsersService {
         // console.log(user);            
         if (user != null) {
           const userData = await getDoc(doc(this.db, 'User', user));
-          console.log(userData.data());
+          // console.log(userData.data());
           const userRole = userData.data();
-          console.log(userRole.role)
+          // console.log(userRole.role)
           if (userRole.role == 'User') {
             this.navCntrl.navigateForward('tabs/stalls');
           } else {
             this.navCntrl.navigateForward('vendor-tabs/home');
           }
         } else {
-          console.log("retry")
+          console.log("Try Again!")
         }
       })
       .catch((error) => {
