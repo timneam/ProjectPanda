@@ -65,6 +65,14 @@ const routes: Routes = [
     path: '',
     loadChildren: () => import('./vendor-tabs/vendor-tabs.module').then( m => m.VendorTabsPageModule)
   },
+{
+  path: 'add', 
+  loadChildren: () =>
+  import('./vendor-add/vendor-add.module').then( m => m.VendorAddPageModule)
+},  {
+    path: 'menu-item',
+    loadChildren: () => import('./menu-item/menu-item.module').then( m => m.MenuItemPageModule)
+  }
 
 
 

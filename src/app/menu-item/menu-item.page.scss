@@ -1,0 +1,65 @@
+.titlee {
+    width: 50%;
+    margin-top: 37%;
+    font-size: 17px;
+    font-weight: 500;
+    font-family: 'Roboto';
+    margin-left: 13px;
+}
+
+.pricee {
+    margin-top: 37%;
+    font-size: 17px;
+    font-weight: 500;
+    font-family: 'Roboto';
+    margin-left: 27%;
+}
+.des {
+    font-size: 17px;
+    font-weight: 400;
+    font-family: 'Roboto';
+    margin-left: 13px;
+    margin-top: 5px;
+    margin-bottom: 3px;
+}
+
+ion-button {
+    --border-radius: 30px;
+    }
+
+    hr {
+        display: block;
+        height: 1px;
+        border: 0;
+        border-top: 1px solid rgb(119, 117, 117);
+        margin: 1em 0;
+        padding: 0;
+        width: 100%;
+        float: right;
+    }
+
+
+    .commente {
+      
+        margin-top: 18px;
+        font-size: 17px;
+        font-weight: 400;
+        font-family: 'Roboto';
+        margin-left: 13px;
+        margin-bottom: 8px;
+    }
+    .textbox {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 280px;
+    }
+    ion-textarea{
+        border: solid 1px rgb(167, 167, 167);
+        border-radius: 10px;
+        width: 90%;
+        margin-left: 13px;
+        margin-top: -2px;
+     }
+    

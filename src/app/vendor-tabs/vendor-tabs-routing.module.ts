@@ -19,12 +19,12 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'add',
+        path: 'orders',
         children: [
           {
             path: '',
             loadChildren: () =>
-             import('../vendor-add/vendor-add.module').then( m => m.VendorAddPageModule)
+             import('../vendor-orders/vendor-orders.module').then( m => m.VendorOrdersPageModule)
           }
         ]
       },

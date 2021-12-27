@@ -13,8 +13,8 @@
   <h2 class="headerr">Menu</h2>
 
   <ion-list>
-    <div *ngFor="let data of stallMenu">
-      <ion-item>
+    <div *ngFor="let data of stallMenu"  [routerLink]="['/menu-item']">
+      <ion-item >
 
         <img src='../assets/nasiLemak.png' height="90px" width="90px" style="margin-bottom: 13px;margin-top: 7px;">
 
