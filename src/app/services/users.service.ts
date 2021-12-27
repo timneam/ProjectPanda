@@ -3,7 +3,7 @@ import { Firestore } from '@angular/fire/firestore';
 import { collectionData } from 'rxfire/firestore';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, updateProfile, updateEmail, updatePassword, signOut } from "firebase/auth";
 import * as firebase from '@angular/fire'
-import { addDoc, collection, deleteDoc, doc, getDocs, getFirestore, setDoc, updateDoc } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, getFirestore, setDoc, updateDoc } from 'firebase/firestore';
 import { async } from '@angular/core/testing';
 import { NavController } from '@ionic/angular';
 
@@ -26,17 +26,23 @@ export class UsersService {
   loginUser(email, password) {
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
+      .then(async (userCredential) => {
+        const user = userCredential.user.uid;
         // Signed in 
-        const user = userCredential.user;
-
-        // if successful, add to local storage, route to home page
-        // if (user.uid != null) {
-        //   localStorage.setItem("token", user.uid)
-        // } else {
-        //   console.log("Error Logging In!")
-        // }
-
+        // console.log(user);            
+        if (user != null) {
+          const userData = await getDoc(doc(this.db, 'User', user));
+          console.log(userData.data());
+          const userRole = userData.data();
+          console.log(userRole.role)
+          if (userRole.role == 'User') {
+            this.navCntrl.navigateForward('tabs/stalls');
+          } else {
+            this.navCntrl.navigateForward('vendor-tabs/home');
+          }
+        } else {
+          console.log("retry")
+        }
       })
       .catch((error) => {
         const errorCode = error.code;
