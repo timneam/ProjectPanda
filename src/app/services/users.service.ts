@@ -46,7 +46,7 @@ export class UsersService {
       });
   }
 
-  registerUser(firstName, lastName, email, password, reEnterPassword, phoneNumber) {
+  registerUser(firstName, lastName, email, password, reEnterPassword, phoneNumber, role) {
     const auth = getAuth();
     createUserWithEmailAndPassword(auth, email, password)
       .then(async (userCredential) => {
@@ -56,7 +56,8 @@ export class UsersService {
           const data = {
             firstName: firstName,
             lastName: lastName,
-            phoneNumber: phoneNumber
+            phoneNumber: phoneNumber,
+            role: role
           }
           const newUser = doc(this.db, "User", userCredential.user.uid);
           // Manually set Doc ID

@@ -29,6 +29,7 @@ export class RegisterPage implements OnInit {
       firstName: new FormControl(),
       lastName: new FormControl(),
       phoneNumber: new FormControl(),
+      role: new FormControl('User'),
     })
 
   }
@@ -56,7 +57,8 @@ export class RegisterPage implements OnInit {
       this.formData.value.email, 
       this.formData.value.password,
       this.formData.value.reEnterPassword, 
-      this.formData.value.phoneNumber)
+      this.formData.value.phoneNumber,
+      this.formData.value.role)
       this.presentLoading()
       this.router.navigateByUrl('/are-you-singtel-staff');
   }
