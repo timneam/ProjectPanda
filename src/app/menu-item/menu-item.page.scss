@@ -62,4 +62,26 @@ ion-button {
         margin-left: 13px;
         margin-top: -2px;
      }
-    
+     .icon-circle, .icon-circle-large, .icon-circle-small{
+        position: relative;
+        display: inline-block;
+        
+        /*padding: 16px;*/
+        
+        width: 50px; height: 50px; margin-top: 15px; margin-left: 8px;
+        font-size:40px; 
+        
+         -moz-border-radius:50%;
+        -webkit-border-radius:50%;
+          border-radius: 50%;
+        
+          
+        
+        border: 1px solid #F5585C;
+       
+        background: #F5585C; /*#ececec;ebebeb*/
+        color: #fff;
+        
+        text-align:center;
+        /*vertical-align: middle;*/
+      }
