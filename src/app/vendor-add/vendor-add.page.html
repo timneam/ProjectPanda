@@ -29,6 +29,27 @@
   <hr>
   <ion-icon name="add-circle-outline" class="plusIcon"></ion-icon>
 
+  <div style="display: flex;flex-direction: row;margin-bottom: 10px;">
+    <ion-button (click)="decrementQty()"
+    style="border-radius: 25px; width: 50px; height: 50px; margin-top: 15px; margin-right: 10px;" color="primary">
+    <ion-icon name="remove-outline" style="font-size: 35px;"></ion-icon>
+  
+    </ion-button>
+    <ion-button 
+    style="border-radius: 25px; width: 155px; height: 50px; margin-top: 15px; margin-left: 5px; " color="primary">
+    <p style="font-size: 16px;text-transform: capitalize;">Current Stock: {{item_qty}}</p>
+  
+    </ion-button>
+
+    <ion-button (click)="incrementQty()"
+    style="border-radius: 25px; width: 50px; height: 50px; margin-top: 15px; margin-left: 15px;margin-right: 5px; " color="primary">
+    <ion-icon name="add-outline" style="font-size: 35px!important;"></ion-icon>
+  
+    </ion-button>
+
+   
+  </div>
+
   <ion-button 
   style="border-radius: 25px; width: 160px; height: 50px; margin-top: 15px; font-size: 24px;" color="primary">
   <ion-label
