@@ -49,4 +49,38 @@ export class StallsService {
     
   // }
 
+  async getMenuItem(docid) {
+    const querySnapshot = await getDocs(collection(this.db, "Stall", docid, "Menu"));
+    let MenuItem = []
+
+    querySnapshot.forEach((doc) => {
+      let data = doc.data()
+      let foodData = { "menuId": doc.id, "foodName": data.foodName, "foodDetails": data.foodDetails, "foodPrice": data.foodPrice, "foodEstTime": data.foodEstTime }
+      MenuItem.push(foodData)
+    })
+    return MenuItem
+  }
+
+  async getMenuAddon(docid, MenuId) {
+    const querySnapshot = await getDocs(collection(this.db, "Stall", docid, "Menu", MenuId, "Addon"));
+    let MenuAddon = []
+
+    querySnapshot.forEach((doc) => {
+      let data = doc.data()
+      let foodData = { "addonId": doc.id, "title": data.title, "price": data.price }
+      MenuAddon.push(foodData)
+    })
+    return MenuAddon
+  }
+
+  async addMenuAddon(docid, MenuId) {
+    const querySnapshot = await addDoc(collection(this.db, "Stall", docid, "Menu", MenuId, "Addon"), {});
+
+  }
+
+  async updateMenuAddon(docid, MenuId, addonId) {
+    const querySnapshot = await updateDoc(doc(this.db, "Stall", docid, "Menu", MenuId, "Addon", addonId), {});
+    
+  }
+
 }
