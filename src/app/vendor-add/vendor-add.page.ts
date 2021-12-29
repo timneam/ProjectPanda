@@ -31,4 +31,21 @@ export class VendorAddPage implements OnInit {
         console.log('item_2->' + this.item_qty);
       }
       }
+      MySelect1:any=[];
+moreIndex1:any=1;
+doc_name:any=[];
+doc_price:any=[]; 
+
+
+selectNo1(val1){
+    if(val1==1)
+    {
+     this.MySelect1.push(this.moreIndex1);
+     this.moreIndex1++;
+    }
+    else{
+      this.MySelect1.pop(this.moreIndex1);
+      this.moreIndex1--;
+    }    
+  }
 }

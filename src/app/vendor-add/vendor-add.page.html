@@ -27,7 +27,28 @@
   </div>
   
   <hr>
-  <ion-icon name="add-circle-outline" class="plusIcon"></ion-icon>
+  <ion-icon name="add-circle-outline" class="plusIcon" (click)="selectNo1(1);" style="margin-bottom: -25px;"></ion-icon>
+
+  
+<ion-card *ngFor="let item of MySelect1; let i=index; " >
+  <ion-row >            
+    <ion-col col-10>
+      <ion-item>
+        <ion-label >Add-On</ion-label>
+        <ion-input type="text" text-right [(ngModel)]="doc_name[item]" id="doc_name[{{item}}]" name="doc_name[{{item}}]" required></ion-input>
+      </ion-item>
+    </ion-col>
+    
+      <button class="btn btnpos" ion-button (click)="selectNo1(0);" style="float: right;"><ion-icon style="color: black;" name="trash-outline"></ion-icon></button>
+    
+  </ion-row>
+  <ion-item>
+    <ion-label style="padding-left: 10px;" >Price ($)</ion-label>
+    <ion-input type="number" text-right [(ngModel)]="doc_price[item]" name="doc_price[{{item}}]" required></ion-input>
+  </ion-item>
+
+
+</ion-card>
 
   <div style="display: flex;flex-direction: row;margin-bottom: 10px;">
     <ion-button (click)="decrementQty()"
@@ -59,6 +80,7 @@
   
   </ion-button>
 </div>
+
 
 
 </ion-content>
