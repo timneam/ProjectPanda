@@ -6,23 +6,25 @@
       {{data.stallName}}
     </h3>
     <div *ngFor="let data of stallMenu">
-      <p class="subb">Estimated wait time {{data.foodEstTime}}  mins </p>
+      <p class="subb">Estimated wait time {{data.foodEstTime}} mins </p>
     </div>
 
   </div>
   <h2 class="headerr">Menu</h2>
 
   <ion-list>
-    <div *ngFor="let data of stallMenu"  [routerLink]="['/menu-item']">
-      <ion-item >
+    <div *ngFor="let data of stallMenu" [routerLink]="['/menu-item']">
+      <ion-item>
 
         <img src='../assets/nasiLemak.png' height="90px" width="90px" style="margin-bottom: 13px;margin-top: 7px;">
 
-        <p style="margin-right:196px;margin-top:45px;display:inline-block;background-color:transparent;z-index:-1;margin-left: 35px;">
+        <p
+          style="margin-right:196px;margin-top:45px;display:inline-block;background-color:transparent;z-index:-1;margin-left: 35px;">
           {{data.foodPrice}}
         </p>
 
-        <ion-label style="margin-left: -237px;margin-top:-28px;z-index: 99;background-color: transparent;font-size:18px ;">
+        <ion-label
+          style="margin-left: -237px;margin-top:-28px;z-index: 99;background-color: transparent;font-size:18px ;">
           <b>{{data.foodName}}</b>
         </ion-label>
 
@@ -31,10 +33,6 @@
       <hr>
 
     </div>
-
-      <ion-item>
-        <ion-label>Main 2</ion-label>
-      </ion-item>
 
   </ion-list>
 </ion-content>

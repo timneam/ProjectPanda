@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 import { getDocs, collection, getFirestore } from 'firebase/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { StallsService } from '../services/stalls.service';
+import { error } from 'protractor';
 
 @Component({
   selector: 'app-vendor-add',
@@ -20,6 +21,8 @@ export class VendorAddPage implements OnInit {
   stallMenu = []
   addonData = []
 
+  addMenuForm: FormGroup;
+
   item_qty = 1
 
   constructor(private _location: Location,
@@ -34,7 +37,21 @@ export class VendorAddPage implements OnInit {
     // Get Data from firebase
     this.getMenuItem();
     // Assign the Addon or what
+    this.addMenuForm = new FormGroup({
+      foodName: new FormControl(),
+      foodPrice: new FormControl(),
+      foodDescription: new FormControl()
+    })
+  }
 
+  addMenuDetails() {
+    this.stallsService.addItemToStall(
+      this.addMenuForm.value.foodName,
+      this.addMenuForm.value.foodPrice,
+      this.addMenuForm.value.foodDescription,
+    )
+    console.log("test");
+    console.log(this.addMenuForm.value);
   }
 
   // Use this function for Edit not Add 

@@ -49,6 +49,25 @@ export class StallsService {
     
   // }
 
+  async addItemToStall(foodName, foodPrice, foodDescription) {
+    // user id to get doc data
+    const auth = getAuth();
+    const user = auth.currentUser;
+
+    const vendorData = await getDoc(doc(this.db, 'User', user.uid));
+    const newMenu = doc(this.db, 'Stall', vendorData.data().stallId, 'Menu')
+
+    if (vendorData != null) {
+      const menuDetails = {
+        foodName: foodName,
+        foodPrice: foodPrice,
+        foodDescription: foodDescription,
+      };
+      await setDoc(newMenu, menuDetails);
+      console.log("Added to menu!", menuDetails)
+    }
+  }
+
   async getMenuItem(docid) {
     const querySnapshot = await getDocs(collection(this.db, "Stall", docid, "Menu"));
     let MenuItem = []
