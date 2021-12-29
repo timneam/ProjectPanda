@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { addDoc, collection, deleteDoc, doc, getDocs, getFirestore, setDoc, updateDoc, where, query, getDoc, QuerySnapshot } from 'firebase/firestore';
 import { NavController } from '@ionic/angular';
-import { documentId, Firestore } from '@angular/fire/firestore';
+import { Firestore } from '@angular/fire/firestore';
 import { collectionData } from 'rxfire/firestore';
 import { getAuth } from 'firebase/auth';
 
@@ -17,14 +17,11 @@ export class StallsService {
     private navCntrl: NavController) { }
 
   getStallInformation() {
-    const stallRef = collection(this.firestore, 'Stall');
-    return collectionData(stallRef);
+    return collectionData(collection(this.firestore, 'Stall'));
   }
 
   async getMenuInformation() {
-    const q = query(collection(this.firestore, "Stall"));
-
-    const querySnapshot = await getDocs(q);
+    const querySnapshot = await getDocs(query(collection(this.firestore, "Stall")));
     querySnapshot.forEach((doc) => {
       // doc.data() is never undefined for query doc snapshots
       // console.log(doc.id, " => ", doc.data());
@@ -39,37 +36,36 @@ export class StallsService {
   //   console.log(vendorData.data().stallId);
 
   //   const stallDetails = await getDocs(collection(this.db, 'Stall', vendorData.data().stallId, 'Menu'));
-    
+
   //   stallDetails.forEach((doc) => {
   //     console.log(doc.id);
   //     let menuData = doc.data();
   //     let menuItems = { "foodId" : doc.id, "foodName" : menuData.foodName, "foodPrice": menuData.foodPrice , "foodDetails": menuData.foodDetails , "foodEstTime": menuData.foodEstTime}
   //     this.menu.push(menuItems);
   //   })
-    
   // }
 
-  async addItemToStall(foodName, foodPrice, foodDescription) {
-    // user id to get doc data
-    const auth = getAuth();
-    const user = auth.currentUser;
-
-    const vendorData = await getDoc(doc(this.db, 'User', user.uid));
-    const newMenu = doc(this.db, 'Stall', vendorData.data().stallId, 'Menu')
-
-    if (vendorData != null) {
-      const menuDetails = {
-        foodName: foodName,
-        foodPrice: foodPrice,
-        foodDescription: foodDescription,
-      };
-      await setDoc(newMenu, menuDetails);
-      console.log("Added to menu!", menuDetails)
+  async addItem(foodName, foodPrice, foodDescription, item_qty, stallId) {
+    const data = {
+      foodName: foodName,
+      foodPrice: foodPrice,
+      foodDetails: foodDescription,
+      foodQuantity: item_qty,
+      foodEstTime: 3
     }
+    const docRef = await addDoc(collection(this.db, 'Stall', stallId, 'Menu'), data)
+    return docRef
   }
 
-  async getMenuItem(docid) {
-    const querySnapshot = await getDocs(collection(this.db, "Stall", docid, "Menu"));
+  async updateItem(stallId, menuId, data) {
+    await updateDoc(doc(this.db, "Stall", stallId, "Menu", menuId), data)
+  }
+
+  async deleteItem(stallId, menuId, data) {
+
+  }
+  async getMenuItem(stallId) {
+    const querySnapshot = await getDocs(collection(this.db, "Stall", stallId, "Menu"));
     let MenuItem = []
 
     querySnapshot.forEach((doc) => {
@@ -80,8 +76,8 @@ export class StallsService {
     return MenuItem
   }
 
-  async getMenuAddon(docid, MenuId) {
-    const querySnapshot = await getDocs(collection(this.db, "Stall", docid, "Menu", MenuId, "Addon"));
+  async getMenuAddon(stallId, menuId) {
+    const querySnapshot = await getDocs(collection(this.db, "Stall", stallId, "Menu", menuId, "Addon"));
     let MenuAddon = []
 
     querySnapshot.forEach((doc) => {
@@ -92,14 +88,16 @@ export class StallsService {
     return MenuAddon
   }
 
-  async addMenuAddon(docid, MenuId) {
-    const querySnapshot = await addDoc(collection(this.db, "Stall", docid, "Menu", MenuId, "Addon"), {});
-
+  async addMenuAddon(stallId, menuId, data) {
+    const docRef = await addDoc(collection(this.db, 'Stall', stallId, 'Menu', menuId, "Addon"), data)
+    return docRef
   }
 
-  async updateMenuAddon(docid, MenuId, addonId) {
-    const querySnapshot = await updateDoc(doc(this.db, "Stall", docid, "Menu", MenuId, "Addon", addonId), {});
+  async updateMenuAddon(stallId, menuId, addonId, data) {
+    await updateDoc(doc(this.db, "Stall", stallId, "Menu", menuId, "Addon", addonId), data)
+  }
+
+  async deleteMenuAddon(stallId, menuId, addonId, data) {
     
   }
-
 }

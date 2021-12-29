@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { StallsService } from '../services/stalls.service';
-import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
-import { addDoc, collection, deleteDoc, doc, getDocs, getFirestore, setDoc, updateDoc, query, where, QuerySnapshot, } from 'firebase/firestore';
+import { Validators, FormBuilder } from '@angular/forms';
+import { collection, getDocs, getFirestore } from 'firebase/firestore';
 import { LoadingController } from '@ionic/angular';
 
 @Component({
@@ -18,7 +18,7 @@ export class Tab1Page {
   stall = []
 
   constructor(
-    private LoadingController : LoadingController ,
+    private LoadingController: LoadingController,
     private StallsService: StallsService,
     private formBuilder: FormBuilder) {
 
