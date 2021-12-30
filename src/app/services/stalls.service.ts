@@ -4,6 +4,7 @@ import { NavController } from '@ionic/angular';
 import { Firestore } from '@angular/fire/firestore';
 import { collectionData } from 'rxfire/firestore';
 import { getAuth } from 'firebase/auth';
+import { UsersService } from './users.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,8 @@ export class StallsService {
   menu = [];
 
   constructor(private firestore: Firestore,
-    private navCntrl: NavController) { }
+    private navCntrl: NavController,
+    private userService: UsersService) { }
 
   getStallInformation() {
     return collectionData(collection(this.firestore, 'Stall'));
@@ -28,22 +30,12 @@ export class StallsService {
     });
   }
 
-  // async vendorAndStore(){
-  //   // user id to get doc data
-  //   const auth = getAuth();
-  //   const user = auth.currentUser;
-  //   const vendorData = await getDoc(doc(this.db, 'User', user.uid));
-  //   console.log(vendorData.data().stallId);
+  async getOneMenuDetails(stallId, menuId){
 
-  //   const stallDetails = await getDocs(collection(this.db, 'Stall', vendorData.data().stallId, 'Menu'));
-
-  //   stallDetails.forEach((doc) => {
-  //     console.log(doc.id);
-  //     let menuData = doc.data();
-  //     let menuItems = { "foodId" : doc.id, "foodName" : menuData.foodName, "foodPrice": menuData.foodPrice , "foodDetails": menuData.foodDetails , "foodEstTime": menuData.foodEstTime}
-  //     this.menu.push(menuItems);
-  //   })
-  // }
+    const menu = await getDoc(doc(this.db, 'Stall', stallId, 'Menu', menuId));
+    
+    return menu;
+  }
 
   async addItem(foodName, foodPrice, foodDescription, item_qty, stallId) {
     const data = {
@@ -74,6 +66,21 @@ export class StallsService {
       MenuItem.push(foodData)
     })
     return MenuItem
+  }
+
+  async getMenuDetails(stallId, menuId) {
+
+    this.userService.getUserInformation
+
+    const querySnapshot = await getDocs(collection(this.db, "Stall", stallId, "Menu" , menuId));
+    let MenuItem = []
+
+    // querySnapshot.forEach((doc) => {
+    //   let data = doc.data()
+    //   let foodData = { "menuId": doc.id, "foodName": data.foodName, "foodDetails": data.foodDetails, "foodPrice": data.foodPrice, "foodEstTime": data.foodEstTime }
+    //   MenuItem.push(foodData)
+    // })
+    // return MenuItem
   }
 
   async getMenuAddon(stallId, menuId) {

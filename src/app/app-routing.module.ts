@@ -71,13 +71,14 @@ const routes: Routes = [
   import('./vendor-add/vendor-add.module').then( m => m.VendorAddPageModule)
 },
   {
-    path: 'menu-item',
+    path: 'menu-item/:stallId/:menuId',
     loadChildren: () => import('./menu-item/menu-item.module').then( m => m.MenuItemPageModule)
   },
   {
     path: 'vendor-tabs/update-item',
     loadChildren: () => import('./update-item/update-item.module').then( m => m.UpdateItemPageModule)
-  },  {
+  },
+  {
     path: 'vendor-profile',
     loadChildren: () => import('./vendor-profile/vendor-profile.module').then( m => m.VendorProfilePageModule)
   }

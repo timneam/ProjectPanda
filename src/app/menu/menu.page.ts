@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { StallsService } from '../services/stalls.service';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { addDoc, collection, deleteDoc, doc, getDocs, getFirestore, setDoc, updateDoc, query, where, getDoc, } from 'firebase/firestore';
-import { ActivatedRoute } from '@angular/router';
-import { LoadingController } from '@ionic/angular';
+import { ActivatedRoute, Router } from '@angular/router';
+import { LoadingController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-menu',
@@ -16,12 +16,14 @@ export class MenuPage implements OnInit {
   stallData = []
   stallMenu = []
 
-  docid = this.activatedRoute.snapshot.paramMap.get("id");
+  stallId = this.activatedRoute.snapshot.paramMap.get("id");
 
   constructor(
     private LoadingController : LoadingController,
     private stallService: StallsService,
-    private activatedRoute: ActivatedRoute) { }
+    private activatedRoute: ActivatedRoute,
+    private navCtrl: NavController,
+    private router: Router) { }
 
   ngOnInit() {
     this.presentLoading()
@@ -43,7 +45,7 @@ export class MenuPage implements OnInit {
 
   
   async getStallData() {
-    const stallData = await getDoc(doc(this.db, "Stall", this.docid));
+    const stallData = await getDoc(doc(this.db, "Stall", this.stallId));
     if (stallData.exists()) {
       this.stallData = [stallData.data()]
     } else {
@@ -52,13 +54,17 @@ export class MenuPage implements OnInit {
   }
 
   async getStallMenu() {
-    const querySnapshot = await getDocs(collection(this.db, "Stall", this.docid, "Menu"));
+    const querySnapshot = await getDocs(collection(this.db, "Stall", this.stallId, "Menu"));
     querySnapshot.forEach((doc) => {
       let data = doc.data()
       let foodData = { "foodId": doc.id, "foodName": data.foodName, "foodDetails": data.foodDetails, "foodPrice": data.foodPrice, "foodEstTime": data.foodEstTime }
       this.stallMenu.push(foodData)
     })
     console.log(this.stallMenu)
+  }
+
+  async goToMenuDetails(foodId){
+    this.router.navigateByUrl(`/menu-item/${this.stallId}/${foodId}`)
   }
 
 }
