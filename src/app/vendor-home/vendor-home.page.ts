@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { getAuth } from 'firebase/auth';
 import { getDoc, doc, getDocs, collection, getFirestore } from 'firebase/firestore';
 import { StallsService } from '../services/stalls.service';
-
+import {Router} from '@angular/router'
 @Component({
   selector: 'app-vendor-home',
   templateUrl: './vendor-home.page.html',
@@ -13,7 +13,7 @@ export class VendorHomePage implements OnInit {
   db = getFirestore();
   menu = [];
 
-  constructor(private stallService: StallsService) { }
+  constructor(private stallService: StallsService, private router: Router) { }
 
   ngOnInit() {
     this.showMenu();
@@ -36,5 +36,7 @@ export class VendorHomePage implements OnInit {
     })
     
   }
-
+  toUpdateItem(){
+    this.router.navigate(['/vendor-tabs/update-item'])
+  }
 }

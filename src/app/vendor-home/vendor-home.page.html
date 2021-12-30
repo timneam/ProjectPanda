@@ -21,7 +21,7 @@
 
 
         <ion-list *ngFor="let data of menu">
-            <ion-item>
+            <ion-item (click)="toUpdateItem()">
                 <img src='../assets/nasiLemak.png' height="90px" width="90px" style="margin-bottom: 13px;margin-top: 7px;">
                 <p style="margin-right:196px;margin-top:45px;display:inline-block;background-color:transparent;z-index:-1;margin-left:
           35px;">${{data.foodPrice}}</p>
@@ -34,7 +34,7 @@
     </ion-content>
 
     <ion-fab vertical="bottom" horizontal="end" edge slot="fixed" style="margin-bottom: 62px; margin-right: 18px;">
-        <ion-fab-button color="primary" [routerLink]="['/add']">
+        <ion-fab-button color="primary" [routerLink]="['/vendor-tabs/add']">
             <ion-icon name="add"></ion-icon>
         </ion-fab-button>
 

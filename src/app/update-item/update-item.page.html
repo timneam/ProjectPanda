@@ -1,0 +1,98 @@
+<ion-content>
+  <div style="position: relative;display: inline;">
+    <img src="../assets/vendorImg.png" style="width: 100%;">
+    <img src="../assets/backk.png" style="position: absolute;left: 0;width: 20px;margin-top: 5px;margin-left: 5px;"
+      (click)="backClicked()">
+  </div>
+
+  <form [formGroup]="addMenuForm" (ngSubmit)="addMenuDetails()">
+    <ion-item>
+      <ion-label position="floating">Name</ion-label>
+      <ion-input type="name" formControlName="foodName"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Price ($)</ion-label>
+      <ion-input type="number" formControlName="foodPrice"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Product Description</ion-label>
+      <ion-textarea rows={6} formControlName="foodDescription"></ion-textarea>
+    </ion-item> 
+
+    <!-- Add Est time here -->
+
+    <div style="display: flex;flex-direction: column;align-items: center;">
+      <hr style="margin-top: 26px;">
+      <div style="display: flex;flex-direction: row;">
+        <p style="margin-top: -8px;margin-bottom: -8px;font-weight: bold;">Add-on</p>
+
+      </div>
+
+      <hr>
+      <ion-icon name="add-circle-outline" class="plusIcon" (click)="addAddon()" style="margin-bottom: -25px;">
+      </ion-icon>
+
+
+
+      <ion-card *ngFor="let item of addonData; let i=index; ">
+        <ion-row>
+          <ion-col col-10>
+            <ion-item>
+              <ion-label>Add-On</ion-label>
+              <ion-input type="text" value="{{item.title}}" text-right required></ion-input>
+            </ion-item>
+          </ion-col>
+
+          <button class="btn btnpos" ion-button (click)="deleteAddon(i)" style="float: right;">
+            <ion-icon style="color: black;" name="trash-outline"></ion-icon>
+          </button>
+
+        </ion-row>
+        <ion-item>
+          <ion-label style="padding-left: 10px;">Price ($)</ion-label>
+          <ion-input type="number" value="{{item.price}}" text-right required></ion-input>
+        </ion-item>
+
+
+      </ion-card>
+
+      <div style="display: flex;flex-direction: row;margin-bottom: 10px;">
+        <ion-button (click)="changeQty(0)"
+          style="border-radius: 25px; width: 50px; height: 50px; margin-top: 15px; margin-right: 10px;" color="primary">
+          <ion-icon name="remove-outline" style="font-size: 35px;"></ion-icon>
+
+        </ion-button>
+        <ion-button style="border-radius: 25px; width: 155px; height: 50px; margin-top: 15px; margin-left: 5px; "
+          color="primary">
+          <p style="font-size: 16px;text-transform: capitalize;">Current Stock: {{item_qty}}</p>
+
+        </ion-button>
+
+        <ion-button (click)="changeQty(1)"
+          style="border-radius: 25px; width: 50px; height: 50px; margin-top: 15px; margin-left: 15px;margin-right: 5px; "
+          color="primary">
+          <ion-icon name="add-outline" style="font-size: 35px!important;"></ion-icon>
+
+        </ion-button>
+
+
+      </div>
+
+      <ion-button style="border-radius: 25px; width: 160px; height: 50px; margin-top: 15px; font-size: 24px;"
+        color="primary" type="submit">
+        <ion-label
+          style="color: white;text-transform: none;font-size: 18px;font-family: 'Roboto', sans-serif;font-weight: 500;">
+          Update
+        </ion-label>
+
+      </ion-button>
+    </div>
+  </form>
+
+  <ion-button (click)="updateAddon()">
+    Test Update
+  </ion-button>
+
+</ion-content>

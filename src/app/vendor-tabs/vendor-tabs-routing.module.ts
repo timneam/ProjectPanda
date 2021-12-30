@@ -29,6 +29,16 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'profile',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+             import('../vendor-profile/vendor-profile.module').then( m => m.VendorProfilePageModule)
+          }
+        ]
+      },
+      {
         path: '',
         redirectTo: '/vendor-tabs/home',
         pathMatch: 'full'
