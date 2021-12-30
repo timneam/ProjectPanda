@@ -20,16 +20,16 @@
 
       <hr>
     </div>
-    <div style="margin-left: 12px;">
+    <div style="margin-left: 12px;" *ngFor="let data of menuAddOns">
       <div style="margin-bottom: 3px;display: flex;align-items: center;flex-direction: row;">
-        <input type="checkbox" value="Extra sugar -$1" style="margin-top: 3px;"> &nbsp; Extra sugar - $1
+        <input type="checkbox" value="Extra sugar -$1" style="margin-top: 3px;"> &nbsp; {{data.addOnTitle}} - ${{data.addOnPrice}}
         <br>
       </div>
 
-      <div style="margin-bottom: 3px;display: flex;align-items: center;flex-direction: row;">
+      <!-- <div style="margin-bottom: 3px;display: flex;align-items: center;flex-direction: row;">
         <input type="checkbox" value="Egg"> &nbsp; Egg - $2
         <br>
-      </div>
+      </div> -->
 
     </div>
     <div>

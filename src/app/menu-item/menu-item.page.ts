@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { doc, getDoc, getFirestore } from 'firebase/firestore';
+import { collection, doc, getDoc, getFirestore, QuerySnapshot } from 'firebase/firestore';
 import { StallsService } from '../services/stalls.service';
+import { getDocs } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-menu-item',
@@ -13,6 +14,8 @@ export class MenuItemPage implements OnInit {
 
   db = getFirestore();
   menuDetails = [];
+
+  menuAddOns = [];
 
   stallRoute:any;
   menuRoute: any;
@@ -26,9 +29,8 @@ export class MenuItemPage implements OnInit {
     }
 
   ngOnInit() {
-    console.log(this.stallRoute);
-    console.log(this.menuRoute);
     this.thisMenuDetails();
+    this.thisMenuAddOns();
   }
 
   async thisMenuDetails(){
@@ -37,8 +39,18 @@ export class MenuItemPage implements OnInit {
     let data = getMenuDetails.data();
     let menuData = { "foodName": data.foodName, "foodDetails": data.foodDetails, "foodPrice": data.foodPrice, "foodEstTime": data.foodEstTime }
     this.menuDetails.push(menuData)
+  }
 
-    console.log(this.menuDetails)
+  async thisMenuAddOns(){
+    const querySnapshot = await getDocs(collection(this.db, 'Stall', this.stallRoute, 'Menu', this.menuRoute, 'Addon'))
+
+    querySnapshot.forEach((doc) => {
+      let data = doc.data()
+      console.log(data);
+      let menuVar = { "addOnTitle": data.title, "addOnPrice": data.price}
+      this.menuAddOns.push(menuVar);  
+    })
+    console.log(this.menuAddOns)
   }
 
   item_qty = 1
