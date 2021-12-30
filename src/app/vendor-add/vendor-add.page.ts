@@ -3,7 +3,7 @@ import { Location } from '@angular/common';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 import { getFirestore } from 'firebase/firestore';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { StallsService } from '../services/stalls.service';
 
 @Component({
@@ -31,7 +31,8 @@ export class VendorAddPage implements OnInit {
     private formBuilder: FormBuilder,
     private activatedRoute: ActivatedRoute,
     public alertController: AlertController,
-    private stallsService: StallsService) {
+    private stallsService: StallsService,
+    private route: Router) {
 
   }
 
@@ -62,6 +63,7 @@ export class VendorAddPage implements OnInit {
           })
         }
       }
+      this.route.navigateByUrl('/vendor-tabs/home');
     }).catch((error) => {
       console.error(error);
     });
