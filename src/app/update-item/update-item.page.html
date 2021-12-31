@@ -9,22 +9,23 @@
     <div *ngFor="let data of stallMenu">
       <ion-item>
         <ion-label position="floating">Name</ion-label>
-        <ion-input type="name" formControlName="foodName" Value="data.foodName"></ion-input>
+        <ion-input type="name" formControlName="foodName"></ion-input>
+
       </ion-item>
 
       <ion-item>
         <ion-label position="floating">Price ($)</ion-label>
-        <ion-input type="number" formControlName="foodPrice" value="{{data.foodPrice}}"></ion-input>
+        <ion-input type="number" formControlName="foodPrice"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="floating">Food Estimated Time (mins)</ion-label>
-        <ion-input type="number" formControlName="foodEstTime" value="{{data.foodEstTime}}"></ion-input>
+        <ion-input type="number" formControlName="foodEstTime"></ion-input>
       </ion-item>
-      
+
       <ion-item>
         <ion-label position="stacked">Product Description</ion-label>
-        <ion-textarea rows={6} formControlName="foodDetails" value="{{data.foodDescription}}"></ion-textarea>
+        <ion-textarea rows={6} formControlName="foodDetails"></ion-textarea>
       </ion-item>
     </div>
 
@@ -32,9 +33,7 @@
       <hr style="margin-top: 26px;">
       <div style="display: flex;flex-direction: row;">
         <p style="margin-top: -8px;margin-bottom: -8px;font-weight: bold;">Add-on</p>
-
       </div>
-
       <hr>
       <ion-icon name="add-circle-outline" class="plusIcon" (click)="addAddon()" style="margin-bottom: -25px;">
       </ion-icon>
@@ -44,10 +43,10 @@
           <ion-col col-10>
             <ion-item>
               <ion-label>Add-On not</ion-label>
-              <ion-input type="text" value="{{item.title}}" text-right></ion-input>
+              <ion-input value="{{item.title}}" text-right></ion-input>
             </ion-item>
           </ion-col>
-          
+
           <button class="btn btnpos" ion-button (click)="deleteAddonInArray(i)" style="float: right;">
             <ion-icon style="color: black;" name="trash-outline"></ion-icon>
           </button>
@@ -55,7 +54,7 @@
 
         <ion-item>
           <ion-label style="padding-left: 10px;">Price ($)</ion-label>
-          <ion-input type="number" value="{{item.price}}" text-right></ion-input>
+          <ion-input value="{{item.price}}" text-right></ion-input>
         </ion-item>
       </ion-card>
 
@@ -63,19 +62,19 @@
         <ion-row>
           <ion-col col-10>
             <ion-item>
-              <ion-label>Add-On get</ion-label>
-              <ion-input type="text" value="{{item.title}}" text-right></ion-input>
+              <ion-label>Add-On</ion-label>
+              <ion-input value="{{item.title}}" text-right></ion-input>
             </ion-item>
           </ion-col>
 
-          <div class="delete-button" (click)="deleteAddonInDatabase(item.addonId)" style="float: right;">
+          <div class="delete-button" (click)="deleteAddonInDatabase(item.addonId, i)" style="float: right;">
             <ion-icon style="color: black;" name="trash-outline"></ion-icon>
           </div>
         </ion-row>
 
         <ion-item>
           <ion-label style="padding-left: 10px;">Price ($)</ion-label>
-          <ion-input type="number" value="{{item.price}}" text-right></ion-input>
+          <ion-input value="{{item.price}}" text-right></ion-input>
         </ion-item>
       </ion-card>
 
@@ -86,9 +85,8 @@
 
         </ion-button>
         <ion-button style="border-radius: 25px; width: 155px; height: 50px; margin-top: 15px; margin-left: 5px; "
-          color="primary">
+          color="primary" (click)="alertChangeQuantity()">
           <p style="font-size: 16px;text-transform: capitalize;">Current Stock: {{foodQuantity}}</p>
-
         </ion-button>
 
         <ion-button (click)="changeQty(1)"

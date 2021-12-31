@@ -44,7 +44,8 @@ export class UpdateItemPage implements OnInit {
       foodName: new FormControl(),
       foodPrice: new FormControl(),
       foodDetails: new FormControl(),
-      foodEstTime: new FormControl()
+      foodEstTime: new FormControl(),
+      foodQuantity: new FormControl()
     })
   }
 
@@ -53,6 +54,12 @@ export class UpdateItemPage implements OnInit {
     this.stallsService.getOneMenuDetails(this.stallId, this.menuId).then(res => {
       this.stallMenu.push(res.data())
       this.foodQuantity = res.data().foodQuantity
+      this.updateMenuForm.patchValue({
+        foodName: res.data().foodName,
+        foodPrice: res.data().foodPrice,
+        foodDetails:res.data().foodDetails,
+        foodEstTime: res.data().foodEstTime,
+     });
       console.log(this.stallMenu)
     })
     this.stallsService.getMenuAddon(this.stallId, this.menuId).then(res => {
@@ -130,7 +137,6 @@ export class UpdateItemPage implements OnInit {
   }
 
   async deleteAddonInArray(index: number) {
-    console.log(index)
     const alert = await this.alertController.create({
       header: "Are you sure?",
       subHeader: "This will remove the addon permanently ",
@@ -154,7 +160,7 @@ export class UpdateItemPage implements OnInit {
     await alert.present();
   }
 
-  async deleteAddonInDatabase(addonId) {
+  async deleteAddonInDatabase(addonId, index) {
     console.log(addonId)
     const alert = await this.alertController.create({
       header: "Are you sure?",
@@ -174,15 +180,13 @@ export class UpdateItemPage implements OnInit {
             this.deleteAddonData.push(addonId)
             console.log(this.deleteAddonData)
             // remove addon from array
-            this.getAddonData.splice(addonId, 1)
+            this.getAddonData.splice(index, 1)
             console.log(this.getAddonData)
           },
         },
       ],
     });
     await alert.present();
-
-
   }
 
   backClicked() {
@@ -205,6 +209,36 @@ export class UpdateItemPage implements OnInit {
       }
 
     }
+  }
+
+  async alertChangeQuantity(){
+    const alert = await this.alertController.create({
+      header: "Input Quantity",
+      inputs: [{
+        name: 'Quantity',
+        value: this.foodQuantity,
+        type: 'number',
+      }],
+      buttons: [
+        {
+          text: "Cancel",
+          role: "cancel",
+          handler: () => {
+            console.log("Confirm Cancel");
+          },
+        },
+        {
+          text: "Ok",
+          handler: (res) => {
+            console.log(res)
+            // add id of Addons to remove
+            this.foodQuantity = res.Quantity
+          },
+        },
+      ],
+    });
+    await alert.present();
+
   }
 
 }
