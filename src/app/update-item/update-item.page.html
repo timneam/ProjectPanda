@@ -5,23 +5,28 @@
       (click)="backClicked()">
   </div>
 
-  <form [formGroup]="updateMenuForm" (ngSubmit)="updateMenu()" *ngFor="let menuData of stallMenu">
-    <ion-item>
-      <ion-label position="floating">Name</ion-label>
-      <ion-input type="name" formControlName="foodName" value="{{menuData.foodName}}"></ion-input>
-    </ion-item>
+  <form [formGroup]="updateMenuForm" (ngSubmit)="updateMenu()">
+    <div *ngFor="let data of stallMenu">
+      <ion-item>
+        <ion-label position="floating">Name</ion-label>
+        <ion-input type="name" formControlName="foodName" Value="data.foodName"></ion-input>
+      </ion-item>
 
-    <ion-item>
-      <ion-label position="floating">Price ($)</ion-label>
-      <ion-input type="number" formControlName="foodPrice" value="{{menuData.foodPrice}}"></ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-label position="floating">Price ($)</ion-label>
+        <ion-input type="number" formControlName="foodPrice" value="{{data.foodPrice}}"></ion-input>
+      </ion-item>
 
-    <ion-item>
-      <ion-label position="stacked">Product Description</ion-label>
-      <ion-textarea rows={6} formControlName="foodDetails" value="{{menuData.foodDescription}}"></ion-textarea>
-    </ion-item> 
-
-    <!-- Add Est time here -->
+      <ion-item>
+        <ion-label position="floating">Food Estimated Time (mins)</ion-label>
+        <ion-input type="number" formControlName="foodEstTime" value="{{data.foodEstTime}}"></ion-input>
+      </ion-item>
+      
+      <ion-item>
+        <ion-label position="stacked">Product Description</ion-label>
+        <ion-textarea rows={6} formControlName="foodDetails" value="{{data.foodDescription}}"></ion-textarea>
+      </ion-item>
+    </div>
 
     <div style="display: flex;flex-direction: column;align-items: center;">
       <hr style="margin-top: 26px;">
@@ -34,25 +39,23 @@
       <ion-icon name="add-circle-outline" class="plusIcon" (click)="addAddon()" style="margin-bottom: -25px;">
       </ion-icon>
 
-
-
       <ion-card *ngFor="let item of addonData; let i=index; ">
         <ion-row>
           <ion-col col-10>
             <ion-item>
-              <ion-label>Add-On</ion-label>
-              <ion-input type="text" value="{{item.title}}" text-right required></ion-input>
+              <ion-label>Add-On not</ion-label>
+              <ion-input type="text" value="{{item.title}}" text-right></ion-input>
             </ion-item>
           </ion-col>
-
+          
           <button class="btn btnpos" ion-button (click)="deleteAddonInArray(i)" style="float: right;">
             <ion-icon style="color: black;" name="trash-outline"></ion-icon>
           </button>
-
         </ion-row>
+
         <ion-item>
           <ion-label style="padding-left: 10px;">Price ($)</ion-label>
-          <ion-input type="number" value="{{item.price}}" text-right required></ion-input>
+          <ion-input type="number" value="{{item.price}}" text-right></ion-input>
         </ion-item>
       </ion-card>
 
@@ -60,19 +63,19 @@
         <ion-row>
           <ion-col col-10>
             <ion-item>
-              <ion-label>Add-On</ion-label>
-              <ion-input type="text" value="{{item.title}}" text-right required></ion-input>
+              <ion-label>Add-On get</ion-label>
+              <ion-input type="text" value="{{item.title}}" text-right></ion-input>
             </ion-item>
           </ion-col>
 
-          <button class="btn btnpos" ion-button (click)="deleteAddonInDatabase(item.addonId)" style="float: right;">
+          <div class="delete-button" (click)="deleteAddonInDatabase(item.addonId)" style="float: right;">
             <ion-icon style="color: black;" name="trash-outline"></ion-icon>
-          </button>
-
+          </div>
         </ion-row>
+
         <ion-item>
           <ion-label style="padding-left: 10px;">Price ($)</ion-label>
-          <ion-input type="number" value="{{item.price}}" text-right required></ion-input>
+          <ion-input type="number" value="{{item.price}}" text-right></ion-input>
         </ion-item>
       </ion-card>
 

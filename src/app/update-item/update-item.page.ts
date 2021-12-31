@@ -43,7 +43,8 @@ export class UpdateItemPage implements OnInit {
     this.updateMenuForm = new FormGroup({
       foodName: new FormControl(),
       foodPrice: new FormControl(),
-      foodDetails: new FormControl()
+      foodDetails: new FormControl(),
+      foodEstTime: new FormControl()
     })
   }
 
@@ -68,7 +69,7 @@ export class UpdateItemPage implements OnInit {
       foodPrice: this.updateMenuForm.value.foodPrice ? this.updateMenuForm.value.foodPrice : this.stallMenu[0].foodPrice,
       foodDetails: this.updateMenuForm.value.foodDetails ? this.updateMenuForm.value.foodDetails : this.stallMenu[0].foodDetails,
       foodQuantity: this.foodQuantity ? this.foodQuantity : this.stallMenu[0].foodQuantity,
-      foodEstTime: 3
+      foodEstTime: this.updateMenuForm.value.foodEstTime ? this.updateMenuForm.value.foodEstTime : this.stallMenu[0].foodEstTime
     }
     this.stallsService.updateItem(
       this.stallId,
@@ -129,6 +130,7 @@ export class UpdateItemPage implements OnInit {
   }
 
   async deleteAddonInArray(index: number) {
+    console.log(index)
     const alert = await this.alertController.create({
       header: "Are you sure?",
       subHeader: "This will remove the addon permanently ",
@@ -153,12 +155,34 @@ export class UpdateItemPage implements OnInit {
   }
 
   async deleteAddonInDatabase(addonId) {
-    // add id of Addons to remove
-    this.deleteAddonData.push(addonId)
-    console.log(this.deleteAddonData)
-    // remove addon from array
-    this.getAddonData.splice(addonId, 1)
-    console.log(this.getAddonData)
+    console.log(addonId)
+    const alert = await this.alertController.create({
+      header: "Are you sure?",
+      subHeader: "This will remove the addon permanently ",
+      buttons: [
+        {
+          text: "Cancel",
+          role: "cancel",
+          handler: () => {
+            console.log("Confirm Cancel");
+          },
+        },
+        {
+          text: "Ok",
+          handler: () => {
+            // add id of Addons to remove
+            this.deleteAddonData.push(addonId)
+            console.log(this.deleteAddonData)
+            // remove addon from array
+            this.getAddonData.splice(addonId, 1)
+            console.log(this.getAddonData)
+          },
+        },
+      ],
+    });
+    await alert.present();
+
+
   }
 
   backClicked() {
