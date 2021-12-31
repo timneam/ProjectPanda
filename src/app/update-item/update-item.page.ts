@@ -14,14 +14,15 @@ import { StallsService } from '../services/stalls.service';
 export class UpdateItemPage implements OnInit {
 
   db = getFirestore();
-  
+
   // Test Data
-  stallId : any;
-  menuId : any;
-  addonId : any;
+  stallId: any;
+  menuId: any;
+  addonId: any;
   stallMenu = []
   addonData = []
   getAddonData = []
+  deleteAddonData = []
 
   updateMenuForm: FormGroup;
 
@@ -32,9 +33,9 @@ export class UpdateItemPage implements OnInit {
     public alertController: AlertController,
     private stallsService: StallsService) {
 
-      this.menuId = this.activatedRoute.snapshot.paramMap.get('menuId')
-      this.stallId = this.activatedRoute.snapshot.paramMap.get('stallId')
-     }
+    this.menuId = this.activatedRoute.snapshot.paramMap.get('menuId')
+    this.stallId = this.activatedRoute.snapshot.paramMap.get('stallId')
+  }
 
   ngOnInit() {
     // Get Data from firebase
@@ -49,20 +50,23 @@ export class UpdateItemPage implements OnInit {
 
   updateMenu() {
     this.stallsService.updateItem(
-      this.stallId, 
-      this.menuId, 
+      this.stallId,
+      this.menuId,
       this.updateMenuForm.value.foodName,
       this.updateMenuForm.value.foodPrice,
       this.updateMenuForm.value.foodDescription,
       this.item_qty
-      ).then(res => {
-        for (let i = 0; i < this.addonData.length; i++ ) {
-          this.stallsService.addMenuAddon(this.stallId, this.menuId, this.addonData[i])
-          .catch((error) => {
-            console.error(error);
-          })
-        }
-      }) 
+    ).then(res => {
+      // Add addon
+      for (let i = 0; i < this.addonData.length; i++) {
+        this.stallsService.addMenuAddon(this.stallId, this.menuId, this.addonData[i])
+      }
+      // Delete addon
+      for (let i = 0; i < this.deleteAddonData.length; i++) {
+        this.stallsService.deleteMenuAddon(this.stallId, this.menuId, this.deleteAddonData[i])
+      }
+
+    })
       .catch((error) => {
         console.error(error);
       })
@@ -142,9 +146,10 @@ export class UpdateItemPage implements OnInit {
     await alert.present();
   }
 
-  async deleteAddonInDatabase(addonId){
-    this.stallsService.deleteMenuAddon(this.stallId, this.menuId, addonId)
-    console.log()
+  async deleteAddonInDatabase(addonId) {
+    // add id of Addons to remove
+    this.deleteAddonData.push(addonId)
+    console.log(this.deleteAddonData)
   }
 
   backClicked() {

@@ -25,7 +25,7 @@ export class VendorAddPage implements OnInit {
 
   addMenuForm: FormGroup;
 
-  item_qty = 0
+  item_qty = 1
 
   constructor(private _location: Location,
     private formBuilder: FormBuilder,
