@@ -17,18 +17,22 @@ export class MenuPage implements OnInit {
   stallMenu = []
 
   stallId = this.activatedRoute.snapshot.paramMap.get("id");
-
+Est: any;
+foodID: any;
   constructor(
     private LoadingController : LoadingController,
     private stallService: StallsService,
     private activatedRoute: ActivatedRoute,
     private navCtrl: NavController,
-    private router: Router) { }
+    private router: Router) { 
+      this.foodID = localStorage.getItem("foodI")
+    }
 
   ngOnInit() {
     this.presentLoading()
     this.getStallData();
     this.getStallMenu();
+ 
   }
 
   async presentLoading() {
@@ -60,6 +64,9 @@ export class MenuPage implements OnInit {
       let foodData = { "foodId": doc.id, "foodName": data.foodName, "foodDetails": data.foodDetails, "foodPrice": data.foodPrice, "foodEstTime": data.foodEstTime }
       this.stallMenu.push(foodData)
     })
+    console.log(this.stallMenu[0].foodEstTime)
+    localStorage.setItem("est1",this.stallMenu[0].foodEstTime)
+    localStorage.setItem("foodI",this.stallMenu[0].foodId)
     console.log(this.stallMenu)
   }
 
