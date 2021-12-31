@@ -75,7 +75,7 @@ const routes: Routes = [
     loadChildren: () => import('./menu-item/menu-item.module').then( m => m.MenuItemPageModule)
   },
   {
-    path: 'vendor-tabs/update-item',
+    path: 'vendor-tabs/:stallId/update-item/:menuId',
     loadChildren: () => import('./update-item/update-item.module').then( m => m.UpdateItemPageModule)
   },
   {

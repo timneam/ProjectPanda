@@ -33,7 +33,6 @@ export class StallsService {
   async getOneMenuDetails(stallId, menuId){
 
     const menu = await getDoc(doc(this.db, 'Stall', stallId, 'Menu', menuId));
-    
     return menu;
   }
 
@@ -49,7 +48,14 @@ export class StallsService {
     return docRef
   }
 
-  async updateItem(stallId, menuId, data) {
+  async updateItem(stallId, menuId, foodName, foodPrice, foodDescription, item_qty) {
+    const data = {
+      foodName: foodName,
+      foodPrice: foodPrice,
+      foodDetails: foodDescription,
+      foodQuantity: item_qty,
+      foodEstTime: 3
+    }
     await updateDoc(doc(this.db, "Stall", stallId, "Menu", menuId), data)
   }
 
@@ -100,11 +106,8 @@ export class StallsService {
     return docRef
   }
 
-  async updateMenuAddon(stallId, menuId, addonId, data) {
-    await updateDoc(doc(this.db, "Stall", stallId, "Menu", menuId, "Addon", addonId), data)
-  }
-
-  async deleteMenuAddon(stallId, menuId, addonId, data) {
-    
+  async deleteMenuAddon(stallId, menuId, addonId) {
+    const docRef = await deleteDoc(doc(this.db, 'Stall', stallId, 'Menu', menuId, 'Addon', addonId))
+    console.log(docRef)
   }
 }

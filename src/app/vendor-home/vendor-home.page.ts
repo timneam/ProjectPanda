@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { getAuth } from 'firebase/auth';
 import { getDoc, doc, getDocs, collection, getFirestore } from 'firebase/firestore';
 import { StallsService } from '../services/stalls.service';
-import {Router} from '@angular/router'
+import {Router} from '@angular/router';
+
 @Component({
   selector: 'app-vendor-home',
   templateUrl: './vendor-home.page.html',
@@ -12,6 +13,7 @@ export class VendorHomePage implements OnInit {
 
   db = getFirestore();
   menu = [];
+  stallId : any;
 
   constructor(private stallService: StallsService, private router: Router) { }
 
@@ -25,6 +27,7 @@ export class VendorHomePage implements OnInit {
     const user = auth.currentUser;
     const vendorData = await getDoc(doc(this.db, 'User', user.uid));
     console.log(vendorData.data().stallId);
+    this.stallId = vendorData.data().stallId;
 
     const stallDetails = await getDocs(collection(this.db, 'Stall', vendorData.data().stallId, 'Menu'));
     
@@ -34,9 +37,10 @@ export class VendorHomePage implements OnInit {
       let menuItems = { "foodId" : doc.id, "foodName" : menuData.foodName, "foodPrice": menuData.foodPrice , "foodDetails": menuData.foodDetails , "foodEstTime": menuData.foodEstTime}
       this.menu.push(menuItems);
     })
-    
   }
-  toUpdateItem(){
-    this.router.navigate(['/vendor-tabs/update-item'])
+
+  toUpdateItem(foodId){
+    this.router.navigateByUrl(`/vendor-tabs/${this.stallId}/update-item/${foodId}`)
   }
+
 }

@@ -69,20 +69,19 @@ export class VendorAddPage implements OnInit {
     });
   }
 
-  updateMenu() {
-    let data = {
-      foodName: "test",
-      foodPrice: "test",
-      foodDetails: "test",
-      foodQuantity: "test",
-      foodEstTime: "test"
-    }
-    this.stallsService.updateItem(this.stallId, this.menuId, data)
-    .catch((error) => {
-      console.error(error);
-    })
-
-  }
+  // updateMenu() {
+  //   let data = {
+  //     foodName: "test",
+  //     foodPrice: "test",
+  //     foodDetails: "test",
+  //     foodQuantity: "test",
+  //     foodEstTime: "test"
+  //   }
+  //   this.stallsService.updateItem(this.stallId, this.menuId, data)
+  //   .catch((error) => {
+  //     console.error(error);
+  //   })
+  // }
 
 
   // Use this function for Edit not Add 
@@ -102,18 +101,17 @@ export class VendorAddPage implements OnInit {
   
   
 
-  // Update working
-  updateAddon() {
-    let data = {
-      "title": 321,
-      "price": 321,
-    }
-    this.stallsService.updateMenuAddon(this.stallId, this.menuId, this.addonId, data)
-    .catch((error) => {
-      console.error(error);
-    })
-
-  }
+  // // Update working
+  // updateAddon() {
+  //   let data = {
+  //     "title": 321,
+  //     "price": 321,
+  //   }
+  //   this.stallsService.updateMenuAddon(this.stallId, this.menuId, this.addonId, data)
+  //   .catch((error) => {
+  //     console.error(error);
+  //   })
+  // }
 
   async addAddon() {
     const alert = await this.alertController.create({

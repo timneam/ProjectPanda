@@ -17,8 +17,9 @@ export class MenuPage implements OnInit {
   stallMenu = []
 
   stallId = this.activatedRoute.snapshot.paramMap.get("id");
-Est: any;
-foodID: any;
+  Est: any;
+  foodID: any;
+  
   constructor(
     private LoadingController : LoadingController,
     private stallService: StallsService,

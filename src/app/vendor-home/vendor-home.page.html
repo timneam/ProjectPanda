@@ -21,7 +21,7 @@
 
 
         <ion-list *ngFor="let data of menu">
-            <ion-item (click)="toUpdateItem()">
+            <ion-item (click)="toUpdateItem(data.foodId)">
                 <img src='../assets/nasiLemak.png' height="90px" width="90px" style="margin-bottom: 13px;margin-top: 7px;">
                 <p style="margin-right:196px;margin-top:45px;display:inline-block;background-color:transparent;z-index:-1;margin-left:
           35px;">${{data.foodPrice}}</p>
