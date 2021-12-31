@@ -1,29 +1,22 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Photo Gallery
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
 
 <ion-content>
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Photo Gallery</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <h1 class="headerr">My Cart</h1>
 
-  <ion-grid>
-    <ion-row>
-    <ion-col size="6" *ngFor="let photo of photoService.photos; index as position">
-      <ion-img [src]="photo.webviewPath" (click)="showActionSheet(photo, position)"></ion-img>
-    </ion-col>
-    </ion-row>
-  </ion-grid>
+  <ion-item style="margin-top: 22px" >
+    
 
-  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
-    <ion-fab-button (click)="photoService.addNewToGallery()">
-      <ion-icon name="camera"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
+    <div style="display:flex; flex-direction: row">  
+    <img src='../assets/nasiLemak.png' height="80px" width="80px" style="margin-bottom: 13px;margin-top: 7px;" >
+ <!-- <p style="margin-right:196px;margin-top:55px;display:inline-block;background-color:transparent;z-index:-1;margin-left: 35px;">$ 13.00</p>
+  
+    <ion-label style="margin-left: -247px;margin-top:-20px;z-index: 99;background-color: transparent;" ><b>Nasi Lemak</b></ion-label> -->
+    <div style="margin-left: 18px; display:flex;flex-direction:column;margin-top:8px"> 
+      <ion-label style="font-size: 19px;margin-bottom: -3px;margin-top:3px"><b> Nasi Lemak</b> </ion-label>
+      <p style="font-size:12px; margin-top:5px;margin-bottom:-3px"> + egg ($1)</p>
+      <p style="font-weight: 500;margin-top:13px">8.00 </p>
+    </div>
+ <p class="quantityy">x1 </p>
+ </div>
+
+</ion-item>
 </ion-content>
