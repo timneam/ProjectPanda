@@ -43,4 +43,8 @@ export class VendorHomePage implements OnInit {
     this.router.navigateByUrl(`/vendor-tabs/${this.stallId}/update-item/${foodId}`)
   }
 
+  addMenuItem(){
+    this.router.navigateByUrl(`/vendor-tabs/${this.stallId}/add`)
+  }
+
 }

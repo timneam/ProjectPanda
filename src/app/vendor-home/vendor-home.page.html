@@ -34,7 +34,7 @@
     </ion-content>
 
     <ion-fab vertical="bottom" horizontal="end" edge slot="fixed" style="margin-bottom: 62px; margin-right: 18px;">
-        <ion-fab-button color="primary" [routerLink]="['/vendor-tabs/add']">
+        <ion-fab-button color="primary" (click)="addMenuItem()">
             <ion-icon name="add"></ion-icon>
         </ion-fab-button>
 

@@ -16,9 +16,9 @@ export class VendorAddPage implements OnInit {
 
   db = getFirestore();
   // Test Data
-  stallId = "BreakfastStall"
-  menuId = "L3JpQ0MvewojAu8kSD99"
-  addonId = "bGC7C3PqrVFRS0db8bGk"
+  stallId : any;
+  menuId : any;
+  addonId : any;
   stallMenu = []
   addonData = []
   getAddonData = []
@@ -34,11 +34,12 @@ export class VendorAddPage implements OnInit {
     private stallsService: StallsService,
     private route: Router) {
 
+      this.stallId = this.activatedRoute.snapshot.paramMap.get('stallId')
+
   }
 
   ngOnInit() {
     // Get Data from firebase
-    this.getMenuItem();
     // Assign the Addon or what
     this.addMenuForm = new FormGroup({
       foodName: new FormControl(),
@@ -83,22 +84,6 @@ export class VendorAddPage implements OnInit {
   //   })
   // }
 
-
-  // Use this function for Edit not Add 
-  getMenuItem() {
-    this.stallsService.getMenuItem(this.stallId).then(res => {
-      this.stallMenu.push(res)
-      // console.log(this.stallMenu)
-    })
-
-    this.stallsService.getMenuAddon(this.stallId, this.menuId).then(res => {
-      for (let i = 0; i < res.length; i++) {
-        this.getAddonData.push(res[i])
-      }
-      // console.log(this.getAddonData)
-    })
-  }
-  
   
 
   // // Update working

@@ -66,7 +66,7 @@ const routes: Routes = [
     loadChildren: () => import('./vendor-tabs/vendor-tabs.module').then( m => m.VendorTabsPageModule)
   },
 {
-  path: 'vendor-tabs/add', 
+  path: 'vendor-tabs/:stallId/add', 
   loadChildren: () =>
   import('./vendor-add/vendor-add.module').then( m => m.VendorAddPageModule)
 },
