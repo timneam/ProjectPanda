@@ -35,14 +35,7 @@ export class StallsService {
     return menu;
   }
 
-  async addItem(foodName, foodPrice, foodDescription, item_qty, stallId) {
-    const data = {
-      foodName: foodName,
-      foodPrice: foodPrice,
-      foodDetails: foodDescription,
-      foodQuantity: item_qty,
-      foodEstTime: 3
-    }
+  async addItem(stallId, data) {
     const response = await addDoc(collection(this.db, 'Stall', stallId, 'Menu'), data)
     return response
   }
@@ -65,21 +58,6 @@ export class StallsService {
       MenuItem.push(foodData)
     })
     return MenuItem
-  }
-
-  async getMenuDetails(stallId, menuId) {
-
-    this.userService.getUserInformation
-
-    const querySnapshot = await getDocs(collection(this.db, "Stall", stallId, "Menu", menuId));
-    let MenuItem = []
-
-    // querySnapshot.forEach((doc) => {
-    //   let data = doc.data()
-    //   let foodData = { "menuId": doc.id, "foodName": data.foodName, "foodDetails": data.foodDetails, "foodPrice": data.foodPrice, "foodEstTime": data.foodEstTime }
-    //   MenuItem.push(foodData)
-    // })
-    // return MenuItem
   }
 
   async getMenuAddon(stallId, menuId) {

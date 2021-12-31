@@ -44,17 +44,22 @@ export class VendorAddPage implements OnInit {
     this.addMenuForm = new FormGroup({
       foodName: new FormControl(),
       foodPrice: new FormControl(),
-      foodDescription: new FormControl()
+      foodDescription: new FormControl(),
+      foodEstTime: new FormControl(),
     })
   }
 
   async addMenuDetails() {
+    const data = {
+      foodName: this.addMenuForm.value.foodName,
+      foodPrice: this.addMenuForm.value.foodPrice,
+      foodDetails: this.addMenuForm.value.foodDescription,
+      foodEstTime: this.addMenuForm.value.foodEstTime,
+      foodQuantity: this.item_qty,
+    }
     this.stallsService.addItem(
-      this.addMenuForm.value.foodName,
-      this.addMenuForm.value.foodPrice,
-      this.addMenuForm.value.foodDescription,
-      this.item_qty,
-      this.stallId
+      this.stallId,
+      data
     ).then(res => {
       console.log("Menu add with Id :" + res.id)
       if (res.id != null && this.addonData != null) {
@@ -69,34 +74,6 @@ export class VendorAddPage implements OnInit {
       console.error(error);
     });
   }
-
-  // updateMenu() {
-  //   let data = {
-  //     foodName: "test",
-  //     foodPrice: "test",
-  //     foodDetails: "test",
-  //     foodQuantity: "test",
-  //     foodEstTime: "test"
-  //   }
-  //   this.stallsService.updateItem(this.stallId, this.menuId, data)
-  //   .catch((error) => {
-  //     console.error(error);
-  //   })
-  // }
-
-  
-
-  // // Update working
-  // updateAddon() {
-  //   let data = {
-  //     "title": 321,
-  //     "price": 321,
-  //   }
-  //   this.stallsService.updateMenuAddon(this.stallId, this.menuId, this.addonId, data)
-  //   .catch((error) => {
-  //     console.error(error);
-  //   })
-  // }
 
   async addAddon() {
     const alert = await this.alertController.create({
