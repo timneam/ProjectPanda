@@ -12,7 +12,6 @@ import { UsersService } from './users.service';
 export class StallsService {
 
   db = getFirestore();
-  menu = [];
 
   constructor(private firestore: Firestore,
     private navCntrl: NavController,
@@ -30,7 +29,7 @@ export class StallsService {
     });
   }
 
-  async getOneMenuDetails(stallId, menuId){
+  async getOneMenuDetails(stallId, menuId) {
 
     const menu = await getDoc(doc(this.db, 'Stall', stallId, 'Menu', menuId));
     return menu;
@@ -44,19 +43,13 @@ export class StallsService {
       foodQuantity: item_qty,
       foodEstTime: 3
     }
-    const docRef = await addDoc(collection(this.db, 'Stall', stallId, 'Menu'), data)
-    return docRef
+    const response = await addDoc(collection(this.db, 'Stall', stallId, 'Menu'), data)
+    return response
   }
 
-  async updateItem(stallId, menuId, foodName, foodPrice, foodDescription, item_qty) {
-    const data = {
-      foodName: foodName,
-      foodPrice: foodPrice,
-      foodDetails: foodDescription,
-      foodQuantity: item_qty,
-      foodEstTime: 3
-    }
+  async updateItem(stallId, menuId, data) {
     await updateDoc(doc(this.db, "Stall", stallId, "Menu", menuId), data)
+    return "Updated Successfully"
   }
 
   async deleteItem(stallId, menuId, data) {
@@ -78,7 +71,7 @@ export class StallsService {
 
     this.userService.getUserInformation
 
-    const querySnapshot = await getDocs(collection(this.db, "Stall", stallId, "Menu" , menuId));
+    const querySnapshot = await getDocs(collection(this.db, "Stall", stallId, "Menu", menuId));
     let MenuItem = []
 
     // querySnapshot.forEach((doc) => {
@@ -102,12 +95,12 @@ export class StallsService {
   }
 
   async addMenuAddon(stallId, menuId, data) {
-    const docRef = await addDoc(collection(this.db, 'Stall', stallId, 'Menu', menuId, "Addon"), data)
-    return docRef
+    const response = await addDoc(collection(this.db, 'Stall', stallId, 'Menu', menuId, "Addon"), data)
+    return response
   }
 
   async deleteMenuAddon(stallId, menuId, addonId) {
-    const docRef = await deleteDoc(doc(this.db, 'Stall', stallId, 'Menu', menuId, 'Addon', addonId))
-    console.log(docRef)
+    await deleteDoc(doc(this.db, 'Stall', stallId, 'Menu', menuId, 'Addon', addonId))
+    console.log("deleted : " + addonId)
   }
 }

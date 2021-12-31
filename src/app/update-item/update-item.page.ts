@@ -18,7 +18,6 @@ export class UpdateItemPage implements OnInit {
   // Test Data
   stallId: any;
   menuId: any;
-  addonId: any;
   stallMenu = []
   addonData = []
   getAddonData = []
@@ -26,7 +25,7 @@ export class UpdateItemPage implements OnInit {
 
   updateMenuForm: FormGroup;
 
-  item_qty = 0
+  foodQuantity = null
 
   constructor(private _location: Location, private formBuilder: FormBuilder,
     private activatedRoute: ActivatedRoute,
@@ -44,39 +43,15 @@ export class UpdateItemPage implements OnInit {
     this.updateMenuForm = new FormGroup({
       foodName: new FormControl(),
       foodPrice: new FormControl(),
-      foodDescription: new FormControl()
+      foodDetails: new FormControl()
     })
-  }
-
-  updateMenu() {
-    this.stallsService.updateItem(
-      this.stallId,
-      this.menuId,
-      this.updateMenuForm.value.foodName,
-      this.updateMenuForm.value.foodPrice,
-      this.updateMenuForm.value.foodDescription,
-      this.item_qty
-    ).then(res => {
-      // Add addon
-      for (let i = 0; i < this.addonData.length; i++) {
-        this.stallsService.addMenuAddon(this.stallId, this.menuId, this.addonData[i])
-      }
-      // Delete addon
-      for (let i = 0; i < this.deleteAddonData.length; i++) {
-        this.stallsService.deleteMenuAddon(this.stallId, this.menuId, this.deleteAddonData[i])
-      }
-
-    })
-      .catch((error) => {
-        console.error(error);
-      })
-
   }
 
   // Use this function for Edit not Add 
   getMenuItem() {
     this.stallsService.getOneMenuDetails(this.stallId, this.menuId).then(res => {
       this.stallMenu.push(res.data())
+      this.foodQuantity = res.data().foodQuantity
       console.log(this.stallMenu)
     })
     this.stallsService.getMenuAddon(this.stallId, this.menuId).then(res => {
@@ -86,6 +61,37 @@ export class UpdateItemPage implements OnInit {
       console.log(this.getAddonData)
     })
   }
+
+  updateMenu() {
+    const data = {
+      foodName: this.updateMenuForm.value.foodName ? this.updateMenuForm.value.foodName : this.stallMenu[0].foodName,
+      foodPrice: this.updateMenuForm.value.foodPrice ? this.updateMenuForm.value.foodPrice : this.stallMenu[0].foodPrice,
+      foodDetails: this.updateMenuForm.value.foodDetails ? this.updateMenuForm.value.foodDetails : this.stallMenu[0].foodDetails,
+      foodQuantity: this.foodQuantity ? this.foodQuantity : this.stallMenu[0].foodQuantity,
+      foodEstTime: 3
+    }
+    this.stallsService.updateItem(
+      this.stallId,
+      this.menuId,
+      data
+    ).then(res => {
+      console.log(res)
+      if (res != undefined) {
+        // Add addon
+        for (let i = 0; i < this.addonData.length; i++) {
+          this.stallsService.addMenuAddon(this.stallId, this.menuId, this.addonData[i])
+        }
+        // Delete addon
+        for (let i = 0; i < this.deleteAddonData.length; i++) {
+          this.stallsService.deleteMenuAddon(this.stallId, this.menuId, this.deleteAddonData[i])
+        }
+      }
+
+    }).catch((error) => {
+      console.error(error);
+    })
+  }
+
 
   async addAddon() {
     const alert = await this.alertController.create({
@@ -150,6 +156,9 @@ export class UpdateItemPage implements OnInit {
     // add id of Addons to remove
     this.deleteAddonData.push(addonId)
     console.log(this.deleteAddonData)
+    // remove addon from array
+    this.getAddonData.splice(addonId, 1)
+    console.log(this.getAddonData)
   }
 
   backClicked() {
@@ -159,16 +168,16 @@ export class UpdateItemPage implements OnInit {
 
   changeQty(increment) {
     if (increment == 1) {
-      this.item_qty += 1;
-      console.log(this.item_qty);
+      this.foodQuantity += 1;
+      console.log(this.foodQuantity);
     } else if (increment == 0) {
-      if (this.item_qty - 1 < 1) {
-        this.item_qty = 1;
-        console.log('item cannot be lower than : ' + this.item_qty)
+      if (this.foodQuantity - 1 < 1) {
+        this.foodQuantity = 1;
+        console.log('item cannot be lower than : ' + this.foodQuantity)
       }
       else {
-        this.item_qty -= 1;
-        console.log('item left : ' + this.item_qty);
+        this.foodQuantity -= 1;
+        console.log('item left : ' + this.foodQuantity);
       }
 
     }

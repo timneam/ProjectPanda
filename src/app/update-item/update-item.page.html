@@ -18,7 +18,7 @@
 
     <ion-item>
       <ion-label position="stacked">Product Description</ion-label>
-      <ion-textarea rows={6} formControlName="foodDescription" value="{{menuData.foodDescription}}"></ion-textarea>
+      <ion-textarea rows={6} formControlName="foodDetails" value="{{menuData.foodDescription}}"></ion-textarea>
     </ion-item> 
 
     <!-- Add Est time here -->
@@ -84,7 +84,7 @@
         </ion-button>
         <ion-button style="border-radius: 25px; width: 155px; height: 50px; margin-top: 15px; margin-left: 5px; "
           color="primary">
-          <p style="font-size: 16px;text-transform: capitalize;">Current Stock: {{item_qty}}</p>
+          <p style="font-size: 16px;text-transform: capitalize;">Current Stock: {{foodQuantity}}</p>
 
         </ion-button>
 
