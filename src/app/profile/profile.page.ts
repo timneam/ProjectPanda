@@ -16,7 +16,9 @@ export class ProfilePage implements OnInit {
   db = getFirestore();
   updateData: FormGroup;
 
-  constructor(private UsersService: UsersService,public router: Router, public alertController: AlertController) {
+  constructor(private UsersService: UsersService,
+    public router: Router, 
+    public alertController: AlertController) {
 
   }
 
@@ -32,23 +34,23 @@ export class ProfilePage implements OnInit {
     //Get data from the fire auth
     const auth = getAuth();
     const user = auth.currentUser;
-    console.log(user)
+    // console.log(user)
     // get the data
     const ableToGetData = await getDoc(doc(this.db, "User", user.uid))
     
     if (user !== null) {
       user.providerData.forEach((profile) => {
-        console.log("  Sign-in provider: " + profile.providerId);
-        console.log("  Provider-specific UID: " + profile.uid);
-        console.log("  Name: " + profile.displayName);
-        console.log("  Email: " + profile.email);
-        console.log("  Photo URL: " + profile.photoURL);
+        // console.log("  Sign-in provider: " + profile.providerId);
+        // console.log("  Provider-specific UID: " + profile.uid);
+        // console.log("  Name: " + profile.displayName);
+        // console.log("  Email: " + profile.email);
+        // console.log("  Photo URL: " + profile.photoURL);
         this.userData = profile
       });
     }
 
     if (ableToGetData.exists) {
-      console.log(ableToGetData.data());
+      // console.log(ableToGetData.data());
       this.userData2 = ableToGetData.data();
     }
     else {

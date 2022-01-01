@@ -19,15 +19,17 @@ export class ProfileEditPage implements OnInit {
   constructor(
     private UsersService: UsersService,
     private formBuilder: FormBuilder ,
-    public router: Router, public popoverCtrl: PopoverController ) {
+    public router: Router, 
+    public popoverCtrl: PopoverController ) {
 
   }
 
   userData = null
   userData2 = null
+  allUserData = [];
 
   ngOnInit() {
-    this.getData()
+    this.getUserData();
 
     this.updateDataForm = new FormGroup({
       firstName: new FormControl(),
@@ -38,12 +40,12 @@ export class ProfileEditPage implements OnInit {
     })
   }
 
-  async getData() {
+  async getUserData() {
     
     //Get data from the fire auth
     const auth = getAuth();
     const user = auth.currentUser;
-    console.log(user)
+    // console.log(user)
     // get the data
     const ableToGetData = await getDoc(doc(this.db, "User", user.uid))
     
@@ -65,6 +67,14 @@ export class ProfileEditPage implements OnInit {
     else {
       console.log("No Such Document!");
     }
+
+    this.updateDataForm.patchValue({
+      firstName: this.userData2.firstName,
+      lastName: this.userData2.lastName,
+      email: this.userData.email,
+      phoneNumber: this.userData2.phoneNumber,
+      password: this.userData.password
+    })
   }
 
   updateUserProfile(){
