@@ -45,7 +45,7 @@ export class ProfileEditPage implements OnInit {
     //Get data from the fire auth
     const auth = getAuth();
     const user = auth.currentUser;
-    // console.log(user)
+    console.log(user)
     // get the data
     const ableToGetData = await getDoc(doc(this.db, "User", user.uid))
     
@@ -58,6 +58,8 @@ export class ProfileEditPage implements OnInit {
         console.log("  Photo URL: " + profile.photoURL);
         this.userData = profile
       });
+
+      // console.log(this.userData)
     }
 
     if (ableToGetData.exists) {
@@ -85,7 +87,7 @@ export class ProfileEditPage implements OnInit {
       this.updateDataForm.value.password,
       this.updateDataForm.value.phoneNumber
     )
-    console.log(this.updateDataForm)
+    // console.log(this.updateDataForm)
   }
 
   async editName() {

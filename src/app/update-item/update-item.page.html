@@ -42,14 +42,14 @@
         <ion-row>
           <ion-col col-10>
             <ion-item>
-              <ion-label>Add-On not</ion-label>
+              <ion-label>Add-On</ion-label>
               <ion-input value="{{item.title}}" text-right></ion-input>
             </ion-item>
           </ion-col>
 
-          <button class="btn btnpos" ion-button (click)="deleteAddonInArray(i)" style="float: right;">
+          <div class="delete-button" (click)="deleteAddonInArray(i)" style="float: right;">
             <ion-icon style="color: black;" name="trash-outline"></ion-icon>
-          </button>
+          </div>
         </ion-row>
 
         <ion-item>

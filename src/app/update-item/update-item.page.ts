@@ -196,7 +196,7 @@ export class UpdateItemPage implements OnInit {
 
   changeQty(increment) {
     if (increment == 1) {
-      this.foodQuantity += 1;
+      this.foodQuantity ++;
       console.log(this.foodQuantity);
     } else if (increment == 0) {
       if (this.foodQuantity - 1 < 1) {
