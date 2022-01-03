@@ -26,9 +26,12 @@ export class CartService {
     let stallList = [];
 
     querySnapshot.forEach((doc) => {
-      let stallData = doc.data();
+      let stallData = doc.id;
+      console.log(doc.id)
+      console.log(doc.data())
+      console.log(doc)
       stallList.push(stallData)
-      // console.log(stallList)
+      console.log(stallList)
     })
 
     return stallList
@@ -38,7 +41,7 @@ export class CartService {
   // create cart for a stall (cart -> stall -> menuList)
   async createCartForAStall(userId, stallId, data) {
     const addStallCart = await setDoc(doc(this.db, 'User', userId, 'Cart', stallId), data)
-    return addStallCart
+    return data
   }
 
   // get Items in cart ( cart -> stall -> menuList -> documents )
@@ -62,22 +65,15 @@ export class CartService {
   }
 
   // add items into a cart (cart -> stall -> menuList -> addon -> add a document)
-  async addItemAddonToCart(userId, stallId, menuId, data){
-    const addAddonToCart = await addDoc(collection(this.db, 'User', userId, 'Cart', stallId, 'menuItems', menuId, 'Addon'), data)
+  async addItemAddonToCart(userId, stallId, menuId, addonId, data){
+    const addAddonToCart = await addDoc(collection(this.db, 'User', userId, 'Cart', stallId, 'menuItems', menuId, 'Addon', addonId), data)
     return addAddonToCart
   }
 
   // remove items from a cart (cart -> stall -> menuList -> remove a document)
-  async removeItemFromCart(userId, stallId, data){
-    const removeItemFromCart = await addDoc(collection(this.db, 'User', userId, 'Cart', stallId, 'menuItems'), data)
+  async removeItemFromCart(userId, stallId, menuId, data){
+    const removeItemFromCart = await addDoc(collection(this.db, 'User', userId, 'Cart', stallId, 'menuItems', menuId), data)
     return removeItemFromCart
   }
-
-  // remove items from a cart (cart -> stall -> menuList -> addon -> remove a document)
-  async removeItemAddonFromCart(userId, stallId, menuId, data) {
-    const removeAddonFromCart = await addDoc(collection(this.db, 'User', userId, 'Cart', stallId, 'menuItems', menuId, 'Addon'), data)
-    return removeAddonFromCart
-  }
-
 
 }

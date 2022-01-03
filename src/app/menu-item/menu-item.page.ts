@@ -19,6 +19,8 @@ export class MenuItemPage implements OnInit {
   menuDetails = [];
   menuAddOns = [];
 
+  userAddons = [];
+
   stallRoute:any;
   menuRoute: any;
 
@@ -82,7 +84,7 @@ export class MenuItemPage implements OnInit {
     let auth = getAuth();
     let user = auth.currentUser;
 
-    let data = {
+    let menuData = {
       foodName: this.menuDetails[0].foodName,
       foodPrice: this.menuDetails[0].foodPrice,
       foodDescription: this.menuDetails[0].foodDetails,
@@ -90,10 +92,20 @@ export class MenuItemPage implements OnInit {
       foodQty: this.item_qty
     }
 
-    console.log(data)
-    
-    this.cartService.addItemToCart(user.uid, this.stallRoute, this.menuRoute, data)
+    let stallData = {
+      stallId: this.stallRoute
+    }
+
+    this.cartService.createCartForAStall(user.uid, this.stallRoute, stallData).then((res) => {
+      console.log(res)
+      this.cartService.addItemToCart(user.uid, this.stallRoute, this.menuRoute, menuData)
+    })
   }
+
+  allUserAddons() {
+    
+  }
+
 
 }
 

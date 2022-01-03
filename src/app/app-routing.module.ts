@@ -83,7 +83,7 @@ const routes: Routes = [
     loadChildren: () => import('./vendor-profile/vendor-profile.module').then( m => m.VendorProfilePageModule)
   },
   {
-    path: 'cart',
+    path: 'cart/:stallId',
     loadChildren: () => import('./tab2/tab2.module').then( m => m.Tab2PageModule)
   }
 
