@@ -81,7 +81,12 @@ const routes: Routes = [
   {
     path: 'vendor-profile',
     loadChildren: () => import('./vendor-profile/vendor-profile.module').then( m => m.VendorProfilePageModule)
+  },
+  {
+    path: 'cart',
+    loadChildren: () => import('./tab2/tab2.module').then( m => m.Tab2PageModule)
   }
+
 
 
 

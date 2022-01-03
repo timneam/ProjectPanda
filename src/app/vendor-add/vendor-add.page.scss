@@ -42,3 +42,7 @@ ion-button {
         transform: translate(135px, -46px);
     font-size: 22px;
     }
+
+    ion-input [disabled] :disabled {
+        color: black;
+     }
