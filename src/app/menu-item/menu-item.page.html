@@ -53,17 +53,16 @@
       <ion-button (click)="incrementQty()"
         style="border-radius: 25px; width: 55px; height: 55px; margin-top: 15px; margin-left: 5px; " color="primary">
         <ion-icon name="add-outline" style="font-size: 35px!important;"></ion-icon>
-
       </ion-button>
 
       <ion-button style="border-radius: 25px; width: 130px; height: 55px; margin-top: 15px; margin-left: 20px; "
-        color="primary">
+        color="primary" (click)="addToCart()">
         <ion-label
           style="color: white;text-transform: none;font-size: 18px;font-family: 'Roboto', sans-serif;font-weight: 400;">
           Add to Cart
         </ion-label>
-
       </ion-button>
+
     </div>
   </div>
 </ion-content>

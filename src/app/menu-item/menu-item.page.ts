@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { collection, doc, getDoc, getFirestore, QuerySnapshot } from 'firebase/firestore';
 import { StallsService } from '../services/stalls.service';
 import { getDocs } from '@angular/fire/firestore';
+import { CartService } from '../services/cart.service';
+import { getAuth } from 'firebase/auth';
 
 @Component({
   selector: 'app-menu-item',
@@ -13,8 +15,8 @@ import { getDocs } from '@angular/fire/firestore';
 export class MenuItemPage implements OnInit {
 
   db = getFirestore();
-  menuDetails = [];
 
+  menuDetails = [];
   menuAddOns = [];
 
   stallRoute:any;
@@ -23,7 +25,8 @@ export class MenuItemPage implements OnInit {
   constructor(
     private _location: Location,
     private activatedRoute: ActivatedRoute,
-    private stallService: StallsService) { 
+    private stallService: StallsService,
+    private cartService: CartService) { 
       this.stallRoute = this.activatedRoute.snapshot.paramMap.get('stallId');
       this.menuRoute = this.activatedRoute.snapshot.paramMap.get('menuId');
     }
@@ -74,6 +77,24 @@ export class MenuItemPage implements OnInit {
   backClicked() {
     this._location.back();
   }
+
+  addToCart(){
+    let auth = getAuth();
+    let user = auth.currentUser;
+
+    let data = {
+      foodName: this.menuDetails[0].foodName,
+      foodPrice: this.menuDetails[0].foodPrice,
+      foodDescription: this.menuDetails[0].foodDetails,
+      foodEstTime: this.menuDetails[0].foodEstTime,
+      foodQty: this.item_qty
+    }
+
+    console.log(data)
+    
+    this.cartService.addItemToCart(user.uid, this.stallRoute, this.menuRoute, data)
+  }
+
 }
 
 function stallId(stallId: any, menuId: any) {

@@ -20,22 +20,24 @@ export class CartService {
   constructor(private firestore:Firestore) { }
 
   // Get all stalls in the cart collection (cart -> stalls)
-  async getAllStallsCart(userId, stallId){
-    const querySnapshot = await getDocs(collection(this.db, 'User', userId , 'Cart', stallId))
+  async getAllStallsCart(userId){
+    const querySnapshot = await getDocs(collection(this.db, 'User', userId , 'Cart'))
 
     let stallList = [];
 
     querySnapshot.forEach((doc) => {
       let stallData = doc.data();
-      console.log(stallData);
-      // stallList.push(stallData)
+      stallList.push(stallData)
+      // console.log(stallList)
     })
+
+    return stallList
 
   }
 
   // create cart for a stall (cart -> stall -> menuList)
-  async createCartForAStall(userId, data) {
-    const addStallCart = await addDoc(collection(this.db, 'User', userId, 'Cart'), data)
+  async createCartForAStall(userId, stallId, data) {
+    const addStallCart = await setDoc(doc(this.db, 'User', userId, 'Cart', stallId), data)
     return addStallCart
   }
 
@@ -54,8 +56,8 @@ export class CartService {
   }
 
   // add items into a cart (cart -> stall -> menuList -> add a document)
-  async addItemToCart(userId, stallId, data){
-    const addItemToCart = await addDoc(collection(this.db, 'User', userId, 'Cart', stallId, 'menuItems'), data)
+  async addItemToCart(userId, stallId, menuId, data){
+    const addItemToCart = await setDoc(doc(this.db, 'User', userId, 'Cart', stallId, 'menuList', menuId), data)
     return addItemToCart
   }
 
