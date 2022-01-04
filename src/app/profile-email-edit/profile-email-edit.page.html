@@ -1,32 +1,34 @@
-
-
 <ion-content>
-  
+
   <img src="../assets/backk.png" class="iconn" [routerLink]="['/tabs/profile']">
-  <div style="align-self: center;display: flex;flex-direction: column;align-items: center;margin-top: 40%;">
-  <ion-card class="textCard">
-    <ion-item>
-      <ion-icon name="mail-outline" style="margin-right: 8px;"></ion-icon>
-      <ion-input name="Email" type="email"  placeholder="New Email"></ion-input>
 
-    </ion-item>
- 
-  </ion-card>
-  <ion-card class="textCard1">
-    <ion-item>
-      <ion-icon name="mail-outline" style="margin-right: 8px;"></ion-icon>
-      <ion-input name="Email" type="email"  placeholder="Confirm New Email"></ion-input>
+  <form [formGroup]="updateUserEmailForm" (ngSubmit)="updateUserEmail()">
 
-    </ion-item>
- 
-  </ion-card>
+    <div style="align-self: center;display: flex;flex-direction: column;align-items: center;margin-top: 40%;">
 
-  <ion-button 
-  style="border-radius: 25px;color: #F5585C; width: 140px; height: 50px; margin-top: 115px;box-shadow: 5px 5px 5px lightgray;" color="primary">
-  <ion-label
-    style="color: white;text-transform: none;font-size: 16px;font-family: 'Sen', sans-serif;">
-    <b>Save Changes</b>
-  </ion-label>
-  </ion-button>
-  </div>
+      <ion-card class="textCard">
+        <ion-item>
+          <ion-icon name="mail-outline" style="margin-right: 8px;"></ion-icon>
+          <ion-input name="email" type="email" formControlName="email" placeholder="New Email"></ion-input>
+        </ion-item>
+      </ion-card>
+
+      <ion-card class="textCard1">
+        <ion-item>
+          <ion-icon name="mail-outline" style="margin-right: 8px;"></ion-icon>
+          <ion-input name="email" type="email" placeholder="Confirm New Email"></ion-input>
+        </ion-item>
+      </ion-card>
+
+      <ion-button type="submit"
+        style="border-radius: 25px;color: #F5585C; width: 140px; height: 50px; margin-top: 115px;box-shadow: 5px 5px 5px lightgray;"
+        color="primary">
+        <ion-label style="color: white;text-transform: none;font-size: 16px;font-family: 'Sen', sans-serif;">
+          <b>Save Changes</b>
+        </ion-label>
+      </ion-button>
+
+    </div>
+    
+  </form>
 </ion-content>

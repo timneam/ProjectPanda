@@ -112,7 +112,7 @@ export class UsersService {
     }
   }
 
-  updateUserProfile(firstName, lastName, email, password, phoneNumber) {
+  updateUserProfile(firstName, lastName, phoneNumber) {
     const auth = getAuth();
     const user = auth.currentUser;
     const username = `${firstName}${lastName}`
@@ -125,31 +125,58 @@ export class UsersService {
         firstName: firstName,
         lastName: lastName,
         phoneNumber: phoneNumber
-      }).then(() => {
-        //update email 
-        if (email.length != 0) {
-          updateEmail(auth.currentUser, email).then((res) => {
-            console.log("Updated Email")
-
-            if (password.length != 0) {
-              updatePassword(user, password).then((res) => {
-                this.navCntrl.navigateForward('tabs/profile');
-              }).catch((error) => {
-                // An error ocurred
-                console.log(error)
-              });
-            }
-          }).catch((error) => {
-            // An error occurred
-            console.log(error)
-          });
-        }
       })
+      this.navCntrl.navigateForward('tabs/profile');
     }).catch((error) => {
       // An error occurred
       console.log(error)
     });
   }
+
+  updateUserEmail(email){
+    const auth = getAuth();
+    const user = auth.currentUser;
+    updateEmail(user, email).then(() => {
+      console.log("Email updated successfully!")
+      this.navCntrl.navigateForward('tabs/profile');
+      // ...
+    }).catch((error) => {
+      // An error occurred
+      console.log(error)
+    });
+  }
+
+  updateUserPassword(password){
+    const auth = getAuth();
+    const user = auth.currentUser;
+
+    updatePassword(user, password).then(() => {
+      console.log("Password updated successfully!")
+      this.navCntrl.navigateForward('tabs/profile');
+    }).catch((error) => {
+      // An error ocurred
+      console.log(error)
+    });
+  }
+
+          // //update email 
+          // if (email.length != 0) {
+          //   updateEmail(auth.currentUser, email).then((res) => {
+          //     console.log("Updated Email")
+  
+          //     if (password.length != 0) {
+          //       updatePassword(user, password).then((res) => {
+          //         this.navCntrl.navigateForward('tabs/profile');
+          //       }).catch((error) => {
+          //         // An error ocurred
+          //         console.log(error)
+          //       });
+          //     }
+          //   }).catch((error) => {
+          //     // An error occurred
+          //     console.log(error)
+          //   });
+          // }
 
   signoutUser() {
     const auth = getAuth();

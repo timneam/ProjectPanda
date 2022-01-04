@@ -34,9 +34,7 @@ export class ProfileEditPage implements OnInit {
     this.updateDataForm = new FormGroup({
       firstName: new FormControl(),
       lastName: new FormControl(),
-      email: new FormControl(),
       phoneNumber: new FormControl(),
-      password: new FormControl()
     })
   }
 
@@ -73,9 +71,7 @@ export class ProfileEditPage implements OnInit {
     this.updateDataForm.patchValue({
       firstName: this.userData2.firstName,
       lastName: this.userData2.lastName,
-      email: this.userData.email,
-      phoneNumber: this.userData2.phoneNumber,
-      password: this.userData.password
+      phoneNumber: this.userData2.phoneNumber
     })
   }
 
@@ -83,8 +79,6 @@ export class ProfileEditPage implements OnInit {
     this.UsersService.updateUserProfile(
       this.updateDataForm.value.firstName,
       this.updateDataForm.value.lastName,
-      this.updateDataForm.value.email,
-      this.updateDataForm.value.password,
       this.updateDataForm.value.phoneNumber
     )
     // console.log(this.updateDataForm)
