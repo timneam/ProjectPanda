@@ -5,36 +5,54 @@
     <h3 style="font-size: 22px;font-weight: bold;color: #ffffff;display: flex;justify-content: center;">
       {{data.stallName}}
     </h3>
-  <!--   <div *ngFor="let data of stallMenu[-1]">
+    <!--   <div *ngFor="let data of stallMenu[-1]">
       <p class="subb">Estimated wait time {{data.foodEstTime}} mins </p>
      <p class="subb">Estimated wait time  mins </p>
-    </div> --> 
-     <div *ngFor="let data of stallMenu">
-       <div *ngIf="data.foodId ==foodID">
+    </div> -->
+    <div *ngFor="let data of stallMenu">
+      <div *ngIf="data.foodId == foodID">
 
-      <p class="subb">Estimated wait time {{data.foodEstTime}} mins </p>
-       </div>
+        <p class="subb">Estimated wait time {{data.foodEstTime}} mins </p>
+      </div>
     </div>
   </div>
   <h2 class="headerr">Menu</h2>
 
   <ion-list>
     <div *ngFor="let data of stallMenu">
-      <ion-item (click)="goToMenuDetails(data.foodId)">
+      
+      <ion-card (click)="goToMenuDetails(data.foodId)">
 
-        <img src='../assets/nasiLemak.png' height="90px" width="90px" style="margin-bottom: 13px;margin-top: 7px;">
+        <ion-row>
 
-        <p
-          style="margin-right:196px;margin-top:45px;display:inline-block;background-color:transparent;z-index:-1;margin-left: 35px;">
-         $ {{data.foodPrice}}
-        </p>
+          <ion-col size="4">
+            <img src='../assets/nasiLemak.png' height="90px" width="90px" style="margin-bottom: 13px;margin-top: 7px;">
+          </ion-col>
 
-        <ion-label
-          style="margin-left: -217px;margin-top:-28px;z-index: 99;background-color: transparent;font-size:18px ;">
-          <b>{{data.foodName}}</b>
-        </ion-label>
+          <ion-col size="8">
+            <ion-row>
+              <ion-label
+                style="background-color: transparent; font-size:18px ;">
+                <b>{{data.foodName}}</b>
+              </ion-label>
+            </ion-row>
+            <ion-row>
+              <ion-label
+                style="background-color:transparent; margin-top: 10px;">
+                $ {{data.foodPrice}}
+              </ion-label>
+            </ion-row>
+            <ion-row>
+              <ion-label
+                style="background-color:transparent; margin-top: 10px;">
+                {{data.foodDetails}}
+              </ion-label>
+            </ion-row>
+          </ion-col>
 
-      </ion-item>
+        </ion-row>
+
+      </ion-card>
 
       <hr>
 

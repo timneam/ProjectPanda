@@ -51,8 +51,11 @@ export class CartService {
     let cartItems = [];
 
     querySnapshot.forEach((doc) => {
-      let items = doc.data();
+      console.log(doc.id)
+      console.log(doc.data())
+      let items = { "id": doc.id, "foodName": doc.data().foodName, "foodPrice": doc.data().foodPrice, "foodDescription": doc.data().foodDescription, "foodEstTime" : doc.data().foodEstTime, "foodQty": doc.data().foodQty }
       cartItems.push(items)
+      console.log(cartItems)
     })
 
     return cartItems
@@ -72,9 +75,9 @@ export class CartService {
   }
 
   // remove items from a cart (cart -> stall -> menuList -> remove a document)
-  async removeItemFromCart(userId, stallId, menuId, data){
-    const removeItemFromCart = await addDoc(collection(this.db, 'User', userId, 'Cart', stallId, 'menuItems', menuId), data)
-    return removeItemFromCart
+  async removeItemFromCart(userId, stallId, menuId){
+    const removeItemFromCart = await deleteDoc(doc(this.db, 'User', userId, 'Cart', stallId, 'menuList', menuId))
+    console.log("deleted : " + menuId)
   }
 
 }

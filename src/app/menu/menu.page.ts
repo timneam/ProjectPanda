@@ -72,6 +72,7 @@ export class MenuPage implements OnInit {
   }
 
   async goToMenuDetails(foodId){
+    console.log(foodId)
     this.router.navigateByUrl(`/menu-item/${this.stallId}/${foodId}`)
   }
 

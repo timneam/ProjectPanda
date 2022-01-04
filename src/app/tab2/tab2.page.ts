@@ -52,6 +52,12 @@ export class Tab2Page {
 
   }
 
+  removeItemFromCart(id) {
+    this.cartService.removeItemFromCart(this.userId, this.stallId, id).then(() => {
+      console.log("Item removed from cart successfully!")
+    })
+  }
+
   public async showActionSheet(photo: UserPhoto, position: number) {
     const actionSheet = await this.actionSheetController.create({
       header: 'Photos',

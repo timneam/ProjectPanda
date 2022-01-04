@@ -1,32 +1,53 @@
-<ion-header >
+<ion-header>
   <ion-toolbar style="background-color: #F1696C;">
     <ion-title>
       <div class="centerise">
-      <img src="../assets/ESPRESSO.png" class="espresso">
-    </div>
+        <img src="../assets/ESPRESSO.png" class="espresso">
+      </div>
     </ion-title>
     <div style="display: flex;flex-direction: row;align-items: center;margin-top: 20px;">
-    <img src="../assets/profile.png" width="60" height="60" style="margin-right: 20px;margin-left: 30px;margin-top: -3px;">
-    <div style="display: flex;flex-direction: column;">
-    <p style="font-size: 21px;font-family: roboto; color: white;margin-right: 20px;margin-left: 26px;margin-top: 6px;"><b>Hi Jane,</b></p>
-    <p style="font-size: 16px;color: white;;margin-right: 20px;margin-left: 23px;margin-top: -11px;">What's for lunch today?</p>
-  </div>
-  </div>
- 
+      <img src="../assets/profile.png" width="60" height="60"
+        style="margin-right: 20px;margin-left: 30px;margin-top: -3px;">
+      <div style="display: flex;flex-direction: column;">
+        <p
+          style="font-size: 21px;font-family: roboto; color: white;margin-right: 20px;margin-left: 26px;margin-top: 6px;">
+          <b>Hi Jane,</b></p>
+        <p style="font-size: 16px;color: white;;margin-right: 20px;margin-left: 23px;margin-top: -11px;">What's for
+          lunch today?</p>
+      </div>
+    </div>
+
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
- <h2 class="headerr">Vendors</h2>
-<div class="carddd" *ngFor="let data of stall">
- <ion-card style="margin-top: 18px;box-shadow: 3px 5px 3px rgb(184, 180, 180);border-radius: 2px;width:90%" [routerLink]="['/menu', data.id]" >
-   <div style="display: flex;flex-direction: row;">
-    <img src="../assets/malayStall.png" class="stalll">
-    <div style="display: flex;flex-direction: column;">
-      <h3 class="stallText">{{data.stallName}}</h3>
-      <p class="stallSub">{{data.stallDetails}}</p>
-    </div>
-   </div>
- </ion-card>
-</div>
+  <h2 class="headerr">Vendors</h2>
+  <div class="carddd" *ngFor="let data of stall">
+
+    <ion-card style="margin-top: 10px; box-shadow: 3px 5px 3px rgb(184, 180, 180); border-radius: 2px; width:90%"
+      [routerLink]="['/menu', data.id]">
+
+      <ion-row>
+
+        <ion-col size="4">
+          <img src="../assets/malayStall.png" class="stalll" style="margin-left: 10px; margin-top: 10px;">
+        </ion-col>
+
+        <ion-col size="8">
+          <ion-row>
+            <ion-label style="background-color: transparent; font-size:18px ; margin-top: 10px;">
+              <h3 class="stallText">{{data.stallName}}</h3>
+            </ion-label>
+          </ion-row>
+          <ion-row>
+            <ion-label style="background-color:transparent; margin-top: 10px;">
+              <p class="stallSub">{{data.stallDetails}}</p>
+            </ion-label>
+          </ion-row>
+        </ion-col>
+
+      </ion-row>
+    </ion-card>
+
+  </div>
 </ion-content>
