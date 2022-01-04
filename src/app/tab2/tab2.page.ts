@@ -41,11 +41,12 @@ export class Tab2Page {
     console.log(this.stallId)
 
     this.cartService.getItemsInACart(this.userId, this.stallId).then(doc => {
-      console.log(doc)
+
       doc.forEach(res => {
-        console.log(res)
-        let cartData = { "id": res }
+        // console.log(res)
+        let cartData = { "id": res.id, "foodName": res.foodName , "foodPrice":res.foodPrice , "foodDescription":res.foodDescription , "foodEstTime":res.foodEstTime , "foodQty": res.foodQty}
         this.cartItems.push(cartData)
+        console.log(this.cartItems)
       });
     });
 

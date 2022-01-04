@@ -1,71 +1,79 @@
-
 <ion-content>
   <div style="display:flex; flex-direction: column;">
-  <div style="display: flex;flex-direction: row;">
-  <img src="../assets/backk.png" class="iconn" [routerLink]="['/tabs/cart-selection']" style="margin-top: 8px;margin-left: 8px;height: 25px;">
-  <ion-button style="border-radius: 25px; width: 100px; height: 40px; margin-top: 15px; margin-left: 55%; "
-  color="primary">
-  <ion-label
-    style="color: white;text-transform: none;font-size: 13px;font-family: 'Sen', sans-serif;font-weight: 500;">
-    Clear Cart
-  </ion-label>
+    <div style="display: flex;flex-direction: row;">
+      <img src="../assets/backk.png" class="iconn" [routerLink]="['/tabs/cart-selection']"
+        style="margin-top: 8px;margin-left: 8px;height: 25px;">
 
-</ion-button>
-</div>
-<ion-item-sliding>
-  <ion-item style="margin-top: 25px;max-width: 93%;" >
-    
+      <ion-button style="border-radius: 25px; width: 100px; height: 40px; margin-top: 15px; margin-left: 55%; "
+        color="primary">
+        <ion-label
+          style="color: white;text-transform: none;font-size: 13px;font-family: 'Sen', sans-serif;font-weight: 500;">
+          Clear Cart
+        </ion-label>
+      </ion-button>
 
-    <div style="display:flex; flex-direction: row">  
-    <img src='../assets/nasiLemak.png' height="80px" width="80px" style="margin-bottom: 13px;margin-top: 7px;margin-left: 5px;" >
- <!-- <p style="margin-right:196px;margin-top:55px;display:inline-block;background-color:transparent;z-index:-1;margin-left: 35px;">$ 13.00</p>
+    </div>
+
+    <ion-item-sliding *ngFor="let item of cartItems">
+      <ion-item style="margin-top: 25px;max-width: 93%;">
+
+        <div style="display:flex; flex-direction: row">
+          <img src='../assets/nasiLemak.png' height="80px" width="80px"
+            style="margin-bottom: 13px;margin-top: 7px;margin-left: 5px;">
+          <!-- <p style="margin-right:196px;margin-top:55px;display:inline-block;background-color:transparent;z-index:-1;margin-left: 35px;">$ 13.00</p>
   
     <ion-label style="margin-left: -247px;margin-top:-20px;z-index: 99;background-color: transparent;" ><b>Nasi Lemak</b></ion-label> -->
-    <div style="margin-left: 20px; display:flex;flex-direction:column;margin-top:8px"> 
-      <ion-label style="font-size: 19px;margin-bottom: -3px;margin-top:3px"><b> Nasi Lemak</b> </ion-label>
-      <p style="font-size:12px; margin-top:5px;margin-bottom:-3px"> + egg ($1)</p>
-      <p style="font-weight: 500;margin-top:13px;margin-bottom: 7px;">8.00 </p>
+          <div style="margin-left: 20px; display:flex;flex-direction:column;margin-top:8px">
+            <ion-label style="font-size: 19px;margin-bottom: -3px;margin-top:3px"><b>{{item.foodName}}</b> </ion-label>
+            <p style="font-size:12px; margin-top:5px;margin-bottom:-3px"> + egg ($1)</p>
+            <p style="font-weight: 500;margin-top:13px;margin-bottom: 7px;">{{item.foodPrice}} </p>
+          </div>
+          <p class="quantityy">{{item.foodQty}}</p>
+        </div>
+
+      </ion-item>
+
+      <ion-item-options>
+        <ion-item-option style="height:80%;align-self:flex-end;">Remove</ion-item-option>
+      </ion-item-options>
+
+    </ion-item-sliding>
+
+    <ion-card style="width: 120%;margin-left:-10%;height:50px;margin-top:20%">
+      <div style="display:flex;flex-direction:row;align-items:center;justify-content:center;">
+        <p class="pText"> Do you really need cutlery? </p>
+        <ion-toggle style="margin-left:25px"></ion-toggle>
+      </div>
+    </ion-card>
+
+    <div
+      style="display:flex;flex-direction:row;font-size: 14px;justify-content:space-around;margin-top:5px;font-family: 'Open Sans';">
+      <p> Subtotal: </p>
+      <p style="margin-left:50px"> $8.00 </p>
     </div>
- <p class="quantityy">x1 </p>
- </div>
-
-</ion-item>
-<ion-item-options>
-  <ion-item-option style="height:80%;align-self:flex-end;" >Remove</ion-item-option>
-</ion-item-options>
-</ion-item-sliding>
-<ion-card style="width: 120%;margin-left:-10%;height:50px;margin-top:20%">
-  <div style="display:flex;flex-direction:row;align-items:center;justify-content:center;">
-  <p class="pText"> Do you really need cutlery? </p>
-  <ion-toggle style="margin-left:25px" ></ion-toggle>
-  </div>
- </ion-card>
-
-  <div style="display:flex;flex-direction:row;font-size: 14px;justify-content:space-around;margin-top:5px;font-family: 'Open Sans';">
-  <p> Subtotal: </p>
-  <p style="margin-left:50px"> $8.00 </p>
-     </div>
-     <div style="display:flex;flex-direction:row;font-size: 14px;justify-content:space-around;margin-top:-15px;font-family: 'Open Sans';">
+    <div
+      style="display:flex;flex-direction:row;font-size: 14px;justify-content:space-around;margin-top:-15px;font-family: 'Open Sans';">
       <p> Surcharge Cost: </p>
       <p style="margin-left:2px"> $0.90 </p>
-         </div>
-         <div style="display:flex;flex-direction:row;font-size: 11px;justify-content:space-around;margin-top:-15px;font-family: 'Open Sans';">
-          <p> Cost per container: </p>
-          <p style="margin-left:5px"> $0.30 </p>
-             </div>
-             <div style="display:flex;flex-direction:row;font-size: 16px;justify-content:space-around;font-family: 'Open Sans';">
-              <p> Grand Total:</p>
-              <p style="margin-left:8px"> $9.10 </p>
-                 </div>
-                 <hr style="align-self: center;">
+    </div>
+    <div
+      style="display:flex;flex-direction:row;font-size: 11px;justify-content:space-around;margin-top:-15px;font-family: 'Open Sans';">
+      <p> Cost per container: </p>
+      <p style="margin-left:5px"> $0.30 </p>
+    </div>
+    <div style="display:flex;flex-direction:row;font-size: 16px;justify-content:space-around;font-family: 'Open Sans';">
+      <p> Grand Total:</p>
+      <p style="margin-left:8px"> $9.10 </p>
+    </div>
+    <hr style="align-self: center;">
 
-                 <ion-button 
-style="border-radius: 25px;color: #F5585C; width: 270px; height: 45px; font-size: 24px;margin-top: -3px;align-self:center;" color="primary">
-<ion-label
-  style="color: white;text-transform: none;font-size: 16px;font-family: 'Sen', sans-serif;">
- Place Order
-</ion-label>
-</ion-button>
- </div>
- 
+    <ion-button
+      style="border-radius: 25px;color: #F5585C; width: 270px; height: 45px; font-size: 24px;margin-top: -3px;align-self:center;"
+      color="primary">
+      <ion-label style="color: white;text-transform: none;font-size: 16px;font-family: 'Sen', sans-serif;">
+        Place Order
+      </ion-label>
+    </ion-button>
+  </div>
+
 </ion-content>

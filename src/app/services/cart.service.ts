@@ -51,8 +51,7 @@ export class CartService {
     let cartItems = [];
 
     querySnapshot.forEach((doc) => {
-      let items = doc.id;
-      console.log(items)
+      let items = doc.data();
       cartItems.push(items)
     })
 
