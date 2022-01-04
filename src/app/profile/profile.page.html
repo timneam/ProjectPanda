@@ -23,7 +23,9 @@
     <ion-item>
       <ion-icon name="mail-outline" style="margin-right: 8px;"></ion-icon>
       <ion-input name="Email" type="email" value={{userData.email}} disabled></ion-input>
+
     </ion-item>
+    <ion-icon name="create-outline" style="color: black;font-size: 16px;" [routerLink]="['/profile-email-edit']" enabled></ion-icon>
   </ion-card>
 
   <ion-card class="textCard1">
@@ -37,7 +39,9 @@
     <ion-item lines= 'none'>
       <ion-icon name="lock-closed-outline" style="margin-right: 8px;"></ion-icon>
       <ion-input name="Password" type="password" value="123456789" disabled></ion-input>
+
     </ion-item>
+    <ion-icon name="create-outline" style="color: black;font-size: 16px;"></ion-icon>
   </ion-card>
 
   <ion-button [routerLink]="['/profile-edit']"

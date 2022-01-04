@@ -87,4 +87,8 @@ export class ProfilePage implements OnInit {
 
    
   }
+
+  async emailForward() {
+    this.router.navigateByUrl[('/profile-email-edit')]
+  }
 }
