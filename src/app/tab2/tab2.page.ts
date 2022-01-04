@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ActionSheetController } from '@ionic/angular';
+import { getAuth } from 'firebase/auth';
+import { CartService } from '../services/cart.service';
 import { UserPhoto, PhotoService } from '../services/photo.service';
 
 @Component({
@@ -9,10 +12,43 @@ import { UserPhoto, PhotoService } from '../services/photo.service';
 })
 export class Tab2Page {
 
-  constructor(public photoService: PhotoService, public actionSheetController: ActionSheetController) {}
+  userId: any;
+  stallId: any;
+
+  cartItems = [];
+
+  constructor(
+    public photoService: PhotoService, 
+    public actionSheetController: ActionSheetController,
+    private activatedRoute: ActivatedRoute,
+    private cartService: CartService) {
+    this.stallId = this.activatedRoute.snapshot.paramMap.get("stallId");
+  }
 
   async ngOnInit() {
+    this.getItemsInCart();
+
     await this.photoService.loadSaved();
+  }
+  
+  getItemsInCart(){
+    let auth = getAuth();
+    let user = auth.currentUser;
+
+    this.userId = user.uid
+
+    console.log(this.userId)
+    console.log(this.stallId)
+
+    this.cartService.getItemsInACart(this.userId, this.stallId).then(doc => {
+      console.log(doc)
+      doc.forEach(res => {
+        console.log(res)
+        let cartData = { "id": res }
+        this.cartItems.push(cartData)
+      });
+    });
+
   }
 
   public async showActionSheet(photo: UserPhoto, position: number) {

@@ -46,15 +46,17 @@ export class CartService {
 
   // get Items in cart ( cart -> stall -> menuList -> documents )
   async getItemsInACart(userId, stallId){
-    const querySnapshot = await getDocs(collection(this.db, 'User', userId , 'Cart', stallId, 'MenuList'))
+    const querySnapshot = await getDocs(collection(this.db, 'User', userId , 'Cart', stallId, 'menuList'))
 
     let cartItems = [];
 
     querySnapshot.forEach((doc) => {
-      let items = doc.data()
+      let items = doc.id;
       console.log(items)
-      // cartItems.push(items)
+      cartItems.push(items)
     })
+
+    return cartItems
 
   }
 
