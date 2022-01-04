@@ -20,21 +20,21 @@
 
   <ion-list>
     <div *ngFor="let data of stallMenu">
-      <ion-card (click)="goToMenuDetails(data.foodId)">
+      <ion-item (click)="goToMenuDetails(data.foodId)">
 
         <img src='../assets/nasiLemak.png' height="90px" width="90px" style="margin-bottom: 13px;margin-top: 7px;">
 
         <p
           style="margin-right:196px;margin-top:45px;display:inline-block;background-color:transparent;z-index:-1;margin-left: 35px;">
-          {{data.foodPrice}}
+         $ {{data.foodPrice}}
         </p>
 
         <ion-label
-          style="margin-left: -237px;margin-top:-28px;z-index: 99;background-color: transparent;font-size:18px ;">
+          style="margin-left: -217px;margin-top:-28px;z-index: 99;background-color: transparent;font-size:18px ;">
           <b>{{data.foodName}}</b>
         </ion-label>
 
-      </ion-card>
+      </ion-item>
 
       <hr>
 
