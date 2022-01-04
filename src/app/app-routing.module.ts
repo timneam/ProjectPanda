@@ -88,6 +88,10 @@ const routes: Routes = [
   },  {
     path: 'profile-email-edit',
     loadChildren: () => import('./profile-email-edit/profile-email-edit.module').then( m => m.ProfileEmailEditPageModule)
+  },
+  {
+    path: 'profile-password-edit',
+    loadChildren: () => import('./profile-password-edit/profile-password-edit.module').then( m => m.ProfilePasswordEditPageModule)
   }
 
 
