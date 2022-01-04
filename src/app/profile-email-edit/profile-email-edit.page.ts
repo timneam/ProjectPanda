@@ -13,7 +13,6 @@ export class ProfileEmailEditPage implements OnInit {
 
   db = getFirestore();
   updateUserEmailForm: FormGroup
-  userData = null;
 
   constructor(private formBuilder: FormBuilder,
     private userService: UsersService) { }
@@ -32,19 +31,12 @@ export class ProfileEmailEditPage implements OnInit {
   //   const auth = getAuth();
   //   const user = auth.currentUser
   //   console.log(user)
+  //   let email = user.email;
 
   //   if (user !== null) {
-  //     user.providerData.forEach((profile) => {
-  //       // console.log("  Sign-in provider: " + profile.providerId);
-  //       // console.log("  Provider-specific UID: " + profile.uid);
-  //       // console.log("  Name: " + profile.displayName);
-  //       // console.log("  Email: " + profile.email);
-  //       // console.log("  Photo URL: " + profile.photoURL);
-  //       this.userData = profile
-  //       console.log(this.userData.email)
-  //     });
+  //     console.log(email)
   //     this.updateUserEmailForm.patchValue({
-  //       email: this.userData.email
+  //       email: email
   //     })
   //   }
   // }

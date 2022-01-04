@@ -18,7 +18,7 @@ export class ProfileEditPage implements OnInit {
 
   constructor(
     private UsersService: UsersService,
-    private formBuilder: FormBuilder ,
+    private formBuilder: FormBuilder,
     public router: Router, 
     public popoverCtrl: PopoverController ) {
 
