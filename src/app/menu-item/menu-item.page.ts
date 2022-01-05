@@ -16,13 +16,18 @@ export class MenuItemPage implements OnInit {
 
   db = getFirestore();
 
-  menuDetails = [];
-  menuAddOns = [];
+  menuDetails = []
+  menuAddOns = []
 
-  userAddons = [];
+  userAddons = []
 
-  stallRoute:any;
-  menuRoute: any;
+  stallRoute: any
+  menuRoute: any
+
+  userAddonInput = []
+
+  selectedItemsList = [];
+  checkedIDs = [];
 
   constructor(
     private _location: Location,
@@ -52,7 +57,7 @@ export class MenuItemPage implements OnInit {
     querySnapshot.forEach((doc) => {
       let data = doc.data()
       console.log(data);
-      let menuVar = { "addOnTitle": data.title, "addOnPrice": data.price}
+      let menuVar = { "id": doc.id, "addOnTitle": data.title, "addOnPrice": data.price}
       this.menuAddOns.push(menuVar);  
     })
     console.log(this.menuAddOns)
@@ -98,8 +103,25 @@ export class MenuItemPage implements OnInit {
 
     this.cartService.createCartForAStall(user.uid, this.stallRoute, stallData).then((res) => {
       console.log(res)
-      this.cartService.addItemToCart(user.uid, this.stallRoute, this.menuRoute, menuData)
+      this.cartService.addItemToCart(user.uid, this.stallRoute, this.menuRoute, menuData).then((res) => {
+        this.selectedItemsList.forEach(element => {
+          console.log(element)
+          let data = { "addOnTitle": element.addOnTitle, "addOnPrice": element.addOnPrice }
+          this.cartService.addItemAddonToCart(user.uid, this.stallRoute, this.menuRoute, element.id, data )
+          console.log("Added to cart!")
+          console.log(data)
+        });
+      })
     })
+  }
+
+  changeSelection() {
+    this.selectedItemsList = this.menuAddOns.filter((value, index) => {
+      if (value.isChecked) {
+        console.log(value)
+      }
+      return value.isChecked
+    });
   }
 
   allUserAddons() {
@@ -108,8 +130,3 @@ export class MenuItemPage implements OnInit {
 
 
 }
-
-function stallId(stallId: any, menuId: any) {
-  throw new Error('Function not implemented.');
-}
-

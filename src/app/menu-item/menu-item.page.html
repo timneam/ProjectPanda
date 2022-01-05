@@ -20,9 +20,10 @@
 
       <hr>
     </div>
+    
     <div style="margin-left: 12px;" *ngFor="let data of menuAddOns">
       <div style="margin-bottom: 3px;display: flex;align-items: center;flex-direction: row;">
-        <input type="checkbox" style="margin-top: 3px;"> &nbsp; {{data.addOnTitle}} - ${{data.addOnPrice}}
+        <input type="checkbox" [(ngModel)]="data.isChecked" (change)="changeSelection()" style="margin-top: 3px;"> &nbsp; {{data.addOnTitle}} - ${{data.addOnPrice}}
         <br>
       </div>
 
@@ -32,6 +33,7 @@
       </div> -->
 
     </div>
+
     <div>
       <p class="commente">Add comments</p>
 
