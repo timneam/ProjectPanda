@@ -6,6 +6,7 @@ import { StallsService } from '../services/stalls.service';
 import { getDocs } from '@angular/fire/firestore';
 import { CartService } from '../services/cart.service';
 import { getAuth } from 'firebase/auth';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-menu-item',
@@ -94,7 +95,8 @@ export class MenuItemPage implements OnInit {
       foodPrice: this.menuDetails[0].foodPrice,
       foodDescription: this.menuDetails[0].foodDetails,
       foodEstTime: this.menuDetails[0].foodEstTime,
-      foodQty: this.item_qty
+      foodQty: this.item_qty,
+      userComment: (<HTMLInputElement>document.getElementById("userComment")).value
     }
 
     let stallData = {
@@ -104,6 +106,7 @@ export class MenuItemPage implements OnInit {
     this.cartService.createCartForAStall(user.uid, this.stallRoute, stallData).then((res) => {
       console.log(res)
       this.cartService.addItemToCart(user.uid, this.stallRoute, this.menuRoute, menuData).then((res) => {
+        console.log(menuData)
         this.selectedItemsList.forEach(element => {
           console.log(element)
           let data = { "addOnTitle": element.addOnTitle, "addOnPrice": element.addOnPrice }
