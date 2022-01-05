@@ -41,7 +41,7 @@ export class CartService {
   // create cart for a stall (cart -> stall -> menuList)
   async createCartForAStall(userId, stallId, data) {
     const addStallCart = await setDoc(doc(this.db, 'User', userId, 'Cart', stallId), data)
-    return data
+    console.log(stallId)
   }
 
   // get Items in cart ( cart -> stall -> menuList -> documents )
@@ -62,14 +62,32 @@ export class CartService {
 
   }
 
+    // get Items in cart ( cart -> stall -> menuList -> documents )
+    async getAddonForItem(userId, stallId, menuId){
+      const querySnapshot = await getDocs(collection(this.db, 'User', userId , 'Cart', stallId, 'menuList', menuId, 'Addon'))
+  
+      let addOnItems = [];
+  
+      querySnapshot.forEach((doc) => {
+        console.log(doc.id)
+        console.log(doc.data())
+        let items = { "id": doc.id, "addOnTitle": doc.data().addOnTitle, "addOnPrice": doc.data().addOnTitle}
+        addOnItems.push(items)
+        console.log(addOnItems)
+      })
+  
+      return addOnItems
+  
+    }
+
   // add items into a cart (cart -> stall -> menuList -> add a document)
-  async addItemToCart(userId, stallId, menuId, data){
+  async setItemToCart(userId, stallId, menuId, data){
     const addItemToCart = await setDoc(doc(this.db, 'User', userId, 'Cart', stallId, 'menuList', menuId), data)
     return addItemToCart
   }
 
   // add items into a cart (cart -> stall -> menuList -> addon -> add a document)
-  async addItemAddonToCart(userId, stallId, menuId, addonId, data){
+  async setItemAddonToCart(userId, stallId, menuId, addonId, data){
     const addAddonToCart = await setDoc(doc(this.db, 'User', userId, 'Cart', stallId, 'menuList', menuId, 'Addon', addonId), data)
     return addAddonToCart
   }

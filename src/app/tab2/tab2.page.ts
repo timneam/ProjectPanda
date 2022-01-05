@@ -41,15 +41,20 @@ export class Tab2Page {
     console.log(this.stallId)
 
     this.cartService.getItemsInACart(this.userId, this.stallId).then(doc => {
-
       doc.forEach(res => {
         // console.log(res)
-        let cartData = { "id": res.id, "foodName": res.foodName , "foodPrice":res.foodPrice , "foodDescription":res.foodDescription , "foodEstTime":res.foodEstTime , "foodQty": res.foodQty}
-        this.cartItems.push(cartData)
-        console.log(this.cartItems)
+
+        let addon = [];
+
+        this.cartService.getAddonForItem(this.userId, this.stallId, res.id).then(doc => {
+          addon = doc
+        }).then(() => {
+          let cartData = { "id": res.id, "foodName": res.foodName , "foodPrice":res.foodPrice , "foodDescription":res.foodDescription , "foodEstTime":res.foodEstTime , "foodQty": res.foodQty, "addon" : addon}
+          this.cartItems.push(cartData)
+          console.log(cartData)
+        })
       });
     });
-
   }
 
   removeItemFromCart(id) {
