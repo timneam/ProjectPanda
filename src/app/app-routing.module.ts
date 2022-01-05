@@ -92,6 +92,10 @@ const routes: Routes = [
   {
     path: 'profile-password-edit',
     loadChildren: () => import('./profile-password-edit/profile-password-edit.module').then( m => m.ProfilePasswordEditPageModule)
+  },
+  {
+    path: 'vendor-incoming',
+    loadChildren: () => import('./vendor-incoming/vendor-incoming.module').then( m => m.VendorIncomingPageModule)
   }
 
 
