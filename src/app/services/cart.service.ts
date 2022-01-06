@@ -12,88 +12,66 @@ import { NavController } from '@ionic/angular';
 export class CartService {
 
   db = getFirestore();
-  router:any;
+  router: any;
 
   auth = getAuth();
   user = this.auth.currentUser;
 
-  constructor(private firestore:Firestore) { }
+  constructor(private firestore: Firestore) { }
 
   // Get all stalls in the cart collection (cart -> stalls)
-  async getAllStallsCart(userId){
-    const querySnapshot = await getDocs(collection(this.db, 'User', userId , 'Cart'))
-
+  async getAllStallsCart(userId) {
+    const querySnapshot = await getDocs(collection(this.db, 'User', userId, 'Cart'))
     let stallList = [];
-
     querySnapshot.forEach((doc) => {
       let stallData = doc.id;
-      console.log(doc.id)
-      console.log(doc.data())
-      console.log(doc)
       stallList.push(stallData)
       console.log(stallList)
     })
-
     return stallList
-
   }
 
   // create cart for a stall (cart -> stall -> menuList)
   async createCartForAStall(userId, stallId, data) {
     const addStallCart = await setDoc(doc(this.db, 'User', userId, 'Cart', stallId), data)
-    console.log(stallId)
   }
 
   // get Items in cart ( cart -> stall -> menuList -> documents )
-  async getItemsInACart(userId, stallId){
-    const querySnapshot = await getDocs(collection(this.db, 'User', userId , 'Cart', stallId, 'menuList'))
-
+  async getItemsInACart(userId, stallId) {
+    const querySnapshot = await getDocs(collection(this.db, 'User', userId, 'Cart', stallId, 'menuList'))
     let cartItems = [];
-
     querySnapshot.forEach((doc) => {
-      console.log(doc.id)
-      console.log(doc.data())
-      let items = { "id": doc.id, "foodName": doc.data().foodName, "foodPrice": doc.data().foodPrice, "foodDescription": doc.data().foodDescription, "foodEstTime" : doc.data().foodEstTime, "foodQty": doc.data().foodQty }
+      let items = { "id": doc.id, "foodName": doc.data().foodName, "foodPrice": doc.data().foodPrice, "foodDescription": doc.data().foodDescription, "foodEstTime": doc.data().foodEstTime, "foodQty": doc.data().foodQty }
       cartItems.push(items)
-      console.log(cartItems)
     })
-
     return cartItems
-
   }
 
-    // get Items in cart ( cart -> stall -> menuList -> documents )
-    async getAddonForItem(userId, stallId, menuId){
-      const querySnapshot = await getDocs(collection(this.db, 'User', userId , 'Cart', stallId, 'menuList', menuId, 'Addon'))
-  
-      let addOnItems = [];
-  
-      querySnapshot.forEach((doc) => {
-        console.log(doc.id)
-        console.log(doc.data())
-        let items = { "id": doc.id, "addOnTitle": doc.data().addOnTitle, "addOnPrice": doc.data().addOnTitle}
-        addOnItems.push(items)
-        console.log(addOnItems)
-      })
-  
-      return addOnItems
-  
-    }
+  // get Items in cart ( cart -> stall -> menuList -> documents )
+  async getAddonForItem(userId, stallId, menuId) {
+    const querySnapshot = await getDocs(collection(this.db, 'User', userId, 'Cart', stallId, 'menuList', menuId, 'Addon'))
+    let addOnItems = [];
+    querySnapshot.forEach((doc) => {
+      let items = { "id": doc.id, "addOnTitle": doc.data().addOnTitle, "addOnPrice": doc.data().addOnTitle }
+      addOnItems.push(items)
+    })
+    return addOnItems
+  }
 
   // add items into a cart (cart -> stall -> menuList -> add a document)
-  async setItemToCart(userId, stallId, menuId, data){
+  async setItemToCart(userId, stallId, menuId, data) {
     const addItemToCart = await setDoc(doc(this.db, 'User', userId, 'Cart', stallId, 'menuList', menuId), data)
     return addItemToCart
   }
 
   // add items into a cart (cart -> stall -> menuList -> addon -> add a document)
-  async setItemAddonToCart(userId, stallId, menuId, addonId, data){
+  async setItemAddonToCart(userId, stallId, menuId, addonId, data) {
     const addAddonToCart = await setDoc(doc(this.db, 'User', userId, 'Cart', stallId, 'menuList', menuId, 'Addon', addonId), data)
     return addAddonToCart
   }
 
   // remove items from a cart (cart -> stall -> menuList -> remove a document)
-  async removeItemFromCart(userId, stallId, menuId){
+  async removeItemFromCart(userId, stallId, menuId) {
     const removeItemFromCart = await deleteDoc(doc(this.db, 'User', userId, 'Cart', stallId, 'menuList', menuId))
     console.log("deleted : " + menuId)
   }

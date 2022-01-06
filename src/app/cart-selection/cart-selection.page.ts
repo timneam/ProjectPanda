@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { getAuth } from 'firebase/auth';
+import { NavController } from '@ionic/angular';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { CartService } from '../services/cart.service';
+import { UsersService } from '../services/users.service';
 
 @Component({
   selector: 'app-cart-selection',
@@ -10,34 +12,38 @@ import { CartService } from '../services/cart.service';
 })
 export class CartSelectionPage implements OnInit {
 
+  auth = getAuth();
   userId: any;
   stallsCart = [];
 
   constructor(private cartService: CartService,
-    private router: Router) { }
+    private router: Router,
+    private navCntrl: NavController,
+    private usersService: UsersService) { }
 
   ngOnInit() {
-    this.getStallsCart();
+    this.testRefresh();
   }
 
+  testRefresh = async function () {
+    onAuthStateChanged(this.auth, async (user) => {
+      if (user) {
+        let users = this.auth.currentUser
+        this.userId = users.uid
+        this.getStallsCart()        
+      } else {
+        console.log("User is signed out")
+        this.navCntrl.navigateForward('splash');
+      }
+    });
+  };
+
   getStallsCart() {
-    let auth = getAuth();
-    let user = auth.currentUser;
-
-    this.userId = user.uid
-
-    // console.log(this.userId)
-
     this.cartService.getAllStallsCart(this.userId).then(res => {
-      // console.log(res)
-    
       res.forEach(res => {
         let stallData = { "id": res }
         this.stallsCart.push(stallData)
       });
-
-      console.log(this.stallsCart)
-      // console.log(this.stallsCart)
     });
   }
 

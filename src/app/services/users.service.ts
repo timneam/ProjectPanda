@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
 import { collectionData } from 'rxfire/firestore';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, updateProfile, updateEmail, updatePassword, signOut } from "firebase/auth";
-import * as firebase from '@angular/fire'
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, updateEmail, updatePassword, signOut } from "firebase/auth";
 import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, getFirestore, setDoc, updateDoc } from 'firebase/firestore';
 import { async } from '@angular/core/testing';
 import { NavController } from '@ionic/angular';
@@ -13,6 +12,7 @@ import { NavController } from '@ionic/angular';
 export class UsersService {
 
   db = getFirestore();
+  auth = getAuth();
   router: any;
 
   constructor(private firestore: Firestore,
@@ -24,8 +24,7 @@ export class UsersService {
   }
 
   loginUser(email, password) {
-    const auth = getAuth();
-    signInWithEmailAndPassword(auth, email, password)
+    signInWithEmailAndPassword(this.auth, email, password)
       .then(async (userCredential) => {
         const user = userCredential.user.uid;
         // Signed in 
@@ -133,7 +132,7 @@ export class UsersService {
     });
   }
 
-  updateUserEmail(email){
+  updateUserEmail(email) {
     const auth = getAuth();
     const user = auth.currentUser;
     updateEmail(user, email).then(() => {
@@ -146,7 +145,7 @@ export class UsersService {
     });
   }
 
-  updateUserPassword(password){
+  updateUserPassword(password) {
     const auth = getAuth();
     const user = auth.currentUser;
 
@@ -159,24 +158,6 @@ export class UsersService {
     });
   }
 
-          // //update email 
-          // if (email.length != 0) {
-          //   updateEmail(auth.currentUser, email).then((res) => {
-          //     console.log("Updated Email")
-  
-          //     if (password.length != 0) {
-          //       updatePassword(user, password).then((res) => {
-          //         this.navCntrl.navigateForward('tabs/profile');
-          //       }).catch((error) => {
-          //         // An error ocurred
-          //         console.log(error)
-          //       });
-          //     }
-          //   }).catch((error) => {
-          //     // An error occurred
-          //     console.log(error)
-          //   });
-          // }
 
   signoutUser() {
     const auth = getAuth();
