@@ -38,3 +38,9 @@ hr {
     z-index: 999;
     margin-top: -10px;
   }
+
+  ion-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }

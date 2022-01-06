@@ -24,7 +24,7 @@
   
     <ion-label style="margin-left: -247px;margin-top:-20px;z-index: 99;background-color: transparent;" ><b>Nasi Lemak</b></ion-label> -->
           <div style="margin-left: 20px; display:flex;flex-direction:column;margin-top:8px">
-            <ion-label style="font-size: 19px;margin-bottom: -3px;margin-top:3px"><b>{{item.foodName}}</b> </ion-label>
+            <ion-label style="font-size: 19px;margin-bottom: -3px;margin-top:3px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"><b>{{item.foodName}}</b> </ion-label>
 
             <div *ngFor="let addon of item['addon']">
             <p style="font-size:12px; margin-top:5px;margin-bottom:-3px"> + {{addon.addOnTitle}}</p>
@@ -32,7 +32,7 @@
 
             <p style="font-weight: 500;margin-top:13px;margin-bottom: 7px;">$ {{item.foodPrice}} </p>
           </div>
-          <p class="quantityy">{{item.foodQty}}</p>
+          <p class="quantityy">x{{item.foodQty}}</p>
         </div>
 
       </ion-item>

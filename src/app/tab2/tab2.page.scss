@@ -13,8 +13,10 @@ ion-content ion-toolbar {
   flex-direction: column;
   font-size: 20px;
   justify-content: flex-end;
-  margin-left: 27%;
+ position: absolute;
+ margin-left: 300px;
   z-index: 9;
+  transform: translateY(50px);
 }
 
 ion-button {
