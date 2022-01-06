@@ -5,6 +5,7 @@ import { CartService } from '../services/cart.service';
 import { UsersService } from '../services/users.service';
 import { UserPhoto, PhotoService } from '../services/photo.service';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { OrderService } from '../services/order.service';
 
 @Component({
   selector: 'app-tab2',
@@ -25,7 +26,8 @@ export class Tab2Page {
     private activatedRoute: ActivatedRoute,
     private navCntrl: NavController,
     private cartService: CartService,
-    private usersService: UsersService) {
+    private usersService: UsersService,
+    private orderService: OrderService) {
     this.stallId = this.activatedRoute.snapshot.paramMap.get("stallId");
   }
 
@@ -88,4 +90,15 @@ export class Tab2Page {
     });
     await actionSheet.present();
   }
+
+  checkout() {
+    this.orderService.addOrderId(this.stallId).then((res) => {
+      console.log(res.id)
+      this.cartItems.forEach((doc) => {
+        console.log(doc)
+        this.orderService.addToOrders(this.stallId, res.id, doc.id, doc)
+      })
+    })
+  }
+
 }

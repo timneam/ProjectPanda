@@ -2,7 +2,7 @@
   <div style="display:flex; flex-direction: column;">
     <div style="display: flex;flex-direction: row;">
       <img src="../assets/backk.png" class="iconn" [routerLink]="['/tabs/cart-selection']"
-        style="margin-top: 8px;margin-left: 8px;height: 25px;">
+        style="margin-top: 25px;margin-left: 20px;height: 25px;">
 
       <ion-button style="border-radius: 25px; width: 100px; height: 40px; margin-top: 15px; margin-left: 55%; "
         color="primary">
@@ -73,11 +73,12 @@
 
     <ion-button
       style="border-radius: 25px;color: #F5585C; width: 270px; height: 45px; font-size: 24px;margin-top: -3px;align-self:center;"
-      color="primary">
+      color="primary" (click)="checkout()">
       <ion-label style="color: white;text-transform: none;font-size: 16px;font-family: 'Sen', sans-serif;">
         Place Order
       </ion-label>
     </ion-button>
+    <br>
   </div>
 
 </ion-content>

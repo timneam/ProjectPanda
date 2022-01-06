@@ -52,7 +52,7 @@ export class CartService {
     const querySnapshot = await getDocs(collection(this.db, 'User', userId, 'Cart', stallId, 'menuList', menuId, 'Addon'))
     let addOnItems = [];
     querySnapshot.forEach((doc) => {
-      let items = { "id": doc.id, "addOnTitle": doc.data().addOnTitle, "addOnPrice": doc.data().addOnTitle }
+      let items = { "id": doc.id, "addOnTitle": doc.data().addOnTitle, "addOnPrice": doc.data().addOnPrice }
       addOnItems.push(items)
     })
     return addOnItems

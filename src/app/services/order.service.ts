@@ -20,4 +20,18 @@ export class OrderService {
       return getOrders
     }
 
+    async addOrderId(stallId) {
+      const addOrders = await addDoc(collection(this.db, 'Stall', stallId, 'OrdersRecieved'), {
+        orderName: '',
+        orderedBy: ''
+      })
+      return addOrders
+    }
+
+    async addToOrders(stallId, orderId, menuId, data) {
+      const addOrders = await setDoc(doc(this.db, 'Stall', stallId, 'OrdersRecieved', orderId, "orderList", menuId), data)
+      return addOrders
+    }
+
+
 }
