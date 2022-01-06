@@ -33,5 +33,10 @@ export class OrderService {
       return addOrders
     }
 
+    async incomingOrders(stallId) {
+      const incomingOrders = await getDocs(collection(this.db, 'Stall', stallId, 'OrdersRecieved'))
+      return incomingOrders
+    }
+
 
 }
