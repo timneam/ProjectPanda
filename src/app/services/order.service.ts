@@ -38,5 +38,17 @@ export class OrderService {
       return incomingOrders
     }
 
+    // add orders into preparing orders collection (Orders Preparing)
+    async acceptOrders(stallId, orderId, menuId, data) {
+      const addOrders = await setDoc(doc(this.db, 'Stall', stallId, 'OrdersRecieved', orderId, "orderList", menuId), data)
+      return addOrders
+    }
+
+    // add orders into preparing orders collection (Orders Completed)
+    async completedOrders(stallId, orderId, menuId, data) {
+      const addOrders = await setDoc(doc(this.db, 'Stall', stallId, 'OrdersRecieved', orderId, "orderList", menuId), data)
+      return addOrders
+    }
+
 
 }
