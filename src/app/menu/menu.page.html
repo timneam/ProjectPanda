@@ -5,10 +5,6 @@
     <h3 style="font-size: 22px;font-weight: bold;color: #ffffff;display: flex;justify-content: center;">
       {{data.stallName}}
     </h3>
-    <!--   <div *ngFor="let data of stallMenu[-1]">
-      <p class="subb">Estimated wait time {{data.foodEstTime}} mins </p>
-     <p class="subb">Estimated wait time  mins </p>
-    </div> -->
     <div *ngFor="let data of stallMenu">
       <div *ngIf="data.foodId == foodID">
 
