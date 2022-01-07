@@ -19,7 +19,7 @@ ion-item {
     --border-width: 0;
     --inner-border-width: 0;
     --background: #F5585C;
-    --color:
+    --color: white;
 }
 
 
@@ -37,4 +37,18 @@ hr {
 
 ion-button {
     --border-radius: 25px;
+    }
+
+    #btm {
+        position: fixed;
+        right: 10%;
+        bottom: 5%;
+        z-index: 1000;
+        transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+    
+        text-align: center;
+        text-decoration: none;
     }
