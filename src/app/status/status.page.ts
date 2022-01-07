@@ -31,7 +31,7 @@ export class StatusPage implements OnInit {
       if (user) {
         let users = this.auth.currentUser
         this.userId = users.uid
-        this.test();       
+        this.getUserOrders();       
       } else {
         console.log("User is signed out")
         this.navCntrl.navigateForward('splash');
@@ -39,23 +39,7 @@ export class StatusPage implements OnInit {
     });
   };
 
-  getUserOrders(){
-    this.orderService.getAllStallId().then((res) => {
-      res.forEach((doc) =>{
-        this.stallId.push(doc.id)
-      })
-    }).then(() => {
-      this.stallId.forEach((doc) => {
-        this.orderService.getOrdersByUserID(doc, this.userId).then((res) => {
-          console.log(res)
-          this.userOrders.push(res)
-          console.log(this.userOrders)
-        })
-      })
-    })
-  }
-
-  test() {
+  getUserOrders() {
     this.orderService.getAllStallId().then((res) => {
       res.forEach((doc) =>{
         this.stallId.push(doc.id)
@@ -63,7 +47,6 @@ export class StatusPage implements OnInit {
     }).then(() => {
       this.stallId.forEach((doc) => {
         this.orderService.test(doc, this.userId, 'Pending').then((res) => {
-          console.log(res)
           this.userOrders.push(res)
           console.log(this.userOrders)
         })
