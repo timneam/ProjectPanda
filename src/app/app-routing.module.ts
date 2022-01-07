@@ -108,6 +108,10 @@ const routes: Routes = [
   {
     path: 'vendor-incoming-order-details',
     loadChildren: () => import('./vendor-incoming-order-details/vendor-incoming-order-details.module').then( m => m.VendorIncomingOrderDetailsPageModule)
+  },
+  {
+    path: 'forget-password',
+    loadChildren: () => import('./forget-password/forget-password.module').then( m => m.ForgetPasswordPageModule)
   }
 
 
