@@ -24,7 +24,6 @@ export class StatusPage implements OnInit {
 
   ngOnInit() {
     this.getCurrentUser();
-    this.getUserOrders();
   }
 
   getCurrentUser = async function () {
@@ -32,8 +31,7 @@ export class StatusPage implements OnInit {
       if (user) {
         let users = this.auth.currentUser
         this.userId = users.uid
-        console.log(this.userId)
-        this.getUserOrders()        
+        this.test();       
       } else {
         console.log("User is signed out")
         this.navCntrl.navigateForward('splash');
@@ -45,18 +43,32 @@ export class StatusPage implements OnInit {
     this.orderService.getAllStallId().then((res) => {
       res.forEach((doc) =>{
         this.stallId.push(doc.id)
-        console.log(this.stallId)
       })
     }).then(() => {
       this.stallId.forEach((doc) => {
-        console.log(doc)
-        this.orderService.getOrdersByUserID(doc.id, this.userId).then((res) => {
+        this.orderService.getOrdersByUserID(doc, this.userId).then((res) => {
           console.log(res)
           this.userOrders.push(res)
+          console.log(this.userOrders)
         })
       })
     })
-    
+  }
+
+  test() {
+    this.orderService.getAllStallId().then((res) => {
+      res.forEach((doc) =>{
+        this.stallId.push(doc.id)
+      })
+    }).then(() => {
+      this.stallId.forEach((doc) => {
+        this.orderService.test(doc, this.userId, 'Pending').then((res) => {
+          console.log(res)
+          this.userOrders.push(res)
+          console.log(this.userOrders)
+        })
+      })
+    })
   }
 
 }

@@ -45,8 +45,29 @@ export class OrderService {
 
       // Create a field search against a collection.
       const q = query(collection(this.db, "Stall", stallId, "OrdersRecieved"), where("UserID", "==", userId));
-      console.log(q)
+
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        console.log(doc.id, " => ", doc.data());
+      });
+
       return q
+    }
+
+    // find the document based on user ID
+    async test(stallId, userId, status) {
+
+      // Create a field search against a collection.
+
+      const querySnapshot = await getDocs(query(collection(this.db, "Stall", stallId, "OrdersRecieved"), where("UserID", "==", userId), where("Status", "==", status)));
+      querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        console.log(doc.id, " => ", doc.data());
+      });
+
+      console.log(querySnapshot)
+      return querySnapshot
     }
 
     // add orders into preparing orders collection (Orders Preparing)

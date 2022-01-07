@@ -105,7 +105,7 @@ export class Tab2Page {
 
     console.log(ableToGetData.data())
 
-    this.userDetails = {"UserID": this.userId, "UserFirstName": ableToGetData.data().firstName, "UserLastName": ableToGetData.data().lastName, "UserPhoneNumber": ableToGetData.data().phoneNumber}
+    this.userDetails = {"UserID": this.userId, "UserFirstName": ableToGetData.data().firstName, "UserLastName": ableToGetData.data().lastName, "UserPhoneNumber": ableToGetData.data().phoneNumber, "Status": "Pending" }
 
     console.log(this.userId)
     this.orderService.addOrderId(this.stallId, this.userDetails).then((res) => {
