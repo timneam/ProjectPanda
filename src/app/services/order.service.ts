@@ -20,11 +20,8 @@ export class OrderService {
       return getOrders
     }
 
-    async addOrderId(stallId) {
-      const addOrders = await addDoc(collection(this.db, 'Stall', stallId, 'OrdersRecieved'), {
-        orderName: '',
-        orderedBy: ''
-      })
+    async addOrderId(stallId, data) {
+      const addOrders = await addDoc(collection(this.db, 'Stall', stallId, 'OrdersRecieved'), data)
       return addOrders
     }
 

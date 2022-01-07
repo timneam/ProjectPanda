@@ -6,6 +6,8 @@ import { UsersService } from '../services/users.service';
 import { UserPhoto, PhotoService } from '../services/photo.service';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { OrderService } from '../services/order.service';
+import { doc, getDoc } from 'firebase/firestore';
+import { getFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-tab2',
@@ -18,7 +20,11 @@ export class Tab2Page {
   userId: any;
   stallId: any;
 
+  userDetails: any;
+
   cartItems = [];
+
+  db = getFirestore();
 
   constructor(
     public photoService: PhotoService,
@@ -91,8 +97,18 @@ export class Tab2Page {
     await actionSheet.present();
   }
 
-  checkout() {
-    this.orderService.addOrderId(this.stallId).then((res) => {
+  async checkout() {
+    let users = this.auth.currentUser
+    this.userId = users.uid
+
+    const ableToGetData = await getDoc(doc(this.db, "User", this.userId))
+
+    console.log(ableToGetData.data())
+
+    this.userDetails = {"UserID": this.userId, "UserFirstName": ableToGetData.data().firstName, "UserLastName": ableToGetData.data().lastName, "UserPhoneNumber": ableToGetData.data().phoneNumber}
+
+    console.log(this.userId)
+    this.orderService.addOrderId(this.stallId, this.userDetails).then((res) => {
       console.log(res.id)
       this.cartItems.forEach((doc) => {
         console.log(doc)
