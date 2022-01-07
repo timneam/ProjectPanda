@@ -5,6 +5,7 @@ import { doc, updateDoc, deleteDoc, getFirestore, getDocs, collection, where, ge
 import { getAuth } from 'firebase/auth';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { StallsService } from '../services/stalls.service';
 
 @Component({
   selector: 'app-vendor-profile',
@@ -16,21 +17,24 @@ export class VendorProfilePage implements OnInit {
   db = getFirestore();
   updateData: FormGroup;
 
+  stallId: any;
+
   constructor(
     private UsersService: UsersService,
     public router: Router, 
-    public alertController: AlertController
+    public alertController: AlertController,
+    private stallService: StallsService
   ) { }
 
   userData = null
   userData2 = null
+  vendorData = null
 
   ngOnInit() {
     this.getData()
   }
 
   async getData() {
-    
     //Get data from the fire auth
     const auth = getAuth();
     const user = auth.currentUser;
@@ -48,6 +52,13 @@ export class VendorProfilePage implements OnInit {
         this.userData = profile
       });
     }
+
+    const vendorData = await getDoc(doc(this.db, 'User', user.uid));
+    console.log(vendorData.data().stallId);
+    this.stallId = vendorData.data().stallId;
+
+    this.vendorData = this.stallService.getAStallInformation(this.stallId)
+    console.log(vendorData.data())
 
     if (ableToGetData.exists) {
       // console.log(ableToGetData.data());

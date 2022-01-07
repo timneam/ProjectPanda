@@ -21,6 +21,14 @@ export class StallsService {
     return collectionData(collection(this.firestore, 'Stall'));
   }
 
+  getAStallInformation(stallId) {
+    return getDoc(doc(this.firestore, 'Stall', stallId));
+  }
+
+  async updateStallInformation(stallId, data){
+    await updateDoc(doc(this.db, "Stall", stallId), data)
+  }
+
   async getMenuInformation() {
     const querySnapshot = await getDocs(query(collection(this.firestore, "Stall")));
     querySnapshot.forEach((doc) => {
