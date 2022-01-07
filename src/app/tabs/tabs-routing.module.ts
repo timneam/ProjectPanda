@@ -18,6 +18,16 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'status',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../status/status.module').then(m => m.StatusPageModule)
+          }
+        ]
+      },
+      {
         path: 'cart-selection',
         children: [
           {

@@ -96,6 +96,14 @@ const routes: Routes = [
   {
     path: 'vendor-incoming',
     loadChildren: () => import('./vendor-incoming/vendor-incoming.module').then( m => m.VendorIncomingPageModule)
+  },
+  {
+    path: 'status',
+    loadChildren: () => import('./status/status.module').then( m => m.StatusPageModule)
+  },
+  {
+    path: 'vendor-individual-order',
+    loadChildren: () => import('./vendor-individual-order/vendor-individual-order.module').then( m => m.VendorIndividualOrderPageModule)
   }
 
 
