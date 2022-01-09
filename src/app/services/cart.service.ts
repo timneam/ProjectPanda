@@ -26,7 +26,6 @@ export class CartService {
     querySnapshot.forEach((doc) => {
       let stallData = doc.id;
       stallList.push(stallData)
-      console.log(stallList)
     })
     return stallList
   }

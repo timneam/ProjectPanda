@@ -30,7 +30,7 @@ export class CartSelectionPage implements OnInit {
       if (user) {
         let users = this.auth.currentUser
         this.userId = users.uid
-        this.getStallsCart()        
+        this.getStallsCart()
       } else {
         console.log("User is signed out")
         this.navCntrl.navigateForward('splash');
@@ -40,10 +40,17 @@ export class CartSelectionPage implements OnInit {
 
   getStallsCart() {
     this.cartService.getAllStallsCart(this.userId).then(res => {
-      res.forEach(res => {
-        let stallData = { "id": res }
-        this.stallsCart.push(stallData)
-      });
+
+      if (res.length !== 0) {
+        res.forEach(res => {
+          let stallData = { "id": res }
+          this.stallsCart.push(stallData)
+        });
+      } else {
+        // Add Ui for this Thanks
+        console.log("No Item in Cart")
+      }
+
     });
   }
 

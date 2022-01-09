@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../services/users.service';
-import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
-import { doc, updateDoc, deleteDoc, getFirestore, getDocs, collection, where, getDoc } from 'firebase/firestore';
-import { getAuth } from 'firebase/auth';
+import { FormGroup } from '@angular/forms';
+import { doc, deleteDoc, getFirestore, getDoc } from 'firebase/firestore';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 
@@ -13,53 +13,41 @@ import { Router } from '@angular/router';
 })
 export class ProfilePage implements OnInit {
 
+  auth = getAuth();
   db = getFirestore();
   updateData: FormGroup;
 
+  userInfo= []
+  userData = []
+
   constructor(private UsersService: UsersService,
-    public router: Router, 
+    public router: Router,
     public alertController: AlertController) {
 
   }
 
-  userData = null
-  userData2 = null
-
   ngOnInit() {
-    this.getData()
+    this.getCurrentUser()
   }
 
-  async getData() {
-    
-    //Get data from the fire auth
-    const auth = getAuth();
-    const user = auth.currentUser;
-    // console.log(user)
-    // get the data
-    const ableToGetData = await getDoc(doc(this.db, "User", user.uid))
-    
-    if (user !== null) {
-      user.providerData.forEach((profile) => {
-        // console.log("  Sign-in provider: " + profile.providerId);
-        // console.log("  Provider-specific UID: " + profile.uid);
-        // console.log("  Name: " + profile.displayName);
-        // console.log("  Email: " + profile.email);
-        // console.log("  Photo URL: " + profile.photoURL);
-        this.userData = profile
-      });
-    }
-
-    if (ableToGetData.exists) {
-      // console.log(ableToGetData.data());
-      this.userData2 = ableToGetData.data();
-    }
-    else {
-      console.log("No Such Document!");
-    }
-  }
+  getCurrentUser = async function () {
+    onAuthStateChanged(this.auth, async (user) => {
+      if (user) {
+        let users = this.auth.currentUser
+        this.userInfo = users.providerData
+        let ableToGetData = await getDoc(doc(this.db, "User", users.uid))
+        this.userData.push(ableToGetData.data())
+      } else {
+        console.log("User is signed out")
+        this.navCntrl.navigateForward('splash');
+      }
+    });
+  };
 
   async deleteData() {
-    const frankDocRef = doc(this.db, "User", "DeezNutz");
+    // disable accout tbh, dont delete 
+    // do update role or smt
+    const frankDocRef = doc(this.db, "User", this.userInfo[0].uid);
     await deleteDoc(frankDocRef);
   }
 
@@ -67,9 +55,8 @@ export class ProfilePage implements OnInit {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
       header: 'Log out',
-     
       message: 'Are you sure you want to log out?',
-      buttons: [ {
+      buttons: [{
         text: 'No',
         handler: () => {
           alert.dismiss()
@@ -84,8 +71,6 @@ export class ProfilePage implements OnInit {
       },]
     });
     await alert.present();
-
-   
   }
 
   async emailForward() {

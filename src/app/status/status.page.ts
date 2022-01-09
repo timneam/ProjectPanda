@@ -8,7 +8,7 @@ import { OrderService } from '../services/order.service';
   styleUrls: ['./status.page.scss'],
 })
 export class StatusPage implements OnInit {
-  
+
   auth = getAuth();
   userId: any;
   stallId: any;
@@ -47,10 +47,25 @@ export class StatusPage implements OnInit {
       this.stallData.forEach((doc) => {
         this.orderService.test(doc, this.userId, 'Pending').then((res) => {
           this.orderStatus.push(res)
-          console.log(this.orderStatus)
+          // console.log(this.orderStatus)
         })
       })
     })
+  }
+
+  calcPrice() {
+    // get all 
+  }
+  
+  doRefresh(event) {
+    console.log('Begin async operation');
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.target.complete().then(() => {
+        this.getUserOrders()
+      })
+    }, 2000);
   }
 
 }

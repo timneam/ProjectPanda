@@ -1,64 +1,59 @@
+<ion-content *ngFor="let data of userInfo">
+  <div style="display: flex;flex-direction: row;align-items: center;">
+    <h1 class="headerr">Profile</h1>
+    <div class="powerIcon">
+      <ion-icon name="power" (click)="presentAlert()" style="font-size: 26px;margin-left: 200px;margin-top: 11px;">
+      </ion-icon>
+    </div>
+  </div>
+  <div class="sameLine">
+    <img src={{data.photoURL}} width="80" height="80" style="margin-right: 20px;margin-left: 30px;">
+    <div class="namePhoto">
+      <h3 class="namee">{{data.displayName}}</h3>
+      <p class="subb">Change Profile Photo</p>
 
-<ion-content>
-<div style="display: flex;flex-direction: row;align-items: center;">
-<h1 class="headerr">Profile</h1>
-<div class="powerIcon">
-<ion-icon name="power" (click)="presentAlert()" style="font-size: 26px;margin-left: 200px;margin-top: 11px;" ></ion-icon>
-</div>
-</div>
-<div class="sameLine">
-<img src={{userData.photoURL}} width="80" height="80" style="margin-right: 20px;margin-left: 30px;" >
-<div class="namePhoto">
-<h3 class="namee">{{userData.displayName}}</h3>
-<p class="subb">Change Profile Photo</p>
+    </div>
 
-</div>
+  </div>
+  <hr>
+  <div class="centerise">
+    <div class="textboxxes">
 
-</div>
-<hr>
-<div class="centerise">
-<div class="textboxxes" >
-  
-  <ion-card class="textCard">
-    <ion-item>
-      <ion-icon name="mail-outline" style="margin-right: 8px;"></ion-icon>
-      <ion-input name="Email" type="email" value={{userData.email}} disabled></ion-input>
+      <ion-card class="textCard">
+        <ion-item>
+          <ion-icon name="mail-outline" style="margin-right: 8px;"></ion-icon>
+          <ion-input name="Email" type="email" value={{data.email}} disabled></ion-input>
 
-    </ion-item>
-    <ion-icon name="create-outline" style="color: black;font-size: 16px;" [routerLink]="['/profile-email-edit']" enabled></ion-icon>
-  </ion-card>
+        </ion-item>
+        <ion-icon name="create-outline" style="color: black;font-size: 16px;" [routerLink]="['/profile-email-edit']"
+          enabled></ion-icon>
+      </ion-card>
 
-  <ion-card class="textCard1">
-    <ion-item lines= 'none'>
-      <ion-icon name="call-outline" style="margin-right: 8px;"></ion-icon>
-      <ion-input name="Phone Number" type="number"value={{userData2.phoneNumber}} disabled></ion-input>
-    </ion-item>
-  </ion-card>
+      <ion-card class="textCard1" *ngFor="let data of userData">
+        <ion-item lines='none'>
+          <ion-icon name="call-outline" style="margin-right: 8px;"></ion-icon>
+          <ion-input name="Phone Number" type="number" value={{data.phoneNumber}} disabled></ion-input>
+        </ion-item>
+      </ion-card>
 
-  <ion-card class="textCard1">
-    <ion-item lines= 'none'>
-      <ion-icon name="lock-closed-outline" style="margin-right: 8px;"></ion-icon>
-      <ion-input name="Password" type="password" value="123456789" disabled></ion-input>
+      <ion-card class="textCard1">
+        <ion-item lines='none'>
+          <ion-icon name="lock-closed-outline" style="margin-right: 8px;"></ion-icon>
+          <ion-input name="Password" type="password" value="123456789" disabled></ion-input>
 
-    </ion-item>
-    <ion-icon name="create-outline" style="color: black;font-size: 16px;" [routerLink]="['/profile-password-edit']"></ion-icon>
-  </ion-card>
+        </ion-item>
+        <ion-icon name="create-outline" style="color: black;font-size: 16px;" [routerLink]="['/profile-password-edit']">
+        </ion-icon>
+      </ion-card>
 
-  <ion-button [routerLink]="['/profile-edit']"
-style="border-radius: 25px;color: #F5585C; width: 120px; height: 50px; margin-top: 39px;box-shadow: 5px 5px 5px lightgray;" color="primary">
-<ion-label
-  style="color: white;text-transform: none;font-size: 16px;font-family: 'Sen', sans-serif;">
-  <b>Edit</b>
-</ion-label>
-</ion-button>
-
-</div>
-
-
-
-
-<!--<ion-textarea class="textFieldd" placeholder="Email" value="JaneDoe@gmail.com" disabled></ion-textarea> -->
-
-</div>
+      <ion-button [routerLink]="['/profile-edit']"
+        style="border-radius: 25px;color: #F5585C; width: 120px; height: 50px; margin-top: 39px;box-shadow: 5px 5px 5px lightgray;"
+        color="primary">
+        <ion-label style="color: white;text-transform: none;font-size: 16px;font-family: 'Sen', sans-serif;">
+          <b>Edit</b>
+        </ion-label>
+      </ion-button>
+    </div>
+  </div>
 
 </ion-content>

@@ -17,14 +17,19 @@ import { getFirestore } from '@angular/fire/firestore';
 export class Tab2Page {
 
   auth = getAuth();
+  db = getFirestore();
   userId: any;
   stallId: any;
 
   userDetails: any;
-
   cartItems = [];
 
-  db = getFirestore();
+
+  total = 0
+  addOnPrice = 0
+  surcharge = 0.9
+  containercost = 0.3
+  grandtotal = 0
 
   constructor(
     public photoService: PhotoService,
@@ -46,7 +51,7 @@ export class Tab2Page {
       if (user) {
         let users = this.auth.currentUser
         this.userId = users.uid
-        this.getItemsInCart()        
+        this.getItemsInCart()
       } else {
         console.log("User is signed out")
         this.navCntrl.navigateForward('splash');
@@ -56,17 +61,17 @@ export class Tab2Page {
 
 
   getItemsInCart() {
-      this.cartService.getItemsInACart(this.userId, this.stallId).then(doc => {
-        doc.forEach(res => {
-          let addon = [];
-          this.cartService.getAddonForItem(this.userId, this.stallId, res.id).then(doc => {
-            addon = doc
-          }).then(() => {
-            let cartData = { "id": res.id, "foodName": res.foodName, "foodPrice": res.foodPrice, "foodDescription": res.foodDescription, "foodEstTime": res.foodEstTime, "foodQty": res.foodQty, "addon": addon }
-            this.cartItems.push(cartData)
-          })
-        });
+    this.cartService.getItemsInACart(this.userId, this.stallId).then(doc => {
+      doc.forEach(res => {
+        let addon = [];
+        this.cartService.getAddonForItem(this.userId, this.stallId, res.id).then(doc => {
+          addon = doc
+        }).then(() => {
+          let cartData = { "id": res.id, "foodName": res.foodName, "foodPrice": res.foodPrice, "foodDescription": res.foodDescription, "foodEstTime": res.foodEstTime, "foodQty": res.foodQty, "addon": addon }
+          this.cartItems.push(cartData)
+        })
       });
+    });
   }
 
   removeItemFromCart(id) {
@@ -99,22 +104,70 @@ export class Tab2Page {
 
   async checkout() {
     let users = this.auth.currentUser
-    this.userId = users.uid
-
-    const ableToGetData = await getDoc(doc(this.db, "User", this.userId))
-
+    const ableToGetData = await getDoc(doc(this.db, "User", users.uid))
     console.log(ableToGetData.data())
 
-    this.userDetails = {"UserID": this.userId, "UserFirstName": ableToGetData.data().firstName, "UserLastName": ableToGetData.data().lastName, "UserPhoneNumber": ableToGetData.data().phoneNumber, "Status": "Pending" }
-
-    console.log(this.userId)
+    this.userDetails = { "UserID": this.userId, "UserFirstName": ableToGetData.data().firstName, "UserLastName": ableToGetData.data().lastName, "UserPhoneNumber": ableToGetData.data().phoneNumber, "Status": "Pending" }
+    // console.log(this.userId)
     this.orderService.addOrderId(this.stallId, this.userDetails).then((res) => {
-      console.log(res.id)
+      // console.log(res.id)
       this.cartItems.forEach((doc) => {
-        console.log(doc)
+        // console.log(doc)
         this.orderService.addToOrders(this.stallId, res.id, doc.id, doc)
       })
     })
+  }
+
+  calcPrice(containerQuantity) {
+    this.containercost = 0.3 * containerQuantity
+
+    // Get all current items
+    console.log(this.cartItems)
+    this.cartItems.forEach(data => {
+      this.total = this.total + data.foodPrice
+      data.addon.forEach(data => {
+        console.log(data)
+        this.addOnPrice = this.addOnPrice + parseFloat(data.addOnPrice)
+        console.log("addon : $" + this.addOnPrice)
+      })
+      console.log("total : $" + this.total)
+    })
+  }
+
+  grandTotal() {
+    this.grandtotal = this.total + this.addOnPrice + this.surcharge + this.containercost
+    console.log("Grand Total : $" + this.grandtotal)
+  }
+
+  firstFunction(_callback) {
+    // do some asynchronous work
+    // and when the asynchronous stuff is complete'
+
+    this.cartItems.forEach(data => {
+      this.total = this.total + data.foodPrice
+      data.addon.forEach(data => {
+        this.addOnPrice = this.addOnPrice + parseFloat(data.addOnPrice)
+        console.log("addon : $" + this.addOnPrice)
+      })
+      console.log("total : $" + this.total)
+    })
+
+    _callback();
+  }
+
+  secondFunction(containerQuantity) {
+    // call first function and pass in a callback function which
+    // first function runs when it has completed
+
+    this.firstFunction(function () {
+      console.log('huzzah, I\'m done!');
+    });
+
+    this.containercost = 0.3 * containerQuantity
+    this.grandtotal = this.total + this.addOnPrice + this.surcharge + this.containercost
+    console.log("Container Cost : $" + this.grandtotal)
+    console.log("Surcharge : $" + this.grandtotal)
+    console.log("Grand Total : $" + this.grandtotal)
   }
 
 }
