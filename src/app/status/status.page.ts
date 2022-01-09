@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { getFirestore } from '@angular/fire/firestore';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { OrderService } from '../services/order.service';
 
@@ -9,21 +8,21 @@ import { OrderService } from '../services/order.service';
   styleUrls: ['./status.page.scss'],
 })
 export class StatusPage implements OnInit {
-
+  
   auth = getAuth();
   userId: any;
-  stallId = [];
+  stallId: any;
 
-  userOrders = [];
+  stallData = [];
+  orderStatus = [];
 
-  db = getFirestore();
 
   constructor(
     private orderService: OrderService,
   ) { }
 
   ngOnInit() {
-    this.getCurrentUser();
+    this.getCurrentUser()
   }
 
   getCurrentUser = async function () {
@@ -31,7 +30,7 @@ export class StatusPage implements OnInit {
       if (user) {
         let users = this.auth.currentUser
         this.userId = users.uid
-        this.getUserOrders();       
+        this.getUserOrders()
       } else {
         console.log("User is signed out")
         this.navCntrl.navigateForward('splash');
@@ -41,14 +40,14 @@ export class StatusPage implements OnInit {
 
   getUserOrders() {
     this.orderService.getAllStallId().then((res) => {
-      res.forEach((doc) =>{
-        this.stallId.push(doc.id)
+      res.forEach((doc) => {
+        this.stallData.push(doc.id)
       })
     }).then(() => {
-      this.stallId.forEach((doc) => {
+      this.stallData.forEach((doc) => {
         this.orderService.test(doc, this.userId, 'Pending').then((res) => {
-          this.userOrders.push(res)
-          console.log(this.userOrders)
+          this.orderStatus.push(res)
+          console.log(this.orderStatus)
         })
       })
     })
