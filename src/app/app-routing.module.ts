@@ -85,7 +85,8 @@ const routes: Routes = [
   {
     path: 'cart/:stallId',
     loadChildren: () => import('./tab2/tab2.module').then( m => m.Tab2PageModule)
-  },  {
+  },
+  {
     path: 'profile-email-edit',
     loadChildren: () => import('./profile-email-edit/profile-email-edit.module').then( m => m.ProfileEmailEditPageModule)
   },
@@ -106,7 +107,7 @@ const routes: Routes = [
     loadChildren: () => import('./vendor-individual-order/vendor-individual-order.module').then( m => m.VendorIndividualOrderPageModule)
   },
   {
-    path: 'vendor-incoming-order-details',
+    path: 'vendor-incoming-order-details/:orderId',
     loadChildren: () => import('./vendor-incoming-order-details/vendor-incoming-order-details.module').then( m => m.VendorIncomingOrderDetailsPageModule)
   },
   {

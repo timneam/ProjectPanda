@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { doc, getDoc, getFirestore } from '@angular/fire/firestore';
+import { Router } from '@angular/router';
 import { getAuth } from 'firebase/auth';
 import { OrderService } from '../services/order.service';
 
@@ -14,7 +15,8 @@ export class VendorIncomingPage implements OnInit {
   stallId: any;
   orders = [];
 
-  constructor(private orderService: OrderService) { }
+  constructor(private orderService: OrderService,
+    private router: Router) { }
 
   ngOnInit() {
     this.getIncomingOrders();
@@ -36,7 +38,11 @@ export class VendorIncomingPage implements OnInit {
         console.log(this.orders)
       })
     })
+  }
 
+  async goToOrderDetails(orderId){
+    console.log(orderId)
+    this.router.navigateByUrl(`/vendor-incoming-order-details/${orderId}`)
   }
 
 }

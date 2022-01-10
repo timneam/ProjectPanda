@@ -73,6 +73,33 @@ export class OrderService {
     return orderDetails
   }
 
+  async getUserDetailsInOrder(stallId, orderId){
+    
+    const querySnapshot = await getDoc(doc(this.db, "Stall", stallId, "OrdersRecieved", orderId))
+
+    if (querySnapshot.exists()) {
+      let orderUserDetails = querySnapshot.data()
+      return orderUserDetails
+    } else {
+      console.log("No such document!");
+    }
+  }
+
+  async getOrderedItems(stallId, orderId){
+    const querySnapshot = await getDocs(collection(this.db, "Stall", stallId, "OrdersRecieved", orderId, "orderList"));
+
+    let orderDetails = [];
+
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      // console.log(doc.data())
+      let data = doc.data()
+      let orderData = { "OrderID": doc.id, "foodName": data.foodName, "foodPrice": data.foodPrice, "foodQty": data.foodQty, "foodEstTime": data.foodEstTime, "foodDescription": data.foodDescription, "addOn": data.addon}
+      orderDetails.push(orderData)
+    });
+    return orderDetails
+  }
+
   // add orders into preparing orders collection (Orders Preparing)
   async acceptOrders(stallId, orderId, menuId, data) {
     const addOrders = await setDoc(doc(this.db, 'Stall', stallId, 'OrdersPreparing', orderId, "orderList", menuId), data)

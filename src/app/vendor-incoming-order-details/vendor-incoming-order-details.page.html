@@ -43,7 +43,7 @@
 
 <div style="display: flex;flex-direction: row;align-items: flex-end;justify-content: center;">
 
-  <ion-button type="submit"  
+  <ion-button type="submit" (click)="acceptOrder()">
   style="border-radius: 25px;color: #F5585C; width: 130px; height: 45px; margin-top: 23px;box-shadow: 5px 5px 5px lightgray;margin-right: 8px;"
   color="primary">
   <ion-label style="color: white;text-transform: none;font-size: 16px;font-family: 'Sen', sans-serif;">
@@ -51,7 +51,7 @@
   </ion-label>
 </ion-button>
 
-<ion-button type="submit"  
+<ion-button type="submit" (click)="cancelOrder()" 
 style="border-radius: 25px;color: #F5585C; width: 130px; height: 45px; margin-top: 23px;box-shadow: 5px 5px 5px lightgray;margin-left: 13px;"
 color="primary">
 <ion-label style="color: white;text-transform: none;font-size: 16px;font-family: 'Sen', sans-serif;">
