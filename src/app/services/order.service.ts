@@ -56,11 +56,11 @@ export class OrderService {
   }
 
   // find the document based on user ID
-  async test(stallId, userId, status) {
+  async test(stallId, userId) {
 
     // Create a field search against a collection.
 
-    const querySnapshot = await getDocs(query(collection(this.db, "Stall", stallId, "OrdersRecieved"), where("UserID", "==", userId), where("Status", "==", status)));
+    const querySnapshot = await getDocs(query(collection(this.db, "Stall", stallId, "OrdersRecieved"), where("UserID", "==", userId)));
 
     let orderDetails = [];
 

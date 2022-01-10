@@ -15,11 +15,14 @@ export class VendorIncomingPage implements OnInit {
   stallId: any;
   orders = [];
 
+  // audio = new Audio('../../assets/1.mp3')
+  
   constructor(private orderService: OrderService,
     private router: Router) { }
 
   ngOnInit() {
     this.getIncomingOrders();
+    // this.audio.play(); 
   }
 
   async getIncomingOrders() {

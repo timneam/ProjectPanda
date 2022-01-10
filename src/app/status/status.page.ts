@@ -16,6 +16,10 @@ export class StatusPage implements OnInit {
   stallData = [];
   orderStatus = [];
 
+  cancelledOrder = [];
+  pendingOrder = [];
+  preparingOrder = [];
+  completedOrder = [];
 
   constructor(
     private orderService: OrderService,
@@ -40,21 +44,43 @@ export class StatusPage implements OnInit {
 
   getUserOrders() {
     this.orderService.getAllStallId().then((res) => {
+      
+      console.log(res)
+      
       res.forEach((doc) => {
+        
+        console.log(doc)
+
         this.stallData.push(doc.id)
       })
     }).then(() => {
       this.stallData.forEach((doc) => {
-        this.orderService.test(doc, this.userId, 'Pending').then((res) => {
-          this.orderStatus.push(res)
-          console.log(this.orderStatus)
+        this.orderService.test(doc, this.userId).then((res) => {
+          if (res.length != 0) {
+            res.forEach((doc) => {
+              this.orderStatus.push(doc)
+            })
+          }
+        }).then(() => {
+          this.pendingOrder = this.orderStatus.filter(rqeq => {
+            return rqeq.Status == "Pending" 
+          })
+          this.cancelledOrder = this.orderStatus.filter(rqeq => {
+            return rqeq.Status == "Cancelled" 
+          })
+          this.preparingOrder = this.orderStatus.filter(rqeq => {
+            return rqeq.Status == "Preparing" 
+          })
+          this.completedOrder = this.orderStatus.filter(rqeq => {
+            return rqeq.Status == "Completed" 
+          })
+          console.log(this.pendingOrder)
+          console.log(this.cancelledOrder)
+          console.log(this.preparingOrder)
+          console.log(this.completedOrder)
         })
       })
     })
-  }
-
-  calcPrice() {
-    // get all 
   }
   
   doRefresh(event) {
