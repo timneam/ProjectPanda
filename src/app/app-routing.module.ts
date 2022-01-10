@@ -112,6 +112,14 @@ const routes: Routes = [
   {
     path: 'forget-password',
     loadChildren: () => import('./forget-password/forget-password.module').then( m => m.ForgetPasswordPageModule)
+  },
+  {
+    path: 'vendor-complete',
+    loadChildren: () => import('./vendor-complete/vendor-complete.module').then( m => m.VendorCompletePageModule)
+  },
+  {
+    path: 'vendor-complete-order-details',
+    loadChildren: () => import('./vendor-complete-order-details/vendor-complete-order-details.module').then( m => m.VendorCompleteOrderDetailsPageModule)
   }
 
 
