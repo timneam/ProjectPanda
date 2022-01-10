@@ -11,13 +11,14 @@
     justify-content: center;
     width: 85%;
     height: fit-content;
-    margin-top: 70px;
+    margin-top: 65px;
     margin-left: 28px;
 }
 
 .subHeading {
   color: #979797;
   font-family: 'Roboto', sans-serif;
+
 }
 .containerr {
     align-items: center;
@@ -77,7 +78,14 @@ margin-top: 20px;
     .switchh {
       color: #6F6F6F;
       font-size: 12px;
-      margin-top: 50px;
+      margin-top: 47px;
+    }
+    .switche {
+      color: #6F6F6F;
+      font-size: 12px;
+      margin-top: 1px;
+      width: 42%;
+      align-self: flex-end;
     }
     .textboxxes {
       width: 100%;
@@ -117,4 +125,5 @@ margin-top: 20px;
     box-shadow: 4px 4px 4px rgb(158, 156, 156);
     margin-top: 15px;
     padding: 3px;
+    margin-bottom: 8px;
 }

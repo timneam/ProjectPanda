@@ -22,10 +22,10 @@
             <ion-input name="Password" type="password" placeholder="Password" id="user_password" required  formControlName="password" ></ion-input>
           </ion-item>
         </ion-card>
-
+        <p class="switche" [routerLink]="['/forget-password']"><u>Forgot Password? </u></p>
 
         <ion-button type="submit"
-          style="border-radius: 25px;color: #F5585C; width: 120px; height: 50px; margin-top: 70px;box-shadow: 5px 5px 5px lightgray;" color="primary">
+          style="border-radius: 25px;color: #F5585C; width: 120px; height: 50px; margin-top: 55px;box-shadow: 5px 5px 5px lightgray;" color="primary">
           <ion-label
             style="color: white;text-transform: none;font-size: 16px;font-family: 'Sen', sans-serif;">
             <b>Login</b>
@@ -33,7 +33,7 @@
         </ion-button>
 
       </form>
-      <p class="switchh" [routerLink]="['/forget-password']">Forgot Password? <u>Click here to reset</u></p>
+      
     <p class="switchh" [routerLink]="['/register']">New User? <u>Create an Account</u></p>
   </div>
 </ion-content> 
