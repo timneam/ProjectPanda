@@ -101,14 +101,26 @@ export class OrderService {
   }
 
   // add orders into preparing orders collection (Orders Preparing)
-  async acceptOrders(stallId, orderId, menuId, data) {
-    const addOrders = await setDoc(doc(this.db, 'Stall', stallId, 'OrdersPreparing', orderId, "orderList", menuId), data)
+  async declineOrders(stallId, orderId) {
+    const addOrders = await updateDoc(doc(this.db, 'Stall', stallId, 'OrdersRecieved', orderId), {
+      Status: "Cancelled"
+    })
+    return addOrders
+  }
+
+  // add orders into preparing orders collection (Orders Preparing)
+  async acceptOrders(stallId, orderId) {
+    const addOrders = await updateDoc(doc(this.db, 'Stall', stallId, 'OrdersRecieved', orderId), {
+      Status: "Preparing"
+    })
     return addOrders
   }
 
   // add orders into preparing orders collection (Orders Completed)
-  async completedOrders(stallId, orderId, menuId, data) {
-    const addOrders = await setDoc(doc(this.db, 'Stall', stallId, 'OrdersCompleted', orderId, "orderList", menuId), data)
+  async completedOrders(stallId, orderId) {
+    const addOrders = await updateDoc(doc(this.db, 'Stall', stallId, 'OrdersRecieved', orderId), {
+      Status: "Done"
+    })
     return addOrders
   }
 

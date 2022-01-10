@@ -47,7 +47,7 @@ export class StatusPage implements OnInit {
       this.stallData.forEach((doc) => {
         this.orderService.test(doc, this.userId, 'Pending').then((res) => {
           this.orderStatus.push(res)
-          // console.log(this.orderStatus)
+          console.log(this.orderStatus)
         })
       })
     })

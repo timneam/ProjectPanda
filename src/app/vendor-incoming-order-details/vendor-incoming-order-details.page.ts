@@ -47,11 +47,11 @@ export class VendorIncomingOrderDetailsPage implements OnInit {
   }
 
   cancelOrder() {
-
+    this.orderService.declineOrders(this.stallId, this.orderId)
   }
 
   acceptOrder() {
-
+    this.orderService.acceptOrders(this.stallId, this.orderId)
   }
 
 }
