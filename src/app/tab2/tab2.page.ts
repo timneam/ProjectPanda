@@ -30,6 +30,7 @@ export class Tab2Page {
   surcharge = 0.9
   containercost = 0.3
   grandtotal = 0
+  containerQuantity = 0
 
   constructor(
     public photoService: PhotoService,
@@ -118,33 +119,12 @@ export class Tab2Page {
     })
   }
 
-  calcPrice(containerQuantity) {
-    this.containercost = 0.3 * containerQuantity
-
-    // Get all current items
-    console.log(this.cartItems)
-    this.cartItems.forEach(data => {
-      this.total = this.total + data.foodPrice
-      data.addon.forEach(data => {
-        console.log(data)
-        this.addOnPrice = this.addOnPrice + parseFloat(data.addOnPrice)
-        console.log("addon : $" + this.addOnPrice)
-      })
-      console.log("total : $" + this.total)
-    })
-  }
-
-  grandTotal() {
-    this.grandtotal = this.total + this.addOnPrice + this.surcharge + this.containercost
-    console.log("Grand Total : $" + this.grandtotal)
-  }
-
-  firstFunction(_callback) {
+  calFood(_callback) {
     // do some asynchronous work
     // and when the asynchronous stuff is complete'
-
     this.cartItems.forEach(data => {
-      this.total = this.total + data.foodPrice
+      this.containerQuantity = this.containerQuantity + data.foodQty
+      this.total = this.total + (data.foodPrice * data.foodQty)
       data.addon.forEach(data => {
         this.addOnPrice = this.addOnPrice + parseFloat(data.addOnPrice)
         console.log("addon : $" + this.addOnPrice)
@@ -155,18 +135,17 @@ export class Tab2Page {
     _callback();
   }
 
-  secondFunction(containerQuantity) {
+  grandTotal() {
     // call first function and pass in a callback function which
     // first function runs when it has completed
-
-    this.firstFunction(function () {
-      console.log('huzzah, I\'m done!');
+    this.calFood(function () {
+      console.log("Test calFood Function");
     });
 
-    this.containercost = 0.3 * containerQuantity
+    this.containercost = 0.3 * this.containerQuantity
     this.grandtotal = this.total + this.addOnPrice + this.surcharge + this.containercost
-    console.log("Container Cost : $" + this.grandtotal)
-    console.log("Surcharge : $" + this.grandtotal)
+    console.log("Container Cost : $" + this.containercost)
+    console.log("Surcharge : $" + this.surcharge)
     console.log("Grand Total : $" + this.grandtotal)
   }
 

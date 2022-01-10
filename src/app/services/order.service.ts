@@ -96,6 +96,7 @@ export class OrderService {
       let data = doc.data()
       // let orderData = { "OrderID": doc.id, "foodName": data.foodName, "foodPrice": data.foodPrice, "foodQty": data.foodQty, "foodEstTime": data.foodEstTime, "foodDescription": data.foodDescription, "addOn": data.addon}
       orderDetails.push(data)
+      console.log(orderDetails)
     });
     return orderDetails
   }
