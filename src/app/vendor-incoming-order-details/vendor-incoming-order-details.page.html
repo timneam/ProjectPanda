@@ -1,63 +1,53 @@
 <ion-content>
   <div style="display: flex;flex-direction: row;">
-  <img src="../assets/backk.png" class="iconn" [routerLink]="['/vendor-incoming']">
-  <p style="display: flex;width: 85%;align-items: center;justify-content: center;"> Indian Stall #order num</p>
-</div>
+    <img src="../assets/backk.png" class="iconn" [routerLink]="['/vendor-incoming']">
+    <p style="display: flex;width: 85%;align-items: center;justify-content: center;"> Indian Stall #order num</p>
+  </div>
 
-<div style="display: flex;margin-top: 25px; align-items: center;justify-content: center;margin-right: 50px;"> 
-  <img src= "../assets/profile.png">
-  <h4 style="margin-left: 28px;">Jane Doe</h4>
-</div>
-<div style="display: flex;align-items: center;justify-content: center;margin-top: 5px;">
-<ion-card class="textCard1">
-  <ion-item lines= 'none'>
-    <ion-icon name="call-outline" style="margin-right: 8px;color: white;"></ion-icon>
-    <p > &nbsp; 946759384</p>
-  </ion-item>
-</ion-card>
-</div>
+  <div *ngFor="let userDetail of userDetails">
+    <div style="display: flex;margin-top: 25px; align-items: center;justify-content: center;margin-right: 50px;">
+      <img src="../assets/profile.png">
+      <h4 style="margin-left: 28px;">{{userDetail.UserFirstName}} {{userDetail.UserLastName}}</h4>
+    </div>
+    <div style="display: flex;align-items: center;justify-content: center;margin-top: 5px;">
+      <ion-card class="textCard1">
+        <ion-item lines='none'>
+          <ion-icon name="call-outline" style="margin-right: 8px;color: white;"></ion-icon>
+          <p> &nbsp; {{userDetail.UserPhoneNumber}}</p>
+        </ion-item>
+      </ion-card>
+    </div>
+  </div>
 
-<div style="display: flex;flex-direction: row;align-items: center;justify-content: center;margin-bottom: -2px;">
-  
-  <ion-row>
-<p style="font-weight: bold;margin-right: 18px;"> Indian Pizza</p>
-<p style="margin-right: 88px;">x2</p>
-<p>$13.00</p>
-<hr>
-  </ion-row>
+  <div style="display: flex;flex-direction: row;align-items: center;justify-content: center;margin-bottom: -2px;" *ngFor="let orderDetail of orderDetails">
 
-</div>
-<div style="display: flex;flex-direction: row;align-items: center;justify-content: center;margin-bottom: -2px;">
-  
-  <ion-row>
-<p style="font-weight: bold;margin-right: 18px;"> Indian Pizza</p>
-<p style="margin-right: 88px;">x2</p>
-<p>$13.00</p>
-<hr>
-  </ion-row>
+    <ion-row>
+      <p style="font-weight: bold;margin-right: 18px;">{{orderDetail.foodName}}</p>
+      <p style="margin-right: 88px;">{{orderDetail.foodQty}}</p>
+      <p>{{orderDetail.foodPrice}}</p>
+      <hr>
+    </ion-row>
 
-</div>
+  </div>
 
-<div id="btm">
+  <div id="btm">
+    <div style="display: flex;flex-direction: row;align-items: flex-end;justify-content: center;">
+      <ion-button type="submit" (click)="acceptOrder()"
+        style="border-radius: 25px;color: #F5585C; width: 130px; height: 45px; margin-top: 23px;box-shadow: 5px 5px 5px
+        lightgray;margin-right: 8px;"
+        color="primary">
+        <ion-label style="color: white;text-transform: none;font-size: 16px;font-family: 'Sen', sans-serif;">
+          <b>Accept</b>
+        </ion-label>
+      </ion-button>
 
-
-<div style="display: flex;flex-direction: row;align-items: flex-end;justify-content: center;">
-
-  <ion-button type="submit" (click)="acceptOrder()">
-  style="border-radius: 25px;color: #F5585C; width: 130px; height: 45px; margin-top: 23px;box-shadow: 5px 5px 5px lightgray;margin-right: 8px;"
-  color="primary">
-  <ion-label style="color: white;text-transform: none;font-size: 16px;font-family: 'Sen', sans-serif;">
-    <b>Accept</b>
-  </ion-label>
-</ion-button>
-
-<ion-button type="submit" (click)="cancelOrder()" 
-style="border-radius: 25px;color: #F5585C; width: 130px; height: 45px; margin-top: 23px;box-shadow: 5px 5px 5px lightgray;margin-left: 13px;"
-color="primary">
-<ion-label style="color: white;text-transform: none;font-size: 16px;font-family: 'Sen', sans-serif;">
-  <b>Decline</b>
-</ion-label>
-</ion-button>
-</div>
-</div>
+      <ion-button type="submit" (click)="cancelOrder()"
+        style="border-radius: 25px;color: #F5585C; width: 130px; height: 45px; margin-top: 23px;box-shadow: 5px 5px 5px lightgray;margin-left: 13px;"
+        color="primary">
+        <ion-label style="color: white;text-transform: none;font-size: 16px;font-family: 'Sen', sans-serif;">
+          <b>Decline</b>
+        </ion-label>
+      </ion-button>
+    </div>
+  </div>
 </ion-content>

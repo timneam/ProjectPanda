@@ -15,6 +15,9 @@ export class VendorIncomingOrderDetailsPage implements OnInit {
   orderId: any
   stallId: any
 
+  userDetails = [];
+  orderDetails = [];
+
   db = getFirestore();
 
   constructor(private activatedRoute: ActivatedRoute,
@@ -37,11 +40,12 @@ export class VendorIncomingOrderDetailsPage implements OnInit {
     console.log(this.orderId)
 
     this.orderService.getUserDetailsInOrder(this.stallId, this.orderId).then((res) => {
-      console.log(res)
+      this.userDetails.push(res)
     })
 
     this.orderService.getOrderedItems(this.stallId, this.orderId).then((res) => {
-      console.log(res)
+      this.orderDetails.push(res)
+      console.log(this.orderDetails)
     })
   }
 
