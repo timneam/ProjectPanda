@@ -41,7 +41,6 @@ export class VendorIncomingPage implements OnInit {
   }
 
   async goToOrderDetails(orderId){
-    console.log(orderId)
     this.router.navigateByUrl(`/vendor-incoming-order-details/${orderId}`)
   }
 

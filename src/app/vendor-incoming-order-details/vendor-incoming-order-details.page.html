@@ -19,23 +19,21 @@
     </div>
   </div>
 
-  <div style="display: flex;flex-direction: row;align-items: center;justify-content: center;margin-bottom: -2px;" *ngFor="let orderDetail of orderDetails">
-
-    <ion-row>
-      <p style="font-weight: bold;margin-right: 18px;">{{orderDetail.foodName}}</p>
-      <p style="margin-right: 88px;">{{orderDetail.foodQty}}</p>
-      <p>{{orderDetail.foodPrice}}</p>
-      <hr>
-    </ion-row>
-
+  <div *ngFor="let orderDetail of orderDetails">
+    <div style="display: flex;flex-direction: row;align-items: center;justify-content: center;margin-bottom: -2px;">
+      <ion-row>
+        <p style="font-weight: bold;margin-right: 18px;">{{orderDetail.foodName}}</p>
+        <p style="margin-right: 88px;">{{orderDetail.foodQty}}</p>
+        <p>{{orderDetail.foodPrice}}</p>
+        <hr>
+      </ion-row>
+    </div>
   </div>
 
   <div id="btm">
     <div style="display: flex;flex-direction: row;align-items: flex-end;justify-content: center;">
-      <ion-button type="submit" (click)="acceptOrder()"
-        style="border-radius: 25px;color: #F5585C; width: 130px; height: 45px; margin-top: 23px;box-shadow: 5px 5px 5px
-        lightgray;margin-right: 8px;"
-        color="primary">
+      <ion-button type="submit" (click)="acceptOrder()" style="border-radius: 25px;color: #F5585C; width: 130px; height: 45px; margin-top: 23px;box-shadow: 5px 5px 5px
+        lightgray;margin-right: 8px;" color="primary">
         <ion-label style="color: white;text-transform: none;font-size: 16px;font-family: 'Sen', sans-serif;">
           <b>Accept</b>
         </ion-label>

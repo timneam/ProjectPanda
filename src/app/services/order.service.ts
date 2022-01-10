@@ -94,8 +94,8 @@ export class OrderService {
       // doc.data() is never undefined for query doc snapshots
       // console.log(doc.data())
       let data = doc.data()
-      let orderData = { "OrderID": doc.id, "foodName": data.foodName, "foodPrice": data.foodPrice, "foodQty": data.foodQty, "foodEstTime": data.foodEstTime, "foodDescription": data.foodDescription, "addOn": data.addon}
-      orderDetails.push(orderData)
+      // let orderData = { "OrderID": doc.id, "foodName": data.foodName, "foodPrice": data.foodPrice, "foodQty": data.foodQty, "foodEstTime": data.foodEstTime, "foodDescription": data.foodDescription, "addOn": data.addon}
+      orderDetails.push(data)
     });
     return orderDetails
   }

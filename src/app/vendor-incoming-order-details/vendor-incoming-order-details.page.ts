@@ -34,10 +34,7 @@ export class VendorIncomingOrderDetailsPage implements OnInit {
     const user = auth.currentUser;
     
     const vendorData = await getDoc(doc(this.db, 'User', user.uid));
-    console.log(vendorData.data().stallId);
     this.stallId = vendorData.data().stallId;
-
-    console.log(this.orderId)
 
     this.orderService.getUserDetailsInOrder(this.stallId, this.orderId).then((res) => {
       this.userDetails.push(res)
