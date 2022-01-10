@@ -17,7 +17,7 @@ export class ProfilePage implements OnInit {
   db = getFirestore();
   updateData: FormGroup;
 
-  userInfo= []
+  userInfo = []
   userData = []
 
   constructor(private UsersService: UsersService,
@@ -37,6 +37,7 @@ export class ProfilePage implements OnInit {
         this.userInfo = users.providerData
         let ableToGetData = await getDoc(doc(this.db, "User", users.uid))
         this.userData.push(ableToGetData.data())
+        console.log(this.userData)
       } else {
         console.log("User is signed out")
         this.navCntrl.navigateForward('splash');
@@ -66,6 +67,8 @@ export class ProfilePage implements OnInit {
         text: 'Logout',
         handler: () => {
           this.UsersService.signoutUser();
+          this.userInfo = []
+          this.userData = []
           // this.router.navigateByUrl('/login-or-register');
         }
       },]

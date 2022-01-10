@@ -3,6 +3,7 @@ import { StallsService } from '../services/stalls.service';
 import { Validators, FormBuilder } from '@angular/forms';
 import { collection, getDocs, getFirestore } from 'firebase/firestore';
 import { LoadingController } from '@ionic/angular';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 @Component({
   selector: 'app-tab1',
@@ -11,6 +12,7 @@ import { LoadingController } from '@ionic/angular';
 })
 export class Tab1Page {
 
+  auth = getAuth();
   db = getFirestore();
   stallName = []
   stallDetails = []
@@ -25,11 +27,20 @@ export class Tab1Page {
   }
 
   ngOnInit() {
-    this.getStallData()
-    this.presentLoading()
-
+    this.getCurrentUser();
   }
 
+  getCurrentUser = async function () {
+    onAuthStateChanged(this.auth, async (user) => {
+      if (user) {
+        this.getStallData()
+        this.presentLoading()
+      } else {
+        console.log("User is signed out")
+        this.navCntrl.navigateForward('splash');
+      }
+    });
+  };
 
   async presentLoading() {
     const loading = await this.LoadingController.create({
