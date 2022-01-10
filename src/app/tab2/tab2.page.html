@@ -27,7 +27,7 @@
             <ion-label style="font-size: 19px;margin-bottom: -3px;margin-top:3px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"><b>{{item.foodName}}</b> </ion-label>
 
             <div *ngFor="let addon of item['addon']">
-            <p style="font-size:12px; margin-top:5px;margin-bottom:-3px"> + {{addon.addOnTitle}}</p>
+            <p style="font-size:12px; margin-top:5px;margin-bottom:-3px"> + {{addon.addOnTitle}} ( ${{addon.addOnPrice}} ) </p>
             </div>
 
             <p style="font-weight: 500;margin-top:13px;margin-bottom: 7px;">$ {{item.foodPrice}} </p>
@@ -77,10 +77,6 @@
       <ion-label style="color: white;text-transform: none;font-size: 16px;font-family: 'Sen', sans-serif;">
         Place Order
       </ion-label>
-    </ion-button>
-
-    <ion-button (click)="grandTotal()">
-      2nd function
     </ion-button>
 
     <br>

@@ -72,6 +72,10 @@ export class Tab2Page {
           this.cartItems.push(cartData)
         })
       });
+    }).then(() => {
+      setTimeout(() => {
+        this.grandTotal();
+      }, 1000)
     });
   }
 
@@ -108,12 +112,12 @@ export class Tab2Page {
     const ableToGetData = await getDoc(doc(this.db, "User", users.uid))
     console.log(ableToGetData.data())
 
-    this.userDetails = { "UserID": this.userId, "UserFirstName": ableToGetData.data().firstName, "UserLastName": ableToGetData.data().lastName, "UserPhoneNumber": ableToGetData.data().phoneNumber, "Status": "Pending" }
+    this.userDetails = { "UserID": this.userId, "UserFirstName": ableToGetData.data().firstName, "UserLastName": ableToGetData.data().lastName, "UserPhoneNumber": ableToGetData.data().phoneNumber, "Status": "Pending", "TotalPrice": this.grandtotal}
     // console.log(this.userId)
     this.orderService.addOrderId(this.stallId, this.userDetails).then((res) => {
       // console.log(res.id)
       this.cartItems.forEach((doc) => {
-        // console.log(doc)
+        console.log(doc)
         this.orderService.addToOrders(this.stallId, res.id, doc.id, doc)
       })
     })
@@ -138,7 +142,7 @@ export class Tab2Page {
   grandTotal() {
     // call first function and pass in a callback function which
     // first function runs when it has completed
-    this.calFood(function () {
+    this.calFood(function() {
       console.log("Test calFood Function");
     });
 
