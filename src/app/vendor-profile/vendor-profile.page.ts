@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../services/users.service';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { doc, updateDoc, deleteDoc, getFirestore, getDocs, collection, where, getDoc } from 'firebase/firestore';
-import { getAuth } from 'firebase/auth';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { StallsService } from '../services/stalls.service';
@@ -14,7 +14,9 @@ import { StallsService } from '../services/stalls.service';
 })
 export class VendorProfilePage implements OnInit {
 
+  auth = getAuth();
   db = getFirestore();
+
   updateData: FormGroup;
 
   stallId: any;
@@ -31,13 +33,22 @@ export class VendorProfilePage implements OnInit {
   vendorData = null
 
   ngOnInit() {
-    this.getData()
+    this.getCurrentUser()
   }
 
+  getCurrentUser = async function () {
+    onAuthStateChanged(this.auth, async (user) => {
+      if (user) {
+        this.getData()
+      } else {
+        console.log("User is signed out")
+        this.navCntrl.navigateForward('splash');
+      }
+    });
+  };
+
   async getData() {
-    //Get data from the fire auth
-    const auth = getAuth();
-    const user = auth.currentUser;
+    const user = this.auth.currentUser;
     // console.log(user)
     // get the data
     const ableToGetData = await getDoc(doc(this.db, "User", user.uid))
@@ -70,7 +81,7 @@ export class VendorProfilePage implements OnInit {
   }
 
   async deleteData() {
-    const frankDocRef = doc(this.db, "User", "DeezNutz");
+    const frankDocRef = doc(this.db, "User",  );
     await deleteDoc(frankDocRef);
   }
 
@@ -95,8 +106,6 @@ export class VendorProfilePage implements OnInit {
       },]
     });
     await alert.present();
-
-   
   }
 
   async emailForward() {

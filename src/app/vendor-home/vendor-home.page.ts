@@ -37,9 +37,8 @@ export class VendorHomePage implements OnInit {
 
   async showMenu(){
     // user id to get doc data
-    const auth = getAuth();
-    const user = auth.currentUser;
-    const vendorData = await getDoc(doc(this.db, 'User', user.uid));
+    const user = this.auth.currentUser.uid;
+    const vendorData = await getDoc(doc(this.db, 'User', user));
     console.log(vendorData.data().stallId);
     this.stallId = vendorData.data().stallId;
 
