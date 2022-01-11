@@ -65,6 +65,8 @@ export class StatusPage implements OnInit {
       this.stallData.forEach((doc) => {
         console.log(doc)
         console.log(this.orderStatus)
+        // I trying to get ordered items in menuList and I need the stallId 
+        // so I did foreach loop but i not sure how to do
         // let thisOrderId = this.orderStatus.data().OrderID
         // this.orderService.getOrderedItems(doc, thisOrderId)
       })
