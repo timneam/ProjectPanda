@@ -39,8 +39,6 @@
       <ion-icon name="add-circle-outline" class="plusIcon" (click)="addAddon()" style="margin-bottom: -25px;">
       </ion-icon>
 
-
-
       <ion-card *ngFor="let item of addonData; let i=index; ">
         <ion-row>
           <ion-col col-10>
@@ -59,29 +57,24 @@
           <ion-label style="padding-left: 10px;">Price ($)</ion-label>
           <ion-input type="number" value="{{item.price}}"  style="color: black;" text-right required disabled></ion-input>
         </ion-item>
-
-
       </ion-card>
 
       <div style="display: flex;flex-direction: row;margin-bottom: 10px;">
         <ion-button (click)="changeQty(0)"
           style="border-radius: 25px; width: 50px; height: 50px; margin-top: 15px; margin-right: 10px;" color="primary">
           <ion-icon name="remove-outline" style="font-size: 35px;"></ion-icon>
-
         </ion-button>
+
         <ion-button style="border-radius: 25px; width: 155px; height: 50px; margin-top: 15px; margin-left: 5px; "
           color="primary">
           <p style="font-size: 16px;text-transform: capitalize;">Current Stock: {{item_qty}}</p>
-
         </ion-button>
 
         <ion-button (click)="changeQty(1)"
           style="border-radius: 25px; width: 50px; height: 50px; margin-top: 15px; margin-left: 15px;margin-right: 5px; "
           color="primary">
           <ion-icon name="add-outline" style="font-size: 35px!important;"></ion-icon>
-
         </ion-button>
-
 
       </div>
 
@@ -91,8 +84,10 @@
           style="color: white;text-transform: none;font-size: 18px;font-family: 'Roboto', sans-serif;font-weight: 500;">
           Create
         </ion-label>
-
       </ion-button>
+
+      <br>
+
     </div>
   </form>
 

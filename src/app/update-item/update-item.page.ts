@@ -3,7 +3,7 @@ import { Location } from '@angular/common';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 import { doc, getDoc, getFirestore } from 'firebase/firestore';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { StallsService } from '../services/stalls.service';
 
 @Component({
@@ -30,7 +30,8 @@ export class UpdateItemPage implements OnInit {
   constructor(private _location: Location, private formBuilder: FormBuilder,
     private activatedRoute: ActivatedRoute,
     public alertController: AlertController,
-    private stallsService: StallsService) {
+    private stallsService: StallsService,
+    private router: Router) {
 
     this.menuId = this.activatedRoute.snapshot.paramMap.get('menuId')
     this.stallId = this.activatedRoute.snapshot.paramMap.get('stallId')
@@ -243,6 +244,7 @@ export class UpdateItemPage implements OnInit {
   deleteItem(){
     this.stallsService.deleteItemFromMenu(this.stallId, this.menuId).then((res) => {
       console.log("Item removed from menu!")
+      this.router.navigate(['/vendor-tabs/home'])
     })
   }
 
