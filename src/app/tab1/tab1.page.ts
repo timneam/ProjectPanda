@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { StallsService } from '../services/stalls.service';
 import { Validators, FormBuilder } from '@angular/forms';
-import { collection, getDocs, getFirestore } from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs, getFirestore } from 'firebase/firestore';
 import { LoadingController } from '@ionic/angular';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
@@ -14,6 +14,9 @@ export class Tab1Page {
 
   auth = getAuth();
   db = getFirestore();
+
+  userData = [];
+
   stallName = []
   stallDetails = []
   stallId = []
@@ -35,6 +38,7 @@ export class Tab1Page {
       if (user) {
         this.getStallData()
         this.presentLoading()
+        this.getUserData()
       } else {
         console.log("User is signed out")
         this.navCntrl.navigateForward('splash');
@@ -54,6 +58,17 @@ export class Tab1Page {
     console.log('Loading dismissed!');
   }
 
+  async getUserData() {
+    const user = this.auth.currentUser.uid
+    console.log(user)
+
+    const userdata = await getDoc(doc(this.db, "User", user)).then((res) => {
+      console.log(res.data())
+      this.userData.push(res.data())
+    })
+    return userdata
+
+  }
 
   async getStallData() {
     const querySnapshot = await getDocs(collection(this.db, "Stall"));
