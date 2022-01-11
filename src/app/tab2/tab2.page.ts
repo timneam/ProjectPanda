@@ -4,7 +4,7 @@ import { ActionSheetController, NavController } from '@ionic/angular';
 import { CartService } from '../services/cart.service';
 import { UsersService } from '../services/users.service';
 import { UserPhoto, PhotoService } from '../services/photo.service';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { getAuth, onAuthStateChanged, reload } from 'firebase/auth';
 import { OrderService } from '../services/order.service';
 import { doc, getDoc } from 'firebase/firestore';
 import { getFirestore } from '@angular/fire/firestore';
@@ -85,6 +85,18 @@ export class Tab2Page {
     })
   }
 
+  clearCart() {
+    this.cartService.getItemsInACart(this.userId, this.stallId).then((doc) => {
+      doc.forEach((doc) => {
+        console.log(doc.id)
+        this.cartService.removeItemFromCart(this.userId, this.stallId, doc.id).then(() => {
+          console.log("All items removed from cart!")
+          document.location.reload();
+        })
+      })
+    })
+  }
+
   public async showActionSheet(photo: UserPhoto, position: number) {
     const actionSheet = await this.actionSheetController.create({
       header: 'Photos',
@@ -115,10 +127,19 @@ export class Tab2Page {
     this.userDetails = { "UserID": this.userId, "UserFirstName": ableToGetData.data().firstName, "UserLastName": ableToGetData.data().lastName, "UserPhoneNumber": ableToGetData.data().phoneNumber, "Status": "Pending", "TotalPrice": this.grandtotal}
     // console.log(this.userId)
     this.orderService.addOrderId(this.stallId, this.userDetails).then((res) => {
-      // console.log(res.id)
+      console.log(res.id)
       this.cartItems.forEach((doc) => {
         console.log(doc)
         this.orderService.addToOrders(this.stallId, res.id, doc.id, doc)
+      })
+    }).then(() => {
+      this.cartService.getItemsInACart(this.userId, this.stallId).then((doc) => {
+        doc.forEach((doc) => {
+          console.log(doc.id)
+          this.cartService.removeItemFromCart(this.userId, this.stallId, doc.id).then(() => {
+            console.log("All items removed from cart!")
+          })
+        })
       })
     })
   }
