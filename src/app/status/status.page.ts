@@ -35,6 +35,10 @@ export class StatusPage implements OnInit {
         let users = this.auth.currentUser
         this.userId = users.uid
         this.getUserOrders()
+        this.cancelledOrder
+        this.pendingOrder
+        this.preparingOrder
+        this.completedOrder
       } else {
         console.log("User is signed out")
         this.navCntrl.navigateForward('splash');
@@ -44,13 +48,9 @@ export class StatusPage implements OnInit {
 
   getUserOrders() {
     this.orderService.getAllStallId().then((res) => {
-      
       console.log(res)
-      
       res.forEach((doc) => {
-        
         console.log(doc)
-
         this.stallData.push(doc.id)
       })
     }).then(() => {
@@ -58,29 +58,33 @@ export class StatusPage implements OnInit {
         this.orderService.test(doc, this.userId).then((res) => {
           if (res.length != 0) {
             res.forEach((doc) => {
+              console.log(doc)
               this.orderStatus.push(doc)
+              console.log(this.orderStatus)
             })
           }
-        }).then(() => {
-          this.pendingOrder = this.orderStatus.filter(rqeq => {
-            return rqeq.Status == "Pending" 
-          })
-          this.cancelledOrder = this.orderStatus.filter(rqeq => {
-            return rqeq.Status == "Cancelled" 
-          })
-          this.preparingOrder = this.orderStatus.filter(rqeq => {
-            return rqeq.Status == "Preparing" 
-          })
-          this.completedOrder = this.orderStatus.filter(rqeq => {
-            return rqeq.Status == "Completed" 
-          })
-          console.log(this.pendingOrder)
-          console.log(this.cancelledOrder)
-          console.log(this.preparingOrder)
-          console.log(this.completedOrder)
         })
       })
     })
+  }
+
+  filteredOrders(){
+    this.pendingOrder = this.orderStatus.filter(rqeq => {
+      return rqeq.Status == "Pending" 
+    })
+    this.cancelledOrder = this.orderStatus.filter(rqeq => {
+      return rqeq.Status == "Cancelled" 
+    })
+    this.preparingOrder = this.orderStatus.filter(rqeq => {
+      return rqeq.Status == "Preparing" 
+    })
+    this.completedOrder = this.orderStatus.filter(rqeq => {
+      return rqeq.Status == "Completed" 
+    })
+    console.log(this.pendingOrder)
+    console.log(this.cancelledOrder)
+    console.log(this.preparingOrder)
+    console.log(this.completedOrder)
   }
   
   doRefresh(event) {
