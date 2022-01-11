@@ -13,7 +13,9 @@ export class VendorIncomingPage implements OnInit {
 
   db = getFirestore();
   stallId: any;
+
   orders = [];
+  incomingOrders = [];
 
   // audio = new Audio('../../assets/1.mp3')
   
@@ -34,12 +36,15 @@ export class VendorIncomingPage implements OnInit {
     this.stallId = vendorData.data().stallId;
 
     this.orderService.incomingOrders(this.stallId).then((res) => {
-
       res.forEach((doc) => {
         let orderData = doc;
-        this.orders.push(orderData)
-        console.log(this.orders)
+        this.orders.push(orderData.data())
       })
+    }).then(() => {
+      this.incomingOrders = this.orders.filter(rqeq => {
+        return rqeq.Status == "Pending" 
+      })
+      console.log(this.incomingOrders)
     })
   }
 
