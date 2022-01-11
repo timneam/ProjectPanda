@@ -28,9 +28,13 @@ export class VendorProfilePage implements OnInit {
     private stallService: StallsService
   ) { }
 
-  userData = null
+  userData = []
+  userInfo = []
+
   userData2 = null
   vendorData = null
+
+  allOfVendorData = []
 
   ngOnInit() {
     this.getCurrentUser()
@@ -39,7 +43,12 @@ export class VendorProfilePage implements OnInit {
   getCurrentUser = async function () {
     onAuthStateChanged(this.auth, async (user) => {
       if (user) {
-        this.getData()
+        let users = this.auth.currentUser
+        this.userInfo = users.providerData
+        console.log(this.userInfo)
+        let ableToGetData = await getDoc(doc(this.db, "User", users.uid))
+        this.userData.push(ableToGetData.data())
+        console.log(this.userData)
       } else {
         console.log("User is signed out")
         this.navCntrl.navigateForward('splash');
@@ -52,27 +61,15 @@ export class VendorProfilePage implements OnInit {
     // console.log(user)
     // get the data
     const ableToGetData = await getDoc(doc(this.db, "User", user.uid))
-    
-    if (user !== null) {
-      user.providerData.forEach((profile) => {
-        // console.log("  Sign-in provider: " + profile.providerId);
-        // console.log("  Provider-specific UID: " + profile.uid);
-        // console.log("  Name: " + profile.displayName);
-        // console.log("  Email: " + profile.email);
-        // console.log("  Photo URL: " + profile.photoURL);
-        this.userData = profile
-      });
-    }
 
     const vendorData = await getDoc(doc(this.db, 'User', user.uid));
-    console.log(vendorData.data().stallId);
+    // console.log(vendorData.data().stallId);
     this.stallId = vendorData.data().stallId;
 
     this.vendorData = this.stallService.getAStallInformation(this.stallId)
-    console.log(vendorData.data())
+    // console.log(vendorData.data())
 
     if (ableToGetData.exists) {
-      // console.log(ableToGetData.data());
       this.userData2 = ableToGetData.data();
     }
     else {
@@ -81,7 +78,8 @@ export class VendorProfilePage implements OnInit {
   }
 
   async deleteData() {
-    const frankDocRef = doc(this.db, "User",  );
+    const user = this.auth.currentUser;
+    const frankDocRef = doc(this.db, "User", user.uid);
     await deleteDoc(frankDocRef);
   }
 
@@ -101,7 +99,8 @@ export class VendorProfilePage implements OnInit {
         text: 'Logout',
         handler: () => {
           this.UsersService.signoutUser();
-          // this.router.navigateByUrl('/login-or-register');
+          this.userInfo = []
+          this.userData = []
         }
       },]
     });
