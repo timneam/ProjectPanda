@@ -1,40 +1,36 @@
-
 <ion-content>
   <h1 class="headerr">Orders</h1>
 
-  <div  style="display: flex;justify-content: center;flex-direction: column;align-items: center;">
-    <ion-card [routerLink]="['/vendor-individual-order']" style="border-radius: 0px;border-color: black;width: 82%;color: black;height: 55px;box-shadow: none;border:groove 1px;border-color: black;margin-bottom: -11px;">
+  <div style="display: flex;justify-content: center;flex-direction: column;align-items: center;" *ngFor="let order of preparingOrders">
+    <ion-card [routerLink]="['/vendor-individual-order']"
+      style="border-radius: 0px;border-color: black;width: 82%;color: black;height: 55px;box-shadow: none;border:groove 1px;border-color: black;margin-bottom: -11px;">
       <div style="display: flex;flex-direction: row;margin-top: 5px;margin-left: 8px;align-items: center;">
-<p>Order id: IND-24653980 </p>
-<ion-icon name="caret-forward-outline" style="font-size: 18px;margin-left: 110px;margin-bottom: 2px;"></ion-icon>
-      </div>
-    </ion-card>
-    <ion-card style="border-radius: 0px;border-color: black;width: 82%;color: black;height: 55px;box-shadow: none;border:groove 1px;border-color: black;">
-      <div style="display: flex;flex-direction: row;margin-top: 5px;margin-left: 8px;align-items: center;">
-<p>Order id: IND-24653981 </p>
-<ion-icon name="caret-forward-outline" style="font-size: 18px;margin-left: 110px;margin-bottom: 2px;"></ion-icon>
+        <p>Order id: {{order.id}}  </p>
+        <ion-icon name="caret-forward-outline" style="font-size: 18px;margin-left: 110px;margin-bottom: 2px;">
+        </ion-icon>
       </div>
     </ion-card>
   </div>
 
-  <div style="display: flex;justify-content: flex-end;align-items: center;margin-top:190px;flex-direction: column;align-content: center;width: 100%;position: fixed;">
+  <div
+    style="display: flex;justify-content: flex-end;align-items: center;margin-top:190px;flex-direction: column;align-content: center;width: 100%;position: fixed;">
     <ion-button [routerLink]="['/vendor-incoming']"
-style="border-radius: 25px;color: #F5585C; width: 290px; height: 43px; font-size: 24px;margin-top: -5px;" color="primary">
-<ion-label
-  style="color: white;text-transform: none;font-size: 17px;font-family: 'Sen', sans-serif;">
-  Incoming (99)
-</ion-label>
-</ion-button>
+      style="border-radius: 25px;color: #F5585C; width: 290px; height: 43px; font-size: 24px;margin-top: -5px;"
+      color="primary">
+      <ion-label style="color: white;text-transform: none;font-size: 17px;font-family: 'Sen', sans-serif;">
+        Incoming (99)
+      </ion-label>
+    </ion-button>
 
 
 
-<ion-button [routerLink]="['/vendor-complete']"
-style="border-radius: 25px;color: #F5585C; width: 290px; height: 43px; font-size: 24px;margin-top: 3px;" color="primary">
-<ion-label
-  style="color: white;text-transform: none;font-size: 17px;font-family: 'Sen', sans-serif;">
-  Completed
-</ion-label>
-</ion-button>
+    <ion-button [routerLink]="['/vendor-complete']"
+      style="border-radius: 25px;color: #F5585C; width: 290px; height: 43px; font-size: 24px;margin-top: 3px;"
+      color="primary">
+      <ion-label style="color: white;text-transform: none;font-size: 17px;font-family: 'Sen', sans-serif;">
+        Completed
+      </ion-label>
+    </ion-button>
 
   </div>
 </ion-content>
