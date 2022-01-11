@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { getAuth } from 'firebase/auth';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { getDoc, doc, getDocs, collection, getFirestore } from 'firebase/firestore';
 import { StallsService } from '../services/stalls.service';
 import {Router} from '@angular/router';
@@ -11,15 +11,29 @@ import {Router} from '@angular/router';
 })
 export class VendorHomePage implements OnInit {
 
+  auth = getAuth();
   db = getFirestore();
+
   menu = [];
+
   stallId : any;
 
   constructor(private stallService: StallsService, private router: Router) { }
 
   ngOnInit() {
-    this.showMenu();
+    this.getCurrentUser();
   }
+
+  getCurrentUser = async function () {
+    onAuthStateChanged(this.auth, async (user) => {
+      if (user) {
+        this.showMenu()
+      } else {
+        console.log("User is signed out")
+        this.navCntrl.navigateForward('splash');
+      }
+    });
+  };
 
   async showMenu(){
     // user id to get doc data
