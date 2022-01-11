@@ -22,9 +22,9 @@
   <div *ngFor="let orderDetail of orderDetails">
     <div style="display: flex;flex-direction: row;align-items: center;justify-content: center;margin-bottom: -2px;">
       <ion-row>
-        <p style="font-weight: bold;margin-right: 18px;">{{orderDetail.foodName}}</p>
-        <p style="margin-right: 88px;">{{orderDetail.foodQty}}</p>
-        <p>{{orderDetail.foodPrice}}</p>
+        <p style="font-weight: bold;margin-right: 15px;white-space: nowrap;width: 52%;overflow: hidden;text-overflow: ellipsis;margin-left: 10px;">{{orderDetail.foodName}}</p>
+        <p style="margin-right: 80px;">x{{orderDetail.foodQty}}</p>
+        <p>${{orderDetail.foodPrice}}</p>
         <hr>
       </ion-row>
     </div>

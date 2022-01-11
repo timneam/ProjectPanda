@@ -2,7 +2,10 @@
 <ion-content>
   <div style="display: flex;flex-direction: row;align-items: center;">
   <h1 class="headerr">Profile</h1>
-
+  <div class="powerIcon">
+    <ion-icon name="power" (click)="presentAlert()" style="font-size: 26px;margin-left: 200px;margin-top: 11px;">
+    </ion-icon>
+  </div>
   </div>
   <div class="sameLine">
   <img src={{userData.photoURL}} width="80" height="80" style="margin-right: 20px;margin-left: 30px;" >
@@ -42,13 +45,7 @@
       <ion-icon name="create-outline" style="color: black;font-size: 16px;" [routerLink]="['/profile-password-edit']"></ion-icon>
     </ion-card>
   
-    <ion-button (click)="presentAlert()"
-  style="border-radius: 25px;color: #F5585C; width: 120px; height: 50px; margin-top: 39px;box-shadow: 5px 5px 5px lightgray;" color="primary">
-  <ion-label
-    style="color: white;text-transform: none;font-size: 16px;font-family: 'Sen', sans-serif;">
-    <b>Logout</b>
-  </ion-label>
-  </ion-button>
+
   
   </div>
   
