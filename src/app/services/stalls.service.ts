@@ -53,9 +53,11 @@ export class StallsService {
     return "Updated Successfully"
   }
 
-  async deleteItem(stallId, menuId, data) {
-
+  async deleteItemFromMenu(stallId, menuId) {
+    const removeItemFromMenu = await deleteDoc(doc(this.db, 'Stall', stallId, 'Menu', menuId))
+    console.log("deleted : " + menuId)
   }
+
   async getMenuItem(stallId) {
     const querySnapshot = await getDocs(collection(this.db, "Stall", stallId, "Menu"));
     let MenuItem = []

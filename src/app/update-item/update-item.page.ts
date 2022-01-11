@@ -238,7 +238,12 @@ export class UpdateItemPage implements OnInit {
       ],
     });
     await alert.present();
+  }
 
+  deleteItem(){
+    this.stallsService.deleteItemFromMenu(this.stallId, this.menuId).then((res) => {
+      console.log("Item removed from menu!")
+    })
   }
 
 }
