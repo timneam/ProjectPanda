@@ -36,6 +36,7 @@ export class StatusPage implements OnInit {
         let users = this.auth.currentUser
         this.userId = users.uid
         this.getUserOrders()
+        this.getOrderedItems()
       } else {
         console.log("User is signed out")
         this.navCntrl.navigateForward('splash');
