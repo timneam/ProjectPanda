@@ -138,6 +138,7 @@ export class Tab2Page {
           console.log(doc.id)
           this.cartService.removeItemFromCart(this.userId, this.stallId, doc.id).then(() => {
             console.log("All items removed from cart!")
+            this.navCntrl.navigateForward('payment-options');
           })
         })
       })
