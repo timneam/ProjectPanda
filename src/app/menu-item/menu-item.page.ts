@@ -107,6 +107,7 @@ export class MenuItemPage implements OnInit {
       console.log(res)
       this.cartService.setItemToCart(user.uid, this.stallRoute, this.menuRoute, menuData).then((res) => {
         console.log(menuData)
+        this._location.back();
         this.selectedItemsList.forEach(element => {
           console.log(element)
           let data = { "addOnTitle": element.addOnTitle, "addOnPrice": element.addOnPrice }
