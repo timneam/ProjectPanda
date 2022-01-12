@@ -121,7 +121,11 @@ const routes: Routes = [
   {
     path: 'vendor-complete-order-details',
     loadChildren: () => import('./vendor-complete-order-details/vendor-complete-order-details.module').then( m => m.VendorCompleteOrderDetailsPageModule)
+  },  {
+    path: 'payment-options',
+    loadChildren: () => import('./payment-options/payment-options.module').then( m => m.PaymentOptionsPageModule)
   }
+
 
 
 
