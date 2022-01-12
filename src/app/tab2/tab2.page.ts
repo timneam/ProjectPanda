@@ -29,10 +29,14 @@ export class Tab2Page {
 
 
   total = 0
+  totalString: any;
   addOnPrice = 0
   surcharge = 0.9
+  surchargeString: any;
   containercost = 0.3
-  grandtotal = 0
+  containerCostString: any;
+  grandTotal = 0
+  grandTotalString: any;
   containerQuantity = 0
 
   constructor(
@@ -77,7 +81,7 @@ export class Tab2Page {
       });
     }).then(() => {
       setTimeout(() => {
-        this.grandTotal();
+        this.calcGrandTotal();
       }, 1000)
     });
   }
@@ -127,7 +131,7 @@ export class Tab2Page {
     const ableToGetData = await getDoc(doc(this.db, "User", users.uid))
     // console.log(ableToGetData.data())
     // console.log(this.stallId)
-    this.userDetails = { "UserID": this.userId, "UserFirstName": ableToGetData.data().firstName, "UserLastName": ableToGetData.data().lastName, "UserPhoneNumber": ableToGetData.data().phoneNumber, "Status": "Pending", "TotalPrice": this.grandtotal, "stallID": this.stallId }
+    this.userDetails = { "UserID": this.userId, "UserFirstName": ableToGetData.data().firstName, "UserLastName": ableToGetData.data().lastName, "UserPhoneNumber": ableToGetData.data().phoneNumber, "Status": "Pending", "TotalPrice": this.grandTotal, "stallID": this.stallId }
     // console.log(this.userId)
     this.orderService.addOrderId(this.stallId, this.userDetails).then((res) => {
       console.log(res.id)
@@ -164,18 +168,22 @@ export class Tab2Page {
     _callback();
   }
 
-  grandTotal() {
+  calcGrandTotal() {
     // call first function and pass in a callback function which
     // first function runs when it has completed
     this.calFood(function () {
-      console.log("Test calFood Function");
+      console.log("---------------------");
     });
 
-    this.containercost = 0.3 * this.containerQuantity
-    this.grandtotal = this.total + this.addOnPrice + this.surcharge + this.containercost
-    console.log("Container Cost : $" + this.containercost)
+    this.containercost = (this.containerQuantity * 3) / 10
+    this.grandTotal = this.total + this.addOnPrice + this.surcharge + this.containercost
+    this.totalString =this.total.toFixed(2)
+    this.surchargeString = this.surcharge.toFixed(2)
+    this.containerCostString = this.containercost.toFixed(2)
+    this.grandTotalString = this.grandTotal.toFixed(2)
     console.log("Surcharge : $" + this.surcharge)
-    console.log("Grand Total : $" + this.grandtotal)
+    console.log("Container Cost : $" + this.containercost)
+    console.log("Grand Total : $" + this.grandTotal)
   }
 
   imageData: any
@@ -195,7 +203,7 @@ export class Tab2Page {
 
   // uploadTask = uploadBytesResumable(this.storageRef, this.imageData, this.metadata);
 
-  fileImg : any;
+  fileImg: any;
 
   onchange = (img) => {
     console.log("test meow")
