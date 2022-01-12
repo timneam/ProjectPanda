@@ -38,6 +38,7 @@ export class Tab2Page {
   grandTotal = 0
   grandTotalString: any;
   containerQuantity = 0
+  
 
   constructor(
     public photoService: PhotoService,
@@ -186,24 +187,8 @@ export class Tab2Page {
     console.log("Grand Total : $" + this.grandTotal)
   }
 
-  imageData: any
-
-  metadata = {
-    contentType: 'image/jpeg'
-  };
-
-  // Create a root reference
-  storage = getStorage();
-
-  // Create a reference to 'mountains.jpg'
-  storageRef = ref(this.storage);
-
-  // Create a reference to 'images/mountains.jpg'
-  mountainImagesRef = ref(this.storage, 'images/mountains.jpg');
-
-  // uploadTask = uploadBytesResumable(this.storageRef, this.imageData, this.metadata);
-
   fileImg: any;
+  progress: any;
 
   onchange = (img) => {
     console.log("test meow")
@@ -213,6 +198,7 @@ export class Tab2Page {
     console.log(this.fileImg.name)
 
   }
+
   addImageToDatabase() {
     const storage = getStorage();
     const storageRef = ref(storage, `images/${this.fileImg.name}`);
@@ -220,6 +206,7 @@ export class Tab2Page {
     const uploadTask = uploadBytesResumable(storageRef, this.fileImg);
     console.log(uploadTask)
 
+    // make if statement if file size to big? or format is wrong
     uploadTask.on('state_changed',
       (snapshot) => {
         // do shit here for the "progress bar"
@@ -227,6 +214,8 @@ export class Tab2Page {
         console.log(snapshot)
         const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         console.log('Upload is ' + progress + '% done');
+        // go show this in HTML or smt for the progress tracking
+        this.progress = progress
         switch (snapshot.state) {
           case 'paused':
             console.log('Upload is paused');
@@ -244,6 +233,7 @@ export class Tab2Page {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           // This is the file url for the image btw 
           // Go add this to the SRC on front-end
+          // update doc image or add to doc
           console.log('File available at', downloadURL);
         });
       }
