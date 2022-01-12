@@ -120,7 +120,7 @@ export class OrderService {
   // add orders into preparing orders collection (Orders Completed)
   async completedOrders(stallId, orderId) {
     const addOrders = await updateDoc(doc(this.db, 'Stall', stallId, 'OrdersRecieved', orderId), {
-      Status: "Done"
+      Status: "Completed"
     })
     return addOrders
   }
