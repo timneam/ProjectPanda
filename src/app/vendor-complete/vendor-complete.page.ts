@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { doc, getDoc, getFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { OrderService } from '../services/order.service';
+import { getDoc, doc, getDocs, collection, getFirestore } from 'firebase/firestore';
 
 @Component({
   selector: 'app-vendor-complete',
@@ -24,14 +24,24 @@ export class VendorCompletePage implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    this.getIncomingOrders()
+    this.getCurrentUser()
     // this.audio.play(); 
   }
 
+  getCurrentUser = async function () {
+    onAuthStateChanged(this.auth, async (user) => {
+      if (user) {
+        this.getIncomingOrders()
+      } else {
+        console.log("User is signed out")
+        this.navCntrl.navigateForward('splash');
+      }
+    });
+  };
+
   async getIncomingOrders() {
     // user id to get doc data
-    const auth = getAuth();
-    const user = auth.currentUser;
+    const user = this.auth.currentUser;
     const vendorData = await getDoc(doc(this.db, 'User', user.uid));
     this.stallId = vendorData.data().stallId;
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { doc, getDoc, getFirestore } from '@angular/fire/firestore';
+import { getDoc, doc, getDocs, collection, getFirestore } from 'firebase/firestore';
 import { Router } from '@angular/router';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { OrderService } from '../services/order.service';

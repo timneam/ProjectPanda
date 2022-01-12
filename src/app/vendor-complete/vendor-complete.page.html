@@ -4,13 +4,16 @@
   <div style="text-align: center;">
     <h2>Completed Orders</h2>
   </div>
-  <div style="display: flex;flex-direction: column; align-items: center; margin-top: 15%;" *ngFor="let order of completedOrders" >
-    <ion-card (click)="goToOrderDetails(order.id)"
+  <br>
+  <div style="display: flex;flex-direction: column; align-items: center;margin-top: -6%;" *ngFor="let order of completedOrders">
+    <ion-card
       style="border-radius: 0px;border-color: black;width: 82%;color: black;height: 55px;box-shadow: none;border:groove 1px;border-color: black;">
-      <div style="display: flex;flex-direction: row;margin-top: 5px;margin-left: 8px;align-items: center;"  [routerLink]="['/vendor-complete-order-details']">
-        <p>Order id: {{order.id}}</p>
-        <ion-icon name="caret-forward-outline" style="font-size: 18px;margin-left: 110px;margin-bottom: 2px;">
-        </ion-icon>
+      <div style="display: flex;flex-direction: row;margin-top: 5px;margin-left: 8px;align-items: center;white-space: pre;">
+        <ion-card (click)="goToOrderDetails(order.id)">
+          <p>Order id: {{order.id}} </p>
+          <ion-icon name="caret-forward-outline" style="font-size: 18px;margin-left: 250px;margin-bottom: 2px;position: absolute;">
+          </ion-icon>
+        </ion-card>
       </div>
     </ion-card>
   </div>
