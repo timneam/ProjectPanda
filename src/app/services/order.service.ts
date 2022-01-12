@@ -73,6 +73,11 @@ export class OrderService {
     return orderDetails
   }
 
+  async lol(stallId, orderId){
+    const querySnapshot = await getDocs(collection(this.db, 'Stall', stallId, 'OrdersRecieved', orderId, "orderList"))
+    return querySnapshot
+  }
+
   async getUserDetailsInOrder(stallId, orderId){
     
     const querySnapshot = await getDoc(doc(this.db, "Stall", stallId, "OrdersRecieved", orderId))

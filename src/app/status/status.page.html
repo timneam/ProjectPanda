@@ -8,7 +8,7 @@
     <h1 class="headerr">Orders</h1>
   </div>
 
-  <div class="wrap-collabsible" *ngFor="let order of orderStatus">
+  <div class="wrap-collabsible" *ngFor="let order of pendingOrder">
     <input id="collapsible" class="toggle" type="checkbox">
     <label for="collapsible" class="lbl-toggle">
       <div style="display: flex;flex-direction: row;margin-top: 5px;margin-left: 8px;align-items: center;">
@@ -24,8 +24,8 @@
       <div class="content-inner">
         <div
           style="display: flex;flex-direction: column;align-items: center;justify-content: center;margin-bottom: -2px;">
-          <ion-row>
-            <p style="font-weight: bold;margin-right: 18px;">Indian Pizza</p>
+          <ion-row *ngFor=" let data of order['menuItem']">
+            <p style="font-weight: bold;margin-right: 18px;">{{data.foodName}}</p>
             <p style="margin-right: 88px;">x2</p>
             <p>$5.00</p>
             <hr>
@@ -62,4 +62,5 @@
       </div>
     </div>
   </div>
+
 </ion-content>

@@ -213,7 +213,7 @@ export class Tab2Page {
         // make global variable that updates then display it on HTML
         console.log(snapshot)
         const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log('Upload is ' + progress + '% done');
+        console.log('Upload is ' + progress.toFixed(2) + '% done');
         // go show this in HTML or smt for the progress tracking
         this.progress = progress
         switch (snapshot.state) {
