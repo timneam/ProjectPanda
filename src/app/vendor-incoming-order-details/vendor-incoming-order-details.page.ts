@@ -49,6 +49,7 @@ export class VendorIncomingOrderDetailsPage implements OnInit {
     this.stallId = vendorData.data().stallId;
 
     this.orderService.getUserDetailsInOrder(this.stallId, this.orderId).then((res) => {
+      console.log(res)
       this.userDetails.push(res)
     })
 
