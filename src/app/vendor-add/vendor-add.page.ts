@@ -5,6 +5,7 @@ import { AlertController } from '@ionic/angular';
 import { getFirestore } from 'firebase/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StallsService } from '../services/stalls.service';
+import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
 
 @Component({
   selector: 'app-vendor-add',
@@ -155,6 +156,70 @@ export class VendorAddPage implements OnInit {
       }
 
     }
+  }
+
+  // ------------------------------------------------------------------------------------
+
+  fileImg: any;
+  progress: any;
+
+  onchange = (img) => {
+    console.log("test meow")
+    const file = img.target.files
+    this.fileImg = file[0]
+    console.log(this.fileImg)
+    console.log(this.fileImg.name)
+
+  }
+
+  addImageToDatabase() {
+    const storage = getStorage();
+    const storageRef = ref(storage, `images/${this.fileImg.name}`);
+
+    const uploadTask = uploadBytesResumable(storageRef, this.fileImg);
+    console.log(uploadTask)
+
+    // make if statement if file size to big? or format is wrong
+    uploadTask.on('state_changed',
+      (snapshot) => {
+        // do shit here for the "progress bar"
+        // make global variable that updates then display it on HTML
+        console.log(snapshot)
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log('Upload is ' + progress + '% done');
+        // go show this in HTML or smt for the progress tracking
+        this.progress = progress
+        switch (snapshot.state) {
+          case 'paused':
+            console.log('Upload is paused');
+            break;
+          case 'running':
+            console.log('Upload is running');
+            break;
+        }
+      },
+      (error) => {
+        // Handle unsuccessful uploads
+        console.log(error)
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          // This is the file url for the image btw 
+          // Go add this to the SRC on front-end
+          // update doc image or add to doc
+          console.log('File available at', downloadURL);
+        });
+      }
+    );
+
+    // // Pause the upload
+    // uploadTask.pause();
+
+    // // Resume the upload
+    // uploadTask.resume();
+
+    // // Cancel the upload
+    // uploadTask.cancel();
   }
 
 }

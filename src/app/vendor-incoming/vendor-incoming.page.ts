@@ -24,9 +24,20 @@ export class VendorIncomingPage implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    this.getIncomingOrders()
+    this.getCurrentUser()
     // this.audio.play(); 
   }
+
+  getCurrentUser = async function () {
+    onAuthStateChanged(this.auth, async (user) => {
+      if (user) {
+        this.getIncomingOrders()
+      } else {
+        console.log("User is signed out")
+        this.navCntrl.navigateForward('splash');
+      }
+    });
+  };
 
   async getIncomingOrders() {
     // user id to get doc data

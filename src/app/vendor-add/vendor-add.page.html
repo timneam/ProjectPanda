@@ -5,6 +5,11 @@
       (click)="backClicked()">
   </div>
 
+  <div style="text-align: center;">
+    <ion-input style="margin-left: 50px;" type="file" (change)="onchange($event)"></ion-input>
+    <ion-button (click)="addImageToDatabase()">Submit</ion-button>
+  </div>
+
   <form [formGroup]="addMenuForm" (ngSubmit)="addMenuDetails()">
     <ion-item>
       <ion-label position="floating">Name</ion-label>

@@ -58,8 +58,8 @@ export class CartService {
   }
 
   // add items into a cart (cart -> stall -> menuList -> add a document)
-  async setItemToCart(userId, stallId, menuId, data) {
-    const addItemToCart = await setDoc(doc(this.db, 'User', userId, 'Cart', stallId, 'menuList', menuId), data)
+  async setItemToCart(userId, stallId, data) {
+    const addItemToCart = await addDoc(collection(this.db, 'User', userId, 'Cart', stallId, 'menuList'), data)
     return addItemToCart
   }
 
