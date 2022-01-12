@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { getFirestore } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { doc, getDoc } from 'firebase/firestore';
 import { OrderService } from '../services/order.service';
+import { getDoc, doc, getDocs, collection, getFirestore } from 'firebase/firestore';
 
 @Component({
   selector: 'app-vendor-incoming-order-details',

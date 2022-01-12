@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { doc, getDoc, getFirestore } from '@angular/fire/firestore';
+import { getDoc, doc, getDocs, collection, getFirestore } from 'firebase/firestore';
 import { Router } from '@angular/router';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { OrderService } from '../services/order.service';
@@ -13,26 +13,38 @@ export class VendorOrdersPage implements OnInit {
 
   auth = getAuth();
   db = getFirestore();
+
   stallId: any;
 
   orders = [];
   preparingOrders = [];
 
-  constructor(private orderService: OrderService,
-    private router: Router) { }
+  constructor(
+    private orderService: OrderService,
+    private router: Router
+    ) { }
 
     ngOnInit() {
-      this.getIncomingOrders()
+      this.getCurrentUser();
       // this.audio.play(); 
     }
 
+    getCurrentUser = async function () {
+      onAuthStateChanged(this.auth, async (user) => {
+        if (user) {
+          this.getIncomingOrders()
+        } else {
+          console.log("User is signed out")
+          this.navCntrl.navigateForward('splash');
+        }
+      });
+    };
+
     async getIncomingOrders() {
-      // user id to get doc data
-      const auth = getAuth();
-      const user = auth.currentUser;
+      const user = this.auth.currentUser;
       const vendorData = await getDoc(doc(this.db, 'User', user.uid));
       this.stallId = vendorData.data().stallId;
-  
+      console.log(this.stallId)
       this.orderService.incomingOrders(this.stallId).then((res) => {
         res.forEach((doc) => {
           let orderData = {'id': doc.id, 'UserFirstName': doc.data().UserFirstName, 'UserLastName': doc.data().UserLastName,'UserID': doc.data().UserID, 'UserPhoneNumber': doc.data().UserPhoneNumber,'Status': doc.data().Status};
