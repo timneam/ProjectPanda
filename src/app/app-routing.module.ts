@@ -124,6 +124,10 @@ const routes: Routes = [
   },  {
     path: 'payment-options',
     loadChildren: () => import('./payment-options/payment-options.module').then( m => m.PaymentOptionsPageModule)
+  },
+  {
+    path: 'order-confirmation',
+    loadChildren: () => import('./order-confirmation/order-confirmation.module').then( m => m.OrderConfirmationPageModule)
   }
 
 
