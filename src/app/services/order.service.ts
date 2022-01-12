@@ -67,7 +67,7 @@ export class OrderService {
     querySnapshot.forEach((doc) => {
       // doc.data() is never undefined for query doc snapshots
       let data = doc.data()
-      let orderData = { "OrderID": doc.id, "UserID": data.UserID, "UserFirstName": data.UserFirstName, "UserLastName": data.UserLastName, "UserPhoneNumber": data.UserPhoneNumber, "Status": data.Status }
+      let orderData = { "OrderID": doc.id, "UserID": data.UserID, "UserFirstName": data.UserFirstName, "UserLastName": data.UserLastName, "UserPhoneNumber": data.UserPhoneNumber, "Status": data.Status, "stallID": data.stallID }
       orderDetails.push(orderData)
     });
     return orderDetails
