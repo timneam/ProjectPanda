@@ -122,9 +122,9 @@ export class Tab2Page {
   async checkout() {
     let users = this.auth.currentUser
     const ableToGetData = await getDoc(doc(this.db, "User", users.uid))
-    console.log(ableToGetData.data())
-
-    this.userDetails = { "UserID": this.userId, "UserFirstName": ableToGetData.data().firstName, "UserLastName": ableToGetData.data().lastName, "UserPhoneNumber": ableToGetData.data().phoneNumber, "Status": "Pending", "TotalPrice": this.grandtotal}
+    // console.log(ableToGetData.data())
+    // console.log(this.stallId)
+    this.userDetails = { "UserID": this.userId, "UserFirstName": ableToGetData.data().firstName, "UserLastName": ableToGetData.data().lastName, "UserPhoneNumber": ableToGetData.data().phoneNumber, "Status": "Pending", "TotalPrice": this.grandtotal, "stallID": this.stallId}
     // console.log(this.userId)
     this.orderService.addOrderId(this.stallId, this.userDetails).then((res) => {
       console.log(res.id)

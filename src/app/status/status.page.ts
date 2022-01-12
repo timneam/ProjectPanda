@@ -27,6 +27,7 @@ export class StatusPage implements OnInit {
 
   ngOnInit() {
     this.getCurrentUser()
+    this.getOrderedItems()
   }
 
   getCurrentUser = async function () {
@@ -54,29 +55,21 @@ export class StatusPage implements OnInit {
           if (res.length != 0) {
             res.forEach((doc) => {
               // console.log(doc)
-              console.log(doc.OrderID)
+              // console.log(doc.OrderID)
               this.orderStatus.push(doc)
               console.log(this.orderStatus)
             })
           }
         })
       })
-    }).then(() => {
-      this.stallData.forEach((doc) => {
-        console.log(doc)
-        console.log(this.orderStatus)
-        // I trying to get ordered items in menuList and I need the stallId 
-        // so I did foreach loop but i not sure how to do
-        // let thisOrderId = this.orderStatus.data().OrderID
-        // this.orderService.getOrderedItems(doc, thisOrderId)
-      })
     })
   }
 
-  getOrderedItems () {
-    console.log(this.stallData)
-    console.log(this.orderStatus)
-    this.orderService.getOrderedItems(this.stallData, this.orderStatus)
+  getOrderedItems() {
+    this.orderStatus.forEach((doc) => {
+      console.log(doc)
+    })
+    this.orderService.getOrderedItems(this.stallId, this.orderStatus)
   }
 
   filteredOrders(){
