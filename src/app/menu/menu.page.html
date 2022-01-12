@@ -2,7 +2,7 @@
   <div *ngFor="let data of stallData">
     <img src="../assets/stallBackground.png" style="position: absolute;z-index: -1;width: 100%;">
     <img src="../assets/whiteback.png" class="iconn" [routerLink]="['/tabs/stalls']">
-    <h3 style="font-size: 22px;font-weight: bold;color: #ffffff;display: flex;justify-content: center;">
+    <h3 style="font-size: 22px;font-weight: bold;color: #ffffff;display: flex;justify-content: center;text-shadow: grey 2px 2px;">
       {{data.stallName}}
     </h3>
     <div *ngFor="let data of stallMenu">
@@ -28,7 +28,7 @@
           <ion-col size="8">
             <ion-row>
               <ion-label
-                style="background-color: transparent; font-size:18px ;color:black;font-weight:500;">
+                style="background-color: transparent; font-size:18px ;color:black;font-weight:500; ">
                {{data.foodName}}
               </ion-label>
             </ion-row>
