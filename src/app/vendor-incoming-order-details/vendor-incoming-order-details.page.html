@@ -2,7 +2,8 @@
   <div *ngFor="let userDetail of userDetails">
     <div style="display: flex;flex-direction: row;">
       <img src="../assets/backk.png" class="iconn" [routerLink]="['/vendor-incoming']">
-      <p style="display: flex;width: 85%;align-items: center;justify-content: center;">{{userDetail.stallID}} #{{orderId}}</p>
+     <!--{{userDetail.stallID}}--> 
+      <p style="display: flex;width: 85%;align-items: center;justify-content: center;"> #{{orderId}}</p>
     </div>
 
     <div>
@@ -19,38 +20,21 @@
         </ion-card>
       </div>
 
-      <div *ngFor="let orderDetail of orderDetails">
+      
         <div style="display: flex;flex-direction: row;align-items: center;justify-content: center;margin-bottom: -2px;">
+          <ion-card style="width: 80%;">
+            <div *ngFor="let orderDetail of orderDetails">
           <ion-row>
-            <ion-col>
-              <p
-                style="font-weight: bold;margin-right: 15px;white-space: nowrap;width: 52%;overflow: hidden;text-overflow: ellipsis;margin-left: 10px;">
-                {{orderDetail.foodName}}</p>
-            </ion-col>
-            <ion-col>
-              <p style="margin-right: 80px;">x{{orderDetail.foodQty}}</p>
-            </ion-col>
-            <ion-col>
-              <p style="margin-right: 80px;">${{orderDetail.foodPrice}}</p>
-            </ion-col>
+            <p style="font-weight: bold;margin-right: 15px;white-space: nowrap;width: 40%;overflow: hidden;text-overflow: ellipsis;margin-left: 10px;">{{orderDetail.foodName}}</p>
+            <p style="">x{{orderDetail.foodQty}}</p>
+            <p style="margin-left:60px">${{orderDetail.foodPrice}}</p>
+            <hr>
           </ion-row>
-
+     
         </div>
+      </ion-card>
       </div>
-
-      <ion-row>
-        <ion-col>
-          <p
-            style="font-weight: bold;margin-right: 15px;white-space: nowrap;width: 52%;overflow: hidden;text-overflow: ellipsis; margin-left: 100px;">
-            Total Price: </p>
-        </ion-col>
-        <ion-col>
-          <p
-            style="font-weight: bold;margin-right: 15px;white-space: nowrap;width: 52%;overflow: hidden;text-overflow: ellipsis; margin-right: 10px;">
-            ${{userDetail.TotalPrice}}</p>
-        </ion-col>
-      </ion-row>
-
+   
     </div>
   </div>
 
