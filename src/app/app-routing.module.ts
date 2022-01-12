@@ -103,7 +103,7 @@ const routes: Routes = [
     loadChildren: () => import('./status/status.module').then( m => m.StatusPageModule)
   },
   {
-    path: 'vendor-individual-order',
+    path: 'vendor-individual-order/:orderId',
     loadChildren: () => import('./vendor-individual-order/vendor-individual-order.module').then( m => m.VendorIndividualOrderPageModule)
   },
   {
@@ -119,9 +119,10 @@ const routes: Routes = [
     loadChildren: () => import('./vendor-complete/vendor-complete.module').then( m => m.VendorCompletePageModule)
   },
   {
-    path: 'vendor-complete-order-details',
+    path: 'vendor-complete-order-details/:orderId',
     loadChildren: () => import('./vendor-complete-order-details/vendor-complete-order-details.module').then( m => m.VendorCompleteOrderDetailsPageModule)
-  },  {
+  },
+  {
     path: 'payment-options',
     loadChildren: () => import('./payment-options/payment-options.module').then( m => m.PaymentOptionsPageModule)
   },
