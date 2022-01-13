@@ -1,8 +1,7 @@
 <ion-content>
   <div *ngFor="let userDetail of userDetails">
     <div style="display: flex;flex-direction: row;">
-      <img src="../assets/backk.png" class="iconn"
-        [routerLink]="['/vendor-incoming']">
+      <img src="../assets/backk.png" class="iconn" [routerLink]="['/vendor-incoming']">
       <!--{{userDetail.stallID}}-->
       <p style="display: flex;width: 85%;align-items: center;justify-content:
         center;"> Order ID #{{orderId}}</p>
@@ -39,25 +38,55 @@
               <p style="margin-left:60px">${{orderDetail.foodPrice}}</p>
               <hr>
             </ion-row>
-
+              <div *ngFor="let addon of orderDetail['addon']">
+                <p style="font-weight: bold;margin-right: 15px;white-space:
+                nowrap;width: 40%;overflow: hidden;text-overflow:
+                ellipsis;margin-left: 10px;">{{addon.addOnTitle}}</p>
+                <p style="margin-left:60px">${{addon.addOnPrice}}</p>
+              </div>
           </div>
         </ion-card>
 
-        
       </div>
 
-      <ion-row>
-        <ion-col>
-          <p
-            style="font-weight: bold;margin-right: 15px;white-space: nowrap;width: 52%;overflow: hidden;text-overflow: ellipsis; margin-left: 100px;">
-            Total Price: </p>
-        </ion-col>
-        <ion-col>
-          <p
-            style="font-weight: bold;margin-right: 15px;white-space: nowrap;width: 52%;overflow: hidden;text-overflow: ellipsis; margin-right: 10px;">
-            ${{userDetail.TotalPrice}}</p>
-        </ion-col>
-      </ion-row>
+      <ion-card>
+        <ion-row>
+          <ion-col>
+            <p
+              style="font-weight: bold;margin-right: 15px;white-space: nowrap;width: 52%;overflow: hidden;text-overflow: ellipsis; margin-left: 100px;">
+              Subtotal: </p>
+          </ion-col>
+          <ion-col>
+            <p
+              style="font-weight: bold;margin-right: 15px;white-space: nowrap;width: 52%;overflow: hidden;text-overflow: ellipsis; margin-right: 10px;">
+              ${{userDetail.Subtotal}}</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <p
+              style="font-weight: bold;margin-right: 15px;white-space: nowrap;width: 52%;overflow: hidden;text-overflow: ellipsis; margin-left: 100px;">
+              Surcharge: </p>
+          </ion-col>
+          <ion-col>
+            <p
+              style="font-weight: bold;margin-right: 15px;white-space: nowrap;width: 52%;overflow: hidden;text-overflow: ellipsis; margin-right: 10px;">
+              ${{userDetail.Surcharge}}</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <p
+              style="font-weight: bold;margin-right: 15px;white-space: nowrap;width: 52%;overflow: hidden;text-overflow: ellipsis; margin-left: 100px;">
+              Total Price: </p>
+          </ion-col>
+          <ion-col>
+            <p
+              style="font-weight: bold;margin-right: 15px;white-space: nowrap;width: 52%;overflow: hidden;text-overflow: ellipsis; margin-right: 10px;">
+              ${{userDetail.GrandTotal}}</p>
+          </ion-col>
+        </ion-row>
+      </ion-card>
     </div>
   </div>
 
@@ -74,10 +103,8 @@
         </ion-label>
       </ion-button>
 
-      <ion-button type="submit" (click)="cancelOrder()"
-        style="border-radius: 25px;color: #F5585C; width: 130px; height: 45px;
-        margin-top: 23px;box-shadow: 5px 5px 5px lightgray;margin-left: 13px;"
-        color="primary">
+      <ion-button type="submit" (click)="cancelOrder()" style="border-radius: 25px;color: #F5585C; width: 130px; height: 45px;
+        margin-top: 23px;box-shadow: 5px 5px 5px lightgray;margin-left: 13px;" color="primary">
         <ion-label style="color: white;text-transform: none;font-size:
           16px;font-family: 'Sen', sans-serif;">
           <b>Decline</b>
