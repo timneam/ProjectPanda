@@ -22,8 +22,6 @@ export class StatusPage implements OnInit {
   cancelledOrder = []
   completedOrder = []
 
-
-
   constructor(
     private orderService: OrderService,
   ) { }
@@ -68,7 +66,19 @@ export class StatusPage implements OnInit {
           this.orderService.test(doc, this.userId).then((res) => {
             if (res.length != 0) {
               res.forEach((doc) => {
-                let data = { "stallID": doc.stallID, "OrderID": doc.OrderID, "Status": doc.Status, "UserFirstName": doc.UserFirstName, "UserLastName": doc.UserLastName, "UserID": doc.UserID, "UserPhoneNumber": doc.UserPhoneNumber }
+                console.log(doc)
+                let data = {
+                  "stallID": doc.stallID, 
+                  "OrderID": doc.OrderID, 
+                  "Status": doc.Status, 
+                  "UserFirstName": doc.UserFirstName, 
+                  "UserLastName": doc.UserLastName, 
+                  "UserID": doc.UserID, 
+                  "UserPhoneNumber": doc.UserPhoneNumber,
+                  "Subtotal": doc.Subtotal,
+                  "Surcharge": doc.Surcharge,
+                  "GrandTotal": doc.GrandTotal, 
+                }
                 this.orderStatus.push(data)
               })
               resolve('get order')
@@ -85,12 +95,12 @@ export class StatusPage implements OnInit {
         reject('hmmm')
       } else {
         this.orderStatus.forEach((doc) => {
+          console.log(doc)
           this.orderService.lol(doc.stallID, doc.OrderID).then(res => {
             let menuArray = []
             res.forEach(doc => {
               menuArray.push(doc.data())
             })
-
             let data = {
               "stallID": doc.stallID,
               "OrderID": doc.OrderID,
@@ -99,14 +109,14 @@ export class StatusPage implements OnInit {
               "UserLastName": doc.UserLastName,
               "UserID": doc.UserID,
               "UserPhoneNumber": doc.UserPhoneNumber,
+              "Subtotal": doc.Subtotal,
+              "Surcharge": doc.Surcharge,
+              "GrandTotal": doc.GrandTotal,
               "menuItem": menuArray
             }
-
             console.log(data)
             this.orderData.push(data)
-
           })
-
         })
         setTimeout(() => {
           resolve('data')

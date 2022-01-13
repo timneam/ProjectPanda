@@ -133,10 +133,17 @@ export class Tab2Page {
     let users = this.auth.currentUser
     const ableToGetData = await getDoc(doc(this.db, "User", users.uid))
     if (this.cartItems.length != 0) {
-      // console.log(ableToGetData.data())
-      // console.log(this.stallId)
-      this.userDetails = { "UserID": this.userId, "UserFirstName": ableToGetData.data().firstName, "UserLastName": ableToGetData.data().lastName, "UserPhoneNumber": ableToGetData.data().phoneNumber, "Status": "Pending", "TotalPrice": this.grandTotal, "stallID": this.stallId }
-      // console.log(this.userId)
+      this.userDetails = { 
+        "UserID": this.userId, 
+        "UserFirstName": ableToGetData.data().firstName, 
+        "UserLastName": ableToGetData.data().lastName, 
+        "UserPhoneNumber": ableToGetData.data().phoneNumber, 
+        "Status": "Pending", 
+        "stallID": this.stallId, 
+        "Subtotal": this.totalString, 
+        "Surcharge": this.surchargeString, 
+        "GrandTotal": this.grandTotalString 
+      }
       this.orderService.addOrderId(this.stallId, this.userDetails).then((res) => {
         console.log(res.id)
         this.cartItems.forEach((doc) => {

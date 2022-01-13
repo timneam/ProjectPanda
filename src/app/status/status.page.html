@@ -41,18 +41,13 @@
           <div style="display: flex;flex-direction: column;">
             <div
               style="display:flex;flex-direction:row;font-size: 14px;margin-top:5px;font-family: 'Open Sans';">
-              <p style="margin-right: 30px; margin-left: 40px             "> Subtotal: </p>
-              <p style="margin-left:45px"> $5.00 </p>
+              <p style="margin-right: 30px; margin-left: 40px;"> Subtotal: </p>
+              <p style="margin-left:45px"> ${{order.Subtotal}} </p>
             </div>
             <div
               style="display:flex;flex-direction:row;font-size: 14px;margin-top:-15px;font-family: 'Open Sans';">
               <p> Surcharge Cost: </p>
-              <p style="margin-left: 70px;" > $0.90 </p>
-            </div>
-            <div
-              style="display:flex;flex-direction:row;font-size: 11px;margin-top:-15px;font-family: 'Open Sans';">
-              <p style="margin-right: 75px;"> Cost per container: </p>
-              <p > $3.30 </p>
+              <p style="margin-left: 70px;" > ${{order.Surcharge}} </p>
             </div>
             <div
               style="display:flex;flex-direction:row;font-size: 11px;margin-top:-15px;font-family: 'Open Sans';">
@@ -62,7 +57,7 @@
             <div
               style="display:flex;flex-direction:row;font-size: 16px;justify-content:space-around;font-family: 'Open Sans';">
               <p> Grand Total:</p>
-              <p style="margin-left:88px"> $10.00 </p>
+              <p style="margin-left:88px"> ${{order.GrandTotal}} </p>
             </div>
           </div>
         </div>
