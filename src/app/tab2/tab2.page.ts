@@ -40,7 +40,7 @@ export class Tab2Page {
   discountedPriceString: any
   amountSaved = 0
   amountSavedString: any
-  
+
 
   constructor(
     public photoService: PhotoService,
@@ -132,27 +132,30 @@ export class Tab2Page {
   async checkout() {
     let users = this.auth.currentUser
     const ableToGetData = await getDoc(doc(this.db, "User", users.uid))
-    // console.log(ableToGetData.data())
-    // console.log(this.stallId)
-    this.userDetails = { "UserID": this.userId, "UserFirstName": ableToGetData.data().firstName, "UserLastName": ableToGetData.data().lastName, "UserPhoneNumber": ableToGetData.data().phoneNumber, "Status": "Pending", "TotalPrice": this.grandTotal, "stallID": this.stallId }
-    // console.log(this.userId)
-    this.orderService.addOrderId(this.stallId, this.userDetails).then((res) => {
-      console.log(res.id)
-      this.cartItems.forEach((doc) => {
-        console.log(doc)
-        this.orderService.addToOrders(this.stallId, res.id, doc.id, doc)
-      })
-    }).then(() => {
-      this.cartService.getItemsInACart(this.userId, this.stallId).then((doc) => {
-        doc.forEach((doc) => {
-          console.log(doc.id)
-          this.cartService.removeItemFromCart(this.userId, this.stallId, doc.id).then(() => {
-            console.log("All items removed from cart!")
-            this.navCntrl.navigateForward('payment-options');
+    if (this.cartItems.length != 0) {
+      // console.log(ableToGetData.data())
+      // console.log(this.stallId)
+      this.userDetails = { "UserID": this.userId, "UserFirstName": ableToGetData.data().firstName, "UserLastName": ableToGetData.data().lastName, "UserPhoneNumber": ableToGetData.data().phoneNumber, "Status": "Pending", "TotalPrice": this.grandTotal, "stallID": this.stallId }
+      // console.log(this.userId)
+      this.orderService.addOrderId(this.stallId, this.userDetails).then((res) => {
+        console.log(res.id)
+        this.cartItems.forEach((doc) => {
+          console.log(doc)
+          this.orderService.addToOrders(this.stallId, res.id, doc.id, doc)
+        })
+      }).then(() => {
+        this.cartService.getItemsInACart(this.userId, this.stallId).then((doc) => {
+          doc.forEach((doc) => {
+            console.log(doc.id)
+            this.cartService.removeItemFromCart(this.userId, this.stallId, doc.id).then(() => {
+              console.log("All items removed from cart!")
+              this.cartService.removeCart(this.userId, this.stallId)
+              this.navCntrl.navigateForward('payment-options');
+            })
           })
         })
       })
-    })
+    }
   }
 
   calFood(_callback) {
@@ -180,7 +183,7 @@ export class Tab2Page {
 
     this.surcharge = (this.containerQuantity * 3) / 10
     this.grandTotal = this.total + this.addOnPrice + this.surcharge
-    this.totalString =this.total.toFixed(2)
+    this.totalString = this.total.toFixed(2)
     this.surchargeString = this.surcharge.toFixed(2)
     this.grandTotalString = this.grandTotal.toFixed(2)
     this.discountedPrice = (this.grandTotal / 100) * 90

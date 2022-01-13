@@ -22,10 +22,10 @@ export class CartSelectionPage implements OnInit {
     private usersService: UsersService) { }
 
   ngOnInit() {
-    this.testRefresh();
+    this.getCurrentUser();
   }
 
-  testRefresh = async function () {
+  getCurrentUser = async function () {
     onAuthStateChanged(this.auth, async (user) => {
       if (user) {
         let users = this.auth.currentUser
@@ -40,7 +40,6 @@ export class CartSelectionPage implements OnInit {
 
   getStallsCart() {
     this.cartService.getAllStallsCart(this.userId).then(res => {
-
       if (res.length !== 0) {
         res.forEach(res => {
           let stallData = { "id": res }
@@ -56,6 +55,15 @@ export class CartSelectionPage implements OnInit {
 
   goToStallCart(stallId) {
     this.router.navigateByUrl(`/cart/${stallId}`)
+  }
+
+  doRefresh(event) {
+    this.stallsCart = [];
+    setTimeout(() => {
+      event.target.complete().then(() => {
+        this.getCurrentUser()
+      })
+    }, 2000);
   }
 
 }

@@ -30,6 +30,10 @@ export class CartService {
     return stallList
   }
 
+  async removeCart(userId, stallId) {
+    const removeCart = await deleteDoc(doc(this.db, 'User', userId, 'Cart', stallId))
+  }
+
   // create cart for a stall (cart -> stall -> menuList)
   async createCartForAStall(userId, stallId, data) {
     const addStallCart = await setDoc(doc(this.db, 'User', userId, 'Cart', stallId), data)
