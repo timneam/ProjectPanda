@@ -6,36 +6,42 @@
         #{{orderId}}</p>
     </div>
 
-      <div style="display: flex;margin-top: 25px; align-items: center;justify-content: center;margin-right: 50px;">
+    <div>
+      <div style="display: flex;margin-top: 25px; align-items:
+        center;justify-content: center;margin-right: 50px;">
         <img src="../assets/profile.png">
-        <h4 style="margin-left: 28px;">{{userDetail.UserFirstName}} {{userDetail.UserLastName}}</h4>
+        <h4 style="margin-left: 28px;">{{userDetail.UserFirstName}}
+          {{userDetail.UserLastName}}</h4>
       </div>
-      <div style="display: flex;align-items: center;justify-content: center;margin-top: 5px;">
+      <div style="display: flex;align-items: center;justify-content:
+        center;margin-top: 5px;">
         <ion-card class="textCard1">
           <ion-item lines='none'>
-            <ion-icon name="call-outline" style="margin-right: 8px;color: white;"></ion-icon>
+            <ion-icon name="call-outline" style="margin-right: 8px;color:
+              white;"></ion-icon>
             <p> &nbsp; {{userDetail.UserPhoneNumber}}</p>
           </ion-item>
         </ion-card>
       </div>
 
-      <div *ngFor="let orderDetail of orderDetails">
-        <div style="display: flex;flex-direction: row;align-items: center;justify-content: center;margin-bottom: -2px;">
-          <ion-row>
-            <ion-col>
-              <p
-                style="font-weight: bold;margin-right: 15px;white-space: nowrap;width: 52%;overflow: hidden;text-overflow: ellipsis;margin-left: 10px;">
-                {{orderDetail.foodName}}</p>
-            </ion-col>
-            <ion-col>
-              <p style="margin-right: 80px;">x{{orderDetail.foodQty}}</p>
-            </ion-col>
-            <ion-col>
-              <p style="margin-right: 80px;">${{orderDetail.foodPrice}}</p>
-            </ion-col>
-          </ion-row>
 
-        </div>
+      <div style="display: flex;flex-direction: row;align-items:
+        center;justify-content: center;margin-bottom: -2px;">
+        <ion-card style="width: 80%;">
+          <div *ngFor="let orderDetail of orderDetails">
+            <ion-row>
+              <p style="font-weight: bold;margin-right: 15px;white-space:
+                nowrap;width: 40%;overflow: hidden;text-overflow:
+                ellipsis;margin-left: 10px;">{{orderDetail.foodName}}</p>
+              <p style="">x{{orderDetail.foodQty}}</p>
+              <p style="margin-left:60px">${{orderDetail.foodPrice}}</p>
+              <hr>
+            </ion-row>
+
+          </div>
+        </ion-card>
+
+        
       </div>
 
       <ion-row>
@@ -51,6 +57,7 @@
         </ion-col>
       </ion-row>
     </div>
+  </div>
 
 
 </ion-content>
