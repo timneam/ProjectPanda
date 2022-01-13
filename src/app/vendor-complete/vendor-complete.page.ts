@@ -62,4 +62,17 @@ export class VendorCompletePage implements OnInit {
     this.router.navigateByUrl(`/vendor-complete-order-details/${orderId}`)
   }
 
+  doRefresh(event) {
+    console.log('Begin async operation');
+
+    this.orders = [];
+    this.completedOrders = [];
+    
+    setTimeout(() => {
+      event.target.complete().then(() => {
+        this.getCurrentUser()
+      })
+    }, 2000);
+  }
+
 }

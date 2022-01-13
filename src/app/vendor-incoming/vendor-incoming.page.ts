@@ -63,4 +63,17 @@ export class VendorIncomingPage implements OnInit {
     this.router.navigateByUrl(`/vendor-incoming-order-details/${orderId}`)
   }
 
+  doRefresh(event) {
+    console.log('Begin async operation');
+
+    this.orders = [];
+    this.incomingOrders = [];
+    
+    setTimeout(() => {
+      event.target.complete().then(() => {
+        this.getCurrentUser()
+      })
+    }, 2000);
+  }
+
 }

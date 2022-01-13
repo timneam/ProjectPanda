@@ -1,5 +1,9 @@
 <ion-content>
-
+  <ion-refresher slot="fixed" pull-factor="0.5" pull-min="100" pull-max="200" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pulling-icon="chevron-down-circle-outline" pulling-text="Pull to refresh"
+      refreshing-spinner="circles" refreshing-text="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
   <img src="../assets/backk.png" class="iconn" [routerLink]="['/vendor-tabs/orders']">
   <div style="text-align: center;">
     <h2 style="margin-bottom: 10%;">Incoming Orders</h2>

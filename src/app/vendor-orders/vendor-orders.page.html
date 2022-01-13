@@ -1,4 +1,10 @@
 <ion-content>
+  <ion-refresher slot="fixed" pull-factor="0.5" pull-min="100" pull-max="200" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pulling-icon="chevron-down-circle-outline" pulling-text="Pull to refresh"
+      refreshing-spinner="circles" refreshing-text="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+  
   <h1 class="headerr">Orders</h1>
 
   <div style="display: flex;justify-content: center;flex-direction: column;align-items: center;" *ngFor="let order of preparingOrders">
