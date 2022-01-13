@@ -161,7 +161,7 @@ export class UsersService {
 
   signoutUser() {
     const auth = getAuth();
-    signOut(auth).then(() => {
+    signOut(auth).then((res) => {
       this.navCntrl.navigateForward('/login-or-register');
       console.log("User has successfully logged out");
     }).catch((error) => {

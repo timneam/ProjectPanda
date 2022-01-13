@@ -158,11 +158,8 @@ export class StatusPage implements OnInit {
     console.log(this.completedOrder)
     
     setTimeout(() => {
-      console.log('Async operation has ended');
       event.target.complete().then(() => {
-
-
-        this.getOrdersFunction()
+        this.getCurrentUser()
       })
     }, 2000);
   }

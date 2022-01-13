@@ -1,4 +1,10 @@
 <ion-content>
+  <ion-refresher slot="fixed" pull-factor="0.5" pull-min="100" pull-max="200" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pulling-icon="chevron-down-circle-outline" pulling-text="Pull to refresh"
+      refreshing-spinner="circles" refreshing-text="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+  
   <div style="display:flex; flex-direction: column;">
     <div style="display: flex;flex-direction: row;">
       <img src="../assets/backk.png" class="iconn" [routerLink]="['/tabs/cart-selection']"
@@ -63,14 +69,18 @@
       <p> Surcharge Cost: </p>
       <p style="margin-left:2px"> ${{surchargeString}} </p>
     </div>
-    <div
+    <!-- <div
       style="display:flex;flex-direction:row;font-size: 11px;justify-content:space-around;margin-top:-15px;font-family: 'Open Sans';">
       <p> Cost per container: $0.30</p>
       <p style="margin-left:5px"> ${{containerCostString}} </p>
-    </div>
+    </div> -->
     <div style="display:flex;flex-direction:row;font-size: 16px;justify-content:space-around;font-family: 'Open Sans';">
       <p> Grand Total:</p>
       <p style="margin-left:8px"> ${{grandTotalString}} </p>
+    </div>
+    <div style="display:flex;flex-direction:row;font-size: 16px;justify-content:space-around;font-family: 'Open Sans';">
+      <p> Discount (10%): </p>
+      <p style="margin-left:8px"> Save ${{amountSavedString}} with Singtel Dash! </p>
     </div>
     <hr style="align-self: center;">
 
