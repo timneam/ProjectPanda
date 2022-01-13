@@ -4,6 +4,7 @@ import { Validators, FormBuilder } from '@angular/forms';
 import { collection, doc, getDoc, getDocs, getFirestore } from 'firebase/firestore';
 import { LoadingController } from '@ionic/angular';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab1',
@@ -25,7 +26,8 @@ export class Tab1Page {
   constructor(
     private LoadingController: LoadingController,
     private StallsService: StallsService,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder,
+    private router: Router) {
 
   }
 
@@ -41,7 +43,7 @@ export class Tab1Page {
         this.getUserData()
       } else {
         console.log("User is signed out")
-        this.navCntrl.navigateForward('splash');
+        this.router.navigateByUrl('splash');
       }
     });
   };

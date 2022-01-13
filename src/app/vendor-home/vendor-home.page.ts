@@ -30,7 +30,7 @@ export class VendorHomePage implements OnInit {
         this.showMenu()
       } else {
         console.log("User is signed out")
-        this.navCntrl.navigateForward('splash');
+        this.router.navigateByUrl('splash');
       }
     });
   };
