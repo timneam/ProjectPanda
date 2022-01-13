@@ -24,32 +24,39 @@
       <div class="content-inner">
         <div
           style="display: flex;flex-direction: column;align-items: center;justify-content: center;margin-bottom: -2px;">
-          <ion-row *ngFor=" let data of order['menuItem']">
-            <p style="font-weight: bold;margin-right: 18px;">{{data.foodName}}</p>
-            <p style="margin-right: 88px;">x2</p>
-            <p>$5.00</p>
-            <hr>
-
-          </ion-row>
+   
+          <div style="display: flex;flex-direction: row;align-items: center;justify-content: center;margin-bottom: -2px;">
+           
+              <div>
+            <ion-row *ngFor=" let data of order['menuItem']">
+              <p style="font-weight: bold;margin-right: 15px;white-space: nowrap;width: 40%;overflow: hidden;text-overflow: ellipsis;margin-left: 10px;">{{data.foodName}}</p>
+              <p style="">x{{data.foodQty}}</p>
+              <p style="margin-left:60px">${{data.foodPrice}}</p>
+              <hr>
+            </ion-row>
+       
+          </div>
+        
+        </div>
           <div style="display: flex;flex-direction: column;">
             <div
-              style="display:flex;flex-direction:row;font-size: 14px;justify-content:space-around;margin-top:5px;font-family: 'Open Sans';">
-              <p> Subtotal: </p>
-              <p style="margin-left:50px"> $5.00 </p>
+              style="display:flex;flex-direction:row;font-size: 14px;margin-top:5px;font-family: 'Open Sans';">
+              <p style="margin-right: 30px; margin-left: 40px             "> Subtotal: </p>
+              <p style="margin-left:45px"> $5.00 </p>
             </div>
             <div
-              style="display:flex;flex-direction:row;font-size: 14px;justify-content:space-around;margin-top:-15px;font-family: 'Open Sans';">
+              style="display:flex;flex-direction:row;font-size: 14px;margin-top:-15px;font-family: 'Open Sans';">
               <p> Surcharge Cost: </p>
-              <p style="margin-left:2px"> $0.90 </p>
+              <p style="margin-left: 70px;" > $0.90 </p>
             </div>
             <div
-              style="display:flex;flex-direction:row;font-size: 11px;justify-content:space-around;margin-top:-15px;font-family: 'Open Sans';">
-              <p> Cost per container: </p>
-              <p style="margin-left:5px"> $3.30 </p>
+              style="display:flex;flex-direction:row;font-size: 11px;margin-top:-15px;font-family: 'Open Sans';">
+              <p style="margin-right: 75px;"> Cost per container: </p>
+              <p > $3.30 </p>
             </div>
             <div
-              style="display:flex;flex-direction:row;font-size: 11px;justify-content:space-around;margin-top:-15px;font-family: 'Open Sans';">
-              <p> Staff discount:</p>
+              style="display:flex;flex-direction:row;font-size: 11px;margin-top:-15px;font-family: 'Open Sans';">
+              <p style="margin-right: 70px;margin-left: 24px;"> Staff discount:</p>
               <p style="margin-left:5px"> -10% </p>
             </div>
             <div
