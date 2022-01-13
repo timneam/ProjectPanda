@@ -19,21 +19,21 @@
   <div class="centerise">
     <div class="textboxxes">
 
-      <ion-card class="textCard">
-        <ion-item>
-          <ion-icon name="mail-outline" style="margin-right: 8px;"></ion-icon>
-          <ion-input name="Email" type="email" value={{data.email}} disabled></ion-input>
-
-        </ion-item>
-        <ion-icon name="create-outline" style="color: black;font-size: 16px;" [routerLink]="['/profile-email-edit']"
-          enabled></ion-icon>
-      </ion-card>
-
       <ion-card class="textCard1" *ngFor="let data of userData">
         <ion-item lines='none'>
           <ion-icon name="call-outline" style="margin-right: 8px;"></ion-icon>
           <ion-input name="Phone Number" type="number" value={{data.phoneNumber}} disabled></ion-input>
         </ion-item>
+      </ion-card>
+
+      <ion-card class="textCard">
+        <ion-item>
+          <ion-icon name="mail-outline" style="margin-right: 8px;"></ion-icon>
+          <ion-input name="Email" type="email" value={{data.email}} disabled></ion-input>
+        </ion-item>
+        <ion-icon name="create-outline" style="color: black;font-size: 16px;" [routerLink]="['/profile-email-edit']"
+          enabled>
+        </ion-icon>
       </ion-card>
 
       <ion-card class="textCard1">
