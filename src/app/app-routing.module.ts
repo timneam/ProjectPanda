@@ -131,7 +131,7 @@ const routes: Routes = [
     loadChildren: () => import('./order-confirmation/order-confirmation.module').then( m => m.OrderConfirmationPageModule)
   },
   {
-    path: 'order-status/:id',
+    path: 'order-status/:stallId/:orderId',
     loadChildren: () => import('./order-status/order-status.module').then( m => m.OrderStatusPageModule)
   }
 

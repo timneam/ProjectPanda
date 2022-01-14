@@ -103,6 +103,8 @@ export class StatusPage implements OnInit {
             res.forEach(doc => {
               menuArray.push(doc.data())
             })
+            this.stallId = doc.stallID
+            console.log(this.stallId)
             let data = {
               "stallID": doc.stallID,
               "OrderID": doc.OrderID,
@@ -177,7 +179,7 @@ export class StatusPage implements OnInit {
   }
 
   goToOrderStatusPage(orderId){
-    this.router.navigateByUrl(`/order-status/${orderId}`)
+    this.router.navigateByUrl(`/order-status/${this.stallId}/${orderId}`)
     
   }
 
