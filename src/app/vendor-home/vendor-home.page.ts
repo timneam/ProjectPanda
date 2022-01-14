@@ -47,7 +47,14 @@ export class VendorHomePage implements OnInit {
     stallDetails.forEach((doc) => {
       console.log(doc.id);
       let menuData = doc.data();
-      let menuItems = { "foodId" : doc.id, "foodName" : menuData.foodName, "foodPrice": menuData.foodPrice , "foodDetails": menuData.foodDetails , "foodEstTime": menuData.foodEstTime}
+      let menuItems = { 
+        "foodId" : doc.id, 
+        "foodName" : menuData.foodName,
+        "foodPrice": menuData.foodPrice, 
+        "foodDetails": menuData.foodDetails, 
+        "foodEstTime": menuData.foodEstTime,
+        "foodImg" : menuData.foodImg
+      }
       this.menu.push(menuItems);
     })
   }
