@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { OrderService } from '../services/order.service';
 
@@ -24,6 +25,7 @@ export class StatusPage implements OnInit {
 
   constructor(
     private orderService: OrderService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -173,4 +175,10 @@ export class StatusPage implements OnInit {
       })
     }, 2000);
   }
+
+  goToOrderStatusPage(orderId){
+    this.router.navigateByUrl(`/order-status/${orderId}`)
+    
+  }
+
 }
