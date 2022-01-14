@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { OrderService } from '../services/order.service';
 import { getDoc, doc, getDocs, collection, getFirestore } from 'firebase/firestore';
@@ -21,7 +21,8 @@ export class VendorCompleteOrderDetailsPage implements OnInit {
   orderDetails = [];
 
   constructor(private activatedRoute: ActivatedRoute,
-    private orderService:OrderService) { 
+    private orderService:OrderService,
+    private router:Router) { 
     this.orderId = this.activatedRoute.snapshot.paramMap.get('orderId')
   }
 
@@ -37,7 +38,7 @@ export class VendorCompleteOrderDetailsPage implements OnInit {
         this.getOrderDetails()
       } else {
         console.log("User is signed out")
-        this.navCntrl.navigateForward('splash');
+        this.router.navigateByUrl('splash');
       }
     });
   };
