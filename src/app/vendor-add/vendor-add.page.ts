@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { Location } from '@angular/common';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
@@ -17,12 +17,14 @@ export class VendorAddPage implements OnInit {
 
   db = getFirestore();
   // Test Data
-  stallId : any;
-  menuId : any;
-  addonId : any;
+  stallId: any;
+  menuId: any;
+  addonId: any;
   stallMenu = []
   addonData = []
   getAddonData = []
+
+  photoURL: any;
 
   addMenuForm: FormGroup;
 
@@ -35,7 +37,7 @@ export class VendorAddPage implements OnInit {
     private stallsService: StallsService,
     private route: Router) {
 
-      this.stallId = this.activatedRoute.snapshot.paramMap.get('stallId')
+    this.stallId = this.activatedRoute.snapshot.paramMap.get('stallId')
 
   }
 
@@ -51,29 +53,67 @@ export class VendorAddPage implements OnInit {
   }
 
   async addMenuDetails() {
-    const data = {
-      foodName: this.addMenuForm.value.foodName,
-      foodPrice: this.addMenuForm.value.foodPrice,
-      foodDetails: this.addMenuForm.value.foodDescription,
-      foodEstTime: this.addMenuForm.value.foodEstTime,
-      foodQuantity: this.item_qty,
-    }
-    this.stallsService.addItem(
-      this.stallId,
-      data
-    ).then(res => {
-      console.log("Menu add with Id :" + res.id)
-      if (res.id != null && this.addonData != null) {
-        for (let i = 0; i < this.addonData.length; i++) {
-          this.stallsService.addMenuAddon(this.stallId, res.id, this.addonData[i]).then(res => {
-            console.log("Addon added with Id :" + res.id)
-          })
+    const storage = getStorage();
+    const storageRef = ref(storage, `images/${this.fileImg.name}`);
+    const uploadTask = uploadBytesResumable(storageRef, this.fileImg);
+    // console.log(uploadTask)
+
+    // make if statement if file size to big? or format is wrong
+    uploadTask.on('state_changed',
+      (snapshot) => {
+        // do shit here for the "progress bar"
+        // make global variable that updates then display it on HTML
+        // console.log(snapshot)
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        // console.log('Upload is ' + progress + '% done');
+        // go show this in HTML or smt for the progress tracking
+        this.progress = progress
+        switch (snapshot.state) {
+          case 'paused':
+            console.log('Upload is paused');
+            break;
+          case 'running':
+            console.log('Upload is running');
+            break;
         }
+      },
+      (error) => {
+        // Handle unsuccessful uploads
+        console.log(error)
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((res) => {
+          // This is the file url for the image btw 
+          // Go add this to the SRC on front-end
+          // update doc image or add to doc
+          console.log('File available at', res);
+          this.photoURL = res
+
+          const data = {
+            foodName: this.addMenuForm.value.foodName,
+            foodPrice: this.addMenuForm.value.foodPrice,
+            foodDetails: this.addMenuForm.value.foodDescription,
+            foodEstTime: this.addMenuForm.value.foodEstTime,
+            foodQuantity: this.item_qty,
+            foodImg: this.photoURL
+          }
+
+          this.stallsService.addItem(this.stallId, data).then(res => {
+            console.log("Menu add with Id :" + res.id)
+            if (res.id != null && this.addonData != null) {
+              for (let i = 0; i < this.addonData.length; i++) {
+                this.stallsService.addMenuAddon(this.stallId, res.id, this.addonData[i]).then(res => {
+                  console.log("Addon added with Id :" + res.id)
+                })
+              }
+            }
+            this.route.navigateByUrl('/vendor-tabs/home');
+          }).catch((error) => {
+            console.error(error);
+          });
+        });
       }
-      this.route.navigateByUrl('/vendor-tabs/home');
-    }).catch((error) => {
-      console.error(error);
-    });
+    );
   }
 
   async addAddon() {
@@ -162,64 +202,27 @@ export class VendorAddPage implements OnInit {
 
   fileImg: any;
   progress: any;
+  preview: any;
 
-  onchange = (img) => {
-    console.log("test meow")
-    const file = img.target.files
-    this.fileImg = file[0]
-    console.log(this.fileImg)
-    console.log(this.fileImg.name)
+  onchange() {
+    let input = document.createElement('input');
+    input.type = 'file';
+    input.onchange = (img) => {
+      // you can use this method to get file and perform respective operations
+      let file = Array.from(input.files);
+      console.log(file);
 
-  }
-
-  addImageToDatabase() {
-    const storage = getStorage();
-    const storageRef = ref(storage, `images/${this.fileImg.name}`);
-
-    const uploadTask = uploadBytesResumable(storageRef, this.fileImg);
-    console.log(uploadTask)
-
-    // make if statement if file size to big? or format is wrong
-    uploadTask.on('state_changed',
-      (snapshot) => {
-        // do shit here for the "progress bar"
-        // make global variable that updates then display it on HTML
-        console.log(snapshot)
-        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log('Upload is ' + progress + '% done');
-        // go show this in HTML or smt for the progress tracking
-        this.progress = progress
-        switch (snapshot.state) {
-          case 'paused':
-            console.log('Upload is paused');
-            break;
-          case 'running':
-            console.log('Upload is running');
-            break;
-        }
-      },
-      (error) => {
-        // Handle unsuccessful uploads
-        console.log(error)
-      },
-      () => {
-        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          // This is the file url for the image btw 
-          // Go add this to the SRC on front-end
-          // update doc image or add to doc
-          console.log('File available at', downloadURL);
-        });
+      this.fileImg = file[0]
+      let reader = new FileReader();
+      reader.onload = function () {
+        let output: any = document.getElementById('previewImg');
+        output.src = reader.result;
       }
-    );
-
-    // // Pause the upload
-    // uploadTask.pause();
-
-    // // Resume the upload
-    // uploadTask.resume();
-
-    // // Cancel the upload
-    // uploadTask.cancel();
+      if (this.fileImg) {
+        reader.readAsDataURL(this.fileImg);
+      }
+    };
+    input.click();
   }
 
 }
