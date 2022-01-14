@@ -15,54 +15,12 @@
         <div style="display: flex;flex-direction: column;margin-top: 5px;">
           <p style="margin-bottom: 0px;margin-top: 8px;">Stall Name: {{order.stallID}} </p>
           <p style="margin-bottom: 0px;margin-top: 8px;">Order ID: {{order.OrderID}} </p>
-          <p style="margin-bottom: 0px;margin-top: 8px;">Status: {{order.Status}} </p>
+          <p style="margin-bottom: 0px;margin-top: 8px;font-weight: bold;">Status: {{order.Status}} </p>
         </div>
 
       </div>
     </label>
-    <div class="collapsible-content">
-      <div class="content-inner">
-        <div
-          style="display: flex;flex-direction: column;align-items: center;justify-content: center;margin-bottom: -2px;">
    
-          <div style="display: flex;flex-direction: row;align-items: center;justify-content: center;margin-bottom: -2px;">
-           
-              <div>
-            <ion-row *ngFor=" let data of order['menuItem']">
-              <p style="font-weight: bold;margin-right: 15px;white-space: nowrap;width: 40%;overflow: hidden;text-overflow: ellipsis;margin-left: 10px;">{{data.foodName}}</p>
-              <p>x{{data.foodQty}}</p>
-              <p style="margin-left:60px">${{data.foodPrice}}</p>
-              <hr>
-            </ion-row>
-       
-          </div>
-        
-        </div>
-          <div style="display: flex;flex-direction: column;">
-            <div
-              style="display:flex;flex-direction:row;font-size: 14px;margin-top:5px;font-family: 'Open Sans';">
-              <p style="margin-right: 30px; margin-left: 40px;"> Subtotal: </p>
-              <p style="margin-left:45px"> ${{order.Subtotal}} </p>
-            </div>
-            <div
-              style="display:flex;flex-direction:row;font-size: 14px;margin-top:-15px;font-family: 'Open Sans';">
-              <p> Surcharge Cost: </p>
-              <p style="margin-left: 70px;" > ${{order.Surcharge}} </p>
-            </div>
-            <div
-              style="display:flex;flex-direction:row;font-size: 11px;margin-top:-15px;font-family: 'Open Sans';">
-              <p style="margin-right: 70px;margin-left: 24px;"> Staff discount:</p>
-              <p style="margin-left:5px"> -10% </p>
-            </div>
-            <div
-              style="display:flex;flex-direction:row;font-size: 16px;justify-content:space-around;font-family: 'Open Sans';">
-              <p> Grand Total:</p>
-              <p style="margin-left:88px"> ${{order.GrandTotal}} </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 
   
@@ -74,16 +32,16 @@
   <div class="wrap-collabsible" *ngFor="let order of preparingOrder">
     <input id="collapsible" class="toggle" type="checkbox">
     <label for="collapsible" class="lbl-toggle">
-      <div style="display: flex;flex-direction: row;margin-top: 5px;margin-left: 8px;align-items: center;">
+      <div style="display: flex;flex-direction: row;margin-top: 5px;margin-left: 8px;align-items: center;" [routerLink]="['/order-status']">
         <div style="display: flex;flex-direction: column;margin-top: 5px;">
           <p style="margin-bottom: 0px;margin-top: 8px;">Stall Name: {{order.stallID}} </p>
           <p style="margin-bottom: 0px;margin-top: 8px;">Order ID: {{order.OrderID}} </p>
-          <p style="margin-bottom: 0px;margin-top: 8px;">Status: {{order.Status}} </p>
+          <p style="margin-bottom: 0px;margin-top: 8px;">Status: <b>{{order.Status}} </b></p>
         </div>
 
       </div>
     </label>
-    <div class="collapsible-content">
+ <!---  <div class="collapsible-content">
       <div class="content-inner">
         <div
           style="display: flex;flex-direction: column;align-items: center;justify-content: center;margin-bottom: -2px;">
@@ -125,7 +83,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 
 
