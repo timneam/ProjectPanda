@@ -36,16 +36,19 @@
                 ellipsis;margin-left: 10px;">{{orderDetail.foodName}}</p>
               <p>x{{orderDetail.foodQty}}</p>
               <p style="margin-left:60px">${{orderDetail.foodPrice}}</p>
-              <hr>
+             
             </ion-row>
-              <div *ngFor="let addon of orderDetail['addon']">
-                <p style="font-weight: bold;margin-right: 15px;white-space:
-                nowrap;width: 40%;overflow: hidden;text-overflow:
-                ellipsis;margin-left: 10px;">{{addon.addOnTitle}}</p>
-                <p style="margin-left:60px">${{addon.addOnPrice}}</p>
-              </div>
+            <div *ngFor="let addon of orderDetail['addon']" style="display: flex;flex-direction: column;">
+              <div style="display: flex;flex-direction: column;">
+              <p style="font-weight: 200;margin-right: 15px;white-space:
+            nowrap;width: 100%;overflow: hidden;text-overflow:
+            ellipsis;margin-left: 10px;font-size: 12px;margin-top: -1px;">+{{addon.addOnTitle}} (${{addon.addOnPrice}})</p>
+             </div>
+            </div>
+            <hr>
           </div>
         </ion-card>
+
 
       </div>
 
