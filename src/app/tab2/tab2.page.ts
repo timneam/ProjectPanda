@@ -40,6 +40,9 @@ export class Tab2Page {
   discountedPriceString: any
   amountSaved = 0
   amountSavedString: any
+  addOnPriceFinal = 0
+  FoodQuantity = 0;
+  subTotal = 0;
 
 
   constructor(
@@ -171,6 +174,7 @@ export class Tab2Page {
     this.cartItems.forEach(data => {
       this.containerQuantity = this.containerQuantity + data.foodQty
       this.total = this.total + (data.foodPrice * data.foodQty)
+      this.FoodQuantity = data.foodQty
       data.addon.forEach(data => {
         this.addOnPrice = this.addOnPrice + parseFloat(data.addOnPrice)
         console.log("addon : $" + this.addOnPrice)
@@ -188,9 +192,11 @@ export class Tab2Page {
       console.log("---------------------");
     });
 
+    this.addOnPriceFinal = this.addOnPrice * this.FoodQuantity
     this.surcharge = (this.containerQuantity * 3) / 10
-    this.grandTotal = this.total + this.addOnPrice + this.surcharge
-    this.totalString = this.total.toFixed(2)
+    this.grandTotal = this.total + this.addOnPriceFinal + this.surcharge
+    this.subTotal = this.total + this.addOnPriceFinal
+    this.totalString = this.subTotal.toFixed(2)
     this.surchargeString = this.surcharge.toFixed(2)
     this.grandTotalString = this.grandTotal.toFixed(2)
     this.discountedPrice = (this.grandTotal / 100) * 90
