@@ -7,13 +7,15 @@
   
   <h1 class="headerr">Orders</h1>
 
-  <div style="display: flex;justify-content: center;flex-direction: column;align-items: center;" *ngFor="let order of preparingOrders">
-    <ion-card (click)="goToOrderDetails(order.id)"
-      style="border-radius: 0px;border-color: black;width: 82%;color: black;height: 55px;box-shadow: none;border:groove 1px;border-color: black;margin-bottom: -11px;">
-      <div style="display: flex;flex-direction: row;margin-top: 5px;margin-left: 8px;align-items: center;">
-        <p>Order id: {{order.id}}  </p>
-        <ion-icon name="caret-forward-outline" style="font-size: 18px;margin-left: 110px;margin-bottom: 2px;">
-        </ion-icon>
+  <div style="display: flex;flex-direction: column; align-items: center;margin-top: -6%;" *ngFor="let order of preparingOrders">
+    <ion-card 
+      style="border-radius: 0px;border-color: black;width: 82%;color: black;height: 55px;box-shadow: none;border:groove 1px;border-color: black;">
+      <div style="display: flex;flex-direction: row;margin-top: 5px;margin-left: 8px;align-items: center;white-space: pre;">
+        <div (click)="goToOrderDetails(order.id)">
+          <p>Order id: {{order.id}} </p>
+          <ion-icon name="caret-forward-outline" style="font-size: 18px;margin-left: 250px;margin-bottom: 2px;position: absolute;">
+          </ion-icon>
+        </div>
       </div>
     </ion-card>
   </div>
