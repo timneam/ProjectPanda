@@ -62,7 +62,13 @@ export class MenuPage implements OnInit {
     const querySnapshot = await getDocs(collection(this.db, "Stall", this.stallId, "Menu"));
     querySnapshot.forEach((doc) => {
       let data = doc.data()
-      let foodData = { "foodId": doc.id, "foodName": data.foodName, "foodDetails": data.foodDetails, "foodPrice": data.foodPrice, "foodEstTime": data.foodEstTime }
+      let foodData = { 
+        "foodId": doc.id,
+        "foodName": data.foodName, 
+        "foodDetails": data.foodDetails, 
+        "foodPrice": data.foodPrice, 
+        "foodEstTime": data.foodEstTime,
+        "foodImg" : data.foodImg }
       this.stallMenu.push(foodData)
     })
     console.log(this.stallMenu[0].foodEstTime)
