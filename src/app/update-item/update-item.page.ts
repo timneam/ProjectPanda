@@ -255,14 +255,26 @@ export class UpdateItemPage implements OnInit {
    fileImg: any;
    progress: any;
  
-   onchange = (img) => {
-     console.log("test meow")
-     const file = img.target.files
-     this.fileImg = file[0]
-     console.log(this.fileImg)
-     console.log(this.fileImg.name)
- 
-   }
+   onchange() {
+    let input = document.createElement('input');
+    input.type = 'file';
+    input.onchange = (img) => {
+      // you can use this method to get file and perform respective operations
+      let file = Array.from(input.files);
+      console.log(file);
+
+      this.fileImg = file[0]
+      let reader = new FileReader();
+      reader.onload = function () {
+        let output: any = document.getElementById('previewImg');
+        output.src = reader.result;
+      }
+      if (this.fileImg) {
+        reader.readAsDataURL(this.fileImg);
+      }
+    };
+    input.click();
+  }
  
    addImageToDatabase() {
      const storage = getStorage();

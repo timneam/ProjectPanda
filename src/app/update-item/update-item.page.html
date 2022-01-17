@@ -1,13 +1,13 @@
 <ion-content>
-  <div style="position: relative;display: inline;">
-    <img src="../assets/vendorImg.png" style="width: 100%;">
-    <img src="../assets/backk.png" style="position: absolute;left: 0;width: 20px;margin-top: 5px;margin-left: 5px;"
+  <div>
+    <img src="../assets/backk.png" style="position: absolute;left: 0;width: 20px;margin-top: 10px;margin-left: 5px;"
       (click)="backClicked()">
   </div>
 
-  <div style="text-align: center;">
-    <ion-input style="margin-left: 50px;" type="file" (change)="onchange($event)"></ion-input>
-    <ion-button (click)="addImageToDatabase()">Submit</ion-button>
+  <div style="position: relative; display: inline;">
+    <div style="text-align: center;">
+      <img (click)="onchange()" id="previewImg" src="../assets/vendorImg.png" style="height: 240px; margin-top: 35px; overflow: hidden; vertical-align: middle;">    
+    </div>
   </div>
 
   <form [formGroup]="updateMenuForm" (ngSubmit)="updateMenu()">
