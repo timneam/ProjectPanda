@@ -104,21 +104,26 @@
 
       </div>
 
-      <ion-button style="border-radius: 25px; width: 160px; height: 50px; margin-top: 15px; font-size: 24px;"
+    <ion-row>
+      <ion-col>
+        <ion-button style="border-radius: 25px; width: 160px; height: 50px; margin-top: 15px; font-size: 24px;"
+        color="primary" (click)="deleteItem()">
+        <ion-label
+          style="color: white;text-transform: none;font-size: 18px;font-family: 'Roboto', sans-serif;font-weight: 500;">
+          Delete
+        </ion-label>
+      </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button style="border-radius: 25px; width: 160px; height: 50px; margin-top: 15px; font-size: 24px;"
         color="primary" type="submit">
         <ion-label
           style="color: white;text-transform: none;font-size: 18px;font-family: 'Roboto', sans-serif;font-weight: 500;">
           Update
         </ion-label>
       </ion-button>
-
-      <ion-button style="border-radius: 25px; width: 160px; height: 50px; margin-top: 15px; font-size: 24px;"
-      color="primary" (click)="deleteItem()">
-      <ion-label
-        style="color: white;text-transform: none;font-size: 18px;font-family: 'Roboto', sans-serif;font-weight: 500;">
-        Delete
-      </ion-label>
-    </ion-button>
+      </ion-col>
+    </ion-row>
 
     <br>
 
