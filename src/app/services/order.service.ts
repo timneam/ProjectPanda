@@ -55,6 +55,25 @@ export class OrderService {
     return q
   }
 
+  //Find vendor details with stall id for order status page
+  async findVendorDetails(stallId) {
+    const querySnapshot = await getDocs(query(collection(this.db, 'User'), where("stallId", "==", stallId)));
+    let vendorDetails = [];
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      let data = doc.data()
+      let vendorData = { 
+        "firstName": data.firstName, 
+        "lastName": data.lastName, 
+        "phoneNumber": data.phoneNumber, 
+        "stallId": data.stallId, 
+      }
+      vendorDetails.push(vendorData)
+    });
+    return vendorDetails
+  }
+
+
   // find the document based on user ID
   async test(stallId, userId) {
 

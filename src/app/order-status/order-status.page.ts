@@ -22,10 +22,12 @@ export class OrderStatusPage implements OnInit {
   stallId : any;
   userId: any;
 
+  vendorData = []
+
   orderData = []
   orderedItemData = []
   stallData = []
-  orderStatus = []
+  orderStatus: any
 
   constructor(
     private _location: Location,
@@ -49,6 +51,7 @@ export class OrderStatusPage implements OnInit {
         let users = this.auth.currentUser
         this.userId = users.uid
         this.getOrdersFunction()
+        this.getVendorData()
       } else {
         console.log("User is signed out")
         this.navCntrl.navigateForward('splash');
@@ -72,7 +75,10 @@ export class OrderStatusPage implements OnInit {
   doRefresh(event) {
     console.log('Begin async operation');
 
-    this.orderStatus = []
+    this.vendorData = []
+    this.orderData = []
+    this.orderedItemData = []
+    this.stallData = []
     this.orderData = []
     
     setTimeout(() => {
@@ -80,6 +86,13 @@ export class OrderStatusPage implements OnInit {
         this.getCurrentUser()
       })
     }, 2000);
+  }
+
+  getVendorData(){
+    this.orderService.findVendorDetails(this.stallId).then((doc) => {
+      this.vendorData = doc
+      console.log(this.vendorData)
+    })
   }
 
 }
