@@ -220,6 +220,9 @@ export class Tab2Page {
     this.grandTotalString = ""
     this.containerQuantity = 0
     this.discountedPrice = 0
+    this.addOnPriceFinal = 0
+    this.FoodQuantity = 0;
+    this.subTotal = 0;
 
     setTimeout(() => {
       event.target.complete().then(() => {
