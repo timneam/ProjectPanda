@@ -53,67 +53,72 @@ export class VendorAddPage implements OnInit {
   }
 
   async addMenuDetails() {
-    const storage = getStorage();
-    const storageRef = ref(storage, `images/${this.fileImg.name}`);
-    const uploadTask = uploadBytesResumable(storageRef, this.fileImg);
-    // console.log(uploadTask)
-
-    // make if statement if file size to big? or format is wrong
-    uploadTask.on('state_changed',
-      (snapshot) => {
-        // do shit here for the "progress bar"
-        // make global variable that updates then display it on HTML
-        // console.log(snapshot)
-        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        // console.log('Upload is ' + progress + '% done');
-        // go show this in HTML or smt for the progress tracking
-        this.progress = progress
-        switch (snapshot.state) {
-          case 'paused':
-            console.log('Upload is paused');
-            break;
-          case 'running':
-            console.log('Upload is running');
-            break;
-        }
-      },
-      (error) => {
-        // Handle unsuccessful uploads
-        console.log(error)
-      },
-      () => {
-        getDownloadURL(uploadTask.snapshot.ref).then((res) => {
-          // This is the file url for the image btw 
-          // Go add this to the SRC on front-end
-          // update doc image or add to doc
-          console.log('File available at', res);
-          this.photoURL = res
-
-          const data = {
-            foodName: this.addMenuForm.value.foodName,
-            foodPrice: this.addMenuForm.value.foodPrice,
-            foodDetails: this.addMenuForm.value.foodDescription,
-            foodEstTime: this.addMenuForm.value.foodEstTime,
-            foodQuantity: this.item_qty,
-            foodImg: this.photoURL
+    if (this.fileImg == undefined) {
+      this.addMenuItem()
+    } else {
+      const storage = getStorage();
+      const storageRef = ref(storage, `images/${this.fileImg.name}`);
+      const uploadTask = uploadBytesResumable(storageRef, this.fileImg);
+      // make if statement if file size to big? or format is wrong
+      uploadTask.on('state_changed',
+        (snapshot) => {
+          // do shit here for the "progress bar"
+          // make global variable that updates then display it on HTML
+          // console.log(snapshot)
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          // console.log('Upload is ' + progress + '% done');
+          // go show this in HTML or smt for the progress tracking
+          this.progress = progress
+          switch (snapshot.state) {
+            case 'paused':
+              console.log('Upload is paused');
+              break;
+            case 'running':
+              console.log('Upload is running');
+              break;
           }
-
-          this.stallsService.addItem(this.stallId, data).then(res => {
-            console.log("Menu add with Id :" + res.id)
-            if (res.id != null && this.addonData != null) {
-              for (let i = 0; i < this.addonData.length; i++) {
-                this.stallsService.addMenuAddon(this.stallId, res.id, this.addonData[i]).then(res => {
-                  console.log("Addon added with Id :" + res.id)
-                })
-              }
-            }
-            this.route.navigateByUrl('/vendor-tabs/home');
-          }).catch((error) => {
-            console.error(error);
+        },
+        (error) => {
+          // Handle unsuccessful uploads
+          console.log(error)
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((res) => {
+            // This is the file url for the image btw 
+            // Go add this to the SRC on front-end
+            // update doc image or add to doc
+            console.log('File available at', res);
+            this.photoURL = res
+            this.addMenuItem()
           });
-        });
+        }
+      );
+    }
+  }
+
+  addMenuItem() {
+    const data = {
+      foodName: this.addMenuForm.value.foodName,
+      foodPrice: this.addMenuForm.value.foodPrice,
+      foodDetails: this.addMenuForm.value.foodDescription,
+      foodEstTime: this.addMenuForm.value.foodEstTime,
+      foodQuantity: this.item_qty,
+      foodImg: this.photoURL ? this.photoURL : "https://www.slntechnologies.com/wp-content/uploads/2017/08/ef3-placeholder-image.jpg"
+    }
+
+    this.stallsService.addItem(this.stallId, data).then(res => {
+      console.log("Menu add with Id :" + res.id)
+      if (res.id != null && this.addonData != null) {
+        for (let i = 0; i < this.addonData.length; i++) {
+          this.stallsService.addMenuAddon(this.stallId, res.id, this.addonData[i]).then(res => {
+            console.log("Addon added with Id :" + res.id)
+          })
+        }
       }
-    );
+      this.route.navigateByUrl('/vendor-tabs/home');
+    }).catch((error) => {
+      console.error(error);
+    });
   }
 
   async addAddon() {

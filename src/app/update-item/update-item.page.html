@@ -4,9 +4,10 @@
       (click)="backClicked()">
   </div>
 
+
   <div style="position: relative; display: inline;">
-    <div style="text-align: center;">
-      <img (click)="onchange()" id="previewImg" src="../assets/vendorImg.png" style="height: 240px; margin-top: 35px; overflow: hidden; vertical-align: middle;">    
+    <div style="text-align: center;" *ngFor="let data of stallMenu">
+      <img (click)="onchange()" id="previewImg" src="{{data.foodImg}}" style="height: 240px; margin-top: 35px; overflow: hidden; vertical-align: middle;">    
     </div>
   </div>
 

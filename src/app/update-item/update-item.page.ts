@@ -27,6 +27,7 @@ export class UpdateItemPage implements OnInit {
 
   updateMenuForm: FormGroup;
 
+  imgURL: any;
   foodQuantity = null
 
   constructor(private _location: Location, private formBuilder: FormBuilder,
@@ -55,6 +56,7 @@ export class UpdateItemPage implements OnInit {
   // Use this function for Edit not Add 
   getMenuItem() {
     this.stallsService.getOneMenuDetails(this.stallId, this.menuId).then(res => {
+      console.log(this.stallMenu)
       this.stallMenu.push(res.data())
       this.foodQuantity = res.data().foodQuantity
       this.updateMenuForm.patchValue({
@@ -74,12 +76,57 @@ export class UpdateItemPage implements OnInit {
   }
 
   updateMenu() {
+    if (this.fileImg == undefined) {
+      this.updateMenuItem()
+    } else {
+    const storage = getStorage();
+    const storageRef = ref(storage, `images/${this.fileImg.name}`);
+    const uploadTask = uploadBytesResumable(storageRef, this.fileImg);
+     // make if statement if file size to big? or format is wrong
+    uploadTask.on('state_changed',
+       (snapshot) => {
+         // do shit here for the "progress bar"
+         // make global variable that updates then display it on HTML
+         console.log(snapshot)
+         const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+         console.log('Upload is ' + progress + '% done');
+         // go show this in HTML or smt for the progress tracking
+         this.progress = progress
+         switch (snapshot.state) {
+           case 'paused':
+             console.log('Upload is paused');
+             break;
+           case 'running':
+             console.log('Upload is running');
+             break;
+         }
+       },
+       (error) => {
+         // Handle unsuccessful uploads
+         console.log(error)
+       },
+       () => {
+         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+           // This is the file url for the image btw 
+           // Go add this to the SRC on front-end
+           // update doc image or add to doc
+           console.log('File available at', downloadURL);
+           this.imgURL = downloadURL
+           this.updateMenuItem()
+         });
+       }
+     );
+    }
+  }
+
+  updateMenuItem() {
     const data = {
       foodName: this.updateMenuForm.value.foodName ? this.updateMenuForm.value.foodName : this.stallMenu[0].foodName,
       foodPrice: this.updateMenuForm.value.foodPrice ? this.updateMenuForm.value.foodPrice : this.stallMenu[0].foodPrice,
       foodDetails: this.updateMenuForm.value.foodDetails ? this.updateMenuForm.value.foodDetails : this.stallMenu[0].foodDetails,
       foodQuantity: this.foodQuantity ? this.foodQuantity : this.stallMenu[0].foodQuantity,
-      foodEstTime: this.updateMenuForm.value.foodEstTime ? this.updateMenuForm.value.foodEstTime : this.stallMenu[0].foodEstTime
+      foodEstTime: this.updateMenuForm.value.foodEstTime ? this.updateMenuForm.value.foodEstTime : this.stallMenu[0].foodEstTime,
+      foodImg: this.imgURL ? this.imgURL : this.stallMenu[0].foodImg
     }
     this.stallsService.updateItem(
       this.stallId,
@@ -210,7 +257,6 @@ export class UpdateItemPage implements OnInit {
         this.foodQuantity -= 1;
         console.log('item left : ' + this.foodQuantity);
       }
-
     }
   }
 
@@ -277,53 +323,7 @@ export class UpdateItemPage implements OnInit {
   }
  
    addImageToDatabase() {
-     const storage = getStorage();
-     const storageRef = ref(storage, `images/${this.fileImg.name}`);
- 
-     const uploadTask = uploadBytesResumable(storageRef, this.fileImg);
-     console.log(uploadTask)
- 
-     // make if statement if file size to big? or format is wrong
-     uploadTask.on('state_changed',
-       (snapshot) => {
-         // do shit here for the "progress bar"
-         // make global variable that updates then display it on HTML
-         console.log(snapshot)
-         const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-         console.log('Upload is ' + progress + '% done');
-         // go show this in HTML or smt for the progress tracking
-         this.progress = progress
-         switch (snapshot.state) {
-           case 'paused':
-             console.log('Upload is paused');
-             break;
-           case 'running':
-             console.log('Upload is running');
-             break;
-         }
-       },
-       (error) => {
-         // Handle unsuccessful uploads
-         console.log(error)
-       },
-       () => {
-         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-           // This is the file url for the image btw 
-           // Go add this to the SRC on front-end
-           // update doc image or add to doc
-           console.log('File available at', downloadURL);
-         });
-       }
-     );
- 
-     // // Pause the upload
-     // uploadTask.pause();
- 
-     // // Resume the upload
-     // uploadTask.resume();
- 
-     // // Cancel the upload
-     // uploadTask.cancel();
+     
    }
 
 }
