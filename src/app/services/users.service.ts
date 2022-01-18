@@ -125,7 +125,6 @@ export class UsersService {
         lastName: lastName,
         phoneNumber: phoneNumber
       })
-      this.navCntrl.navigateForward('tabs/profile');
     }).catch((error) => {
       // An error occurred
       console.log(error)
@@ -137,7 +136,6 @@ export class UsersService {
     const user = auth.currentUser;
     updateEmail(user, email).then(() => {
       console.log("Email updated successfully!")
-      this.navCntrl.navigateForward('tabs/profile');
       // ...
     }).catch((error) => {
       // An error occurred
@@ -151,7 +149,6 @@ export class UsersService {
 
     updatePassword(user, password).then(() => {
       console.log("Password updated successfully!")
-      this.navCntrl.navigateForward('tabs/profile');
     }).catch((error) => {
       // An error ocurred
       console.log(error)

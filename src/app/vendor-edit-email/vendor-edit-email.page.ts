@@ -3,6 +3,7 @@ import { doc, getDoc, getFirestore } from 'firebase/firestore';
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { getAuth } from 'firebase/auth';
 import { UsersService } from '../services/users.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-vendor-edit-email',
@@ -15,7 +16,8 @@ export class VendorEditEmailPage implements OnInit {
   updateUserEmailForm: FormGroup
 
   constructor(private formBuilder: FormBuilder,
-    private userService: UsersService) { }
+    private userService: UsersService,
+    private router:Router) { }
 
   ngOnInit() {
 
@@ -45,7 +47,7 @@ export class VendorEditEmailPage implements OnInit {
     this.userService.updateUserEmail(
       this.updateUserEmailForm.value.email,
     )
-    // console.log(this.updateDataForm)
+    this.router.navigateByUrl['/vendor-tabs/profile']
   }
 
 

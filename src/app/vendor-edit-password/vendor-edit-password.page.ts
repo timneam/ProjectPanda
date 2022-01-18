@@ -3,6 +3,7 @@ import { doc, getDoc, getFirestore } from 'firebase/firestore';
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { getAuth } from 'firebase/auth';
 import { UsersService } from '../services/users.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-vendor-edit-password',
@@ -16,7 +17,8 @@ export class VendorEditPasswordPage implements OnInit {
   userData = null;
 
   constructor(private formBuilder: FormBuilder,
-    private userService: UsersService) { }
+    private userService: UsersService,
+    private router:Router) { }
 
   ngOnInit() {
     this.updateUserPasswordForm = new FormGroup({
@@ -28,7 +30,6 @@ export class VendorEditPasswordPage implements OnInit {
     this.userService.updateUserPassword(
       this.updateUserPasswordForm.value.password,
     )
-    // console.log(this.updateDataForm)
   }
 
 }
