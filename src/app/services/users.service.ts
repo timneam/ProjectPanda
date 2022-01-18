@@ -5,6 +5,7 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, up
 import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, getFirestore, setDoc, updateDoc } from 'firebase/firestore';
 import { async } from '@angular/core/testing';
 import { NavController } from '@ionic/angular';
+import { Location } from "@angular/common";
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,8 @@ export class UsersService {
   router: any;
 
   constructor(private firestore: Firestore,
-    private navCntrl: NavController) { }
+    private navCntrl: NavController,
+    private location: Location) { }
 
   getUserInformation() {
     const usersRef = collection(this.firestore, 'User');
@@ -125,6 +127,7 @@ export class UsersService {
         lastName: lastName,
         phoneNumber: phoneNumber
       })
+      this.location.back();
     }).catch((error) => {
       // An error occurred
       console.log(error)
@@ -136,7 +139,7 @@ export class UsersService {
     const user = auth.currentUser;
     updateEmail(user, email).then(() => {
       console.log("Email updated successfully!")
-      // ...
+      this.location.back();
     }).catch((error) => {
       // An error occurred
       console.log(error)
@@ -149,6 +152,7 @@ export class UsersService {
 
     updatePassword(user, password).then(() => {
       console.log("Password updated successfully!")
+      this.location.back();
     }).catch((error) => {
       // An error ocurred
       console.log(error)

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { getFirestore } from '@angular/fire/firestore';
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 import { getAuth } from 'firebase/auth';
 import { UsersService } from '../services/users.service';
 
@@ -15,7 +16,8 @@ export class ProfileEmailEditPage implements OnInit {
   updateUserEmailForm: FormGroup
 
   constructor(private formBuilder: FormBuilder,
-    private userService: UsersService) { }
+    private userService: UsersService,
+    private router: Router) { }
 
   ngOnInit() {
 
@@ -45,7 +47,6 @@ export class ProfileEmailEditPage implements OnInit {
     this.userService.updateUserEmail(
       this.updateUserEmailForm.value.email,
     )
-    // console.log(this.updateDataForm)
   }
 
 }

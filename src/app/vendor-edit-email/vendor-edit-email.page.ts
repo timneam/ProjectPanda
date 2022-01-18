@@ -47,7 +47,6 @@ export class VendorEditEmailPage implements OnInit {
     this.userService.updateUserEmail(
       this.updateUserEmailForm.value.email,
     )
-    this.router.navigateByUrl['/vendor-tabs/profile']
   }
 
 
