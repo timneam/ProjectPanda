@@ -111,4 +111,30 @@ export class VendorProfilePage implements OnInit {
     this.router.navigateByUrl[('/profile-email-edit')]
   }
 
+  //-----------------------------------------------------------------------------------
+
+  fileImg: any;
+  progress: any;
+
+  onchange() {
+    let input = document.createElement('input');
+    input.type = 'file';
+    input.onchange = (img) => {
+      // you can use this method to get file and perform respective operations
+      let file = Array.from(input.files);
+      console.log(file);
+
+      this.fileImg = file[0]
+      let reader = new FileReader();
+      reader.onload = function () {
+        let output: any = document.getElementById('previewImg');
+        output.src = reader.result;
+      }
+      if (this.fileImg) {
+        reader.readAsDataURL(this.fileImg);
+      }
+    };
+    input.click();
+  }
+
 }

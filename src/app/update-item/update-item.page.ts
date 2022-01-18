@@ -321,9 +321,5 @@ export class UpdateItemPage implements OnInit {
     };
     input.click();
   }
- 
-   addImageToDatabase() {
-     
-   }
 
 }
