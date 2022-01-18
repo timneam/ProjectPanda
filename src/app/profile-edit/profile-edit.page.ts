@@ -4,8 +4,9 @@ import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms'
 import { doc, updateDoc, deleteDoc, getFirestore, getDoc, collection } from 'firebase/firestore'; 
 import { getAuth } from 'firebase/auth';
 import { NamePopUpPage } from '../name-pop-up/name-pop-up.page';
-import {NavController, PopoverController,ToastController} from "@ionic/angular";
-import {Router} from '@angular/router'
+import { NavController, PopoverController, ToastController } from "@ionic/angular";
+import { Router } from '@angular/router'
+
 @Component({
   selector: 'app-profile-edit',
   templateUrl: './profile-edit.page.html',
