@@ -27,6 +27,8 @@ export class Tab2Page {
   userDetails: any;
   cartItems = [];
 
+  totalEstTime = 0
+  totalEstTimeString: any
   total = 0
   totalString: any
   addOnPrice = 0
@@ -77,11 +79,22 @@ export class Tab2Page {
   getItemsInCart() {
     this.cartService.getItemsInACart(this.userId, this.stallId).then(doc => {
       doc.forEach(res => {
+        console.log(res)
+        this.totalEstTime = this.totalEstTime + (res.foodEstTime * res.foodQty)
+        console.log(this.totalEstTime)
+        this.totalEstTimeString = this.totalEstTime.toFixed(2)
         let addon = [];
         this.cartService.getAddonForItem(this.userId, this.stallId, res.id).then(doc => {
           addon = doc
         }).then(() => {
-          let cartData = { "id": res.id, "foodName": res.foodName, "foodPrice": res.foodPrice, "foodDescription": res.foodDescription, "foodEstTime": res.foodEstTime, "foodQty": res.foodQty, "addon": addon }
+          let cartData = { 
+            "id": res.id, 
+            "foodName": res.foodName, 
+            "foodPrice": res.foodPrice, 
+            "foodDescription": res.foodDescription, 
+            "foodEstTime": res.foodEstTime, 
+            "foodQty": res.foodQty, 
+            "addon": addon }
           this.cartItems.push(cartData)
         })
       });
@@ -145,7 +158,8 @@ export class Tab2Page {
         "stallID": this.stallId, 
         "Subtotal": this.totalString, 
         "Surcharge": this.surchargeString, 
-        "GrandTotal": this.grandTotalString 
+        "GrandTotal": this.grandTotalString, 
+        "TotalEstTime": this.totalEstTimeString
       }
       this.orderService.addOrderId(this.stallId, this.userDetails).then((res) => {
         console.log(res.id)
