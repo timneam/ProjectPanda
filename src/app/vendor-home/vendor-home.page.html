@@ -19,15 +19,11 @@
         </div>
 
         <div *ngFor="let data of menu">
-      
             <ion-card (click)="toUpdateItem(data.foodId)">
-      
               <ion-row>
-      
                 <ion-col size="4">
                   <img src={{data.foodImg}} height="90px" width="90px" style="margin-bottom: 13px;margin-top: 7px;">
                 </ion-col>
-      
                 <ion-col size="8">
                   <ion-row>
                     <ion-label
@@ -44,15 +40,18 @@
                   <ion-row>
                     <ion-label
                       style="background-color:transparent; margin-top: 10px;">
+                      Quantity: {{data.foodQuantity}}
+                    </ion-label>
+                  </ion-row>
+                  <ion-row>
+                    <ion-label
+                      style="background-color:transparent; margin-top: 10px;">
                       {{data.foodDetails}}
                     </ion-label>
                   </ion-row>
                 </ion-col>
-
               </ion-row>
-      
             </ion-card>
-      
           </div>
           
     </ion-content>

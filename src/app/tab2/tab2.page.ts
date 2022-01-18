@@ -46,7 +46,6 @@ export class Tab2Page {
   FoodQuantity = 0;
   subTotal = 0;
 
-
   constructor(
     public photoService: PhotoService,
     public actionSheetController: ActionSheetController,
@@ -224,6 +223,8 @@ export class Tab2Page {
   }
 
   doRefresh(event) {
+    this.totalEstTime = 0
+    this.totalEstTimeString = ""
     this.cartItems = []
     this.total = 0
     this.totalString = ""

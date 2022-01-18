@@ -124,7 +124,7 @@ export class UpdateItemPage implements OnInit {
       foodName: this.updateMenuForm.value.foodName ? this.updateMenuForm.value.foodName : this.stallMenu[0].foodName,
       foodPrice: this.updateMenuForm.value.foodPrice ? this.updateMenuForm.value.foodPrice : this.stallMenu[0].foodPrice,
       foodDetails: this.updateMenuForm.value.foodDetails ? this.updateMenuForm.value.foodDetails : this.stallMenu[0].foodDetails,
-      foodQuantity: this.foodQuantity ? this.foodQuantity : this.stallMenu[0].foodQuantity,
+      foodQuantity: this.foodQuantity,
       foodEstTime: this.updateMenuForm.value.foodEstTime ? this.updateMenuForm.value.foodEstTime : this.stallMenu[0].foodEstTime,
       foodImg: this.imgURL ? this.imgURL : this.stallMenu[0].foodImg
     }
@@ -249,9 +249,9 @@ export class UpdateItemPage implements OnInit {
       this.foodQuantity ++;
       console.log(this.foodQuantity);
     } else if (increment == 0) {
-      if (this.foodQuantity - 1 < 1) {
-        this.foodQuantity = 1;
-        console.log('item cannot be lower than : ' + this.foodQuantity)
+      if (this.foodQuantity - 1 < 0) {
+        this.foodQuantity = 0;
+        console.log('This item is out of stock!')
       }
       else {
         this.foodQuantity -= 1;

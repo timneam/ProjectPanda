@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../services/users.service';
 import { FormGroup } from '@angular/forms';
 import { doc, deleteDoc, getFirestore, getDoc } from 'firebase/firestore';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { getAuth, onAuthStateChanged, updateProfile } from 'firebase/auth';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
 
 @Component({
   selector: 'app-profile',
@@ -86,24 +87,63 @@ export class ProfilePage implements OnInit {
   progress: any;
 
   onchange() {
-   let input = document.createElement('input');
-   input.type = 'file';
-   input.onchange = (img) => {
-     // you can use this method to get file and perform respective operations
-     let file = Array.from(input.files);
-     console.log(file);
+    let input = document.createElement('input');
+    input.type = 'file';
+    input.onchange = (img) => {
+      // you can use this method to get file and perform respective operations
+      let file = Array.from(input.files);
+      console.log(file);
 
-     this.fileImg = file[0]
-     let reader = new FileReader();
-     reader.onload = function () {
-       let output: any = document.getElementById('previewImg');
-       output.src = reader.result;
-     }
-     if (this.fileImg) {
-       reader.readAsDataURL(this.fileImg);
-     }
-   };
-   input.click();
- }
+      this.fileImg = file[0]
+      let reader = new FileReader();
+      reader.onload = function () {
+        let output: any = document.getElementById('previewImg');
+        output.src = reader.result;
+      }
+      if (this.fileImg) {
+        reader.readAsDataURL(this.fileImg);
+
+        const storage = getStorage();
+        const storageRef = ref(storage, `images/${this.fileImg.name}`);
+        const uploadTask = uploadBytesResumable(storageRef, this.fileImg);
+        // make if statement if file size to big? or format is wrong
+        uploadTask.on('state_changed',
+          (snapshot) => {
+            // do shit here for the "progress bar"
+            // make global variable that updates then display it on HTML
+            console.log(snapshot)
+            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            console.log('Upload is ' + progress + '% done');
+            // go show this in HTML or smt for the progress tracking
+            this.progress = progress
+            switch (snapshot.state) {
+              case 'paused':
+                console.log('Upload is paused');
+                break;
+              case 'running':
+                console.log('Upload is running');
+                break;
+            }
+          },
+          (error) => {
+            // Handle unsuccessful uploads
+            console.log(error)
+          },
+          () => {
+            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+              // This is the file url for the image btw 
+              // Go add this to the SRC on front-end
+              // update doc image or add to doc
+              console.log('File available at', downloadURL);
+              updateProfile(this.auth.currentUser, {
+                photoURL: downloadURL
+              })
+            });
+          }
+        );
+      }
+    };
+    input.click();
+  }
 
 }

@@ -18,6 +18,9 @@ export class VendorHomePage implements OnInit {
 
   stallId : any;
 
+  soldOut = []
+  gotStocks = []
+
   constructor(private stallService: StallsService, private router: Router) { }
 
   ngOnInit() {
@@ -53,9 +56,17 @@ export class VendorHomePage implements OnInit {
         "foodPrice": menuData.foodPrice, 
         "foodDetails": menuData.foodDetails, 
         "foodEstTime": menuData.foodEstTime,
+        "foodQuantity": menuData.foodQuantity,
         "foodImg" : menuData.foodImg
       }
       this.menu.push(menuItems);
+      if (menuItems.foodQuantity == 0) {
+        this.soldOut.push(menuItems)
+        console.log(this.soldOut) 
+      } else {
+        this.gotStocks.push(menuItems)
+        console.log(this.gotStocks) 
+      }
     })
   }
 

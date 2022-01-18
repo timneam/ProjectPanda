@@ -25,6 +25,7 @@ export class MenuItemPage implements OnInit {
   stallRoute: any
   menuRoute: any
 
+  item_qty = 1
   userAddonInput = []
 
   selectedItemsList = [];
@@ -48,7 +49,14 @@ export class MenuItemPage implements OnInit {
     const getMenuDetails = await getDoc(doc(this.db, 'Stall', this.stallRoute, 'Menu', this.menuRoute))
     console.log(getMenuDetails.data());
     let data = getMenuDetails.data();
-    let menuData = { "foodName": data.foodName, "foodDetails": data.foodDetails, "foodPrice": data.foodPrice, "foodEstTime": data.foodEstTime }
+    let menuData = { 
+      "foodName": data.foodName, 
+      "foodDetails": data.foodDetails, 
+      "foodPrice": data.foodPrice, 
+      "foodEstTime": data.foodEstTime,
+      "foodQuantity": data.foodQuantity,
+      "foodImg": data.foodImg
+     }
     this.menuDetails.push(menuData)
   }
 
@@ -64,11 +72,13 @@ export class MenuItemPage implements OnInit {
     console.log(this.menuAddOns)
   }
 
-  item_qty = 1
-
   incrementQty() {
-    this.item_qty += 1;
-    console.log(this.item_qty + 1);
+    if (this.item_qty >= this.menuDetails[0].foodQuantity) {
+      console.log(this.menuDetails[0].foodQuantity)
+    } else {
+      this.item_qty += 1;
+      console.log(this.item_qty + 1);
+    }
   }
 
   decrementQty() {
