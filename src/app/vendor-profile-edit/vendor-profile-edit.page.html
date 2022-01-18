@@ -1,8 +1,8 @@
 <ion-content>
 
-  <img src="../assets/backk.png" class="iconn" [routerLink]="['/tabs/profile']">
+  <img src="../assets/backk.png" class="iconn" [routerLink]="['/vendor-tabs/profile']">
 
-  <form [formGroup]="updateDataForm" (ngSubmit)="updateUserProfile()" style="margin-top: 21px;">
+  <form  style="margin-top: 21px;">
     <div class="sameLine">
       <img src="../assets/profile.png" width="80" height="80" style="margin-right: 20px;margin-left: 30px;">
      
@@ -17,21 +17,21 @@
         <ion-card class="textCard">
           <ion-item>
             <ion-icon name="person-outline" style="margin-right: 8px;"></ion-icon>
-            <ion-input name="Last name" type="name" formControlName="firstName"></ion-input>
+            <ion-input name="Last name" type="name" ></ion-input>
           </ion-item>
         </ion-card>
 
         <ion-card class="textCard1">
           <ion-item lines='none'>
             <ion-icon name="person-outline" style="margin-right: 8px;"></ion-icon>
-            <ion-input name="Last Name" type="name" formControlName="lastName"></ion-input>
+            <ion-input name="Last Name" type="name" ></ion-input>
           </ion-item>
         </ion-card>
 
         <ion-card class="textCard1">
           <ion-item lines='none'>
             <ion-icon name="call-outline" style="margin-right: 8px;"></ion-icon>
-            <ion-input name="Phone Number" type="number" formControlName="phoneNumber"></ion-input>
+            <ion-input name="Phone Number" type="number"></ion-input>
           </ion-item>
         </ion-card>
 

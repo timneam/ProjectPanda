@@ -31,7 +31,7 @@
           <ion-icon name="mail-outline" style="margin-right: 8px;"></ion-icon>
           <ion-input name="Email" type="email" value={{data.email}} disabled></ion-input>
         </ion-item>
-        <ion-icon name="create-outline" style="color: black;font-size: 16px;" [routerLink]="['/profile-email-edit']"
+        <ion-icon name="create-outline" style="color: black;font-size: 16px;" [routerLink]="['/vendor-edit-email']"
           enabled>
         </ion-icon>
       </ion-card>
@@ -42,9 +42,17 @@
           <ion-input name="Password" type="password" value="123456789" disabled></ion-input>
 
         </ion-item>
-        <ion-icon name="create-outline" style="color: black;font-size: 16px;" [routerLink]="['/profile-password-edit']">
+        <ion-icon name="create-outline" style="color: black;font-size: 16px;" [routerLink]="['/vendor-edit-password']">
         </ion-icon>
       </ion-card>
+
+      <ion-button [routerLink]="['/vendor-profile-edit']"
+      style="border-radius: 25px;color: #F5585C; width: 120px; height: 50px; margin-top: 39px;box-shadow: 5px 5px 5px lightgray;"
+      color="primary">
+      <ion-label style="color: white;text-transform: none;font-size: 16px;font-family: 'Sen', sans-serif;">
+        <b>Edit</b>
+      </ion-label>
+    </ion-button>
 
     </div>
 
