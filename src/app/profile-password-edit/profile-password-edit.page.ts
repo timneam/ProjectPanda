@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { getFirestore } from '@angular/fire/firestore';
+import { doc, getDoc, getFirestore } from 'firebase/firestore';
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { getAuth } from 'firebase/auth';
 import { UsersService } from '../services/users.service';
