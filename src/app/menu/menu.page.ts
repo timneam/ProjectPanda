@@ -19,7 +19,7 @@ export class MenuPage implements OnInit {
 
   stallId = this.activatedRoute.snapshot.paramMap.get("id");
 
-  totalEstTime = [];
+  totalEstTime = 0;
   reallyTotalEstTime = [];
   totalEstTimeString: any;
   Est: any;
@@ -44,13 +44,15 @@ export class MenuPage implements OnInit {
 
   estTime() {
     console.log(this.stallId)
-    this.orderService.incomingOrders(this.stallId).then((doc) => {
+    let status = "Preparing"
+    this.orderService.totalEstTime(this.stallId, status).then((doc) => {
       doc.forEach((doc) => {
-        console.log(doc.data())
-        this.totalEstTime = this.totalEstTime + doc.data().TotalEstTime
+        let time = parseInt(doc.TotalEstTime)
+        this.totalEstTime = this.totalEstTime + time
         console.log(this.totalEstTime)
       })
     })
+
   }
 
   async presentLoading() {
