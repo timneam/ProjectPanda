@@ -36,8 +36,8 @@ export class OrderService {
   }
 
   async incomingOrders(stallId) {
-    const incomingOrders = await getDocs(collection(this.db, 'Stall', stallId, 'OrdersRecieved'))
-    return incomingOrders
+    const q = await getDocs(collection(this.db, 'Stall', stallId, 'OrdersRecieved'))
+    return q
   }
 
   // find the document based on user ID
@@ -53,6 +53,31 @@ export class OrderService {
     });
 
     return q
+  }
+
+  async totalEstTime(stallId, Status) {
+    // Create a field search against a collection.
+    const querySnapshot = await getDocs(query(collection(this.db, "Stall", stallId, "OrdersRecieved"), where("Status", "==", Status)));
+    let orderDetails = [];
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      let data = doc.data()
+      let orderData = { 
+        "OrderID": doc.id,
+        "UserID": data.UserID, 
+        "UserFirstName": data.UserFirstName, 
+        "UserLastName": data.UserLastName, 
+        "UserPhoneNumber": data.UserPhoneNumber, 
+        "Status": data.Status, 
+        "stallID": data.stallID, 
+        "Subtotal": data.Subtotal, 
+        "Surcharge": data.Surcharge, 
+        "GrandTotal": data.GrandTotal,
+        "TotalEstTime": data.TotalEstTime 
+      }
+      orderDetails.push(orderData)
+    });
+    return orderDetails
   }
 
   //Find vendor details with stall id for order status page

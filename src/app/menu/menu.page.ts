@@ -4,6 +4,7 @@ import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms'
 import { addDoc, collection, deleteDoc, doc, getDocs, getFirestore, setDoc, updateDoc, query, where, getDoc, } from 'firebase/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoadingController, NavController } from '@ionic/angular';
+import { OrderService } from '../services/order.service';
 
 @Component({
   selector: 'app-menu',
@@ -17,6 +18,10 @@ export class MenuPage implements OnInit {
   stallMenu = []
 
   stallId = this.activatedRoute.snapshot.paramMap.get("id");
+
+  totalEstTime = [];
+  reallyTotalEstTime = [];
+  totalEstTimeString: any;
   Est: any;
   foodID: any;
   
@@ -25,7 +30,8 @@ export class MenuPage implements OnInit {
     private stallService: StallsService,
     private activatedRoute: ActivatedRoute,
     private navCtrl: NavController,
-    private router: Router) { 
+    private router: Router,
+    private orderService: OrderService) { 
       this.foodID = localStorage.getItem("foodI")
     }
 
@@ -33,7 +39,18 @@ export class MenuPage implements OnInit {
     this.presentLoading()
     this.getStallData();
     this.getStallMenu();
- 
+    this.estTime()
+  }
+
+  estTime() {
+    console.log(this.stallId)
+    this.orderService.incomingOrders(this.stallId).then((doc) => {
+      doc.forEach((doc) => {
+        console.log(doc.data())
+        this.totalEstTime = this.totalEstTime + doc.data().TotalEstTime
+        console.log(this.totalEstTime)
+      })
+    })
   }
 
   async presentLoading() {
@@ -47,7 +64,6 @@ export class MenuPage implements OnInit {
     const { role, data } = await loading.onDidDismiss();
     console.log('Loading dismissed!');
   }
-
   
   async getStallData() {
     const stallData = await getDoc(doc(this.db, "Stall", this.stallId));
