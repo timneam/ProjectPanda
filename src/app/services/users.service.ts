@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
 import { collectionData } from 'rxfire/firestore';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, updateEmail, updatePassword, signOut, sendPasswordResetEmail } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, updateEmail, updatePassword, signOut, sendPasswordResetEmail, sendEmailVerification } from "firebase/auth";
 import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, getFirestore, setDoc, updateDoc } from 'firebase/firestore';
 import { async } from '@angular/core/testing';
 import { NavController } from '@ionic/angular';
 import { Location } from "@angular/common";
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -14,11 +15,11 @@ export class UsersService {
 
   db = getFirestore();
   auth = getAuth();
-  router: any;
 
   constructor(private firestore: Firestore,
     private navCntrl: NavController,
-    private location: Location) { }
+    private location: Location,
+    private router: Router) { }
 
   getUserInformation() {
     const usersRef = collection(this.firestore, 'User');
@@ -73,15 +74,17 @@ export class UsersService {
           const username = `${firstName}${lastName}`
           console.log(username)
           updateProfile(auth.currentUser, {
-            displayName: username, photoURL: "https://emoji.gg/assets/emoji/8858-pepekek.png"
+            displayName: username
           }).then(() => {
-            // Profile updated!
-            // ...
+            sendEmailVerification(auth.currentUser)
+            .then(() => {
+              console.log("Email Verification Sent!")
+              this.router.navigateByUrl('/are-you-singtel-staff');
+            });
           }).catch((error) => {
             // An error occurred
             // ...
           });
-
         }
         else {
           console.log(" retry ");

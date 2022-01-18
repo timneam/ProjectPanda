@@ -41,6 +41,7 @@ export class Tab1Page {
         this.getStallData()
         this.presentLoading()
         this.getUserData()
+        console.log(this.auth.currentUser)
       } else {
         console.log("User is signed out")
         this.router.navigateByUrl('splash');

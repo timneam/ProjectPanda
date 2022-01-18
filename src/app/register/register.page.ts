@@ -60,7 +60,6 @@ export class RegisterPage implements OnInit {
       this.formData.value.phoneNumber,
       this.formData.value.role)
       this.presentLoading()
-      this.router.navigateByUrl('/are-you-singtel-staff');
   }
 
   backk() {
