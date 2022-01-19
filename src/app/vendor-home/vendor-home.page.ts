@@ -20,8 +20,12 @@ export class VendorHomePage implements OnInit {
 
   soldOut = []
   gotStocks = []
+selected_state: any;
+state: string[] = ['Open','Last Order','Closed' ]
 
-  constructor(private stallService: StallsService, private router: Router) { }
+  constructor(private stallService: StallsService, private router: Router) {
+    this.selected_state="Open"
+   }
 
   ngOnInit() {
     this.getCurrentUser();

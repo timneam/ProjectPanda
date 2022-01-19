@@ -8,14 +8,13 @@
       flex;justify-content: center;margin-top: 69px;">{{stallId}}</h3>
         <div style="display: flex;flex-direction: row; margin-top: 72px;">
             <h2 class="headerr">Menu</h2>
-            <ion-button style="border-radius: 25px; width: 120px; height: 40px;
-        margin-top: 15px; font-size: 18px;margin-left: 38%;" color="primary">
-                <ion-label style="color: white;text-transform: none;font-size:
-          17px;font-family: 'Roboto', sans-serif;">
-                    Last Order
-                </ion-label>
-
-            </ion-button>
+    
+            <ion-select  [(ngModel)]="selected_state">
+              <ion-select-option  value="open">Open</ion-select-option>
+              <ion-select-option  value="last">Last Order</ion-select-option>
+              <ion-select-option  value="close">Closed</ion-select-option>
+             
+            </ion-select>
         </div>
 
         <div *ngFor="let data of menu">
