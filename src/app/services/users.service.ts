@@ -77,10 +77,6 @@ export class UsersService {
             displayName: username
           }).then(() => {
             sendEmailVerification(auth.currentUser)
-            .then(() => {
-              console.log("Email Verification Sent!")
-              this.router.navigateByUrl('/are-you-singtel-staff');
-            });
           }).catch((error) => {
             // An error occurred
             // ...

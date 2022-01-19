@@ -6,23 +6,16 @@
       <h1 class="headingg">Register</h1>
    
     </div>
-    <!-- <ion-textarea class="textField" placeholder="Email" id="user_email">
 
-    </ion-textarea>
-    <ion-textarea class="textFieldd" placeholder="Password" id="user_password" type="password">
+    <form [formGroup]="formData" class="textboxes" (ngSubmit)="onRegister()">
 
-    </ion-textarea>
-    <ion-button style="border-radius: 25px;color: #F5585C; width: 120px; height: 50px; margin-top: 70px;"
-      color="primary">
-      <ion-label style="color: white;text-transform: none;font-size: 16px;font-family: Arial, Helvetica, sans-serif;">
-        <b>Login</b>
-      </ion-label>
-    </ion-button> -->
+    <div>
+      <div style="text-align: center;">
+        <img (click)="onchange()" id="previewImg" src="../assets/vendorImg.png" style="height: 240px; overflow: hidden; vertical-align: middle;">    
+      </div>
+    </div>
 
-      <form [formGroup]="formData" class="textboxes" (ngSubmit)="onRegister()">
         <div class="namee">
-     <!--   <ion-textarea class="textFieldF" placeholder="First Name" id="user_firstName" formControlName="firstName"></ion-textarea>
-        <ion-textarea class="textFieldL" placeholder="Last Name" id="user_lastName" formControlName="lastName"></ion-textarea> -->
         <ion-card class="textFieldF">
           <ion-item>
             <ion-icon name="person-outline" style="margin-right: 8px;"></ion-icon>
