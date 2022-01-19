@@ -53,6 +53,13 @@ export class StallsService {
     return "Updated Successfully"
   }
 
+  async updateStallStatus(stallId, stallStatus) {
+    const updateStallStatus = await updateDoc(doc(this.db, 'Stall', stallId), {
+      stallStatus: stallStatus
+    })
+    return updateStallStatus
+  }
+
   async deleteItemFromMenu(stallId, menuId) {
     const removeItemFromMenu = await deleteDoc(doc(this.db, 'Stall', stallId, 'Menu', menuId))
     console.log("deleted : " + menuId)
@@ -64,7 +71,13 @@ export class StallsService {
 
     querySnapshot.forEach((doc) => {
       let data = doc.data()
-      let foodData = { "menuId": doc.id, "foodName": data.foodName, "foodDetails": data.foodDetails, "foodPrice": data.foodPrice, "foodEstTime": data.foodEstTime }
+      let foodData = { 
+        "menuId": doc.id, 
+      "foodName": data.foodName, 
+      "foodDetails": data.foodDetails, 
+      "foodPrice": data.foodPrice, 
+      "foodEstTime": data.foodEstTime 
+    }
       MenuItem.push(foodData)
     })
     return MenuItem

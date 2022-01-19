@@ -1,19 +1,15 @@
 <ion-content>
 
     <ion-content>
-        <img src="../assets/stallBackground.png" style="position: absolute;z-index:
-      -1;width: 100%;">
+        <img src="../assets/stallBackground.png" class="stallBackground">
 
-        <h3 style="font-size: 22px;font-weight: bold;color: #ffffff;display:
-      flex;justify-content: center;margin-top: 69px;">{{stallId}}</h3>
-        <div style="display: flex;flex-direction: row; margin-top: 72px;">
-            <h2 class="headerr">Menu</h2>
-    
-            <ion-select value="open" >
-              <ion-select-option  value="open">Open</ion-select-option>
-              <ion-select-option  value="last">Last Order</ion-select-option>
-              <ion-select-option  value="close">Closed</ion-select-option>
-             
+        <div style="display: flex;flex-direction: row; margin-top: 170px;">
+
+            <h2 class="headerr">{{stallId}}</h2>
+            <ion-select value={{stall_status}} style="width: 130px; margin-left: 30px;" (ionChange)="updateStallStatus($event)">
+              <ion-select-option value="Open">Open</ion-select-option>
+              <ion-select-option value="LastOrder">Last Order</ion-select-option>
+              <ion-select-option value="Closed">Closed</ion-select-option>
             </ion-select>
         </div>
 
@@ -59,6 +55,8 @@
         <ion-fab-button color="primary" (click)="addMenuItem()">
             <ion-icon name="add"></ion-icon>
         </ion-fab-button>
-
     </ion-fab>
+
+    
+
 </ion-content>

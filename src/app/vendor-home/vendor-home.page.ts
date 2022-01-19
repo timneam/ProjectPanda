@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { getDoc, doc, getDocs, collection, getFirestore } from 'firebase/firestore';
 import { StallsService } from '../services/stalls.service';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-vendor-home',
@@ -20,11 +21,13 @@ export class VendorHomePage implements OnInit {
 
   soldOut = []
   gotStocks = []
-selected_state: any;
-state: string[] = ['Open','Last Order','Closed' ]
 
-  constructor(private stallService: StallsService, private router: Router) {
-    this.selected_state="Open"
+  stall_status: any;
+
+  constructor(
+    private stallService: StallsService,
+    private router: Router,
+    public modalController: ModalController) {
    }
 
   ngOnInit() {
@@ -48,6 +51,9 @@ state: string[] = ['Open','Last Order','Closed' ]
     const vendorData = await getDoc(doc(this.db, 'User', user));
     console.log(vendorData.data().stallId);
     this.stallId = vendorData.data().stallId;
+
+    const stallData = await getDoc(doc(this.db, 'Stall', vendorData.data().stallId));
+    this.stall_status = stallData.data().stallStatus
 
     const stallDetails = await getDocs(collection(this.db, 'Stall', vendorData.data().stallId, 'Menu'));
     
@@ -74,6 +80,10 @@ state: string[] = ['Open','Last Order','Closed' ]
     })
   }
 
+  updateStallStatus = (lol) => {
+    this.stallService.updateStallStatus(this.stallId, lol.detail.value)
+  }
+
   toUpdateItem(foodId){
     this.router.navigateByUrl(`/vendor-tabs/${this.stallId}/update-item/${foodId}`)
   }
@@ -81,5 +91,6 @@ state: string[] = ['Open','Last Order','Closed' ]
   addMenuItem(){
     this.router.navigateByUrl(`/vendor-tabs/${this.stallId}/add`)
   }
+
 
 }
