@@ -15,6 +15,8 @@ export class VendorHomePage implements OnInit {
   auth = getAuth();
   db = getFirestore();
 
+  open = false;
+
   menu = [];
 
   stallId : any;
@@ -90,6 +92,16 @@ export class VendorHomePage implements OnInit {
 
   addMenuItem(){
     this.router.navigateByUrl(`/vendor-tabs/${this.stallId}/add`)
+  }
+
+  click(){
+    if (this.open == true) {
+      this.open = false
+      console.log(this.open)
+    } else {
+      this.open = true
+      console.log(this.open)
+    }
   }
 
 
