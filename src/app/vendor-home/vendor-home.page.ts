@@ -84,6 +84,7 @@ export class VendorHomePage implements OnInit {
 
   updateStallStatus = (lol) => {
     this.stallService.updateStallStatus(this.stallId, lol.detail.value)
+    console.log(lol.detail.value)
   }
 
   toUpdateItem(foodId){
