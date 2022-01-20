@@ -5,20 +5,15 @@
     <h3 style="font-size: 22px;font-weight: bold;color: #ffffff;display: flex;justify-content: center;text-shadow: grey 2px 2px;">
       {{data.stallName}}
     </h3>
-    <div *ngFor="let data of stallMenu">
-      <div *ngIf="data.foodId == foodID">
-
-        <p class="subb">Estimated wait time {{totalEstTime}} mins </p>
-      </div>
-    </div>
+    <p class="subb">Estimated wait time {{totalEstTime}} mins </p>
+    <p class="subb">Stall Status: {{data.stallStatus}}</p>
   </div>
+
   <h2 class="headerr">Menu</h2>
 
   <ion-list>
-    <div *ngFor="let data of stallMenu">
-      
+    <div *ngFor="let data of stallMenu">    
       <ion-card (click)="goToMenuDetails(data.foodId)">
-
         <ion-row>
 
           <ion-col size="4">
