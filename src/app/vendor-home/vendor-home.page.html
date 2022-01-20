@@ -1,7 +1,9 @@
 <ion-content>
 
   <ion-content>
-    <img src="../assets/stallBackground.png" class="stallBackground">
+    <div style="text-align: center;">
+      <img src={{stallImg}} class="stallBackground">
+    </div>
     <ion-button (click)="updateStallDetails()" style="border-radius: 25px; width: 90px; height: 35px;
       margin-top: 15px; font-size: 16px;margin-left: 68%;position:absolute;" color="primary">
       <ion-label style="color: white;text-transform: none;font-size:
@@ -12,7 +14,7 @@
     </ion-button>
     <div style="display: flex;flex-direction: row; margin-top: 170px;">
 
-      <h2 class="headerr">{{stallId}}</h2>
+      <h2 class="headerr">{{stallName}}</h2>
 
       <ion-card style="width: 130px; margin-left: 30px;" (click)="click()">
         <p>

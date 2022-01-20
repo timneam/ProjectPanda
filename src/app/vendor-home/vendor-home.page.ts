@@ -20,11 +20,14 @@ export class VendorHomePage implements OnInit {
   menu = [];
 
   stallId : any;
+  stall_status: any;
+  stallImg: any;
+  stallName: any;
 
   soldOut = []
   gotStocks = []
 
-  stall_status: any;
+
 
   constructor(
     private stallService: StallsService,
@@ -56,6 +59,8 @@ export class VendorHomePage implements OnInit {
 
     const stallData = await getDoc(doc(this.db, 'Stall', vendorData.data().stallId));
     this.stall_status = stallData.data().stallStatus
+    this.stallName = stallData.data().stallName
+    this.stallImg = stallData.data().stallImg
 
     const stallDetails = await getDocs(collection(this.db, 'Stall', vendorData.data().stallId, 'Menu'));
     
