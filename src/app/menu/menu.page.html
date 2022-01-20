@@ -1,6 +1,6 @@
 <ion-content>
   <div *ngFor="let data of stallData">
-    <img src="../assets/stallBackground.png" style="position: absolute;z-index: -1;width: 100%;">
+    <img src={{data.stallImg}} style="position: absolute;z-index: -1;width: 100%;">
     <img src="../assets/whiteback.png" class="iconn" [routerLink]="['/tabs/stalls']">
     <h3 style="font-size: 22px;font-weight: bold;color: #ffffff;display: flex;justify-content: center;text-shadow: grey 2px 2px;">
       {{data.stallName}}
