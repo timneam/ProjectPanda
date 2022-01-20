@@ -104,6 +104,10 @@ export class VendorHomePage implements OnInit {
       console.log(this.open)
     }
   }
+  
+  updateStallDetails(){
+    this.router.navigateByUrl(`/vendor-edit-details/${this.stallId}`)
+  }
 
 
 }

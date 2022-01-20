@@ -133,7 +133,8 @@ const routes: Routes = [
   {
     path: 'order-status/:stallId/:orderId',
     loadChildren: () => import('./order-status/order-status.module').then( m => m.OrderStatusPageModule)
-  },  {
+  },
+  {
     path: 'vendor-edit-password',
     loadChildren: () => import('./vendor-edit-password/vendor-edit-password.module').then( m => m.VendorEditPasswordPageModule)
   },
@@ -146,7 +147,7 @@ const routes: Routes = [
     loadChildren: () => import('./vendor-profile-edit/vendor-profile-edit.module').then( m => m.VendorProfileEditPageModule)
   },
   {
-    path: 'vendor-edit-details',
+    path: 'vendor-edit-details/:stallId',
     loadChildren: () => import('./vendor-edit-details/vendor-edit-details.module').then( m => m.VendorEditDetailsPageModule)
   }
 

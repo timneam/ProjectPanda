@@ -104,4 +104,9 @@ export class StallsService {
     await deleteDoc(doc(this.db, 'Stall', stallId, 'Menu', menuId, 'Addon', addonId))
     console.log("deleted : " + addonId)
   }
+
+  async updateStallDetails(stallId, data) {
+    const updateStall = await updateDoc(doc(this.db, 'Stall', stallId), data)
+    return updateStall
+  }
 }
