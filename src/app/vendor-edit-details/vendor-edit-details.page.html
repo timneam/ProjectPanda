@@ -1,0 +1,34 @@
+
+
+<ion-content>
+  <div style="width: 30px; height: 40px;" (click)="backClicked()">
+    <img src="../assets/backk.png" style="position: absolute;left: 0;width: 20px;margin-top: 10px;margin-left: 5px;" >
+  </div>
+  <div>
+    <div style="text-align: center;">
+      <img  id="previewImg" src="../assets/vendorImg.png" style="height: 210px; overflow: hidden; vertical-align: middle;">    
+    </div>
+  </div>
+  <form>
+    <ion-item>
+      <ion-label position="floating">Store Name</ion-label>
+      <ion-input type="name" value="BreakfastStall" ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Store Description</ion-label>
+      <ion-textarea rows={6} value="BreakfastStall that sell breakfast food"></ion-textarea>
+    </ion-item>
+<div style="display: flex;justify-content: center;margin-right: 10px;margin-top: 10%;">
+    <ion-button style="border-radius: 25px; width: 141px; height: 50px; margin-top: 15px; font-size: 24px;"
+    color="primary" type="submit">
+    <ion-label
+      style="color: white;text-transform: none;font-size: 18px;font-family: 'Roboto', sans-serif;font-weight: 500;">
+      Update
+    </ion-label>
+  </ion-button>
+</div>
+  <br>
+
+  </form>
+</ion-content>

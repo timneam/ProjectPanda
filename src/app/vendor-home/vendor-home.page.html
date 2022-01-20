@@ -1,68 +1,77 @@
 <ion-content>
 
-  <ion-content>
-    <img src="../assets/stallBackground.png" class="stallBackground">
+    <ion-content>
+      <img src="../assets/stallBackground.png" class="stallBackground">
+      <ion-button [routerLink]="['/vendor-edit-details']" style="border-radius: 25px; width: 90px; height: 35px;
+      margin-top: 15px; font-size: 16px;margin-left: 68%;position:absolute;" color="primary">
+              <ion-label style="color: white;text-transform: none;font-size:
+        17px;font-family: 'Roboto', sans-serif;">
+                  Edit
+              </ion-label>
 
-    <div style="display: flex;flex-direction: row; margin-top: 170px;">
-
-      <h2 class="headerr">{{stallId}}</h2>
-
-      <ion-card style="width: 130px; margin-left: 30px;" (click)="click()">
-        <p>
-          Stall Settings
-        </p>
-        <ion-list *ngIf="open">
-          <ion-select (ionChange)="updateStallStatus($event)" value="{{stall_status}}">
-            <ion-select-option value="Open">Open</ion-select-option>
-            <ion-select-option value="LastOrder">Last Order</ion-select-option>
-            <ion-select-option value="Closed">Closed</ion-select-option>
-          </ion-select>
-          <div>
-            test
+          </ion-button>
+      <div style="display: flex;flex-direction: row; margin-top: 170px;">
+  
+        <h2 class="headerr">{{stallId}}</h2>
+  
+        <ion-card style="width: 130px; margin-left: 30px;" (click)="click()">
+          <p>
+            Stall Settings
+          </p>
+          <ion-list *ngIf="open">
+            <ion-select (ionChange)="updateStallStatus($event)" value="{{stall_status}}">
+              <ion-select-option value="Open">Open</ion-select-option>
+              <ion-select-option value="LastOrder">Last Order</ion-select-option>
+              <ion-select-option value="Closed">Closed</ion-select-option>
+            </ion-select>
+            <div>
+              test
+            </div>
+          </ion-list>
+        </ion-card>
+      </div>
+        <div *ngFor="let data of menu">
+            <ion-card (click)="toUpdateItem(data.foodId)">
+              <ion-row>
+                <ion-col size="4">
+                  <img src={{data.foodImg}} height="90px" width="90px" style="margin-bottom: 13px;margin-top: 7px;">
+                </ion-col>
+                <ion-col size="8">
+                  <ion-row>
+                    <ion-label
+                      style="background-color: transparent; font-size:18px ;">
+                      <b>{{data.foodName}}</b>
+                    </ion-label>
+                  </ion-row>
+                  <ion-row>
+                    <ion-label
+                      style="background-color:transparent; margin-top: 10px;">
+                      $ {{data.foodPrice}}
+                    </ion-label>
+                  </ion-row>
+                  <ion-row>
+                    <ion-label
+                      style="background-color:transparent; margin-top: 10px;">
+                      Quantity: {{data.foodQuantity}}
+                    </ion-label>
+                  </ion-row>
+                  <ion-row>
+                    <ion-label
+                      style="background-color:transparent; margin-top: 10px;">
+                      {{data.foodDetails}}
+                    </ion-label>
+                  </ion-row>
+                </ion-col>
+              </ion-row>
+            </ion-card>
           </div>
+          
+    </ion-content>
 
-        </ion-list>
-      </ion-card>
-    </div>
+    <ion-fab vertical="bottom" horizontal="end" edge slot="fixed" style="margin-bottom: 62px; margin-right: 18px;">
+        <ion-fab-button color="primary" (click)="addMenuItem()">
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
 
-    <div *ngFor="let data of menu">
-      <ion-card (click)="toUpdateItem(data.foodId)">
-        <ion-row>
-          <ion-col size="4">
-            <img src={{data.foodImg}} height="90px" width="90px" style="margin-bottom: 13px;margin-top: 7px;">
-          </ion-col>
-          <ion-col size="8">
-            <ion-row>
-              <ion-label style="background-color: transparent; font-size:18px ;">
-                <b>{{data.foodName}}</b>
-              </ion-label>
-            </ion-row>
-            <ion-row>
-              <ion-label style="background-color:transparent; margin-top: 10px;">
-                $ {{data.foodPrice}}
-              </ion-label>
-            </ion-row>
-            <ion-row>
-              <ion-label style="background-color:transparent; margin-top: 10px;">
-                Quantity: {{data.foodQuantity}}
-              </ion-label>
-            </ion-row>
-            <ion-row>
-              <ion-label style="background-color:transparent; margin-top: 10px;">
-                {{data.foodDetails}}
-              </ion-label>
-            </ion-row>
-          </ion-col>
-        </ion-row>
-      </ion-card>
-    </div>
-
-  </ion-content>
-
-  <ion-fab vertical="bottom" horizontal="end" edge slot="fixed" style="margin-bottom: 62px; margin-right: 18px;">
-    <ion-fab-button color="primary" (click)="addMenuItem()">
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
-
+    </ion-fab>
 </ion-content>

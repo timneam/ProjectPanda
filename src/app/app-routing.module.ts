@@ -144,6 +144,10 @@ const routes: Routes = [
   {
     path: 'vendor-profile-edit',
     loadChildren: () => import('./vendor-profile-edit/vendor-profile-edit.module').then( m => m.VendorProfileEditPageModule)
+  },
+  {
+    path: 'vendor-edit-details',
+    loadChildren: () => import('./vendor-edit-details/vendor-edit-details.module').then( m => m.VendorEditDetailsPageModule)
   }
 
 
