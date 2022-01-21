@@ -23,10 +23,8 @@ export class VendorHomePage implements OnInit {
   stall_status: any;
   stallImg: any;
   stallName: any;
-
   soldOut = []
   gotStocks = []
-
 
 
   constructor(
@@ -61,7 +59,6 @@ export class VendorHomePage implements OnInit {
     this.stall_status = stallData.data().stallStatus
     this.stallName = stallData.data().stallName
     this.stallImg = stallData.data().stallImg
-
     const stallDetails = await getDocs(collection(this.db, 'Stall', vendorData.data().stallId, 'Menu'));
     
     stallDetails.forEach((doc) => {
@@ -89,7 +86,7 @@ export class VendorHomePage implements OnInit {
 
   updateStallStatus = (lol) => {
     this.stallService.updateStallStatus(this.stallId, lol.detail.value)
-    console.log(lol.detail.value)
+    console.log(lol.detail.value) 
   }
 
   toUpdateItem(foodId){
@@ -109,10 +106,8 @@ export class VendorHomePage implements OnInit {
       console.log(this.open)
     }
   }
-  
+
   updateStallDetails(){
     this.router.navigateByUrl(`/vendor-edit-details/${this.stallId}`)
   }
-
-
 }

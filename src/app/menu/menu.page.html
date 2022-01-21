@@ -1,18 +1,57 @@
 <ion-content>
   <div *ngFor="let data of stallData">
-    <img src={{data.stallImg}} style="position: absolute;z-index: -1;width: 100%;">
+    <img src={{data.stallImg}} style="position: absolute;z-index: -1;width: 100%;height: 160px;">
     <img src="../assets/whiteback.png" class="iconn" [routerLink]="['/tabs/stalls']">
     <h3 style="font-size: 22px;font-weight: bold;color: #ffffff;display: flex;justify-content: center;text-shadow: grey 2px 2px;">
       {{data.stallName}}
     </h3>
     <p class="subb">Estimated wait time {{totalEstTime}} mins </p>
-    <p class="subb">Stall Status: {{data.stallStatus}}</p>
+  
   </div>
-
+<div *ngFor="let data of stallData" style="margin-bottom: -10px;display: flex;flex-direction: row;align-items: center;">
   <h2 class="headerr">Menu</h2>
+  <p style="margin-left: 130px;align-self: end;" >Stall is <b>{{data.stallStatus}}</b></p>
+</div>
+
 
   <ion-list>
-    <div *ngFor="let data of stallMenu">    
+    <div *ngFor="let data of stallMenu"> 
+      <div *ngIf="data.foodQuantity === 0" >
+        <ion-card (click)="goToMenuDetails(data.foodId)" disabled>
+          <ion-row>
+      
+            <ion-col size="4">
+              <img src={{data.foodImg}} height="90px" width="90px" style="margin-bottom: 7px;margin-top: 7px;">
+            </ion-col>
+      
+            <ion-col size="8">
+              <ion-row>
+                <ion-label
+                  style="background-color: transparent; font-size:18px ;color:black;font-weight:500; ">
+                 {{data.foodName}}
+                </ion-label>
+              </ion-row>
+              <ion-row>
+                <ion-label
+                  style="background-color:transparent; margin-top: 10px;font-weight:500;color:black;">
+                  $ {{data.foodPrice}}
+                </ion-label>
+              </ion-row>
+           <!-- <ion-row>
+                <ion-label
+                  style="background-color:transparent; margin-top: 10px;">
+                  {{data.foodDetails}}
+                </ion-label>
+              </ion-row> -->
+            </ion-col>
+      
+          </ion-row> 
+      
+        </ion-card>
+      
+      
+      </div> 
+      <div *ngIf="data.foodQuantity !==0">
       <ion-card (click)="goToMenuDetails(data.foodId)">
         <ion-row>
 
@@ -30,7 +69,7 @@
             <ion-row>
               <ion-label
                 style="background-color:transparent; margin-top: 10px;font-weight:500;color:black;">
-                $ {{data.foodPrice}}
+                $ {{data.foodPrice}} 
               </ion-label>
             </ion-row>
          <!-- <ion-row>
@@ -45,7 +84,7 @@
 
       </ion-card>
 
-      <hr>
+    </div>  
 
     </div>
 

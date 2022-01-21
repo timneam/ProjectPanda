@@ -86,7 +86,8 @@ export class MenuPage implements OnInit {
         "foodDetails": data.foodDetails, 
         "foodPrice": data.foodPrice, 
         "foodEstTime": data.foodEstTime,
-        "foodImg" : data.foodImg }
+        "foodImg" : data.foodImg,
+      "foodQuantity": data.foodQuantity}
       this.stallMenu.push(foodData)
     })
     console.log(this.stallMenu[0].foodEstTime)
