@@ -4,7 +4,7 @@ import { collectionData } from 'rxfire/firestore';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, updateEmail, updatePassword, signOut, sendPasswordResetEmail, sendEmailVerification } from "firebase/auth";
 import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, getFirestore, setDoc, updateDoc } from 'firebase/firestore';
 import { async } from '@angular/core/testing';
-import { NavController } from '@ionic/angular';
+import {  NavController, NavParams, ToastController } from '@ionic/angular';
 import { Location } from "@angular/common";
 import { Router } from '@angular/router';
 
@@ -19,7 +19,8 @@ export class UsersService {
   constructor(private firestore: Firestore,
     private navCntrl: NavController,
     private location: Location,
-    private router: Router) { }
+    private router: Router,
+    private toastCtrl: ToastController,) { }
 
   getUserInformation() {
     const usersRef = collection(this.firestore, 'User');
@@ -51,7 +52,26 @@ export class UsersService {
         const errorMessage = error.message;
         console.log(errorCode)
         console.log(errorMessage)
+
+        if(error.code === "auth/user-not-found") {
+          //alert
+          this.toastCtrl.create({
+            message: 'User does not exist',
+            duration: 2000,
+            position: 'bottom'
+          }).then(alert=> alert.present());
+        }
+
+        if(error.code =="auth/wrong-password") {
+          // ToastController.name 
+          this.toastCtrl.create({
+           message: 'Password is invalid',
+           duration: 2000,
+           position: 'bottom'
+         }).then(alert=> alert.present());
+         }
       });
+     
   }
 
   registerUser(firstName, lastName, email, password, reEnterPassword, phoneNumber, role) {
