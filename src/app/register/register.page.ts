@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { UsersService } from '../services/users.service';
 import { Router } from '@angular/router'
-import { LoadingController } from '@ionic/angular';
+import { LoadingController , ToastController} from '@ionic/angular';
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
 import { getAuth, updateProfile } from 'firebase/auth';
 
@@ -22,7 +22,7 @@ export class RegisterPage implements OnInit {
   constructor(
     private LoadingController: LoadingController,
     private UsersService: UsersService,
-    private formBuilder: FormBuilder,
+    private formBuilder: FormBuilder,   private toastCtrl: ToastController,
     private router: Router
   ) { }
 
@@ -102,6 +102,11 @@ export class RegisterPage implements OnInit {
 
   onRegister() {
     console.log(this.formData.value)
+    if( this.formData.value.firstName == null || this.formData.value.lastName == null||  this.formData.value.email == null || this.formData.value.password == null || this.formData.value.phoneNumber ==null ){
+      this.InvalidToast();
+      return console.log("All fields are required")
+      
+    }
     this.UsersService.registerUser(
       this.formData.value.firstName,
       this.formData.value.lastName,
@@ -110,6 +115,7 @@ export class RegisterPage implements OnInit {
       this.formData.value.reEnterPassword,
       this.formData.value.phoneNumber,
       this.formData.value.role)
+      
     this.presentLoading()
     setTimeout(() => {
       this.addProfilePicture()
@@ -145,5 +151,10 @@ export class RegisterPage implements OnInit {
     };
     input.click();
   }
-
+  InvalidToast() {
+    const toast= this.toastCtrl.create({
+      message: 'All fields are required',
+      duration: 2000,
+      position: 'bottom'
+    }).then(alert=> alert.present()); }
 }

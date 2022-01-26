@@ -76,6 +76,8 @@ export class UsersService {
 
   registerUser(firstName, lastName, email, password, reEnterPassword, phoneNumber, role) {
     const auth = getAuth();
+    const rePw = this
+  
     createUserWithEmailAndPassword(auth, email, password)
       .then(async (userCredential) => {
         // Signed in 
@@ -202,5 +204,11 @@ export class UsersService {
         console.log(error)
     });
   }
+  InvalidToast() {
+    const toast= this.toastCtrl.create({
+      message: 'All fields are required',
+      duration: 2000,
+      position: 'bottom'
+    }).then(alert=> alert.present()); }
 
 }

@@ -10,8 +10,10 @@
     <form [formGroup]="formData" class="textboxes" (ngSubmit)="onRegister()">
 
     <div>
-      <div style="text-align: center;">
-        <img (click)="onchange()" id="previewImg" src="../assets/vendorImg.png" style=" overflow: hidden; vertical-align: middle;">    
+      <div style="text-align: center;margin-right: 10px;">
+        <ion-button (click)="onchange()" id="previewImg"  style=" overflow: hidden; vertical-align: middle;border-radius: 25px;width: 105%;margin-right: 18px;margin-bottom: 8px;"> 
+          <ion-icon name="add"></ion-icon>
+        <p> Optional Profile Photo</p>  </ion-button> 
       </div>
     </div>
 
@@ -56,7 +58,7 @@
         </ion-item>
       </ion-card>
         <ion-button type="submit"  
-          style="border-radius: 25px;color: #F5585C; width: 100%; height: 50px; margin-top: 42px; box-shadow: 5px 5px 5px lightgray;" color="primary">
+          style="border-radius: 25px;color: #F5585C; width: 100%; height: 50px; margin-top: 35px; box-shadow: 5px 5px 5px lightgray;" color="primary">
           <ion-label
             style="color: white;text-transform: none;font-size: 16px;font-family: 'Sen', sans-serif;">
             <b>Create Account</b>
