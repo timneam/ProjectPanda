@@ -1,4 +1,4 @@
-package io.ionic.demo.pg.cap.ng;
+package com.example.projectpanda;
 
 import com.getcapacitor.BridgeActivity;
 
