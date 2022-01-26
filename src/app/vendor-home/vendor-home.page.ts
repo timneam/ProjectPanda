@@ -110,4 +110,19 @@ export class VendorHomePage implements OnInit {
   updateStallDetails(){
     this.router.navigateByUrl(`/vendor-edit-details/${this.stallId}`)
   }
+
+  doRefresh(event) {
+    console.log('Begin async operation');
+
+    this.menu = [];
+    this.soldOut = []
+    this.gotStocks = []
+    
+    setTimeout(() => {
+      event.target.complete().then(() => {
+        this.getCurrentUser()
+      })
+    }, 2000);
+  }
+
 }
