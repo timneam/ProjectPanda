@@ -41,3 +41,16 @@ arrow down and select ProjectPanda
 arrow down and select ProjectPanda
 4) Run on the web: `ionic serve`.
 5) Run on iOS or Android: See [here](https://ionicframework.com/docs/building/running).
+
+To run app in android
+
+the 2 links used:
+1) https://capacitorjs.com/docs/getting-started
+2) https://capacitorjs.com/docs/android
+
+Steps:
+1) Npm install
+2) ionic build
+3) npx cap add android
+4) Open app in android studio with 'npx cap open android'
+5) update gradle
