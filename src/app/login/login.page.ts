@@ -2,9 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../services/users.service';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { deleteDoc, doc, getFirestore, setDoc, updateDoc } from 'firebase/firestore';
-import {  NavController, NavParams, ToastController } from '@ionic/angular';
+import { NavController, NavParams, ToastController } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular';
 import { Firestore } from '@angular/fire/firestore';
+import { AppLauncher } from '@capacitor/app-launcher';
+
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -12,12 +15,12 @@ import { Firestore } from '@angular/fire/firestore';
 })
 
 export class LoginPage implements OnInit {
-  
+
   db = getFirestore();
   formData: FormGroup;
 
   constructor(
-    private LoadingController : LoadingController ,
+    private LoadingController: LoadingController,
     private UsersService: UsersService,
     private formBuilder: FormBuilder,
     private navController: NavController,
@@ -91,5 +94,18 @@ export class LoginPage implements OnInit {
     const frankDocRef = doc(this.db, "User", "DeezNutz");
     await deleteDoc(frankDocRef);
   }
-  
+
+
+  async checkCanOpenUrl() {
+    // Check if app exist, Output is true/false
+    const { value } = await AppLauncher.canOpenUrl({ url: 'com.SingTel.mWallet' })
+    if (value == true) {
+      // Route to external app
+      await AppLauncher.openUrl({ url: 'com.SingTel.mWallet' });
+    } else {
+      // Route to Playstore
+      await AppLauncher.openUrl({ url: 'https://play.google.com/store/apps/details?id=com.SingTel.mWallet' });
+    }
+  };
+
 }
