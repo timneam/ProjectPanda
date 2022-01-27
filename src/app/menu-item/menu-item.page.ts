@@ -101,6 +101,7 @@ export class MenuItemPage implements OnInit {
       foodPrice: this.menuDetails[0].foodPrice,
       foodDescription: this.menuDetails[0].foodDetails,
       foodEstTime: this.menuDetails[0].foodEstTime,
+      foodImg: this.menuDetails[0].foodImg,
       foodQty: this.item_qty,
       userComment: (<HTMLInputElement>document.getElementById("userComment")).value
     }
@@ -113,7 +114,9 @@ export class MenuItemPage implements OnInit {
       this.cartService.setItemToCart(user.uid, this.stallRoute, menuData).then((res) => {
         this._location.back();
         this.selectedItemsList.forEach(element => {
-          let data = { "addOnTitle": element.addOnTitle, "addOnPrice": element.addOnPrice }
+          let data = { 
+          "addOnTitle": element.addOnTitle, 
+          "addOnPrice": element.addOnPrice }
           this.cartService.setItemAddonToCart(user.uid, this.stallRoute, res.id, element.id, data )
         });
       })

@@ -44,7 +44,15 @@ export class CartService {
     const querySnapshot = await getDocs(collection(this.db, 'User', userId, 'Cart', stallId, 'menuList'))
     let cartItems = [];
     querySnapshot.forEach((doc) => {
-      let items = { "id": doc.id, "foodName": doc.data().foodName, "foodPrice": doc.data().foodPrice, "foodDescription": doc.data().foodDescription, "foodEstTime": doc.data().foodEstTime, "foodQty": doc.data().foodQty }
+      let items = { 
+        "id": doc.id, 
+        "foodName": doc.data().foodName, 
+        "foodPrice": doc.data().foodPrice, 
+        "foodDescription": doc.data().foodDescription, 
+        "foodEstTime": doc.data().foodEstTime, 
+        "foodImg": doc.data().foodImg, 
+        "foodQty": doc.data().foodQty 
+      }
       cartItems.push(items)
     })
     return cartItems

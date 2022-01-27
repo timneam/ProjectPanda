@@ -91,7 +91,8 @@ export class Tab2Page {
             "foodName": res.foodName, 
             "foodPrice": res.foodPrice, 
             "foodDescription": res.foodDescription, 
-            "foodEstTime": res.foodEstTime, 
+            "foodEstTime": res.foodEstTime,
+            "foodImg": res.foodImg, 
             "foodQty": res.foodQty, 
             "addon": addon }
           this.cartItems.push(cartData)
