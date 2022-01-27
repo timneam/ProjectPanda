@@ -21,7 +21,7 @@
 
       <h2 class="headerr">{{stallName}}</h2>
 
-      <ion-card style="width: 130px; margin-left: 30px;" (click)="click()">
+      <ion-card style="width: 130px; margin-left: 30px;max-height: 149px;" (click)="click()">
         <p>
           Stall Settings
         </p>
@@ -32,7 +32,7 @@
             <ion-select-option value="Closed">Closed</ion-select-option>
           </ion-select>
           <div>
-            <ion-select value="All">
+            <ion-select value="All" style="margin-top: -3px;">
               <ion-select-option value="All">All Items</ion-select-option>
               <ion-select-option value="Available">Available</ion-select-option>
               <ion-select-option value="SoldOut">Sold Out</ion-select-option>
