@@ -44,10 +44,9 @@ ion-button {
 }
 
 ion-select {
-  --border-radius: 25px;
-  border-radius: 20px;
+ 
   height: 50px;
-  width: 100px;
+border: groove;
   font-family: 'Sen';
   align-self: center;
 }

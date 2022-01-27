@@ -113,6 +113,15 @@ export class UsersService {
         const errorMessage = error.message;
         console.log(errorCode)
         console.log(errorMessage)
+        //need to prev routing to are-you-singtel-staff page when error detetced I cant find the nav code for that line in register
+        if(error.code =="auth/email-already-in-use") {
+          // ToastController.name 
+          this.toastCtrl.create({
+           message: 'Email is taken',
+           duration: 2000,
+           position: 'bottom'
+         }).then(alert=> alert.present());
+         }
       });
   }
 

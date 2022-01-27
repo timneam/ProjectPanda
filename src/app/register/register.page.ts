@@ -99,10 +99,31 @@ export class RegisterPage implements OnInit {
   }
 
   onRegister() {
+
+    console.log(this.formData.value)
+
     if( this.formData.value.firstName == null || this.formData.value.lastName == null||  this.formData.value.email == null || this.formData.value.password == null || this.formData.value.phoneNumber ==null ){
       this.InvalidToast();
       return console.log("All fields are required")
     }
+
+    else if(this.formData.value.password != this.formData.value.reEnterPassword){
+      return  this.toastCtrl.create({
+        message: 'Password fields do not match',
+        duration: 2000,
+        position: 'bottom'
+      }).then(alert=> alert.present()); 
+          }
+     
+            else if(this.formData.value.password.length < 6) {
+              return  this.toastCtrl.create({
+                message: 'Password needs to be at least 6 characters long',
+                duration: 2000,
+                position: 'bottom'
+              }).then(alert=> alert.present()); 
+              }
+
+
 
     this.UsersService.registerUser(
       this.formData.value.firstName,
