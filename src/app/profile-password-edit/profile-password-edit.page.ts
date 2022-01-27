@@ -28,7 +28,6 @@ export class ProfilePasswordEditPage implements OnInit {
     this.userService.updateUserPassword(
       this.updateUserPasswordForm.value.password,
     )
-    // console.log(this.updateDataForm)
   }
 
 }

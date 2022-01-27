@@ -47,7 +47,7 @@ export class MenuItemPage implements OnInit {
 
   async thisMenuDetails(){
     const getMenuDetails = await getDoc(doc(this.db, 'Stall', this.stallRoute, 'Menu', this.menuRoute))
-    console.log(getMenuDetails.data());
+
     let data = getMenuDetails.data();
     let menuData = { 
       "foodName": data.foodName, 
@@ -65,30 +65,26 @@ export class MenuItemPage implements OnInit {
 
     querySnapshot.forEach((doc) => {
       let data = doc.data()
-      console.log(data);
       let menuVar = { "id": doc.id, "addOnTitle": data.title, "addOnPrice": data.price}
       this.menuAddOns.push(menuVar);  
     })
-    console.log(this.menuAddOns)
   }
 
   incrementQty() {
     if (this.item_qty >= this.menuDetails[0].foodQuantity) {
-      console.log(this.menuDetails[0].foodQuantity)
     } else {
       this.item_qty += 1;
-      console.log(this.item_qty + 1);
     }
   }
 
   decrementQty() {
     if (this.item_qty - 1 < 1) {
       this.item_qty = 1;
-      console.log('item_1->' + this.item_qty)
+      console.log(this.item_qty)
     }
     else {
       this.item_qty -= 1;
-      console.log('item_2->' + this.item_qty);
+      console.log(this.item_qty)
     }
   }
 
@@ -114,16 +110,11 @@ export class MenuItemPage implements OnInit {
     }
 
     this.cartService.createCartForAStall(user.uid, this.stallRoute, stallData).then((res) => {
-      console.log(res)
       this.cartService.setItemToCart(user.uid, this.stallRoute, menuData).then((res) => {
-        console.log(res)
         this._location.back();
         this.selectedItemsList.forEach(element => {
-          console.log(element)
           let data = { "addOnTitle": element.addOnTitle, "addOnPrice": element.addOnPrice }
           this.cartService.setItemAddonToCart(user.uid, this.stallRoute, res.id, element.id, data )
-          console.log("Added to cart!")
-          console.log(data)
         });
       })
     })
@@ -132,14 +123,9 @@ export class MenuItemPage implements OnInit {
   changeSelection() {
     this.selectedItemsList = this.menuAddOns.filter((value, index) => {
       if (value.isChecked) {
-        console.log(value)
       }
       return value.isChecked
     });
-  }
-
-  allUserAddons() {
-    
   }
 
 

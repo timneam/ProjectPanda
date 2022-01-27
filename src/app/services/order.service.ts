@@ -140,8 +140,6 @@ export class OrderService {
     if (querySnapshot.exists()) {
       let orderUserDetails = querySnapshot.data()
       return orderUserDetails
-    } else {
-      console.log("No such document!");
     }
   }
 
@@ -151,8 +149,6 @@ export class OrderService {
     let orderDetails = [];
 
     querySnapshot.forEach((doc) => {
-      // doc.data() is never undefined for query doc snapshots
-      // console.log(doc.data())
       let data = doc.data()
       // let orderData = { "OrderID": doc.id, "foodName": data.foodName, "foodPrice": data.foodPrice, "foodQty": data.foodQty, "foodEstTime": data.foodEstTime, "foodDescription": data.foodDescription, "addOn": data.addon}
       orderDetails.push(data)

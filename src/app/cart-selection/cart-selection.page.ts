@@ -32,7 +32,6 @@ export class CartSelectionPage implements OnInit {
         this.userId = users.uid
         this.getStallsCart()
       } else {
-        console.log("User is signed out")
         this.navCntrl.navigateForward('splash');
       }
     });
@@ -45,11 +44,7 @@ export class CartSelectionPage implements OnInit {
           let stallData = { "id": res }
           this.stallsCart.push(stallData)
         });
-      } else {
-        // Add Ui for this Thanks
-        console.log("No Item in Cart")
       }
-
     });
   }
 

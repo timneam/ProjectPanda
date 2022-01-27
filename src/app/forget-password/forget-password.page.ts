@@ -25,7 +25,6 @@ export class ForgetPasswordPage implements OnInit {
     this.userService.passwordReset(
       this.forgotPasswordForm.value.email
     )
-    console.log("Email Sent!")
   }
 
 }

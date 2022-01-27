@@ -38,9 +38,7 @@ export class ProfilePage implements OnInit {
         this.userInfo = users.providerData
         let ableToGetData = await getDoc(doc(this.db, "User", users.uid))
         this.userData.push(ableToGetData.data())
-        console.log(this.userData)
       } else {
-        console.log("User is signed out")
         this.router.navigateByUrl('splash');
       }
     });
@@ -92,7 +90,6 @@ export class ProfilePage implements OnInit {
     input.onchange = (img) => {
       // you can use this method to get file and perform respective operations
       let file = Array.from(input.files);
-      console.log(file);
 
       this.fileImg = file[0]
       let reader = new FileReader();
@@ -134,7 +131,6 @@ export class ProfilePage implements OnInit {
               // This is the file url for the image btw 
               // Go add this to the SRC on front-end
               // update doc image or add to doc
-              console.log('File available at', downloadURL);
               updateProfile(this.auth.currentUser, {
                 photoURL: downloadURL
               })

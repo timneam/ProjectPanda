@@ -44,29 +44,19 @@ export class ProfileEditPage implements OnInit {
     //Get data from the fire auth
     const auth = getAuth();
     const user = auth.currentUser;
-    console.log(user)
     // get the data
     const ableToGetData = await getDoc(doc(this.db, "User", user.uid))
     
     if (user !== null) {
       user.providerData.forEach((profile) => {
-        console.log("  Sign-in provider: " + profile.providerId);
-        console.log("  Provider-specific UID: " + profile.uid);
-        console.log("  Name: " + profile.displayName);
-        console.log("  Email: " + profile.email);
-        console.log("  Photo URL: " + profile.photoURL);
         this.userData = profile
       });
-
-      // console.log(this.userData)
     }
 
     if (ableToGetData.exists) {
-      console.log(ableToGetData.data());
       this.userData2 = ableToGetData.data();
     }
     else {
-      console.log("No Such Document!");
     }
 
     this.updateDataForm.patchValue({
@@ -82,7 +72,6 @@ export class ProfileEditPage implements OnInit {
       this.updateDataForm.value.lastName,
       this.updateDataForm.value.phoneNumber
     )
-    // console.log(this.updateDataForm)
   }
 
   async editName() {

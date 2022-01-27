@@ -49,7 +49,6 @@ export class RegisterPage implements OnInit {
     await loading.present();
 
     const { role, data } = await loading.onDidDismiss();
-    console.log('Loading dismissed!');
   }
 
   async addProfilePicture() {
@@ -87,7 +86,6 @@ export class RegisterPage implements OnInit {
             // This is the file url for the image btw 
             // Go add this to the SRC on front-end
             // update doc image or add to doc
-            console.log('File available at', res);
             updateProfile(this.auth.currentUser, {
               photoURL: res
             }).then(() => {
@@ -101,12 +99,11 @@ export class RegisterPage implements OnInit {
   }
 
   onRegister() {
-    console.log(this.formData.value)
     if( this.formData.value.firstName == null || this.formData.value.lastName == null||  this.formData.value.email == null || this.formData.value.password == null || this.formData.value.phoneNumber ==null ){
       this.InvalidToast();
       return console.log("All fields are required")
-      
     }
+
     this.UsersService.registerUser(
       this.formData.value.firstName,
       this.formData.value.lastName,
@@ -137,7 +134,6 @@ export class RegisterPage implements OnInit {
     input.onchange = (img) => {
       // you can use this method to get file and perform respective operations
       let file = Array.from(input.files);
-      console.log(file);
 
       this.fileImg = file[0]
       let reader = new FileReader();
