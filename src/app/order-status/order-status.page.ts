@@ -53,7 +53,6 @@ export class OrderStatusPage implements OnInit {
         this.getOrdersFunction()
         this.getVendorData()
       } else {
-        console.log("User is signed out")
         this.router.navigateByUrl('splash');
       }
     });
@@ -61,19 +60,16 @@ export class OrderStatusPage implements OnInit {
 
   getOrdersFunction(){
     this.orderService.getUserDetailsInOrder(this.stallId, this.orderId).then((res) => {
-      console.log(res)
       this.orderData.push(res)
     })
     this.orderService.lol(this.stallId, this.orderId).then((res) => {
       res.forEach(doc => {
         this.orderedItemData.push(doc.data())
-        console.log(this.orderedItemData)
       })
     })
   }
 
   doRefresh(event) {
-    console.log('Begin async operation');
 
     this.vendorData = []
     this.orderData = []
@@ -91,7 +87,6 @@ export class OrderStatusPage implements OnInit {
   getVendorData(){
     this.orderService.findVendorDetails(this.stallId).then((doc) => {
       this.vendorData = doc
-      console.log(this.vendorData)
     })
   }
 

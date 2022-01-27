@@ -32,7 +32,6 @@ export class ProfileEmailEditPage implements OnInit {
   // getUserEmail() {
   //   const auth = getAuth();
   //   const user = auth.currentUser
-  //   console.log(user)
   //   let email = user.email;
 
   //   if (user !== null) {

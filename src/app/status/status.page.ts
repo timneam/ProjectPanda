@@ -146,11 +146,6 @@ export class StatusPage implements OnInit {
       })
 
       resolve('Done Filter')
-
-      console.log(this.pendingOrder)
-      console.log(this.cancelledOrder)
-      console.log(this.preparingOrder)
-      console.log(this.completedOrder)
     })
   }
 
@@ -163,13 +158,6 @@ export class StatusPage implements OnInit {
     this.preparingOrder = []
     this.cancelledOrder = []
     this.completedOrder = []
-
-    console.log(this.orderStatus)
-    console.log(this.orderData)
-    console.log(this.pendingOrder)
-    console.log(this.cancelledOrder)
-    console.log(this.preparingOrder)
-    console.log(this.completedOrder)
     
     setTimeout(() => {
       event.target.complete().then(() => {

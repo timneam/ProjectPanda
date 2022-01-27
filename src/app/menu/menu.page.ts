@@ -43,13 +43,11 @@ export class MenuPage implements OnInit {
   }
 
   estTime() {
-    console.log(this.stallId)
     let status = "Preparing"
     this.orderService.totalEstTime(this.stallId, status).then((doc) => {
       doc.forEach((doc) => {
         let time = parseInt(doc.TotalEstTime)
         this.totalEstTime = this.totalEstTime + time
-        console.log(this.totalEstTime)
       })
     })
 
@@ -64,16 +62,13 @@ export class MenuPage implements OnInit {
     await loading.present();
 
     const { role, data } = await loading.onDidDismiss();
-    console.log('Loading dismissed!');
   }
   
   async getStallData() {
     const stallData = await getDoc(doc(this.db, "Stall", this.stallId));
     if (stallData.exists()) {
       this.stallData = [stallData.data()]
-    } else {
-      console.log("No such document!");
-    }
+    } 
   }
 
   async getStallMenu() {
@@ -90,14 +85,11 @@ export class MenuPage implements OnInit {
       "foodQuantity": data.foodQuantity}
       this.stallMenu.push(foodData)
     })
-    console.log(this.stallMenu[0].foodEstTime)
     localStorage.setItem("est1",this.stallMenu[0].foodEstTime)
     localStorage.setItem("foodI",this.stallMenu[0].foodId)
-    console.log(this.stallMenu)
   }
 
   async goToMenuDetails(foodId){
-    console.log(foodId)
     this.router.navigateByUrl(`/menu-item/${this.stallId}/${foodId}`)
   }
 

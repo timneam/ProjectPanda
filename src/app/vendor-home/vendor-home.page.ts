@@ -18,9 +18,11 @@ export class VendorHomePage implements OnInit {
   open = false;
 
   menu = [];
+  filtermenu = []
 
-  stallId : any;
-  stall_status: any;
+  filterstatus = "All"
+  stallId: any;
+  status: any;
   stallImg: any;
   stallName: any;
   soldOut = []
@@ -31,7 +33,7 @@ export class VendorHomePage implements OnInit {
     private stallService: StallsService,
     private router: Router,
     public modalController: ModalController) {
-   }
+  }
 
   ngOnInit() {
     this.getCurrentUser();
@@ -42,62 +44,77 @@ export class VendorHomePage implements OnInit {
       if (user) {
         this.showMenu()
       } else {
-        console.log("User is signed out")
         this.router.navigateByUrl('splash');
       }
     });
   };
 
-  async showMenu(){
+  async showMenu() {
     // user id to get doc data
     const user = this.auth.currentUser.uid;
     const vendorData = await getDoc(doc(this.db, 'User', user));
-    console.log(vendorData.data().stallId);
     this.stallId = vendorData.data().stallId;
 
     const stallData = await getDoc(doc(this.db, 'Stall', vendorData.data().stallId));
-    this.stall_status = stallData.data().stallStatus
+    this.status = stallData.data().stallStatus
     this.stallName = stallData.data().stallName
     this.stallImg = stallData.data().stallImg
     const stallDetails = await getDocs(collection(this.db, 'Stall', vendorData.data().stallId, 'Menu'));
-    
+
     stallDetails.forEach((doc) => {
-      console.log(doc.id);
       let menuData = doc.data();
-      let menuItems = { 
-        "foodId" : doc.id, 
-        "foodName" : menuData.foodName,
-        "foodPrice": menuData.foodPrice, 
-        "foodDetails": menuData.foodDetails, 
+      let menuItems = {
+        "foodId": doc.id,
+        "foodName": menuData.foodName,
+        "foodPrice": menuData.foodPrice,
+        "foodDetails": menuData.foodDetails,
         "foodEstTime": menuData.foodEstTime,
         "foodQuantity": menuData.foodQuantity,
-        "foodImg" : menuData.foodImg
+        "foodImg": menuData.foodImg
       }
       this.menu.push(menuItems);
+      this.filtermenu = this.menu
       if (menuItems.foodQuantity == 0) {
         this.soldOut.push(menuItems)
-        console.log(this.soldOut) 
       } else {
         this.gotStocks.push(menuItems)
-        console.log(this.gotStocks) 
       }
     })
   }
 
-  updateStallStatus = (lol) => {
-    this.stallService.updateStallStatus(this.stallId, lol.detail.value)
-    console.log(lol.detail.value) 
+  updateStallStatus = (value) => {
+    this.stallService.updateStallStatus(this.stallId, value.detail.value).then(res => {
+      this.open = false
+      this.status = value.detail.value
+    })
   }
 
-  toUpdateItem(foodId){
+  filter = (value) => {
+    this.filtermenu = []
+
+    if (value.detail.value == "All") {
+      this.filterstatus = "All"
+      this.filtermenu = this.menu
+    } else if (value.detail.value == "Available") {
+      this.filterstatus = "Available"
+      this.filtermenu = this.gotStocks
+    } else if (value.detail.value == "SoldOut") {
+      this.filterstatus = "SoldOut"
+      this.filtermenu = this.soldOut
+    }
+
+    this.open = false
+  }
+
+  toUpdateItem(foodId) {
     this.router.navigateByUrl(`/vendor-tabs/${this.stallId}/update-item/${foodId}`)
   }
 
-  addMenuItem(){
+  addMenuItem() {
     this.router.navigateByUrl(`/vendor-tabs/${this.stallId}/add`)
   }
 
-  click(){
+  click() {
     if (this.open == true) {
       this.open = false
       console.log(this.open)
@@ -107,17 +124,18 @@ export class VendorHomePage implements OnInit {
     }
   }
 
-  updateStallDetails(){
+  updateStallDetails() {
     this.router.navigateByUrl(`/vendor-edit-details/${this.stallId}`)
   }
 
   doRefresh(event) {
-    console.log('Begin async operation');
 
+    this.open = false
+    this.filterstatus = "All"
     this.menu = [];
     this.soldOut = []
     this.gotStocks = []
-    
+
     setTimeout(() => {
       event.target.complete().then(() => {
         this.getCurrentUser()
