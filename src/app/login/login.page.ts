@@ -50,17 +50,4 @@ export class LoginPage implements OnInit {
     this.UsersService.loginUser(this.formData.value.email, this.formData.value.password)
   }
 
-
-  async checkCanOpenUrl() {
-    // Check if app exist, Output is true/false
-    const { value } = await AppLauncher.canOpenUrl({ url: 'com.SingTel.mWallet' })
-    if (value == true) {
-      // Route to external app
-      await AppLauncher.openUrl({ url: 'com.SingTel.mWallet' });
-    } else {
-      // Route to Playstore
-      await AppLauncher.openUrl({ url: 'https://play.google.com/store/apps/details?id=com.SingTel.mWallet' });
-    }
-  };
-
 }

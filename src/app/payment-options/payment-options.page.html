@@ -1,42 +1,48 @@
-
-
 <ion-content>
   <h1 class="headerr">Payment</h1>
-<div style="display: flex;flex-direction: column;align-items: center;">
-  <p style="font-size:10px;color:red;margin-left:175px;">*Recommended </p>
-  <ion-button 
-  style="border-radius: 25px;color: #F5585C; width: 290px; height: 43px; font-size: 24px;margin-top: -3px;"
-  color="primary">
-<img src="../assets/Sdash.png" height="30px"/>
-</ion-button>
+  <div style="display: flex;flex-direction: column;align-items: center;">
+    <p style="font-size:10px;color:red;margin-left:175px;">*Recommended </p>
+    <ion-button (click)="paymentOption(1)"
+      style="border-radius: 25px;color: #F5585C; width: 290px; height: 43px;
+      font-size: 24px;margin-top: -3px;"
+      color="primary">
+      <img src="../assets/Sdash.png" height="30px" />
+    </ion-button>
 
-<ion-button 
-style="border-radius: 25px;color: #F5585C; width: 290px; height: 43px; font-size: 24px;margin-top: 26px;"
-color="primary">
-<img src="../assets/paynow.png" height="35px"/>
-</ion-button>
+    <ion-button (click)="paymentOption(2)"
+      style="border-radius: 25px;color: #F5585C; width: 290px; height: 43px;
+      font-size: 24px;margin-top: 26px;"
+      color="primary">
+      <img src="../assets/paynow.png" height="35px" />
+    </ion-button>
 
-<ion-button 
-style="border-radius: 25px;color: #F5585C; width: 290px; height: 43px; font-size: 24px;margin-top: 26px;"
-color="primary">
-<img src="../assets/paylah.png" height="35px"/>
-</ion-button>
+    <ion-button (click)="paymentOption(3)"
+      style="border-radius: 25px;color: #F5585C; width: 290px; height: 43px;
+      font-size: 24px;margin-top: 26px;"
+      color="primary">
+      <img src="../assets/paylah.png" height="35px" />
+    </ion-button>
 
-<ion-button [routerLink]="['/order-confirmation']"
-style="border-radius: 25px;color: #F5585C; width: 290px; height: 43px; font-size: 24px;margin-top: 26px;"
-color="primary">
-<ion-label style="color: black;text-transform: none;font-size: 17px;font-family: 'Sen', sans-serif;">
-  Cash Payment
-</ion-label>
-</ion-button>
+    <ion-button (click)="paymentOption(4)"
+      style="border-radius: 25px;color: #F5585C; width: 290px; height: 43px;
+      font-size: 24px;margin-top: 26px;"
+      color="primary">
+      <ion-label style="color: black;text-transform: none;font-size:
+        17px;font-family: 'Sen', sans-serif;">
+        Cash Payment
+      </ion-label>
+    </ion-button>
 
-<hr>
- 
-</div>
-<p style="opacity: 69%;font-size:11px;margin-left:30px">Terms & Conditions: </p>
-<ul style="opacity: 69%;font-size:11px;width:80%;margin-left:15px">
-  <li>Singtel staffs are eligible to a 10% staff discount when using Singtel Dash</li>
-  <li>The discount will be activated once you select Singtel Dash as the payment option</li>
-  <li>All other payment methods will not qualify you for staff discount</li>
-</ul> 
+    <hr>
+
+  </div>
+  <p style="opacity: 69%;font-size:11px;margin-left:30px">Terms & Conditions:
+  </p>
+  <ul style="opacity: 69%;font-size:11px;width:80%;margin-left:15px">
+    <li>Singtel staffs are eligible to a 10% staff discount when using Singtel
+      Dash</li>
+    <li>The discount will be activated once you select Singtel Dash as the
+      payment option</li>
+    <li>All other payment methods will not qualify you for staff discount</li>
+  </ul>
 </ion-content>
