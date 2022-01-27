@@ -20,15 +20,26 @@
 
     <div style="display: flex;flex-direction: row; margin-top: 180px;">
       <h2 class="headerr">{{stallName}}</h2>
-          <ion-select style="width: 130px;" (ionChange)="filter($event)" value="{{filterstatus}}">
+      <ion-card style="width: 130px; margin-left: 30px; text-align: center;">
+        <div (click)="click()">
+          <p>Stall Settings</p> 
+        </div>
+        <div *ngIf="open">
+          <ion-select style="width: 130px;" (ionChange)="updateStallStatus($event)" value="{{status}}">
+            <ion-select-option value="Open">Open</ion-select-option>
+            <ion-select-option value="LastOrder">Last Order</ion-select-option>
+            <ion-select-option value="Closed">Closed</ion-select-option>
+          </ion-select>
+          <ion-select style="width: 130px;margin-top: -3px;" (ionChange)="filter($event)" value="{{filterstatus}}">
             <ion-select-option value="All">All Items</ion-select-option>
             <ion-select-option value="Available">Available</ion-select-option>
             <ion-select-option value="SoldOut">Sold Out</ion-select-option>
           </ion-select>
+       
+      
+
         </div>
       </ion-card>
-
-
 
     </div>
 
