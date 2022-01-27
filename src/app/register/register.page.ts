@@ -58,10 +58,10 @@ export class RegisterPage implements OnInit {
       const storage = getStorage();
       const storageRef = ref(storage, `images/${this.fileImg.name}`);
       const uploadTask = uploadBytesResumable(storageRef, this.fileImg);
-      // make if statement if file size to big? or format is wrong
+      // make if statement if file size to big or if format is wrong
       uploadTask.on('state_changed',
         (snapshot) => {
-          // do shit here for the "progress bar"
+          // progress bar
           // make global variable that updates then display it on HTML
           // console.log(snapshot)
           const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
