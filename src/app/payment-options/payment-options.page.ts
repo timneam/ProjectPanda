@@ -27,6 +27,10 @@ export class PaymentOptionsPage implements OnInit {
     }
   }
 
+  continue() {
+    this.route.navigateByUrl('/order-confirmation')
+  }
+
   async routeToApp(appString) {
     // Check if app exist, Output is true/false
     const { value } = await AppLauncher.canOpenUrl({ url: appString })
