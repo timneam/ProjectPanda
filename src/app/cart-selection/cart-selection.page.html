@@ -6,11 +6,11 @@
   </ion-refresher>
   <h1 class="headerr">My Stalls (Cart)</h1>
 
-  <div class="carddd" *ngFor="let stall of stallsCart">
+  <div class="carddd" *ngFor="let stall of stallDetails">
     <ion-card style="margin-top: 18px;box-shadow: 3px 5px 3px rgb(184, 180, 180);border-radius: 2px;width:90%"
       (click)="goToStallCart(stall.id)">
       <div style="display: flex;flex-direction: row;">
-        <img src="../assets/malayStall.png" class="stalll">
+        <img src={{stall.stallImg}} class="stalll">
         <div style="display: flex;flex-direction: column;">
           <h3 class="stallText">{{stall.id}}</h3>
         </div>
