@@ -17,6 +17,9 @@ export class VendorIndividualOrderPage implements OnInit {
   auth = getAuth();
   db = getFirestore();
 
+  customerId: any;
+  customerImg: any;
+
   userDetails = [];
   orderDetails = [];
 
@@ -47,9 +50,14 @@ export class VendorIndividualOrderPage implements OnInit {
     const vendorData = await getDoc(doc(this.db, 'User', this.auth.currentUser.uid));
     this.stallId = vendorData.data().stallId;
 
-    this.orderService.getUserDetailsInOrder(this.stallId, this.orderId).then((res) => {
-      console.log(res)
+    this.orderService.getUserDetailsInOrder(this.stallId, this.orderId).then(async (res) => {
+      this.customerId = res.UserID
       this.userDetails.push(res)
+      const userdata = await getDoc(doc(this.db, "User", this.customerId)).then((res) => {
+        console.log(res.data())
+        this.customerImg = res.data().UserPhoto
+        console.log(this.customerImg)
+      })
     })
 
     this.orderService.getOrderedItems(this.stallId, this.orderId).then((res) => {
