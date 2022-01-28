@@ -189,6 +189,11 @@ export class UsersService {
     });
   }
 
+  async addUserImgToDatabase(UserId, UserPhoto) {
+    await updateDoc(doc(this.db, "User", UserId), {
+      UserPhoto: UserPhoto
+    })
+  }
 
   signoutUser() {
     const auth = getAuth();

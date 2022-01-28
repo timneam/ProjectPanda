@@ -18,6 +18,7 @@ export class ProfilePage implements OnInit {
   db = getFirestore();
   updateData: FormGroup;
 
+  userId : any;
   userInfo = []
   userData = []
 
@@ -36,6 +37,7 @@ export class ProfilePage implements OnInit {
       if (user) {
         let users = this.auth.currentUser
         this.userInfo = users.providerData
+        this.userId = users.uid;
         let ableToGetData = await getDoc(doc(this.db, "User", users.uid))
         this.userData.push(ableToGetData.data())
       } else {
@@ -134,6 +136,7 @@ export class ProfilePage implements OnInit {
               updateProfile(this.auth.currentUser, {
                 photoURL: downloadURL
               })
+              this.UsersService.addUserImgToDatabase(this.userId, downloadURL)
             });
           }
         );
