@@ -62,12 +62,21 @@ export class Tab1Page {
   }
 
   async getUserData() {
-    const user = this.auth.currentUser.uid
+    const user = this.auth.currentUser
     console.log(user)
 
-    const userdata = await getDoc(doc(this.db, "User", user)).then((res) => {
+    const photoURL = user.photoURL;
+
+    const userdata = await getDoc(doc(this.db, "User", user.uid)).then((res) => {
       console.log(res.data())
-      this.userData.push(res.data())
+      let data = {
+        'uid': user.uid,
+        'firstName': res.data().firstName,
+        'lastName': res.data().firstName,
+        'photoURL': photoURL,
+      }
+      this.userData.push(data)
+      console.log(this.userData)
     })
     return userdata
 

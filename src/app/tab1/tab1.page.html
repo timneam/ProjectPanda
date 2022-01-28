@@ -6,7 +6,7 @@
       </div>
     </ion-title>
     <div style="display: flex;flex-direction: row;align-items: center;margin-top: 20px;" *ngFor="let data of userData">
-      <img src="../assets/profile.png" width="60" height="60"
+      <img src={{data.photoURL}} width="60" height="60"
         style="margin-right: 20px;margin-left: 30px;margin-top: -3px;">
       <div style="display: flex;flex-direction: column;">
         <p
