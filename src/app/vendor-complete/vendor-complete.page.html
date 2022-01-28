@@ -14,11 +14,11 @@
     <ion-card
       style="border-radius: 0px;border-color: black;width: 82%;color: black;height: 55px;box-shadow: none;border:groove 1px;border-color: black;">
       <div style="display: flex;flex-direction: row;margin-top: 5px;margin-left: 8px;align-items: center;white-space: pre;">
-        <ion-card (click)="goToOrderDetails(order.id)">
+        <div (click)="goToOrderDetails(order.id)">
           <p>Order id: {{order.id}} </p>
           <ion-icon name="caret-forward-outline" style="font-size: 18px;margin-left: 250px;margin-bottom: 2px;position: absolute;">
           </ion-icon>
-        </ion-card>
+        </div>
       </div>
     </ion-card>
   </div>
