@@ -88,10 +88,12 @@ export class OrderService {
       // doc.data() is never undefined for query doc snapshots
       let data = doc.data()
       let vendorData = { 
+        "id": doc.id,
         "firstName": data.firstName, 
         "lastName": data.lastName, 
         "phoneNumber": data.phoneNumber, 
-        "stallId": data.stallId, 
+        "stallId": data.stallId,
+        "vendorPhoto":data.vendorPhoto 
       }
       vendorDetails.push(vendorData)
     });

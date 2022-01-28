@@ -22,7 +22,7 @@
     <div *ngFor="let vendorDetail of vendorData">
       <div style="display: flex;margin-top: 25px; align-items:
         center;justify-content: center;margin-right: 50px;">
-        <img src="../assets/profile.png">
+        <img src={{vendorImg}} style="height: 80px; width: 80px; border-radius: 15px;">
         <h4 style="margin-left: 28px;">{{vendorDetail.firstName}} {{vendorDetail.lastName}}
         </h4>
       </div>

@@ -25,8 +25,10 @@ export class StallsService {
     return getDoc(doc(this.firestore, 'Stall', stallId));
   }
 
-  async updateStallInformation(stallId, data){
-    await updateDoc(doc(this.db, "Stall", stallId), data)
+  async updateVendorPicInStall(stallId, vendorPhoto){
+    await updateDoc(doc(this.db, "Stall", stallId), {
+      vendorPhoto: vendorPhoto
+    })
   }
 
   async getMenuInformation() {
@@ -38,7 +40,6 @@ export class StallsService {
   }
 
   async getOneMenuDetails(stallId, menuId) {
-
     const menu = await getDoc(doc(this.db, 'Stall', stallId, 'Menu', menuId));
     return menu;
   }
@@ -72,7 +73,7 @@ export class StallsService {
     querySnapshot.forEach((doc) => {
       let data = doc.data()
       let foodData = { 
-        "menuId": doc.id, 
+      "menuId": doc.id, 
       "foodName": data.foodName, 
       "foodDetails": data.foodDetails, 
       "foodPrice": data.foodPrice, 

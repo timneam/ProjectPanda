@@ -46,10 +46,11 @@ export class VendorProfilePage implements OnInit {
       if (user) {
         let users = this.auth.currentUser
         this.userInfo = users.providerData
-        console.log(this.userInfo)
+        this.getData();
+        // console.log(this.userInfo)
         let ableToGetData = await getDoc(doc(this.db, "User", users.uid))
         this.userData.push(ableToGetData.data())
-        console.log(this.userData)
+        // console.log(this.userData)
       } else {
         console.log("User is signed out")
         this.router.navigateByUrl('splash');
@@ -169,6 +170,8 @@ export class VendorProfilePage implements OnInit {
               updateProfile(this.auth.currentUser, {
                 photoURL: downloadURL
               })
+
+              this.stallService.updateVendorPicInStall(this.stallId, downloadURL)
             });
           }
         );

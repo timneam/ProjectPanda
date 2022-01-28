@@ -22,12 +22,13 @@ export class OrderStatusPage implements OnInit {
   stallId : any;
   userId: any;
 
-  vendorData = []
+  vendorImg: any;
+  orderStatus: any
 
+  vendorData = []
   orderData = []
   orderedItemData = []
   stallData = []
-  orderStatus: any
 
   constructor(
     private _location: Location,
@@ -69,6 +70,18 @@ export class OrderStatusPage implements OnInit {
     })
   }
 
+  getVendorData(){
+    this.orderService.findVendorDetails(this.stallId).then((doc) => {
+      this.vendorData = doc
+    })
+
+    this.stallService.getAStallInformation(this.stallId).then((res) => {
+      console.log(res.data())
+      this.vendorImg = res.data().vendorPhoto
+    })
+
+  }
+
   doRefresh(event) {
 
     this.vendorData = []
@@ -82,12 +95,6 @@ export class OrderStatusPage implements OnInit {
         this.getCurrentUser()
       })
     }, 2000);
-  }
-
-  getVendorData(){
-    this.orderService.findVendorDetails(this.stallId).then((doc) => {
-      this.vendorData = doc
-    })
   }
 
 }
