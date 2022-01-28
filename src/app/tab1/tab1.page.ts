@@ -72,7 +72,7 @@ export class Tab1Page {
       let data = {
         'uid': user.uid,
         'firstName': res.data().firstName,
-        'lastName': res.data().firstName,
+        'lastName': res.data().lastName,
         'photoURL': photoURL,
       }
       this.userData.push(data)
