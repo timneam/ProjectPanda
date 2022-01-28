@@ -4,7 +4,7 @@ import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { getAuth } from 'firebase/auth';
 import { UsersService } from '../services/users.service';
-
+import { AlertController, ToastController } from '@ionic/angular';
 @Component({
   selector: 'app-profile-email-edit',
   templateUrl: './profile-email-edit.page.html',
@@ -17,14 +17,15 @@ export class ProfileEmailEditPage implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
     private userService: UsersService,
-    private router: Router) { }
+    private router: Router, private toastCtrl: ToastController,) { }
 
   ngOnInit() {
 
     // this.getUserEmail();
 
     this.updateUserEmailForm = new FormGroup({
-      email: new FormControl()
+      email: new FormControl(),
+      reEnterEmail: new FormControl(),
     })
 
   }
@@ -43,6 +44,13 @@ export class ProfileEmailEditPage implements OnInit {
   // }
 
   updateUserEmail(){
+    if(this.updateUserEmailForm.value.email != this.updateUserEmailForm.value.reEnterEmail){
+      return  this.toastCtrl.create({
+        message: 'Emails do not match',
+        duration: 2000,
+        position: 'bottom'
+      }).then(alert=> alert.present()); 
+          }
     this.userService.updateUserEmail(
       this.updateUserEmailForm.value.email,
     )
