@@ -21,7 +21,7 @@ export class ProfileEditPage implements OnInit {
     private UsersService: UsersService,
     private formBuilder: FormBuilder,
     public router: Router, 
-    public popoverCtrl: PopoverController ) {
+    public popoverCtrl: PopoverController, private toastCtrl: ToastController,  ) {
 
   }
 
@@ -67,6 +67,12 @@ export class ProfileEditPage implements OnInit {
   }
 
   updateUserProfile(){
+    if(this.updateDataForm.value.firstName.length == 0 ||this.updateDataForm.value.lastName.length == 0 || this.updateDataForm.value.phoneNumber.length == 0){
+      return  this.toastCtrl.create({
+        message: 'Ensure that all fields are filled',
+        duration: 2000,
+        position: 'bottom'
+      }).then(alert=> alert.present()); }
     this.UsersService.updateUserProfile(
       this.updateDataForm.value.firstName,
       this.updateDataForm.value.lastName,
