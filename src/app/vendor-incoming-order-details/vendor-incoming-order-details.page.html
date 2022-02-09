@@ -1,7 +1,8 @@
 <ion-content>
   <div *ngFor="let userDetail of userDetails">
     <div style="display: flex;flex-direction: row;">
-      <img src="../assets/backk.png" class="iconn" [routerLink]="['/vendor-incoming']">
+      <img src="../assets/backk.png" class="iconn"
+        [routerLink]="['/vendor-incoming']">
       <!--{{userDetail.stallID}}-->
       <p style="display: flex;width: 85%;align-items: center;justify-content:
         center;"> Order ID #{{orderId}}</p>
@@ -10,7 +11,14 @@
     <div>
       <div style="display: flex;margin-top: 25px; align-items:
         center;justify-content: center;margin-right: 50px;">
-        <img src="{{customerImg}}" style="width: 80px; height: 80px; border-radius: 15px;">
+        <div *ngIf="customerImg != null">
+          <img src="{{customerImg}}" style="width: 80px; height: 80px;
+            border-radius: 15px;">
+        </div>
+        <div *ngIf="customerImg == null">
+          <img src="../assets/profile_picture.jpg" style="width: 80px; height:
+            80px; border-radius: 15px;">
+        </div>
         <h4 style="margin-left: 28px;">{{userDetail.UserFirstName}}
           {{userDetail.UserLastName}}</h4>
       </div>
@@ -36,16 +44,17 @@
                 ellipsis;margin-left: 10px;">{{orderDetail.foodName}}</p>
               <p>x{{orderDetail.foodQty}}</p>
               <p style="margin-left:60px">${{orderDetail.foodPrice}}</p>
-
             </ion-row>
-            <div *ngFor="let addon of orderDetail['addon']" style="display: flex;flex-direction: column;">
+            <div *ngFor="let addon of orderDetail['addon']" style="display:
+              flex;flex-direction: column;">
               <div style="display: flex;flex-direction: row;">
                 <p style="font-weight: 200;margin-right: 15px;white-space:
-            nowrap;width: 100%;overflow: hidden;text-overflow:
-            ellipsis;margin-left: 10px;font-size: 12px;margin-top: -1px;">+{{addon.addOnTitle}}</p>
+                  nowrap;width: 100%;overflow: hidden;text-overflow:
+                  ellipsis;margin-left: 10px;font-size: 12px;margin-top: -1px;">+{{addon.addOnTitle}}</p>
                 <p style="font-weight: 200;white-space:
-                         nowrap;width: 100%;overflow: hidden;text-overflow:
-                         ellipsis;margin-left: 116px;font-size: 12px;margin-top: -1px;">+${{addon.addOnPrice}}</p>
+                  nowrap;width: 100%;overflow: hidden;text-overflow:
+                  ellipsis;margin-left: 116px;font-size: 12px;margin-top:
+                  -1px;">+${{addon.addOnPrice}}</p>
               </div>
             </div>
             <hr>
@@ -56,22 +65,29 @@
       </div>
 
 
-        <div
-        style="display:flex;flex-direction:row;font-size: 14px;justify-content:space-around;margin-top:5px;font-family: 'Open Sans';">
+      <div
+        style="display:flex;flex-direction:row;font-size:
+        14px;justify-content:space-around;margin-top:5px;font-family: 'Open
+        Sans';">
         <p> Subtotal: </p>
         <p style="margin-left:50px"> ${{userDetail.Subtotal}} </p>
       </div>
       <div
-        style="display:flex;flex-direction:row;font-size: 14px;justify-content:space-around;margin-top:-15px;font-family: 'Open Sans';margin-left: -6px;">
+        style="display:flex;flex-direction:row;font-size:
+        14px;justify-content:space-around;margin-top:-15px;font-family: 'Open
+        Sans';margin-left: -6px;">
         <p> Surcharge Cost: </p>
         <p style="margin-left:2px"> ${{userDetail.Surcharge}}</p>
       </div>
-      <hr style="align-self: center;width: 80%;opacity: 60%;background-color: black;margin-left: 9%;">
-      <div style="display:flex;flex-direction:row;font-size: 16px;justify-content:space-around;font-family: 'Open Sans';margin-top: -20px;margin-bottom: 80px;">
-  
+      <hr style="align-self: center;width: 80%;opacity: 60%;background-color:
+        black;margin-left: 9%;">
+      <div style="display:flex;flex-direction:row;font-size:
+        16px;justify-content:space-around;font-family: 'Open Sans';margin-top:
+        -20px;margin-bottom: 80px;">
+
         <p> Grand Total:</p>
-        <p style="margin-left:8px">  ${{userDetail.GrandTotal}} </p>
-        </div>
+        <p style="margin-left:8px"> ${{userDetail.GrandTotal}} </p>
+      </div>
     </div>
   </div>
 
@@ -88,8 +104,10 @@
         </ion-label>
       </ion-button>
 
-      <ion-button type="submit" (click)="cancelOrder()" style="border-radius: 25px;color: #F5585C; width: 130px; height: 45px;
-        margin-top: 23px;box-shadow: 5px 5px 5px lightgray;margin-left: 13px;" color="primary">
+      <ion-button type="submit" (click)="cancelOrder()" style="border-radius:
+        25px;color: #F5585C; width: 130px; height: 45px;
+        margin-top: 23px;box-shadow: 5px 5px 5px lightgray;margin-left: 13px;"
+        color="primary">
         <ion-label style="color: white;text-transform: none;font-size:
           16px;font-family: 'Sen', sans-serif;">
           <b>Decline</b>
