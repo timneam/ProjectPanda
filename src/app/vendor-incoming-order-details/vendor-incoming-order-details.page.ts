@@ -71,11 +71,13 @@ export class VendorIncomingOrderDetailsPage implements OnInit {
   cancelOrder() {
     this.orderService.declineOrders(this.stallId, this.orderId)
     this._location.back();
+    location.reload()
   }
 
   acceptOrder() {
     this.orderService.acceptOrders(this.stallId, this.orderId)
     this._location.back();
+    location.reload()
   }
 
 }

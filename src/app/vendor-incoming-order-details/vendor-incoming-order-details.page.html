@@ -55,44 +55,23 @@
 
       </div>
 
-      <ion-card>
-        <ion-row>
-          <ion-col>
-            <p
-              style="font-weight: bold;margin-right: 15px;white-space: nowrap;width: 52%;overflow: hidden;text-overflow: ellipsis; margin-left: 100px;">
-              Subtotal: </p>
-          </ion-col>
-          <ion-col>
-            <p
-              style="font-weight: bold;margin-right: 15px;white-space: nowrap;width: 52%;overflow: hidden;text-overflow: ellipsis; margin-right: 10px;">
-              ${{userDetail.Subtotal}}</p>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col>
-            <p
-              style="font-weight: bold;margin-right: 15px;white-space: nowrap;width: 52%;overflow: hidden;text-overflow: ellipsis; margin-left: 100px;">
-              Surcharge: </p>
-          </ion-col>
-          <ion-col>
-            <p
-              style="font-weight: bold;margin-right: 15px;white-space: nowrap;width: 52%;overflow: hidden;text-overflow: ellipsis; margin-right: 10px;">
-              ${{userDetail.Surcharge}}</p>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col>
-            <p
-              style="font-weight: bold;margin-right: 15px;white-space: nowrap;width: 52%;overflow: hidden;text-overflow: ellipsis; margin-left: 100px;">
-              Total Price: </p>
-          </ion-col>
-          <ion-col>
-            <p
-              style="font-weight: bold;margin-right: 15px;white-space: nowrap;width: 52%;overflow: hidden;text-overflow: ellipsis; margin-right: 10px;">
-              ${{userDetail.GrandTotal}}</p>
-          </ion-col>
-        </ion-row>
-      </ion-card>
+
+        <div
+        style="display:flex;flex-direction:row;font-size: 14px;justify-content:space-around;margin-top:5px;font-family: 'Open Sans';">
+        <p> Subtotal: </p>
+        <p style="margin-left:50px"> ${{userDetail.Subtotal}} </p>
+      </div>
+      <div
+        style="display:flex;flex-direction:row;font-size: 14px;justify-content:space-around;margin-top:-15px;font-family: 'Open Sans';margin-left: -6px;">
+        <p> Surcharge Cost: </p>
+        <p style="margin-left:2px"> ${{userDetail.Surcharge}}</p>
+      </div>
+      <hr style="align-self: center;width: 80%;opacity: 60%;background-color: black;margin-left: 9%;">
+      <div style="display:flex;flex-direction:row;font-size: 16px;justify-content:space-around;font-family: 'Open Sans';margin-top: -20px;margin-bottom: 80px;">
+  
+        <p> Grand Total:</p>
+        <p style="margin-left:8px">  ${{userDetail.GrandTotal}} </p>
+        </div>
     </div>
   </div>
 
