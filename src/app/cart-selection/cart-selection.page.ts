@@ -70,6 +70,7 @@ export class CartSelectionPage implements OnInit {
 
   doRefresh(event) {
     this.stallsCart = [];
+    this.stallDetails = [];
     setTimeout(() => {
       event.target.complete().then(() => {
         this.getCurrentUser()
