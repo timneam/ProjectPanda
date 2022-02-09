@@ -108,6 +108,7 @@ export class Tab2Page {
   removeItemFromCart(id) {
     this.cartService.removeItemFromCart(this.userId, this.stallId, id).then(() => {
       console.log("Item removed from cart successfully!")
+      document.location.reload();
     })
   }
 
