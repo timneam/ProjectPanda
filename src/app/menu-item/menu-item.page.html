@@ -1,6 +1,6 @@
 <ion-content>
   <div *ngFor="let data of menuDetails">
-    <img src="{{data.foodImg}}" style="position: absolute;z-index: -1;width: 100%;height: 155px;">
+    <img src="{{data.foodImg}}" style="position: absolute;z-index: -1;width: 100%;height: 155px;object-fit: cover;">
     <img src="../assets/cross.png" style="margin-left: 7px;margin-top: 5px;" (click)="backClicked()">
     <div style="display: flex;flex-direction: row;">
       <p class="titlee">{{data.foodName}}</p>
