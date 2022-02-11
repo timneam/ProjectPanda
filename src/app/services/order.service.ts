@@ -115,6 +115,7 @@ export class OrderService {
       let data = doc.data()
       let orderData = { 
         "OrderID": doc.id,
+        "OrderCode": data.OrderCode,
         "UserID": data.UserID, 
         "UserFirstName": data.UserFirstName, 
         "UserLastName": data.UserLastName, 
@@ -126,6 +127,8 @@ export class OrderService {
         "GrandTotal": data.GrandTotal 
       }
       orderDetails.push(orderData)
+      console.log(orderData)
+      console.log(orderDetails)
     });
     return orderDetails
   }

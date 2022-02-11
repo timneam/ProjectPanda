@@ -10,7 +10,7 @@ import { doc, getDoc } from 'firebase/firestore';
 import { getFirestore } from '@angular/fire/firestore';
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
 import { of } from 'rxjs';
-
+import { StallsService } from '../services/stalls.service';
 
 @Component({
   selector: 'app-tab2',
@@ -23,6 +23,7 @@ export class Tab2Page {
   db = getFirestore();
   userId: any;
   stallId: any;
+  orderCode: any;
 
   userDetails: any;
   cartItems = [];
@@ -53,7 +54,8 @@ export class Tab2Page {
     private navCntrl: NavController,
     private cartService: CartService,
     private usersService: UsersService,
-    private orderService: OrderService) {
+    private orderService: OrderService,
+    private stallService: StallsService) {
     this.stallId = this.activatedRoute.snapshot.paramMap.get("stallId");
   }
 
@@ -67,6 +69,7 @@ export class Tab2Page {
         let users = this.auth.currentUser
         this.userId = users.uid
         this.getItemsInCart()
+        this.makeid()
       } else {
         console.log("User is signed out")
         this.navCntrl.navigateForward('splash');
@@ -163,7 +166,8 @@ export class Tab2Page {
         "Subtotal": this.totalString, 
         "Surcharge": this.surchargeString, 
         "GrandTotal": this.grandTotalString, 
-        "TotalEstTime": this.totalEstTimeString
+        "TotalEstTime": this.totalEstTimeString,
+        "OrderCode": this.orderCode
       }
       this.orderService.addOrderId(this.stallId, this.userDetails).then((res) => {
         console.log(res.id)
@@ -251,18 +255,19 @@ export class Tab2Page {
     }, 2000);
   }
 
-  makeid(length) {
+  makeid() {
     let result = '';
     let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let charactersLength = characters.length;
-    for (let i = 0; i < length; i++) {
+    for (let i = 0; i < 5; i++) {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
     let date = new Date().toLocaleDateString()
     let formatdate = date.replace(/\//g, "-")
     
-    document.getElementById("demo").innerHTML = "BFS" + "-" + formatdate + "-" + result
-    return result;
+    this.stallService.getAStallInformation(this.stallId).then((res) => {
+      this.orderCode = res.data().stallCode + "-" + formatdate + "-" + result;
+    })
   }
 
 }

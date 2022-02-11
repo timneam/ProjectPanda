@@ -71,7 +71,8 @@ export class StatusPage implements OnInit {
                 console.log(doc)
                 let data = {
                   "stallID": doc.stallID, 
-                  "OrderID": doc.OrderID, 
+                  "OrderID": doc.OrderID,
+                  "OrderCode": doc.OrderCode, 
                   "Status": doc.Status, 
                   "UserFirstName": doc.UserFirstName, 
                   "UserLastName": doc.UserLastName, 
@@ -108,6 +109,7 @@ export class StatusPage implements OnInit {
             let data = {
               "stallID": doc.stallID,
               "OrderID": doc.OrderID,
+              "OrderCode":doc.OrderCode,
               "Status": doc.Status,
               "UserFirstName": doc.UserFirstName,
               "UserLastName": doc.UserLastName,
