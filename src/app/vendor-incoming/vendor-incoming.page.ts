@@ -15,6 +15,7 @@ export class VendorIncomingPage implements OnInit {
   db = getFirestore();
   stallId: any;
 
+  OrderCode: any;
   orders = [];
   incomingOrders = [];
 
@@ -48,7 +49,16 @@ export class VendorIncomingPage implements OnInit {
 
     this.orderService.incomingOrders(this.stallId).then((res) => {
       res.forEach((doc) => {
-        let orderData = {'id': doc.id, 'UserFirstName': doc.data().UserFirstName, 'UserLastName': doc.data().UserLastName,'UserID': doc.data().UserID, 'UserPhoneNumber': doc.data().UserPhoneNumber,'Status': doc.data().Status};
+        console.log(doc.data())
+        let orderData = {
+          'id': doc.id, 
+          'UserFirstName': doc.data().UserFirstName, 
+          'UserLastName': doc.data().UserLastName,
+          'UserID': doc.data().UserID, 
+          'UserPhoneNumber': doc.data().UserPhoneNumber,
+          'Status': doc.data().Status,
+          'OrderCode': doc.data().OrderCode
+        };
         this.orders.push(orderData)
       })
     }).then(() => {

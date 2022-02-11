@@ -47,7 +47,15 @@ export class VendorOrdersPage implements OnInit {
       console.log(this.stallId)
       this.orderService.incomingOrders(this.stallId).then((res) => {
         res.forEach((doc) => {
-          let orderData = {'id': doc.id, 'UserFirstName': doc.data().UserFirstName, 'UserLastName': doc.data().UserLastName,'UserID': doc.data().UserID, 'UserPhoneNumber': doc.data().UserPhoneNumber,'Status': doc.data().Status};
+          let orderData = {
+            'id': doc.id, 
+            'UserFirstName': doc.data().UserFirstName, 
+            'UserLastName': doc.data().UserLastName,
+            'UserID': doc.data().UserID, 
+            'UserPhoneNumber': doc.data().UserPhoneNumber,
+            'Status': doc.data().Status,
+            'OrderCode': doc.data().OrderCode
+          };
           this.orders.push(orderData)
         })
       }).then(() => {
