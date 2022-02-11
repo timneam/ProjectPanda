@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../services/users.service';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
-import { deleteDoc, doc, getFirestore, setDoc, updateDoc } from 'firebase/firestore';
+import { deleteDoc, doc, getFirestore, setDoc, Timestamp, updateDoc } from 'firebase/firestore';
 import { NavController, NavParams, ToastController } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular';
 import { Firestore } from '@angular/fire/firestore';
 import { AppLauncher } from '@capacitor/app-launcher';
+import { time } from 'console';
 
 
 @Component({
@@ -45,9 +46,25 @@ export class LoginPage implements OnInit {
 
     const { role, data } = await loading.onDidDismiss();
   }
-  
+
   onLogin() {
     this.UsersService.loginUser(this.formData.value.email, this.formData.value.password)
   }
+
+
+  makeid(length) {
+    let result = '';
+    let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let charactersLength = characters.length;
+    for (let i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    let date = new Date().toLocaleDateString()
+    let formatdate = date.replace(/\//g, "-")
+    
+    document.getElementById("demo").innerHTML = "BFS" + "-" + formatdate + "-" + result
+    return result;
+  }
+
 
 }
