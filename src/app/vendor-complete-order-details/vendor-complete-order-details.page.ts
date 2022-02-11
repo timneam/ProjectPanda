@@ -20,6 +20,8 @@ export class VendorCompleteOrderDetailsPage implements OnInit {
   customerId: any;
   customerImg: any;
 
+  OrderCode: any;
+
   userDetails = [];
   orderDetails = [];
 
@@ -51,6 +53,7 @@ export class VendorCompleteOrderDetailsPage implements OnInit {
     this.stallId = vendorData.data().stallId;
 
     this.orderService.getUserDetailsInOrder(this.stallId, this.orderId).then(async (res) => {
+      this.OrderCode = res.OrderCode
       this.customerId = res.UserID
       this.userDetails.push(res)
       const userdata = await getDoc(doc(this.db, "User", this.customerId)).then((res) => {
