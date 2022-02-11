@@ -21,6 +21,7 @@ export class OrderStatusPage implements OnInit {
   orderId : any;
   stallId : any;
   userId: any;
+  orderCode: any;
 
   vendorImg: any;
   orderStatus: any
@@ -62,6 +63,7 @@ export class OrderStatusPage implements OnInit {
   getOrdersFunction(){
     this.orderService.getUserDetailsInOrder(this.stallId, this.orderId).then((res) => {
       this.orderData.push(res)
+      this.orderCode = res.OrderCode
     })
     this.orderService.lol(this.stallId, this.orderId).then((res) => {
       res.forEach(doc => {
