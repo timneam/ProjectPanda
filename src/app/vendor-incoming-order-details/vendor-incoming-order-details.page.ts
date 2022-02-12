@@ -4,6 +4,8 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { OrderService } from '../services/order.service';
 import { getDoc, doc, getDocs, collection, getFirestore } from 'firebase/firestore';
 import { Location } from '@angular/common';
+import { AlertController } from '@ionic/angular';
+
 @Component({
   selector: 'app-vendor-incoming-order-details',
   templateUrl: './vendor-incoming-order-details.page.html',
@@ -29,6 +31,7 @@ export class VendorIncomingOrderDetailsPage implements OnInit {
     private activatedRoute: ActivatedRoute,
     private _location: Location,
     private orderService: OrderService,
+    public alertController: AlertController,
     private router: Router) {
     this.orderId = this.activatedRoute.snapshot.paramMap.get('orderId')
   }
@@ -71,16 +74,52 @@ export class VendorIncomingOrderDetailsPage implements OnInit {
     })
   }
 
-  cancelOrder() {
-    this.orderService.declineOrders(this.stallId, this.orderId)
-    this._location.back();
+  async cancelOrder() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Cancel Order',
+     
+      message: 'Are you sure you want to cancel the order?',
+      buttons: [ {
+        text: 'No',
+        handler: () => {
+          alert.dismiss()
+        }
+      },
+      {
+        text: 'Yes',
+        handler: () => {
+          this.orderService.declineOrders(this.stallId, this.orderId)
+          this._location.back();
+        }
+      },]
+    });
+    await alert.present();
    // location.reload()
   }
 
-  acceptOrder() {
-    this.orderService.acceptOrders(this.stallId, this.orderId)
-    this._location.back();
-   // location.reload()
+  async acceptOrder() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Accept Order',
+     
+      message: 'Are you sure you want to accept the order?',
+      buttons: [ {
+        text: 'No',
+        handler: () => {
+          alert.dismiss()
+        }
+      },
+      {
+        text: 'Yes',
+        handler: () => {
+          this.orderService.acceptOrders(this.stallId, this.orderId)
+          this._location.back();
+          // location.reload()
+        }
+      },]
+    });
+    await alert.present();
   }
 
 }

@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { OrderService } from '../services/order.service';
 import { Location } from '@angular/common';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-vendor-individual-order',
@@ -29,7 +30,8 @@ export class VendorIndividualOrderPage implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private orderService: OrderService,
-    private _location: Location
+    private _location: Location,
+    public alertController: AlertController,
     ) {
     this.orderId = this.activatedRoute.snapshot.paramMap.get('orderId')
   }
@@ -72,14 +74,52 @@ export class VendorIndividualOrderPage implements OnInit {
     })
   }
 
-  cancelOrder() {
-    this.orderService.declineOrders(this.stallId, this.orderId)
-    this._location.back();
+  async cancelOrder() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Cancel Order',
+     
+      message: 'Are you sure you want to cancel the order?',
+      buttons: [ {
+        text: 'No',
+        handler: () => {
+          alert.dismiss()
+        }
+      },
+      {
+        text: 'Yes',
+        handler: () => {
+          this.orderService.declineOrders(this.stallId, this.orderId)
+          this._location.back();
+        }
+      },]
+    });
+    await alert.present();
   }
 
-  completeOrder() {
-    this.orderService.completedOrders(this.stallId, this.orderId)
-    this._location.back();
+  async completeOrder() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Complete Order',
+     
+      message: 'Are you sure you want to complete the order?',
+      buttons: [ {
+        text: 'No',
+        handler: () => {
+          alert.dismiss()
+        }
+      },
+      {
+        text: 'Yes',
+        handler: () => {
+          this.orderService.completedOrders(this.stallId, this.orderId)
+          this._location.back();
+        }
+      },]
+    });
+    await alert.present();
+    
+
   }
 
 }
