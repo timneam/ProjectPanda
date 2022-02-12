@@ -18,6 +18,8 @@ export class OrderStatusPage implements OnInit {
   auth = getAuth();
   db = getFirestore();
 
+  paymentStatus = "Refund in progress!";
+
   orderId : any;
   stallId : any;
   userId: any;

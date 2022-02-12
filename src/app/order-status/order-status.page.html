@@ -70,6 +70,9 @@
   <div *ngFor="let data of orderData">
     <h3 style="font-weight:300;font-size:19px;display:flex;justify-content:center;;">Status: <b
       style="margin-left:11px;">{{data.Status}}</b></h3>
+      <div *ngIf="data.Status == 'Cancelled'" style="text-align: center; font-size:19px;">
+          <p>Payment Status: {{paymentStatus}}</p>
+      </div>
       <div
       style="display:flex;flex-direction:row;font-size: 14px;justify-content:space-around;margin-top:5px;font-family: 'Open Sans';">
       <p> Subtotal: </p>

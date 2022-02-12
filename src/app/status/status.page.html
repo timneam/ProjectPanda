@@ -8,6 +8,25 @@
     <h1 class="headerr">Orders</h1>
   </div>
 
+  <!-- ------------------------------------------------------------------------------------------------- -->
+
+  <div class="wrap-collabsible" *ngFor="let order of cancelledOrder">
+    <input id="collapsible" class="toggle" type="checkbox">
+    <label for="collapsible" class="lbl-toggle">
+      <div style="display: flex;flex-direction: row;margin-top: 5px;margin-left: 8px;align-items: center;">
+        <div style="display: flex;flex-direction: column;margin-top: 5px;" (click)="goToOrderStatusPage(order.OrderID)">
+          <p style="margin-bottom: 0px;margin-top: 8px;">Stall Name: {{order.stallID}} </p>
+          <p style="margin-bottom: 0px;margin-top: 8px;">Order ID: {{order.OrderCode}} </p>
+          <p style="margin-bottom: 0px;margin-top: 8px;font-weight: bold;">Status: {{order.Status}} </p>
+        </div>
+      </div>
+    </label>
+  </div>
+
+
+
+  <!-- ------------------------------------------------------------------------------------------------- -->
+
   <div class="wrap-collabsible" *ngFor="let order of pendingOrder">
     <input id="collapsible" class="toggle" type="checkbox">
     <label for="collapsible" class="lbl-toggle">
