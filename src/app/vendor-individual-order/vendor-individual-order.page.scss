@@ -41,14 +41,13 @@ ion-button {
 
     #btm {
         position: fixed;
-        right: 10%;
-        bottom: 5%;
+        right: 15%;
+        bottom: 15%;
         z-index: 1000;
         transform: rotate(360deg);
         -webkit-transform: rotate(360deg);
         -moz-transform: rotate(360deg);
         -o-transform: rotate(360deg);
-    
         text-align: center;
         text-decoration: none;
     }
