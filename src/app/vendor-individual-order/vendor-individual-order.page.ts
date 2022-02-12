@@ -3,6 +3,7 @@ import { getDoc, doc, getDocs, collection, getFirestore } from 'firebase/firesto
 import { ActivatedRoute } from '@angular/router';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { OrderService } from '../services/order.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-vendor-individual-order',
@@ -27,7 +28,9 @@ export class VendorIndividualOrderPage implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private orderService: OrderService) {
+    private orderService: OrderService,
+    private _location: Location
+    ) {
     this.orderId = this.activatedRoute.snapshot.paramMap.get('orderId')
   }
 
@@ -71,10 +74,12 @@ export class VendorIndividualOrderPage implements OnInit {
 
   cancelOrder() {
     this.orderService.declineOrders(this.stallId, this.orderId)
+    this._location.back();
   }
 
   completeOrder() {
     this.orderService.completedOrders(this.stallId, this.orderId)
+    this._location.back();
   }
 
 }
