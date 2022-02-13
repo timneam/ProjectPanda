@@ -7,10 +7,12 @@ import { LoadingController } from '@ionic/angular';
 import { Firestore } from '@angular/fire/firestore';
 import { AppLauncher } from '@capacitor/app-launcher';
 import { time } from 'console';
+import { ModalController } from '@ionic/angular';
+import { FilterModalComponent } from '../filter-modal/filter-modal.component';
 
 
 @Component({
-  selector: 'app-login',
+  selector: 'app- ',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
@@ -25,7 +27,8 @@ export class LoginPage implements OnInit {
     private UsersService: UsersService,
     private formBuilder: FormBuilder,
     private navController: NavController,
-    private toastCtrl: ToastController,) {
+    private toastCtrl: ToastController,
+    public modalController: ModalController) {
 
   }
   ngOnInit() {
@@ -51,5 +54,13 @@ export class LoginPage implements OnInit {
     this.UsersService.loginUser(this.formData.value.email, this.formData.value.password)
   }
 
+  async openModal() {
+    console.log("uwu")
+    const modal = await this.modalController.create({
+      component: FilterModalComponent,
+    });
+    return await modal.present();
+  }
+  
 
 }
