@@ -71,8 +71,6 @@ export class VendorOrdersPage implements OnInit {
     }
 
     doRefresh(event) {
-      console.log('Begin async operation');
-  
       this.orders = [];
       this.preparingOrders = [];
       

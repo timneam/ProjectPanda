@@ -45,21 +45,21 @@
         style="display: flex;flex-direction: row;align-items: center;justify-content: center;margin-bottom: -2px;width: 100%;;">
         <div style="width: 80%;">
           <ion-row>
-            <p
-              style="font-weight: bold;margin-right: 15px;white-space: nowrap;width: 40%;overflow: hidden;text-overflow: ellipsis;margin-left: 10px;">
-              {{itemData.foodName}}</p>
+            <p style="font-weight: bold;white-space: nowrap;width: 40%;overflow: hidden;text-overflow: ellipsis;margin-left: 10%;">
+              {{itemData.foodName}}
+            </p>
             <p>x{{itemData.foodQty}}</p>
-            <p style="margin-left:60px">${{itemData.foodPrice}}</p>
+            <p style="margin-left: auto; margin-right: 10%;">${{itemData.foodPrice}}</p>
             <hr>
           </ion-row>
           <div *ngFor="let addon of itemData['addon']" style="display: flex;flex-direction: column;">
             <div style="display: flex;flex-direction: row;">
-            <p style="font-weight: 200;margin-right: 15px;white-space:
-          nowrap;width: 100%;overflow: hidden;text-overflow:
-          ellipsis;margin-left: 10px;font-size: 12px;margin-top: -1px;">+{{addon.addOnTitle}} </p>
-                          <p style="font-weight: 200;white-space:
-                          nowrap;width: 100%;overflow: hidden;text-overflow:
-                          ellipsis;margin-left: 116px;font-size: 12px;margin-top: -1px;">+${{addon.addOnPrice}}</p>
+            <p style="font-weight: 200;margin-right: 15px;white-space: nowrap;width: 100%;overflow: hidden;text-overflow: ellipsis;margin-left: 10px;font-size: 12px;margin-top: -1px;">
+              +{{addon.addOnTitle}} 
+            </p>
+            <p style="font-weight: 200;white-space: nowrap;width: 100%;overflow: hidden;text-overflow: ellipsis;margin-left: 116px;font-size: 12px;margin-top: -1px;">
+              +${{addon.addOnPrice}}
+            </p>
            </div>
           </div>
         </div>
@@ -69,28 +69,24 @@
 
   <div *ngFor="let data of orderData">
     <h3 style="font-weight:300;font-size:19px;display:flex;justify-content:center;;">Status: <b
-      style="margin-left:11px;">{{data.Status}}</b></h3>
-      <div *ngIf="data.Status == 'Cancelled'" style="text-align: center; font-size:19px;">
-          <p>Payment Status: {{paymentStatus}}</p>
-      </div>
-      <div
-      style="display:flex;flex-direction:row;font-size: 14px;justify-content:space-around;margin-top:5px;font-family: 'Open Sans';">
-      <p> Subtotal: </p>
-      <p style="margin-left:50px"> ${{data.Subtotal}} </p>
+      style="margin-left:11px;">{{data.Status}}</b>
+    </h3>
+    <div *ngIf="data.Status == 'Cancelled'" style="text-align: center; font-size:19px;">
+      <p>Payment Status: {{paymentStatus}}</p>
     </div>
-    <div
-      style="display:flex;flex-direction:row;font-size: 14px;justify-content:space-around;margin-top:-15px;font-family: 'Open Sans';margin-left: -6px;">
-      <p> Surcharge Cost: </p>
-      <p style="margin-left:2px"> ${{data.Surcharge}}</p>
+    <div style="display:flex;flex-direction:row;font-size: 14px;justify-content:space-around;margin-top:5px;font-family: 'Open Sans';">
+      <p style="margin-left: 16%;"> Subtotal: </p>
+      <p style="margin-left: auto; margin-right: 16%;"> ${{data.Subtotal}} </p>
+    </div>
+    <div style="display:flex;flex-direction:row;font-size: 14px;justify-content:space-around;margin-top:-15px;font-family: 'Open Sans';">
+      <p style="margin-left: 16%;"> Surcharge Cost: </p>
+      <p style="margin-left: auto; margin-right: 16%;"> ${{data.Surcharge}}</p>
     </div>
     <hr style="align-self: center;width: 80%;opacity: 60%;background-color: black;margin-left: 9%;">
     <div style="display:flex;flex-direction:row;font-size: 16px;justify-content:space-around;font-family: 'Open Sans';margin-top: -20px;margin-bottom: 15px;">
-
-      <p> Grand Total:</p>
-      <p style="margin-left:8px">  ${{data.GrandTotal}} </p>
+      <p style="margin-left: 16%;"> Grand Total:</p>
+      <p style="margin-left: auto; margin-right: 16%;">  ${{data.GrandTotal}} </p>
     </div>
-  
-  
   </div>
 
 </ion-content>

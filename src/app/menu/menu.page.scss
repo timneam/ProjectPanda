@@ -2,23 +2,17 @@
   //  --background: url('assets/stallBackground.png') no-repeat fixed center; 
 // }    
 
-.iconn {
-   /// transform: translate(2px, -150px);
-}
 
 .subb {
     color: white;
-    font-size: 14px;
-    font-weight: 500;
-    margin-left: 9px;
-    margin-top: 36px;
+    font-size: 16px;
+    font-weight: 400;
     text-align: center;
 }
 .headerr {
     font-weight: bold;
     font-size: 23px;
     margin-left: 25px;
-    margin-top: 23px;
   }
 
   ion-item {
@@ -45,3 +39,7 @@ hr {
     flex-direction: column;
     justify-content: center;
   }
+
+.statuscolor {
+  text-decoration-color: red;
+}

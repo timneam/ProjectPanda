@@ -16,6 +16,7 @@ export class MenuPage implements OnInit {
   db = getFirestore();
   stallData = []
   stallMenu = []
+  stallstatus: any
 
   stallId = this.activatedRoute.snapshot.paramMap.get("id");
 
@@ -24,16 +25,16 @@ export class MenuPage implements OnInit {
   totalEstTimeString: any;
   Est: any;
   foodID: any;
-  
+
   constructor(
-    private LoadingController : LoadingController,
+    private LoadingController: LoadingController,
     private stallService: StallsService,
     private activatedRoute: ActivatedRoute,
     private navCtrl: NavController,
     private router: Router,
-    private orderService: OrderService) { 
-      this.foodID = localStorage.getItem("foodI")
-    }
+    private orderService: OrderService) {
+    this.foodID = localStorage.getItem("foodI")
+  }
 
   ngOnInit() {
     this.presentLoading()
@@ -63,33 +64,44 @@ export class MenuPage implements OnInit {
 
     const { role, data } = await loading.onDidDismiss();
   }
-  
+
   async getStallData() {
     const stallData = await getDoc(doc(this.db, "Stall", this.stallId));
     if (stallData.exists()) {
       this.stallData = [stallData.data()]
-    } 
+      
+      let statusData = stallData.data().stallStatus
+      if (statusData == "Open") {
+        console.log(stallData.data().stallStatus)
+        this.stallstatus = 1
+      } else {
+        console.log(stallData.data().stallStatus)
+        this.stallstatus = 0
+      }
+
+    }
   }
 
   async getStallMenu() {
     const querySnapshot = await getDocs(collection(this.db, "Stall", this.stallId, "Menu"));
     querySnapshot.forEach((doc) => {
       let data = doc.data()
-      let foodData = { 
+      let foodData = {
         "foodId": doc.id,
-        "foodName": data.foodName, 
-        "foodDetails": data.foodDetails, 
-        "foodPrice": data.foodPrice, 
+        "foodName": data.foodName,
+        "foodDetails": data.foodDetails,
+        "foodPrice": data.foodPrice,
         "foodEstTime": data.foodEstTime,
-        "foodImg" : data.foodImg,
-      "foodQuantity": data.foodQuantity}
+        "foodImg": data.foodImg,
+        "foodQuantity": data.foodQuantity
+      }
       this.stallMenu.push(foodData)
     })
-    localStorage.setItem("est1",this.stallMenu[0].foodEstTime)
-    localStorage.setItem("foodI",this.stallMenu[0].foodId)
+    localStorage.setItem("est1", this.stallMenu[0].foodEstTime)
+    localStorage.setItem("foodI", this.stallMenu[0].foodId)
   }
 
-  async goToMenuDetails(foodId){
+  async goToMenuDetails(foodId) {
     this.router.navigateByUrl(`/menu-item/${this.stallId}/${foodId}`)
   }
 

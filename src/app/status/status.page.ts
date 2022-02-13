@@ -84,7 +84,7 @@ export class StatusPage implements OnInit {
                 }
                 this.orderStatus.push(data)
               })
-              resolve('get order')
+              resolve('Get order')
             }
           })
         })
@@ -98,14 +98,12 @@ export class StatusPage implements OnInit {
         reject('hmmm')
       } else {
         this.orderStatus.forEach((doc) => {
-          console.log(doc)
           this.orderService.lol(doc.stallID, doc.OrderID).then(res => {
             let menuArray = []
             res.forEach(doc => {
               menuArray.push(doc.data())
             })
             this.stallId = doc.stallID
-            console.log(this.stallId)
             let data = {
               "stallID": doc.stallID,
               "OrderID": doc.OrderID,
@@ -120,12 +118,11 @@ export class StatusPage implements OnInit {
               "GrandTotal": doc.GrandTotal,
               "menuItem": menuArray
             }
-            console.log(data)
             this.orderData.push(data)
           })
         })
         setTimeout(() => {
-          resolve('data')
+          resolve('Menu data')
         }, 2000);
       }
     })
@@ -152,8 +149,6 @@ export class StatusPage implements OnInit {
   }
 
   doRefresh(event) {
-    console.log('Begin async operation');
-
     this.orderStatus = []
     this.orderData = []
     this.pendingOrder = []

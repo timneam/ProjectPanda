@@ -1,20 +1,29 @@
 <ion-content>
   <div *ngFor="let data of stallData">
-    <img src={{data.stallImg}} style="position: absolute;z-index: -1;width: 100%;height: 160px;">
-    <img src="../assets/whiteback.png" class="iconn" [routerLink]="['/tabs/stalls']">
-    <div style="background-color: #BCBCBC; width: 280px;border-radius: 10px;opacity: 93%;margin-left: 15%;display: flex;flex-direction: column;margin-top: 1%;">
-      <h3 style="font-size: 22px;font-weight: bold;color: #ffffff;display: flex;justify-content: center;text-shadow: rgb(39, 38, 38) 2px 2px;">
-        {{data.stallName}}
-      </h3>
-      <p class="subb">Estimated wait time {{totalEstTime}} mins </p>
+    <div style="position: absolute;z-index: -1;width: 100%;height: 150px;background-image: url({{data.stallImg}});background-repeat: no-repeat;background-attachment: fixed;background-size: 100%;">
     </div>
+    <img src="../assets/whiteback.png" [routerLink]="['/tabs/stalls']">
+    <div style="background-color: #BCBCBC; width: 280px;border-radius: 10px;margin: auto;margin-top: -20px;opacity: 95%;">
+      <h3 style="font-size: 22px;font-weight: bold;color: #ffffff;text-shadow: rgb(85, 85, 85) 2px 2px;text-align: center;">
+        {{data.stallName}}
+        <p class="subb">Estimated wait time <b id="statuscolor" style="color:red;"> {{totalEstTime}} </b>mins </p>
+      </h3>
 
-  
+    </div>
   </div>
-<div *ngFor="let data of stallData" style="margin-bottom: -10px;display: flex;flex-direction: row;align-items: center;">
-  <h2 class="headerr">Menu</h2>
-  <p style="margin-left: 220px;align-self: end;" >Stall is <b>{{data.stallStatus}}</b></p>
-</div>
+
+  <div style="margin-bottom: -10px;display: flex;flex-direction: row;align-items: center;margin-top: 45px;">
+    <h2 class="headerr">Menu</h2>
+
+    <div style="margin-left: auto;margin-right: 20px;">
+      <p *ngIf="stallstatus == 1" >
+        Stall is <b id="statuscolor" style="color:green;"> Open </b> 
+      </p>
+      <p *ngIf="stallstatus == 0" style="margin-left: 200px;align-self: end; ">
+        Stall is <b id="statuscolor" style="color:red;"> Closed </b> 
+      </p>
+    </div>
+  </div>
 
 
   <ion-list>
@@ -49,45 +58,37 @@
             </ion-col>
       
           </ion-row> 
-      
         </ion-card>
-      
-      
       </div> 
+
       <div *ngIf="data.foodQuantity !==0">
-      <ion-card (click)="goToMenuDetails(data.foodId)">
-        <ion-row>
+        <ion-card (click)="goToMenuDetails(data.foodId)">
+          <ion-row>
 
-          <ion-col size="4">
-            <img src={{data.foodImg}} height="90px" width="90px" style="margin-bottom: 7px;margin-top: 7px;object-fit: cover;">
-          </ion-col>
+            <ion-col size="4">
+              <img src={{data.foodImg}} height="90px" width="90px" style="margin-bottom: 7px;margin-top: 7px;object-fit: cover;">
+            </ion-col>
 
-          <ion-col size="8">
-            <ion-row>
-              <ion-label
-                style="background-color: transparent; font-size:18px ;color:black;font-weight:500; ">
-               {{data.foodName}}
-              </ion-label>
-            </ion-row>
-            <ion-row>
-              <ion-label
-                style="background-color:transparent; margin-top: 10px;font-weight:500;color:black;">
-                $ {{data.foodPrice}} 
-              </ion-label>
-            </ion-row>
-         <!-- <ion-row>
-              <ion-label
-                style="background-color:transparent; margin-top: 10px;">
-                {{data.foodDetails}}
-              </ion-label>
-            </ion-row> -->
-          </ion-col>
+            <ion-col size="8">
+              <ion-row>
+                <ion-label
+                  style="background-color: transparent; font-size:18px ;color:black;font-weight:500; ">
+                {{data.foodName}}
+                </ion-label>
+              </ion-row>
+              <ion-row>
+                <ion-label
+                  style="background-color:transparent; margin-top: 10px;font-weight:500;color:black;">
+                  $ {{data.foodPrice}} 
+                </ion-label>
+              </ion-row>
+            </ion-col>
 
-        </ion-row> 
+          </ion-row> 
 
-      </ion-card>
+        </ion-card>
 
-    </div>  
+      </div>  
 
     </div>
 
