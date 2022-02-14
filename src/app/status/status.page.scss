@@ -3,11 +3,12 @@
   margin-top: 15px;
   margin-left: 10px;
 }
+
 .headerr {
   font-weight: bold;
   font-size: 28px;
   margin-left: 25px;
-  margin-top: 30px;
+  margin-top: 10px;
 }
 
 .collapsible {
@@ -21,8 +22,6 @@
   outline: none;
   font-size: 15px;
 }
-
-
 
 .collapsible:after {
   content: "\002B";
@@ -111,4 +110,8 @@ hr {
   width: 100%;
   margin-top: 5px;
   align-self: center;
+}
+
+.filterbutton {
+  background-color: gray;
 }

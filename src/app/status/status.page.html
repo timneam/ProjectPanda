@@ -1,79 +1,145 @@
 <ion-content>
-  <ion-refresher slot="fixed" pull-factor="0.5" pull-min="100" pull-max="200" (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content pulling-icon="chevron-down-circle-outline" pulling-text="Pull to refresh"
+  <ion-refresher slot="fixed" pull-factor="0.5" pull-min="100" pull-max="200"
+    (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pulling-icon="chevron-down-circle-outline"
+      pulling-text="Pull to refresh"
       refreshing-spinner="circles" refreshing-text="Refreshing...">
     </ion-refresher-content>
   </ion-refresher>
-  <div>
-    <h1 class="headerr">Orders</h1>
+  <div class="headerr">
+    <ion-row>
+      <h1>Orders</h1>
+
+      <ion-button (click)="openFilter()" style="margin-left: auto; margin-right:
+        20px; margin-top: 15px;">
+        Filter
+      </ion-button>
+    </ion-row>
+  </div>
+
+  <div style="text-align: center;" *ngIf="filter">
+    <ion-button style="width: 93%; font-size: 13px; --background: red;" (click)="doFilter('reset')">
+      Reset
+    </ion-button>
+
+    <ion-button style="width: 23%; font-size: 13px; --background: gray;" *ngIf="cancelFilter == false" (click)="doFilter('cancelled')">
+      Cancelled
+    </ion-button>
+    <ion-button style="width: 23%; font-size: 13px; --background: red;" *ngIf="cancelFilter == true" (click)="doFilter('cancelled')">
+      Cancelled
+    </ion-button>
+
+    <ion-button style="width: 23%; font-size: 13px; --background: gray;" *ngIf="pendingFilter == false" (click)="doFilter('pending')">
+      Pending
+    </ion-button>
+    <ion-button style="width: 23%; font-size: 13px; --background:red;" *ngIf="pendingFilter == true" (click)="doFilter('pending')">
+      Pending
+    </ion-button>
+
+    <ion-button style="width: 23%; font-size: 13px; --background: gray;" *ngIf="preparingFilter == false" (click)="doFilter('preparing')">
+      Preparing
+    </ion-button>
+    <ion-button style="width: 23%; font-size: 13px; --background: red;" *ngIf="preparingFilter == true" (click)="doFilter('preparing')">
+      Preparing
+    </ion-button>
+
+    <ion-button style="width: 23%; font-size: 13px; --background: gray;" *ngIf="completedFilter == false" (click)="doFilter('completed')">
+      Completed
+    </ion-button>
+    <ion-button style="width: 23%; font-size: 13px; --background: red;" *ngIf="completedFilter == true" (click)="doFilter('completed')">
+      Completed
+    </ion-button>
+
+  </div>
+
+
+  <!-- ------------------------------------------------------------------------------------------------- -->
+  
+  <div *ngIf="cancelFilter">
+    <div class="wrap-collabsible" *ngFor="let order of cancelledOrder">
+      <input id="collapsible" class="toggle" type="checkbox">
+      <label for="collapsible" class="lbl-toggle">
+        <div style="display: flex;flex-direction: row;margin-top: 5px;margin-left:
+          8px;align-items: center;">
+          <div style="display: flex;flex-direction: column;margin-top: 5px;"
+            (click)="goToOrderStatusPage(order.OrderID)">
+            <p style="margin-bottom: 0px;margin-top: 8px;">Stall Name:
+              {{order.stallID}} </p>
+            <p style="margin-bottom: 0px;margin-top: 8px;">Order ID:
+              {{order.OrderCode}} </p>
+            <p style="margin-bottom: 0px;margin-top: 8px;font-weight: bold;">Status:
+              {{order.Status}} </p>
+          </div>
+        </div>
+      </label>
+    </div>
+  </div>
+
+
+  <!-- ------------------------------------------------------------------------------------------------- -->
+  <div *ngIf="pendingFilter">
+    <div class="wrap-collabsible" *ngFor="let order of pendingOrder">
+      <input id="collapsible" class="toggle" type="checkbox">
+      <label for="collapsible" class="lbl-toggle">
+        <div style="display: flex;flex-direction: row;margin-top: 5px;margin-left:
+          8px;align-items: center;">
+          <div style="display: flex;flex-direction: column;margin-top: 5px;"
+            (click)="goToOrderStatusPage(order.OrderID)">
+            <p style="margin-bottom: 0px;margin-top: 8px;">Stall Name:
+              {{order.stallID}} </p>
+            <p style="margin-bottom: 0px;margin-top: 8px;">Order ID:
+              {{order.OrderCode}} </p>
+            <p style="margin-bottom: 0px;margin-top: 8px;font-weight: bold;">Status:
+              {{order.Status}} </p>
+          </div>
+        </div>
+      </label>
+    </div>  
   </div>
 
   <!-- ------------------------------------------------------------------------------------------------- -->
-
-  <div class="wrap-collabsible" *ngFor="let order of cancelledOrder">
-    <input id="collapsible" class="toggle" type="checkbox">
-    <label for="collapsible" class="lbl-toggle">
-      <div style="display: flex;flex-direction: row;margin-top: 5px;margin-left: 8px;align-items: center;">
-        <div style="display: flex;flex-direction: column;margin-top: 5px;" (click)="goToOrderStatusPage(order.OrderID)">
-          <p style="margin-bottom: 0px;margin-top: 8px;">Stall Name: {{order.stallID}} </p>
-          <p style="margin-bottom: 0px;margin-top: 8px;">Order ID: {{order.OrderCode}} </p>
-          <p style="margin-bottom: 0px;margin-top: 8px;font-weight: bold;">Status: {{order.Status}} </p>
+  
+  <div *ngIf="preparingFilter">
+    <div class="wrap-collabsible" *ngFor="let order of preparingOrder">
+      <input id="collapsible" class="toggle" type="checkbox">
+      <label for="collapsible" class="lbl-toggle">
+        <div style="display: flex;flex-direction: row;margin-top: 5px;margin-left:
+          8px;align-items: center;">
+          <div style="display: flex;flex-direction: column;margin-top: 5px;"
+            (click)="goToOrderStatusPage(order.OrderID)">
+            <p style="margin-bottom: 0px;margin-top: 8px;">Stall Name:
+              {{order.stallID}} </p>
+            <p style="margin-bottom: 0px;margin-top: 8px;">Order ID:
+              {{order.OrderCode}} </p>
+            <p style="margin-bottom: 0px;margin-top: 8px;font-weight: bold;">Status:
+              {{order.Status}} </p>
+          </div>
         </div>
-      </div>
-    </label>
+      </label>
+    </div>  
   </div>
-
-  <!-- ------------------------------------------------------------------------------------------------- -->
-
-  <div class="wrap-collabsible" *ngFor="let order of pendingOrder">
-    <input id="collapsible" class="toggle" type="checkbox">
-    <label for="collapsible" class="lbl-toggle">
-      <div style="display: flex;flex-direction: row;margin-top: 5px;margin-left: 8px;align-items: center;">
-        <div style="display: flex;flex-direction: column;margin-top: 5px;" (click)="goToOrderStatusPage(order.OrderID)">
-          <p style="margin-bottom: 0px;margin-top: 8px;">Stall Name: {{order.stallID}} </p>
-          <p style="margin-bottom: 0px;margin-top: 8px;">Order ID: {{order.OrderCode}} </p>
-          <p style="margin-bottom: 0px;margin-top: 8px;font-weight: bold;">Status: {{order.Status}} </p>
-        </div>
-      </div>
-    </label>
-  </div>
-
-
-
-  <!-- ------------------------------------------------------------------------------------------------- -->
-
-
-
-  <div class="wrap-collabsible" *ngFor="let order of preparingOrder">
-    <input id="collapsible" class="toggle" type="checkbox">
-    <label for="collapsible" class="lbl-toggle">
-      <div style="display: flex;flex-direction: row;margin-top: 5px;margin-left: 8px;align-items: center;">
-        <div style="display: flex;flex-direction: column;margin-top: 5px;" (click)="goToOrderStatusPage(order.OrderID)">
-          <p style="margin-bottom: 0px;margin-top: 8px;">Stall Name: {{order.stallID}} </p>
-          <p style="margin-bottom: 0px;margin-top: 8px;">Order ID: {{order.OrderCode}} </p>
-          <p style="margin-bottom: 0px;margin-top: 8px;font-weight: bold;">Status: {{order.Status}} </p>
-        </div>
-      </div>
-    </label>
-  </div>
-
-
-
 
   <!-- ---------------------------------------------------------------------------------------------------- -->
-
-
-  <div class="wrap-collabsible" *ngFor="let order of completedOrder">
-    <input id="collapsible" class="toggle" type="checkbox">
-    <label for="collapsible" class="lbl-toggle">
-      <div style="display: flex;flex-direction: row;margin-top: 5px;margin-left: 8px;align-items: center;">
-        <div style="display: flex;flex-direction: column;margin-top: 5px;" (click)="goToOrderStatusPage(order.OrderID)">
-          <p style="margin-bottom: 0px;margin-top: 8px;">Stall Name: {{order.stallID}} </p>
-          <p style="margin-bottom: 0px;margin-top: 8px;">Order ID: {{order.OrderCode}} </p>
-          <p style="margin-bottom: 0px;margin-top: 8px;font-weight: bold;">Status: {{order.Status}} </p>
+  
+  <div *ngIf="completedFilter">
+    <div class="wrap-collabsible" *ngFor="let order of completedOrder">
+      <input id="collapsible" class="toggle" type="checkbox">
+      <label for="collapsible" class="lbl-toggle">
+        <div style="display: flex;flex-direction: row;margin-top: 5px;margin-left:
+          8px;align-items: center;">
+          <div style="display: flex;flex-direction: column;margin-top: 5px;"
+            (click)="goToOrderStatusPage(order.OrderID)">
+            <p style="margin-bottom: 0px;margin-top: 8px;">Stall Name:
+              {{order.stallID}} </p>
+            <p style="margin-bottom: 0px;margin-top: 8px;">Order ID:
+              {{order.OrderCode}} </p>
+            <p style="margin-bottom: 0px;margin-top: 8px;font-weight: bold;">Status:
+              {{order.Status}} </p>
+          </div>
         </div>
-      </div>
-    </label>
+      </label>
+    </div>
   </div>
+
 
 </ion-content>

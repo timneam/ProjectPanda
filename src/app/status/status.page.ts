@@ -14,6 +14,13 @@ export class StatusPage implements OnInit {
   userId: any;
   stallId: any;
 
+  filter = false;
+
+  cancelFilter = true;
+  pendingFilter = true;
+  preparingFilter = true;
+  completedFilter = true;
+
   orderData = []
   stallData = []
   orderStatus = []
@@ -165,6 +172,56 @@ export class StatusPage implements OnInit {
 
   goToOrderStatusPage(orderId){
     this.router.navigateByUrl(`/order-status/${this.stallId}/${orderId}`)
+  }
+
+  openFilter() {
+    if (this.filter == false) {
+      this.filter = true
+    }
+    else {
+      this.filter = false
+    }
+  }
+
+  doFilter(selectOption) {
+    if (selectOption == 'cancelled') {
+      if (this.cancelFilter == false) {
+        this.cancelFilter = true
+      } else {
+        this.cancelFilter = false
+      }
+    } 
+    
+    else if (selectOption == 'pending') {
+      if (this.pendingFilter == false) {
+        this.pendingFilter = true
+      } else {
+        this.pendingFilter = false
+      }
+    } 
+    
+    else if (selectOption == 'preparing') {
+      if (this.preparingFilter == false) {
+        this.preparingFilter = true
+      } else {
+        this.preparingFilter = false
+      }
+    } 
+    
+    else if (selectOption == 'completed') {
+      if (this.completedFilter == false) {
+        this.completedFilter = true
+      } else {
+        this.completedFilter = false
+      }
+    }
+    
+    else if (selectOption == 'reset') {
+      this.cancelFilter = true
+      this.pendingFilter = true
+      this.preparingFilter = true
+      this.completedFilter = true
+    }
     
   }
 
