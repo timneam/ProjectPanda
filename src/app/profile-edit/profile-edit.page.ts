@@ -78,6 +78,7 @@ export class ProfileEditPage implements OnInit {
       this.updateDataForm.value.lastName,
       this.updateDataForm.value.phoneNumber
     )
+ 
   }
 
   async editName() {
