@@ -1,4 +1,10 @@
 <ion-content *ngFor="let data of userInfo">
+  <ion-refresher slot="fixed" pull-factor="0.5" pull-min="100" pull-max="200" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pulling-icon="chevron-down-circle-outline" pulling-text="Pull to refresh"
+      refreshing-spinner="circles" refreshing-text="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+  
   <div style="display: flex;flex-direction: row;align-items: center;">
     <h1 class="headerr">Profile</h1>
     <div class="powerIcon">

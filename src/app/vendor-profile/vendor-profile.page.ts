@@ -180,4 +180,22 @@ export class VendorProfilePage implements OnInit {
     input.click();
   }
 
+
+  doRefresh(event) {
+    this.userData = []
+    this.userInfo = []
+  
+    this.userData2 = null
+    this.vendorData = null
+  
+    this.allOfVendorData = []
+
+    setTimeout(() => {
+      event.target.complete().then(() => {
+        this.getCurrentUser()
+      })
+    }, 2000);
+  }
+
+
 }
