@@ -13,7 +13,14 @@
     </div>
   </div>
   <div class="sameLine">
-    <img (click)="onchange()" id="previewImg" src={{data.photoURL}} width="80" height="80" style="margin-right: 20px;margin-left: 30px;">
+
+    <div *ngIf="data.photoURL != null">
+      <img (click)="onchange()" id="previewImg" src={{data.photoURL}} width="80" height="80" style="margin-right: 20px;margin-left: 30px;">
+    </div>
+    <div *ngIf="data.photoURL == null">
+      <img (click)="onchange()" id="previewImg" src="../assets/profile_picture.jpg" width="80" height="80" style="margin-right: 20px;margin-left: 30px;">
+    </div>
+
     <div class="namePhoto">
       <h3 class="namee">{{data.displayName}}</h3>
       <p class="subb">Change Profile Photo</p>
