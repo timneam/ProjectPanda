@@ -145,4 +145,19 @@ export class ProfilePage implements OnInit {
     input.click();
   }
 
+
+  doRefresh(event) {
+    
+    this.userInfo = []
+    this.userData = []
+
+    setTimeout(() => {
+      event.target.complete().then(() => {
+        this.getCurrentUser()
+      })
+    }, 2000);
+  }
+
+
+
 }
